@@ -79,8 +79,8 @@ class ProductController extends Controller
         $insert->sku = $request->sku;
         $insert->summary = $request->summary;
         $insert->description = $request->description;
-        $insert->cat_id = $request->cat_id;
-        $insert->subcat_id = $request->sub_cat_id;
+        $insert->cat_id = $request->cat_id ?: 1;
+        $insert->subcat_id = $request->sub_cat_id ?: 1;
         $insert->price = $request->price;
         $insert->discount = $request->discount;
         $insert->brand_id = $request->brand_id;

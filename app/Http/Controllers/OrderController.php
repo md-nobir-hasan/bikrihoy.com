@@ -394,11 +394,11 @@ class OrderController extends Controller
 
     public function thanks($order_num)
     {
-        $n['orders'] = Order::with(['orderItem', 'shipping', 'payment', 'user', 'products', 'orderItem.product'])
+        $n['order'] = Order::with(['orderItem', 'shipping', 'payment', 'user', 'products', 'orderItem.product'])
             ->withSum('orderItem as pqty', 'qty')
             ->withSum('products as pp', 'price')
             ->withSum('products as pd', 'discount')
-            ->where('order_number', $order_num);
+            ->where('order_number', $order_num)->first();
         // dd($n);
         return view('frontend.pages.thanks', $n);
     }
