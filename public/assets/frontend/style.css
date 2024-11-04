@@ -671,10 +671,54 @@ input[type="number"] {
 }
 
 .thankyouSection{
-    padding: 5rem 0;
+    padding: 4rem 0;
     background: #f5fbfe;
 }
-
+.thankMain{
+    width: 100%;
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.thankTop{
+    width: 100%;
+    border: 1px dashed #00b512;
+    padding: 3rem;
+    text-align: center;
+}
+.thankData{
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #00b512;
+}
+.thankOrder{
+    margin-top: 2rem;
+}
+.thankOrder table tr td{
+    padding: 1rem .6rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.thankName{
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000015;
+    margin-bottom: 0;
+}
+.sub_title2{
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    color: #000015;
+}
+.thankAddressData{
+    margin-bottom: 0.4rem;
+}
+.thankMobile{
+    font-weight: 500;
+    color: #000015;
+}
 /* REsponsive design  strat*/
 @media (max-width: 1400px) {
     .orderAndContity{
@@ -749,6 +793,12 @@ input[type="number"] {
 }
 
 @media (max-width: 576px) {
+    .thankTop{
+        padding: 2rem;
+    }
+    .thankyouSection{
+        padding: 3rem 0;
+    }
     .footerSection{
         padding: 3rem 0;
     }
@@ -816,6 +866,9 @@ input[type="number"] {
 }
 
 @media (max-width: 520px) {
+    .thankTop{
+        padding: 2rem 1rem;
+    }
     .productImg {
         height: 13rem;
     }
