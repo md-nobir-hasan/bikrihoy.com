@@ -9,7 +9,7 @@
 @push('custom-js')
 <script>
     $(document).ready(function () {
-
+        
     });
 
 </script>
