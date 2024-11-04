@@ -31,9 +31,6 @@ body {
     column-gap: 0.5rem;
     text-decoration: none;
     padding: 0.5rem 0;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
 }
 .headerLogo .logotitle {
     font-size: 1.2rem;
@@ -43,6 +40,8 @@ body {
 }
 .headerLogo img {
     height: 2.7rem;
+    color: #ffffff;
+    font-weight: 600;
 }
 
 /* Product section */
@@ -753,6 +752,17 @@ input[type="number"] {
 }
 
 @media (max-width: 992px) {
+    .orderAndContity{
+        padding-right: 2rem;
+    }
+    .headerMain .headerLogo{
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .smallSingle img{
+        height: 12rem;
+    }
     .callBtns {
         flex-direction: row;
     }
@@ -875,6 +885,9 @@ input[type="number"] {
 }
 
 @media (max-width: 520px) {
+    .smallSingle img{
+        height: 11rem;
+    }
     .thankTop{
         padding: 2rem 1rem;
     }
@@ -900,6 +913,9 @@ input[type="number"] {
 }
 
 @media (max-width: 440px) {
+    .smallSingle img{
+        height: 13rem;
+    }
     .productImg {
         height: 11rem;
     }
@@ -918,6 +934,9 @@ input[type="number"] {
 }
 
 @media (max-width: 405px) {
+    .smallSingle img{
+        height: 12rem;
+    }
     .orderNow {
         padding: 0;
     }
@@ -945,6 +964,9 @@ input[type="number"] {
 }
 
 @media (max-width: 365px) {
+    .smallSingle img{
+        height: 11.2rem;
+    }
     /* .leargeImgSingle {
         height: 19rem;
     } */
