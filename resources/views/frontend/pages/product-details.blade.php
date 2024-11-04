@@ -12,6 +12,7 @@
 
 @section('page_conent')
  <section class="productdetailsSection">
+        <form action="#" class="orderForm">
         <div class="container">
             <div class="sectionDevider top">
             </div>
@@ -19,47 +20,28 @@
 
                 <!-- product photo -->
                 <div class="pdLeft col-lg-6">
+
                     <div class="leargeImage">
-                        <img class="leargeImgSingle active" src="/images/ignore/33348dd258bd20590a1884dc713d3c4c-qtw2tf5q08k1x4rr2acgr3i9g8e4rzb3yv8wsiq126.jpg" alt="">
-                        <img class="leargeImgSingle" src="/images/ignore/NAVIFORCE-NF9189-Stainless-Watch-2-1-qtw1pd9asdq77ay6xz2ri7d675t2saav4mi2m23y72.jpg" alt="">
-                        <img class="leargeImgSingle" src="/images/ignore/613-qtw2wh4u7uqlnic083vtctr6ybc2skfpdzkpxw6yu6.png" alt="">
-                        <img class="leargeImgSingle" src="/images/ignore/6c675298dca25a1d6afd88aa6e505405-qtw1pv48e8enbw891osobkuxhhd1uj9rj2waqbdgwu.jpg" alt="">
-                        <img class="leargeImgSingle" src="/images/ignore/org-1-qpf44q91lezfs4j9b16atrvclm2yhj9flphjlkwr8e.jpg" alt="">
-                        <img class="leargeImgSingle" src="/images/ignore/org-10-qpf45bvbylt175nussipx4ey9h4eekn9cohpmy0p9a.jpg" alt="">
+                        @foreach ($data->productGallery as $img)
+                            <img class="leargeImgSingle @if($loop->first) active @endif" src="/{{$img->imageGallery->img}}" alt="{{$data->title}}">
+                        @endforeach
+
                     </div>
                     <div class="smallImgs">
-                       <div class="smallSingle active">
-                        <p class="pdsColor">Black</p>
-                        <img src="/images/ignore/33348dd258bd20590a1884dc713d3c4c-qtw2tf5q08k1x4rr2acgr3i9g8e4rzb3yv8wsiq126.jpg" alt="">
-                       </div>
-                       <div class="smallSingle">
-                        <p class="pdsColor">Black</p>
-                        <img src="/images/ignore/NAVIFORCE-NF9189-Stainless-Watch-2-1-qtw1pd9asdq77ay6xz2ri7d675t2saav4mi2m23y72.jpg" alt="">
-                       </div>
-                       <div class="smallSingle">
-                        <p class="pdsColor">Black</p>
-                        <img src="/images/ignore/613-qtw2wh4u7uqlnic083vtctr6ybc2skfpdzkpxw6yu6.png" alt="">
-                       </div>
-                       <div class="smallSingle">
-                        <p class="pdsColor">Black</p>
-                        <img src="/images/ignore/6c675298dca25a1d6afd88aa6e505405-qtw1pv48e8enbw891osobkuxhhd1uj9rj2waqbdgwu.jpg" alt="">
-                       </div>
-                       <div class="smallSingle">
-                        <p class="pdsColor">Black</p>
-                        <img src="/images/ignore/org-1-qpf44q91lezfs4j9b16atrvclm2yhj9flphjlkwr8e.jpg" alt="">
-                       </div>
-                       <div class="smallSingle">
-                        <p class="pdsColor">Black</p>
-                        <img src="/images/ignore/org-10-qpf45bvbylt175nussipx4ey9h4eekn9cohpmy0p9a.jpg" alt="">
-                       </div>
-
+                         @foreach ($data->productGallery as $simg)
+                            <div class="smallSingle active">
+                                <p class="pdsColor">{{$simg->color->c_name}}</p>
+                                <input type="hidden" name="color_id" value="{{$simg->color_id}}">
+                                <img src="/{{$simg->imageGallery->img}}" alt="{{$data->title}}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
                 <!-- product data -->
                 <div class="pdRight col-lg-6">
                     <div class="pdrightInner">
-                        <form action="#" class="orderForm">
+
                             <h2 class="sub_title">{{$data->title}}</h2>
                             <div class="priceDetails">
                                 <del>&#2547;6500</del>
@@ -80,7 +62,6 @@
                                     <a href="{{route('checkout',[$data->slug])}}" class="orderNow ">buy now</a>
                                 </button>
                             </div>
-                        </form>
 
                         <!-- Call btn -->
                         <div class="callBtns">
@@ -126,6 +107,7 @@
                 <h3 class="descTitle">Description</h3>
                 <p class="dParagraph my-3 my-lg-4">{!! $data->description !!}</div>
         </div>
+    </form>
     </section>
 
     <!-- Product section -->
