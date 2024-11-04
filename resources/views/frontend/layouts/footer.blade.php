@@ -2,8 +2,6 @@
     <script src="/assets/frontend/jQuery3.7.1.min.js"></script>
     <script src="/assets/frontend/script.js"></script>
 
-    <!-- Custom js -->
-    <script src="./js/customjs/script.js"></script>
 
 {{-- in page js  --}}
 @stack('custom-js')
@@ -15,5 +13,5 @@
 {{-- End Facebook google tag or link  --}}
 
 @stack('g_fb_js')
-</body>
+
 

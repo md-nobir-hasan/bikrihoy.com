@@ -42,48 +42,48 @@ use App\Http\Controllers\WishlishtController;
 */
 
 //frontend route
-Route::get('/', [FrontendController::class,'index'])->name('home');
-Route::get('/ajax-fetch', [AjaxController::class,'ajaxFetch'])->name('ajax-fetch');
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/ajax-fetch', [AjaxController::class, 'ajaxFetch'])->name('ajax-fetch');
 
 Route::get('/redirect', [FrontendController::class, 'redirect']);
 
-Route::get('/category-product/{id}', [FrontendController::class,'categoryWiseShow'])->name('category');
-Route::get('/product/sub-category/{id}/{id2}', [FrontendController::class,'subcatWiseShow'])->name('product.subcat');
-Route::post('single/order', [FrontendController::class,'store'])->name('single.store');
-Route::get('/all_category', [FrontendController::class,'all_category'])->name('all-category');
-Route::get('/all_product', [FrontendController::class,'all_product'])->name('all_product');
-Route::post('order/store',[OrderController::class,'store'])->name('order.store');
-Route::get('product/fetch/{id}',[FrontendController::class,'productFetch'])->name('product.fetch');
-Route::get('order/thank-you-page/{order}',[OrderController::class,'thanks'])->name('order.thanks');
-Route::get('order/checkout',[OrderController::class,'checkout'])->name('checkout');
-Route::get('/product_details/{id}',[FrontendController::class,'product_details'])->name('product_details');
-Route::get('/product_details/{id}/#contact',[FrontendController::class,'product_details'])->name('product_details');
-Route::post('/review',[FrontendController::class,'review'])->name('review');
+Route::get('/category-product/{id}', [FrontendController::class, 'categoryWiseShow'])->name('category');
+Route::get('/product/sub-category/{id}/{id2}', [FrontendController::class, 'subcatWiseShow'])->name('product.subcat');
+Route::post('single/order', [FrontendController::class, 'store'])->name('single.store');
+Route::get('/all_category', [FrontendController::class, 'all_category'])->name('all-category');
+Route::get('/all_product', [FrontendController::class, 'all_product'])->name('all_product');
+Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
+Route::get('product/fetch/{id}', [FrontendController::class, 'productFetch'])->name('product.fetch');
+Route::get('order/thank-you-page/{order}', [OrderController::class, 'thanks'])->name('order.thanks');
+Route::get('order/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::get('/product-details/{id}', [FrontendController::class, 'product_details'])->name('product_details');
+Route::get('/product-details/{id}/#contact', [FrontendController::class, 'product_details'])->name('product_details');
+Route::post('/review', [FrontendController::class, 'review'])->name('review');
 
 //Pages
-Route::get('/pages/{title}',[FrontendController::class,'page'])->name('page');
+Route::get('/pages/{title}', [FrontendController::class, 'page'])->name('page');
 //Add to Cart
-Route::resource('addtocart',AddToCartController::class);
+Route::resource('addtocart', AddToCartController::class);
 
 //Wishlist
-Route::resource('wishlist',WishlishtController::class);
- //end frontend route
+Route::resource('wishlist', WishlishtController::class);
+//end frontend route
 
 
 
 // Route for  both
-   //Ajax CURD Option
-   Route::controller(AjaxController::class)->prefix('ajax')->name('ajax.')->group(function(){
-    Route::get('/subcat','subcatFetch')->name('subcat');
-    Route::post('/insert','store')->name('store');
-    Route::post('/single/insert','singleStore')->name('singlestore');
-    Route::post('/index','index')->name('index');
-    Route::post('/edit','edit')->name('edit');
-    Route::post('/delete','delete')->name('delete');
+//Ajax CURD Option
+Route::controller(AjaxController::class)->prefix('ajax')->name('ajax.')->group(function () {
+    Route::get('/subcat', 'subcatFetch')->name('subcat');
+    Route::post('/insert', 'store')->name('store');
+    Route::post('/single/insert', 'singleStore')->name('singlestore');
+    Route::post('/index', 'index')->name('index');
+    Route::post('/edit', 'edit')->name('edit');
+    Route::post('/delete', 'delete')->name('delete');
 });
 
 
-Route::group(['middleware'=>['auth']],function() {
+Route::group(['middleware' => ['auth']], function () {
     // Admin home
     Route::get('/admin', [HomeController::class, 'home'])->name('admin');
 
@@ -187,24 +187,24 @@ Route::group(['middleware'=>['auth']],function() {
     });
 
     //Order Status
-    Route::group(['as' => 'customer.', 'prefix' => 'customer'], function (){
+    Route::group(['as' => 'customer.', 'prefix' => 'customer'], function () {
         Route::get('/customer', [ContactController::class, 'customer'])->name('customer');
         Route::get('/view/{id}', [ContactController::class, 'view'])->name('view');
         Route::get('/delete/{id}', [ContactController::class, 'delete'])->name('delete');
     });
 
     //Slider images
-    Route::group(['as' => 'slider.', 'prefix' => 'slider'], function (){
-       Route::get('/index', [SliderController::class, 'index'])->name('index');
-       Route::get('/create', [SliderController::class, 'create'])->name('create');
-       Route::post('/store', [SliderController::class, 'store'])->name('store');
-       Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('edit');
-       Route::post('/update/{id}', [SliderController::class, 'update'])->name('update');
-       Route::get('/destroy/{id}', [SliderController::class, 'destroy'])->name('destroy');
+    Route::group(['as' => 'slider.', 'prefix' => 'slider'], function () {
+        Route::get('/index', [SliderController::class, 'index'])->name('index');
+        Route::get('/create', [SliderController::class, 'create'])->name('create');
+        Route::post('/store', [SliderController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [SliderController::class, 'update'])->name('update');
+        Route::get('/destroy/{id}', [SliderController::class, 'destroy'])->name('destroy');
     });
 
     //Banner images
-    Route::group(['as' => 'banner.', 'prefix' => 'banner'], function (){
+    Route::group(['as' => 'banner.', 'prefix' => 'banner'], function () {
         Route::get('/index', [BannerController::class, 'index'])->name('index');
         Route::get('/create', [BannerController::class, 'create'])->name('create');
         Route::post('/store', [BannerController::class, 'store'])->name('store');
@@ -214,7 +214,7 @@ Route::group(['middleware'=>['auth']],function() {
     });
 
     //Product size
-    Route::group(['as'  => 'size.', 'prefix' => 'size'], function (){
+    Route::group(['as' => 'size.', 'prefix' => 'size'], function () {
         Route::get('/index', [ProductSizeController::class, 'index'])->name('index');
         Route::get('/create', [ProductSizeController::class, 'create'])->name('create');
         Route::post('/store', [ProductSizeController::class, 'store'])->name('store');
@@ -224,7 +224,7 @@ Route::group(['middleware'=>['auth']],function() {
     });
 
     //Product color
-    Route::group(['as'  => 'color.', 'prefix' => 'color'], function (){
+    Route::group(['as' => 'color.', 'prefix' => 'color'], function () {
         Route::get('/index', [ProductColorController::class, 'index'])->name('index');
         Route::get('/create', [ProductColorController::class, 'create'])->name('create');
         Route::post('/store', [ProductColorController::class, 'store'])->name('store');
@@ -234,7 +234,7 @@ Route::group(['middleware'=>['auth']],function() {
     });
 
     //Image Management
-    Route::group(['as'  => 'img.', 'prefix' => 'image'], function (){
+    Route::group(['as' => 'img.', 'prefix' => 'image'], function () {
         Route::get('/index', [ImageGalleryController::class, 'index'])->name('index');
         Route::get('/create', [ImageGalleryController::class, 'create'])->name('create');
         Route::post('/store', [ImageGalleryController::class, 'store'])->name('store');
@@ -244,7 +244,7 @@ Route::group(['middleware'=>['auth']],function() {
     });
 
     //Pixel tag
-    Route::group(['as' => 'pixel.', 'prefix' => 'pixel'], function (){
+    Route::group(['as' => 'pixel.', 'prefix' => 'pixel'], function () {
         Route::get('/index', [PixelTagController::class, 'index'])->name('index');
         Route::get('/create', [PixelTagController::class, 'create'])->name('create');
         Route::post('/store', [PixelTagController::class, 'store'])->name('store');
@@ -254,7 +254,7 @@ Route::group(['middleware'=>['auth']],function() {
     });
 
     //Google tag
-    Route::group(['as' => 'google.', 'prefix' => 'google'], function (){
+    Route::group(['as' => 'google.', 'prefix' => 'google'], function () {
         Route::get('/index', [GoogleTagController::class, 'index'])->name('index');
         Route::get('/create', [GoogleTagController::class, 'create'])->name('create');
         Route::post('/store', [GoogleTagController::class, 'store'])->name('store');
@@ -264,38 +264,38 @@ Route::group(['middleware'=>['auth']],function() {
     });
 
     //Page
-    Route::resource('/page',PageController::class);
+    Route::resource('/page', PageController::class);
     //Setting
-    Route::group(['as' => 'setting.', 'prefix' => 'setting'], function (){
+    Route::group(['as' => 'setting.', 'prefix' => 'setting'], function () {
 
         //Features
-        Route::resource('features',FeatureController::class)->names([
-             'index' => 'feature.index',
-             'create' => 'feature.create',
-             'edit' => 'feature.edit',
-             'store' => 'feature.store',
-             'update' => 'feature.update',
-             'destroy' => 'feature.destroy',
-             'show' => 'feature.show',
-            ]);
+        Route::resource('features', FeatureController::class)->names([
+            'index' => 'feature.index',
+            'create' => 'feature.create',
+            'edit' => 'feature.edit',
+            'store' => 'feature.store',
+            'update' => 'feature.update',
+            'destroy' => 'feature.destroy',
+            'show' => 'feature.show',
+        ]);
 
         //Site Setting
-        Route::resource('site-setting',SiteSettingController::class)->names([
-             'index' => 'site.index',
-             'create' => 'site.create',
-             'edit' => 'site.edit',
-             'store' => 'site.store',
-             'update' => 'site.update',
-             'destroy' => 'site.destroy',
-             'show' => 'site.show',
-            ]);
+        Route::resource('site-setting', SiteSettingController::class)->names([
+            'index' => 'site.index',
+            'create' => 'site.create',
+            'edit' => 'site.edit',
+            'store' => 'site.store',
+            'update' => 'site.update',
+            'destroy' => 'site.destroy',
+            'show' => 'site.show',
+        ]);
 
-        Route::prefix('setup')->name('setup.')->group(function(){
+        Route::prefix('setup')->name('setup.')->group(function () {
             // Services
-            Route::resource('services',ServiceController::class);
+            Route::resource('services', ServiceController::class);
 
             // Main Keys
-            Route::resource('mainKey',MainKeyController::class)->names([
+            Route::resource('mainKey', MainKeyController::class)->names([
                 'index' => 'key.index',
                 'create' => 'key.create',
                 'edit' => 'key.edit',
@@ -303,11 +303,11 @@ Route::group(['middleware'=>['auth']],function() {
                 'update' => 'key.update',
                 'destroy' => 'key.destroy',
                 'show' => 'key.show',
-               ]);
+            ]);
         });
 
         //role
-         Route::group(['as' => 'role.', 'prefix' => 'role'], function (){
+        Route::group(['as' => 'role.', 'prefix' => 'role'], function () {
             Route::get('/index', [SettingController::class, 'roleIndex'])->name('index');
             Route::get('/create/{id?}', [SettingController::class, 'roleCreate'])->name('create');
             Route::post('/store', [SettingController::class, 'roleStore'])->name('store');
@@ -315,7 +315,7 @@ Route::group(['middleware'=>['auth']],function() {
         });
 
         //user
-         Route::group(['as' => 'user.', 'prefix' => 'user'], function (){
+        Route::group(['as' => 'user.', 'prefix' => 'user'], function () {
             Route::get('/index', [SettingController::class, 'userIndex'])->name('index');
             Route::get('/create/{id?}', [SettingController::class, 'userCreate'])->name('create');
             Route::post('/store', [SettingController::class, 'userStore'])->name('store');
@@ -328,10 +328,10 @@ Route::group(['middleware'=>['auth']],function() {
 });
 
 //Contact frontend code
-Route::group(['as' => 'contact.', 'prefix' => 'contact'], function (){
+Route::group(['as' => 'contact.', 'prefix' => 'contact'], function () {
     Route::post('/contact', [ContactController::class, 'contact'])->name('contact');
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
