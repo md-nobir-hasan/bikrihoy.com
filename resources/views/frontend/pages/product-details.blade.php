@@ -8,6 +8,12 @@
 
 @push('custom-js')
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $('.smallSingle').on('click',function(){
+            let id = $(this).attr('id');
+            $('#color_id').val(id);
+        })
+    </script>
 @endpush
 
 @section('page_conent')
@@ -23,16 +29,13 @@
                             <img class="leargeImgSingle @if($loop->first) active @endif" src="/{{$img->imageGallery->img}}" alt="{{$data->title}}">
                         @endforeach
                     </div>
+                    <input type="hidden" name="color_id" id="color_id">
                     <div class="smallImgs">
                          @foreach ($data->productGallery as $simg)
-                            <label>
-                                <div class="smallSingle active">
-                                    <input type="radio" name="Color" style="width: 0; height: 0; position: absolute;">
+                                <div class="smallSingle active" id="{{$simg->color_id}}">
                                     <p class="pdsColor">{{$simg->color->c_name}}</p>
-                                    <input type="hidden" name="color_id" value="{{$simg->color_id}}">
                                     <img src="/{{$simg->imageGallery->img}}" alt="{{$data->title}}">
                                 </div>
-                            </label>
 
                         @endforeach
                     </div>
@@ -44,34 +47,34 @@
 
                             <h2 class="sub_title">{{$data->title}}</h2>
                             <div class="priceDetails">
-                                <del class="originalPrice" data-price="6500">&#2547;6500</del>
-                                <span class="discountPrice" data-price="4600">&#2547;4600</span>
+                                <del class="originalPrice" data-price="6500">&#2547;{{$data->price}}</del>
+                                <span class="discountPrice" data-price="4600">&#2547;{{$data->price - $data->discount}}</span>
                             </div>
 
                             <div class="orderAndContity">
                                 <div class="contity">
 
                                     <input class="minusBtn" type="button" value="-">
-                                    <input class="countShow" type="number" min="1" value="1">
+                                    <input class="countShow" name="qty" type="number" min="1" value="1">
                                     <input class="plusBtn" type="button" value="+">
                                 </div>
-                                <button class="btn_primary whatapp">
-                                    <a href="{{route('checkout',[$data->slug])}}" class="orderNow">অর্ডার করুন</a>
+                                <button class="btn_primary whatapp orderNow">
+                                    অর্ডার করুন
                                 </button>
-                                <button class="btn_primary ">
-                                    <a href="{{route('checkout',[$data->slug])}}" class="orderNow ">buy now</a>
+                                <button class="btn_primary orderNow">
+                                    buy now
                                 </button>
                             </div>
 
                         <!-- Call btn -->
                         <div class="callBtns">
-                            <a class="callBtn" href="tel: +880 1518-460933">
+                            <a class="callBtn" href="tel:{{$site_info->phone}}">
                                 <p class="callIndicate">কল করতে ক্লিক করুন</p>
-                                <p>+880 1518-460933</p>
+                                <p>{{$site_info->phone}}</p>
                             </a>
-                            <a class="callBtn whatsappbnt" href="tel: +880 1518-460933">
+                            <a class="callBtn whatsappbnt" href="https://wa.me/{{$site_info->whatsapp}}">
                                 <p class="callIndicate">হোয়াটসঅ্যাপ করুন</p>
-                                <p>+880 1518-460933</p>
+                                <p>{{$site_info->whatsapp}}</p>
                             </a>
                         </div>
 
@@ -124,28 +127,42 @@
                             <div class="productSingle">
                                 <a href="{{route('product_details',[$rproduct->slug])}}">
                                     <div class="productImg">
-                                        <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
-                                        <div class="pDiscount">{{$rproduct->discount}}% off</div>
+                                        <img class="pImgMain" src="{{$rproduct->photo}}" alt="">
+                                        <div class="pDiscount">{{$rproduct->discount * 100 / $rproduct->price}}% off</div>
                                     </div>
                                 </a>
                                 <div class="productData">
                                     <a href="{{route('product_details',[$rproduct->slug])}}" class="productTitle">{{$rproduct->title}}</a>
                                     <div class="productRating">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
+                                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                                            <path fill-rule="evenodd" d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z" clip-rule="evenodd" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                                            <path fill-rule="evenodd" d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z" clip-rule="evenodd" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                                            <path fill-rule="evenodd" d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z" clip-rule="evenodd" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                                            <path fill-rule="evenodd" d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z" clip-rule="evenodd" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                                            <path fill-rule="evenodd" d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z" clip-rule="evenodd" />
+                                        </svg>
                                     </div>
                                     <div class="productStockavility">
-                                        <div class="inStock stokcSingle">
-                                            <i class="fa-solid fa-check"></i>
-                                            <h4 class="inStock">In stock</h4>
-                                        </div>
-                                        <div class="outStock stokcSingle">
-                                            <i class="fa-solid fa-xmark"></i>
-                                            <h4 class="inStock">Out of stock</h4>
-                                        </div>
+                                        @if ($data->stock>0)
+                                            <div class="inStock stokcSingle">
+                                                <i class="fa-solid fa-check"></i>
+                                                <h4 class="inStock">In stock</h4>
+                                            </div>
+                                        @else
+                                            <div class="outStock stokcSingle">
+                                                <i class="fa-solid fa-xmark"></i>
+                                                <h4 class="inStock">Out of stock</h4>
+                                            </div>
+                                        @endif
+
                                     </div>
                                     <div class="productPrice">
                                         <del>&#2547; {{$rproduct->price}}</del>

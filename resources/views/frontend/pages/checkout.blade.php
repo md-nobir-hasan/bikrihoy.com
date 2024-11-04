@@ -29,7 +29,7 @@
                         <div class="orderprocess">
                             <h3 class="orderproces">Your Order</h3>
                             <h4 class="checkoutProductTitle"></h4>
-                            
+
                             <table>
                                 <thead>
                                     <tr>
@@ -38,7 +38,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cart_products as $product)
+                                e    @foreach ($cart_products as $product)
                                      <input type="hidden" name="slug" value="{{$product->slug}}">
                                      <input type="hidden" name="qty" value="1">
                                         <tr>
