@@ -25,11 +25,15 @@
                     </div>
                     <div class="smallImgs">
                          @foreach ($data->productGallery as $simg)
-                            <div class="smallSingle active">
-                                <p class="pdsColor">{{$simg->color->c_name}}</p>
-                                <input type="hidden" name="color_id" value="{{$simg->color_id}}">
-                                <img src="/{{$simg->imageGallery->img}}" alt="{{$data->title}}">
-                            </div>
+                            <label>
+                                <div class="smallSingle active">
+                                    <input type="radio" name="Color" style="width: 0; height: 0; position: absolute;">
+                                    <p class="pdsColor">{{$simg->color->c_name}}</p>
+                                    <input type="hidden" name="color_id" value="{{$simg->color_id}}">
+                                    <img src="/{{$simg->imageGallery->img}}" alt="{{$data->title}}">
+                                </div>
+                            </label>
+
                         @endforeach
                     </div>
                 </div>

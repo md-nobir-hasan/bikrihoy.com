@@ -28,6 +28,8 @@
                     <div class="checkoutFormRight">
                         <div class="orderprocess">
                             <h3 class="orderproces">Your Order</h3>
+                            <h4 class="checkoutProductTitle"></h4>
+                            
                             <table>
                                 <thead>
                                     <tr>
