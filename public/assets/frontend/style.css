@@ -347,6 +347,7 @@ input[type="number"] {
     margin-top: -2rem;
 }
 .pdrightInner {
+    margin-top: 1rem;
     padding-left: 1rem;
     display: block;
 }
