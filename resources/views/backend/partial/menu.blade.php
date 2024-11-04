@@ -228,7 +228,7 @@
             </p>
         </a>
         <ul class="nav nav-treeview">
-            @if ($n = check('Slider Image'))
+            @if ($n = check('Setup size'))
                 <li class="nav-item">
                     <a href="{{ route('size.index') }}"
                        class="nav-link {{ Request::is('size/index') ? 'active' : '' }}">
@@ -237,7 +237,7 @@
                     </a>
                 </li>
             @endif
-            @if ($n = check('Banner Image'))
+            @if ($n = check('Setup color'))
                 <li class="nav-item">
                     <a href="{{ route('color.index') }}"
                        class="nav-link {{ Request::is('color/index') ? 'active' : '' }}">

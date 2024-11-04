@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>Add Product</h4>
+                            <h4>Add Product - haha huhu</h4>
                         </span>
                         <span class="float-right">
                             <a href="{{ route('product.index') }}" class="btn btn-info">Back</a>
