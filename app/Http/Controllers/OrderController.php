@@ -118,7 +118,7 @@ class OrderController extends Controller
         $insert->address = $request->address;
         $insert->note = $request->note;
         $insert->subtotal = $product->price - $product->discount;
-        $insert->total = $insert->subtotal + Shipping::find($request->shipping_id)->price;
+        $insert->total = ($insert->subtotal * $request->qty) + Shipping::find($request->shipping_id)->price;
         $insert->payment_number = $request->payment_number;
         $insert->transection = $request->transection;
         $insert->country = $request->country;
@@ -138,26 +138,24 @@ class OrderController extends Controller
         $insert->status = 'active';
         $insert->save();
 
-        foreach ($request->order_item as $key => $order) {
-            // dd($order);
-            $order_item = new OrderItem();
-            $order_item->order_id = $insert->id;
-            $order_item->product_id = $order['product_id'];
-            if (isset($order['p_size_id'])) {
-                $order_item->p_size_id = $order['p_size_id'];
-            }
-            if (isset($order['p_color_id'])) {
-                $order_item->p_color_id = $order['p_color_id'];
-            }
+        // foreach ($request->order_item as $key => $order) {
+        // dd($order);
+        $order_item = new OrderItem();
+        $order_item->order_id = $insert->id;
+        $order_item->product_id = $product->id;
 
-            $order_item->qty = $order['qty'];
-            $order_item->price = $order['price'];
-            $order_item->save();
-        }
+        // if (isset($order['p_color_id'])) {
+        //     $order_item->p_color_id = $order['p_color_id'];
+        // }
+
+        $order_item->qty = $request->qty;
+        $order_item->price = $insert->total;
+        $order_item->save();
+        // }
 
 
         request()->session()->flash('success', " Order successfully placed");
-        return redirect()->route('frontend.pages.thanks', [$insert->id]);
+        return redirect()->route('order.thanks', [$insert->order_number]);
     }
 
     public function view($id)
@@ -391,15 +389,15 @@ class OrderController extends Controller
         return view('frontend.pages.checkout', $n);
     }
 
-    public function thanks($id)
+    public function thanks($order_num)
     {
         $n['orders'] = Order::with(['orderItem', 'shipping', 'payment', 'user', 'products', 'orderItem.product'])
             ->withSum('orderItem as pqty', 'qty')
             ->withSum('products as pp', 'price')
             ->withSum('products as pd', 'discount')
-            ->find($id);
+            ->where('order_number', $order_num);
         // dd($n);
-        return view('frontend.thanks', $n);
+        return view('frontend.pages.thanks', $n);
     }
 
 

@@ -38,10 +38,12 @@
                                 <tbody>
                                     @foreach ($cart_products as $product)
                                      <input type="hidden" name="slug" value="{{$product->slug}}">
+                                     <input type="hidden" name="qty" value="1">
                                         <tr>
                                             <td>{{$product->title}}</td>
                                             <td>৳ <span>{{$product->price}}</span></td>
                                         </tr>
+                                        {{-- <input type="hidden" name="order_item [{{$loop->index}}][product_id]" value="$product"> --}}
                                     @endforeach
                                     <tr>
                                         <td><b>Discount</b></td>
