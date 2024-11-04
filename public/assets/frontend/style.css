@@ -433,7 +433,11 @@ input[type="number"] {
     column-gap: 4%;
     flex-direction: row-reverse;
 }
-
+.checkoutProductTitle{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000015;
+}
 .checkoutFormRight {
     width: 40%;
     margin-top: 0.5rem;
@@ -441,6 +445,7 @@ input[type="number"] {
 .checkoutFormLeft {
     width: 56%;
 }
+
 .address {
     display: flex;
     justify-content: flex-start;
@@ -507,6 +512,9 @@ input[type="number"] {
 .orderprocess {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
     padding: 1.5rem;
+}
+.orderprocess table{
+    width: 100%;
 }
 .orderproces {
     font-size: 1.2rem;
@@ -660,6 +668,11 @@ input[type="number"] {
 }
 .footerSocial.linkedin svg{
     background:  #0077B5;
+}
+
+.thankyouSection{
+    padding: 5rem 0;
+    background: #f5fbfe;
 }
 
 /* REsponsive design  strat*/
