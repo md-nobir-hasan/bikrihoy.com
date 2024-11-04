@@ -535,6 +535,8 @@ input[type="number"] {
     justify-content: space-between;
     align-items: flex-start;
     column-gap: 2%;
+    flex-wrap: wrap;
+    row-gap: 1rem;
 }
 .footerSingle{
     width: 32%;
@@ -655,8 +657,19 @@ input[type="number"] {
 }
 
 @media (max-width: 992px) {
+    .footerSingle{
+        width: 48%;
+    }
+    .footerRight{
+        margin-left: 0;
+        margin-right: auto;
+    }
     .productSingleMain {
         width: 33.33%;
+    }
+    .footerMiddle{
+        margin-right: 0;
+        width: fit-content;
     }
     .ckeckoutForm {
         flex-direction: column;
@@ -673,6 +686,9 @@ input[type="number"] {
 @media (max-width: 768px) {
     .productSingleMain {
         width: 50%;
+    }
+    .footerSingle{
+        width: 100%;
     }
 }
 
