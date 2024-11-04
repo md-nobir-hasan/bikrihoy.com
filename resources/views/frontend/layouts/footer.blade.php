@@ -11,15 +11,15 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                       </svg>
-                    
-                    <span>Mirpur, Dhaka, Bangladesh.</span>
+
+                    <span>{{$site_info->address}}</span>
                 </div>
                 <div class="footerPhone fLeftInner">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
                       </svg>
 
-                    <a href="tel: 01786743293">01786743293</a>
+                    <a href="tel: 01786743293">{{$site_contact_info->phone}}</a>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
             <div class="footerRight footerSingle">
                 <h3 class="footerTitle">Socials</h3>
                 <div class="footerSocialMain">
-                    <a href="#" target="_blank" class="footerSocial facebook">
+                    <a href="{{$site_contact_info->facebook_page_link}}" target="_blank" class="footerSocial facebook">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg>
                     </a>
                     <a href="#" target="_blank" class="footerSocial twitter">
@@ -54,13 +54,13 @@
 
     </div>
 
-    
+
 </section>
 <div class="footerBotto">
     <div class="container">
-        <p class="footerBottomData">&copy; 2024 Developed By <a href="#">Motion IT BD.</a></p>
+        <p class="footerBottomData">&copy; 2024 Developed By <a href="https://softwareserviceit.com" target="_blank">Sotware Service IT.</a></p>
     </div>
-</div>   
+</div>
 
    <!-- Jquery js -->
     <script src="/assets/frontend/bootstrap.min.js"></script>
