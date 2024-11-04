@@ -796,6 +796,7 @@ input[type="number"] {
     }
     .accordion-header.top{
         flex-direction: column;
+        margin-top: 0.5rem;
     }
 }
 
