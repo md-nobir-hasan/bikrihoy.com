@@ -347,6 +347,7 @@ input[type="number"] {
     margin-top: -2rem;
 }
 .pdrightInner {
+    margin-top: 1rem;
     padding-left: 1rem;
     display: block;
 }
@@ -913,9 +914,15 @@ input[type="number"] {
     .priceDetails {
         margin-top: 2rem;
     }
+    .pdrightInner{
+        padding-left: 0;
+    }
 }
 
 @media (max-width: 480px) {
+    .orderprocess{
+        padding: 1.5rem .5rem;
+    }
     .orderAndContity{
         padding-right: 1rem;
     }
