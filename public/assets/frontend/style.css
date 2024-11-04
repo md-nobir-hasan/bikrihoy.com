@@ -916,6 +916,9 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+    .orderprocess{
+        padding: 1.5rem .5rem;
+    }
     .orderAndContity{
         padding-right: 1rem;
     }
