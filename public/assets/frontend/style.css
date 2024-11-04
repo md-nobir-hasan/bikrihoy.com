@@ -914,6 +914,9 @@ input[type="number"] {
     .priceDetails {
         margin-top: 2rem;
     }
+    .pdrightInner{
+        padding-left: 0;
+    }
 }
 
 @media (max-width: 480px) {
