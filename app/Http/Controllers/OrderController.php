@@ -105,6 +105,7 @@ class OrderController extends Controller
                 $user_id = $user_create->id;
             }
         }
+        $product = DB::table('products')->where('slug', $request->slug)->first();
         $insert = new Order();
         $insert->order_number = $order_number;
         $insert->user_id = $user_id;
@@ -116,8 +117,8 @@ class OrderController extends Controller
         // $insert->email = $request->email;
         $insert->address = $request->address;
         $insert->note = $request->note;
-        $insert->subtotal = $request->subtotal;
-        $insert->total = $request->subtotal + Shipping::find($request->shipping_id)->price;
+        $insert->subtotal = $product->price - $product->discount;
+        $insert->total = $insert->subtotal + Shipping::find($request->shipping_id)->price;
         $insert->payment_number = $request->payment_number;
         $insert->transection = $request->transection;
         $insert->country = $request->country;
