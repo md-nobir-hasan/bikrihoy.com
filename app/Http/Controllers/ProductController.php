@@ -17,6 +17,7 @@ use App\Models\PaSize;
 use App\Models\Subcat;
 use Faker\Core\Color;
 use Illuminate\Support\Facades\Artisan;
+use Str;
 
 class ProductController extends Controller
 {
@@ -91,7 +92,7 @@ class ProductController extends Controller
         // dd($request->all());
         // }
         $insert->photo = ProductGallery::orderBy('id', 'desc')->first()->imageGallery->img;
-        $insert->slug = str()->slug($request->title);
+        $insert->slug = Str::slug($request->title);
         $insert->is_featured = $request->input('is_featured', 0);
         $insert->save();
 
