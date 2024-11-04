@@ -38,39 +38,39 @@
                     <!-- Product Single -->
                     @foreach ($products as $product)
                         <div class="productSingleMain">
-                            <a href="{{route('product_details')}}">
-                                <div class="productSingle">
+                            <div class="productSingle">
+                                    <a href="{{route('product_details',[$product->slug])}}">
                                     <div class="productImg">
-                                        <img class="pImgMain" src="/storage/{{$product->photo}}" alt="{{$product->title}}">
+                                        <img class="pImgMain" src="{{$product->photo}}" alt="{{$product->title}}">
                                         <div class="pDiscount">{{$product->discount}}% off</div>
                                     </div>
-                                    <div class="productData">
-                                        <a href="{{route('product_details')}}" class="productTitle">{{$product->title}}</a>
-                                        <div class="productRating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="productStockavility">
-                                            <div class="inStock stokcSingle">
-                                                <i class="fa-solid fa-check"></i>
-                                                <h4 class="inStock">In stock</h4>
-                                            </div>
-                                            <div class="outStock stokcSingle">
-                                                <i class="fa-solid fa-xmark"></i>
-                                                <h4 class="inStock">Out of stock</h4>
-                                            </div>
-                                        </div>
-                                        <div class="productPrice">
-                                            <del>&#2547; 6500</del>
-                                            <span>&#2547 4600</span>
-                                        </div>
-                                        <a href="{{route('product_details')}}" class="btn_primary">অর্ডার করুন </a>
+                                    </a>
+                                <div class="productData">
+                                    <a href="{{route('product_details',[$product->slug])}}" class="productTitle">{{$product->title}}</a>
+                                    <div class="productRating">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
                                     </div>
+                                    <div class="productStockavility">
+                                        <div class="inStock stokcSingle">
+                                            <i class="fa-solid fa-check"></i>
+                                            <h4 class="inStock">In stock</h4>
+                                        </div>
+                                        <div class="outStock stokcSingle">
+                                            <i class="fa-solid fa-xmark"></i>
+                                            <h4 class="inStock">Out of stock</h4>
+                                        </div>
+                                    </div>
+                                    <div class="productPrice">
+                                        <del>&#2547; 6500</del>
+                                        <span>&#2547 4600</span>
+                                    </div>
+                                    <a href="{{route('product_details',[$product->slug])}}" class="btn_primary">অর্ডার করুন </a>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     @endforeach
                 </div>
