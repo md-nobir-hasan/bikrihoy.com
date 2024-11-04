@@ -87,7 +87,7 @@ body {
     top: 0;
     left: 0;
     padding: 0.5rem 0.8rem;
-    background: #5433ed;
+    background: #00b512;
     font-size: 1rem;
     font-weight: 500;
     color: #ffffff;
@@ -355,6 +355,7 @@ input[type="number"] {
     font-weight: 600;
     color: #000015;
     margin-top: 1.2rem;
+    text-align: center;
 }
 
 /* Checkout section */
