@@ -1,0 +1,10 @@
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+/.vscode
+/.env
+/vendor
+/node_modules
+/storage/app
