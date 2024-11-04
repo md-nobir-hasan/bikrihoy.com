@@ -68,7 +68,11 @@
     <script src="/assets/frontend/jQuery3.7.1.min.js"></script>
     <script src="/assets/frontend/script.js"></script>
 
-
+<script>
+    $('.order-now-button-track').on('click',function(){
+        fbq('track', 'OrderNow');
+    });
+</script>
 {{-- in page js  --}}
 @stack('custom-js')
 
