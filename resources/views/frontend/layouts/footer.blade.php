@@ -73,10 +73,6 @@
 @stack('custom-js')
 
 
-{{-- Facebook google tag or link here  --}}
-{!! $google_tag ? $google_tag->gtag_footer : '' !!}
-{!! $pixel_tag ? $pixel_tag->ptag_footer : '' !!}
-{{-- End Facebook google tag or link  --}}
 
 @stack('g_fb_js')
 
