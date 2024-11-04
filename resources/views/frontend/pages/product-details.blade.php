@@ -44,8 +44,8 @@
 
                             <h2 class="sub_title">{{$data->title}}</h2>
                             <div class="priceDetails">
-                                <del>&#2547;6500</del>
-                                <span>&#2547;4600</span>
+                                <del class="originalPrice" data-price="6500">&#2547;6500</del>
+                                <span class="discountPrice" data-price="4600">&#2547;4600</span>
                             </div>
 
                             <div class="orderAndContity">
