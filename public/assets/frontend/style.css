@@ -899,7 +899,7 @@ input[type="number"] {
 
 @media (max-width: 440px) {
     .productImg {
-        height: 12rem;
+        height: 11rem;
     }
     /* .leargeImgSingle {
         height: 22rem;
@@ -920,7 +920,7 @@ input[type="number"] {
         padding: 0;
     }
     .productImg {
-        height: 11rem;
+        height: 10.2rem;
     }
     .productSingleMain {
         padding: 0.5rem;
@@ -932,7 +932,7 @@ input[type="number"] {
 
 @media (max-width: 380px) {
     .productImg {
-        height: 10rem;
+        height: 9.5rem;
     }
     /* .leargeImgSingle {
         height: 20rem;
@@ -946,4 +946,12 @@ input[type="number"] {
     /* .leargeImgSingle {
         height: 19rem;
     } */
+    .productImg{
+        height: 8.8rem;
+    }
+}
+@media (max-width: 350px) {
+    .productImg{
+        height: 8.5rem;
+    }
 }
