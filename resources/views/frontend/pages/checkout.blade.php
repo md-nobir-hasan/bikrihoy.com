@@ -63,7 +63,7 @@
                  <form action="{{route('order.store')}}" method="POST" class="ckeckoutForm">
                     @csrf
 
-                    <input type="hidden" name="color_id" value="{{$color?->id}}">
+                    <input type="hidden" name="color_id" value="{{$color->id}}">
                     <!-- Payment amout calculate -->
                     <div class="checkoutFormRight">
                         <div class="orderprocess">
