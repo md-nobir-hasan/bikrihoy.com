@@ -46,3 +46,16 @@
     </div>
 </section>
 @endsection
+@push('custom-js')
+<script>
+    $(document).ready(function () {
+        fbq('track', 'Purchase', {
+            value: '{{ $order->total }}', // Total order value
+            currency: 'BDT', // Currency code
+            order_id: '{{ $order->order_number }}', // Order number
+            customer_name: '{{ $order->name }}', // Customer name
+            customer_phone: '{{ $order->phone }}', // Customer phone
+        });
+    });
+</script>
+@endpush

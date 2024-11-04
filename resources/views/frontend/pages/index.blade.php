@@ -85,7 +85,7 @@
                                         <del>&#2547; {{ $product->price}}</del>
                                         <span>&#2547  {{ $product->price - $product->discount}}</span>
                                     </div>
-                                    <a href="{{route('product_details',[$product->slug])}}" class="btn_primary">অর্ডার করুন </a>
+                                    <a href="{{route('product_details',[$product->slug])}}" class="btn_primary order-now-button-track">অর্ডার করুন </a>
                                 </div>
                             </div>
                         </div>

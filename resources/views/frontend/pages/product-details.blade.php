@@ -65,10 +65,10 @@
                                     <input class="countShow" name="qty" type="number" min="1" value="1">
                                     <input class="plusBtn" type="button" value="+">
                                 </div>
-                                <button class="btn_primary whatapp orderNow">
+                                <button class="btn_primary whatapp orderNow order-now-button-track">
                                     অর্ডার করুন
                                 </button>
-                                <button class="btn_primary orderNow">
+                                <button class="btn_primary orderNow order-now-button-track">
                                     buy now
                                 </button>
                             </div>
@@ -175,7 +175,7 @@
                                         <del>&#2547; {{$rproduct->price}}</del>
                                         <span>&#2547 {{$rproduct->price - $rproduct->discount}}</span>
                                     </div>
-                                    <a href="{{route('product_details',[$rproduct->slug])}}" class="btn_primary">অর্ডার করুন </a>
+                                    <a href="{{route('product_details',[$rproduct->slug])}}" class="btn_primary order-now-button-track">অর্ডার করুন </a>
                                 </div>
                             </div>
                         </div>
