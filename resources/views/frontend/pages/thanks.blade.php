@@ -18,11 +18,11 @@
                 <table class="table table-responsive table-bordered">
                     <tr>
                         <td>Order Id:</td>
-                        <td>BKO12054</td>
+                        <td>{{$order->order_number}}</td>
                     </tr>
                     <tr>
                         <td>Order Date:</td>
-                        <td><b>November 4, 2024</b></td>
+                        <td><b>{{$order->created_at->format('d-M-Y')}}</b></td>
                     </tr>
                     <tr>
                         <td>Payment type</td>
@@ -30,17 +30,17 @@
                     </tr>
                     <tr>
                         <td>Total payment</td>
-                        <td><b>&#2547;10235</b></td>
+                        <td><b>&#2547;{{$order->total}}</b></td>
                     </tr>
-                    
+
                 </table>
             </div>
             <div class="thankAddress">
                 <h2 class="sub_title2">Shipping address</h2>
-                <h3 class="thankName">Md Anower Hossan</h3>
-                <p class="thankAddressData">House: 107, Word: 07, Vill: Char-veduril, Bhola Sadar, Bhola-8300</p>
-                <p class="thankMobile">01990000922</p>
-                
+                <h3 class="thankName">{{$order->name}}</h3>
+                <p class="thankAddressData">{{$order->address}}</p>
+                <p class="thankMobile">{{$order->phone}}</p>
+
             </div>
         </div>
     </div>
