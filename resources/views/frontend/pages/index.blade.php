@@ -35,7 +35,7 @@
                     @foreach ($products as $product)
                         <div class="productSingleMain">
                             <div class="productSingle">
-                                    <a href="{{route('product_details',[$product->slug])}}">
+                                    <a href="{{ route('product_details',[$product->slug]) }}">
                                     <div class="productImg">
                                         <img class="pImgMain" src="{{$product->photo}}" alt="{{$product->title}}">
                                         <div class="pDiscount">{{$product->discountPercent()}}% off</div>
