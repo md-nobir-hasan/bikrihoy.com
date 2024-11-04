@@ -69,7 +69,7 @@
                                 <p class="callIndicate">কল করতে ক্লিক করুন</p>
                                 <p>+880 1518-460933</p>
                             </a>
-                            <a class="whatsappbnt" href="tel: +880 1518-460933">
+                            <a class="callBtn whatsappbnt" href="tel: +880 1518-460933">
                                 <p class="callIndicate">হোয়াটসঅ্যাপ করুন</p>
                                 <p>+880 1518-460933</p>
                             </a>
