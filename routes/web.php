@@ -56,8 +56,7 @@ Route::post('order/store', [OrderController::class, 'store'])->name('order.store
 Route::get('product/fetch/{id}', [FrontendController::class, 'productFetch'])->name('product.fetch');
 Route::get('order/thank-you-page/{order}', [OrderController::class, 'thanks'])->name('order.thanks');
 Route::get('order/checkout/{slug}', [OrderController::class, 'checkout'])->name('checkout');
-Route::get('/product-details/{id}', [FrontendController::class, 'product_details'])->name('product_details');
-Route::get('/product-details/{id}/#contact', [FrontendController::class, 'product_details'])->name('product_details');
+Route::get('/product-details/{id}/', [FrontendController::class, 'product_details'])->name('product_details');
 Route::post('/review', [FrontendController::class, 'review'])->name('review');
 
 //Pages

@@ -8,7 +8,7 @@
         let price = parseFloat($('.price').text());
         let discount = parseFloat($('.discount').text());
         let quantity = parseInt($('.countShow').val());
-        let shipping = parseFloat($('input[name="shipping_id"]:checked').val());
+        let shipping = parseFloat($('input[name="shipping_id"]:checked').attr('id'));
 
         // Calculate subtotal and total
         let subtotal = (price - discount) * quantity;
@@ -59,44 +59,24 @@
     <section class="checkoutSection">
         <div class="container">
             <div class="checkoutMain">
-
-                <div class="sectionDevider tCheckout">
-                </div>
-                <!-- Coupon code -->
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header top">
-                        <span class="cFirst">Have a coupon?</span>
-                        <button class="checkout accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            here to enter your code
-                        </button>
-                      </h2>
-                    </div>
-
-                </div>
-
                 <!-- main form -->
                  <form action="{{route('order.store')}}" method="POST" class="ckeckoutForm">
                     @csrf
 
+                    <input type="hidden" name="color_id" value="{{$color->id}}">
                     <!-- Payment amout calculate -->
                     <div class="checkoutFormRight">
                         <div class="orderprocess">
                             <h3 class="orderproces">Your Order</h3>
-                            <h4 class="checkoutProductTitle">Product Name Will be here</h4>
-
-
-
+                            <h4 class="checkoutProductTitle">{{$product->title}} | {{$color->c_name}}</h4>
                             <table>
                                 <tbody>
-                                    @foreach ($cart_products as $product)
                                     <input type="hidden" name="slug" value="{{$product->slug}}">
 
                                     <tr>
                                         <td><b>Price</b></td>
                                         <td><b>৳ <span class="price">{{$product->price}}</span></b></td>
                                     </tr>
-                                    @endforeach
 
                                     <tr>
                                         <td>Discount</td>
@@ -107,7 +87,7 @@
                                         <td>
                                             <div class="quantity">
                                                 <input class="minusBtn" type="button" value="-">
-                                                <input class="countShow" name="qty" type="number" min="1" value="1">
+                                                <input class="countShow" name="qty" type="number" min="1" value="{{$qty}}">
                                                 <input class="plusBtn" type="button" value="+">
                                             </div>
                                         </td>
@@ -121,8 +101,8 @@
                                         <td class="checkradio">
                                             @foreach ($shippings as $shipping)
                                             <div>
-                                                <label>{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
-                                                <input type="radio" name="shipping_id" class="shipping-option" value="{{$shipping->id}}" {{ $loop->first ? 'checked' : '' }}>
+                                                <label for="{{$shipping->price}}">{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
+                                                <input type="radio" name="shipping_id" id="{{$shipping->price}}" class="shipping-option" value="{{$shipping->id}}"  checked>
                                             </div>
                                             @endforeach
                                         </td>

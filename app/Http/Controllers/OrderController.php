@@ -372,9 +372,11 @@ class OrderController extends Controller
         // dd($request->all());
         $n['shippings'] = DB::table('shippings')->get();
         $n['payments'] = DB::table('payments')->get();
+        $n['color'] = DB::table('product_colors')->where('id', $request->color_id)->first();
+        $n['qty'] = $request->qty;
 
         if ($slug) {
-            $n['cart_products'] = DB::table('products')->where('slug', $slug)->get();
+            $n['product'] = DB::table('products')->where('slug', $slug)->first();
         } else {
 
             if (serviceCheck('Database Add To Cart')) {
