@@ -790,6 +790,13 @@ input[type="number"] {
         font-size: 0.9rem;
         padding: 0.3rem 0.6rem;
     }
+    .orderprocess table{
+        width: unset;
+        overflow-x: auto;
+    }
+    .accordion-header.top{
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 550px) {
