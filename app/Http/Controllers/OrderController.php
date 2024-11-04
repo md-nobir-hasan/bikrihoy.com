@@ -369,7 +369,7 @@ class OrderController extends Controller
 
     public function checkout(Request $request, $slug = null)
     {
-        dd($request->all());
+        // dd($request->all());
         $n['shippings'] = DB::table('shippings')->get();
         $n['payments'] = DB::table('payments')->get();
 

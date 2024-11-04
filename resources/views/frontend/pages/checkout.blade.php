@@ -91,7 +91,7 @@
                                 <tbody>
                                     @foreach ($cart_products as $product)
                                     <input type="hidden" name="slug" value="{{$product->slug}}">
-                                    <input type="hidden" name="qty" value="1">
+
                                     <tr>
                                         <td><b>Price</b></td>
                                         <td><b>৳ <span class="price">{{$product->price}}</span></b></td>
@@ -107,7 +107,7 @@
                                         <td>
                                             <div class="quantity">
                                                 <input class="minusBtn" type="button" value="-">
-                                                <input class="countShow" type="number" min="1" value="1">
+                                                <input class="countShow" name="qty" type="number" min="1" value="1">
                                                 <input class="plusBtn" type="button" value="+">
                                             </div>
                                         </td>
@@ -122,7 +122,7 @@
                                             @foreach ($shippings as $shipping)
                                             <div>
                                                 <label>{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
-                                                <input type="radio" name="shipping_id" class="shipping-option" value="{{$shipping->price}}" {{ $loop->first ? 'checked' : '' }}>
+                                                <input type="radio" name="shipping_id" class="shipping-option" value="{{$shipping->id}}" {{ $loop->first ? 'checked' : '' }}>
                                             </div>
                                             @endforeach
                                         </td>
