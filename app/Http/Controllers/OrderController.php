@@ -373,7 +373,7 @@ class OrderController extends Controller
         $n['shippings'] = DB::table('shippings')->get();
         $n['payments'] = DB::table('payments')->get();
 
-        if (!$slug) {
+        if ($slug) {
             $n['cart_products'] = DB::table('products')->where('slug', $slug)->get();
         } else {
 

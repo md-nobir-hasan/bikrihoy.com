@@ -1,4 +1,5 @@
    <!-- Jquery js -->
+    <script src="/assets/frontend/bootstrap.min.js"></script>
     <script src="/assets/frontend/jQuery3.7.1.min.js"></script>
     <script src="/assets/frontend/script.js"></script>
 
