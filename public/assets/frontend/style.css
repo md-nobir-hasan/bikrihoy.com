@@ -31,9 +31,6 @@ body {
     column-gap: 0.5rem;
     text-decoration: none;
     padding: 0.5rem 0;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
 }
 .headerLogo .logotitle {
     font-size: 1.2rem;
@@ -43,6 +40,8 @@ body {
 }
 .headerLogo img {
     height: 2.7rem;
+    color: #ffffff;
+    font-weight: 600;
 }
 
 /* Product section */
@@ -741,8 +740,8 @@ input[type="number"] {
         width: 25%;
     }
     .orderNow {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
     .callBtns {
         flex-direction: column;
@@ -753,6 +752,21 @@ input[type="number"] {
 }
 
 @media (max-width: 992px) {
+    .orderNow{
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+    .orderAndContity{
+        padding-right: 2rem;
+    }
+    .headerMain .headerLogo{
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .smallSingle img{
+        height: 12rem;
+    }
     .callBtns {
         flex-direction: row;
     }
@@ -857,6 +871,10 @@ input[type="number"] {
         flex-direction: column;
         margin-top: 0.5rem;
     }
+    .orderNow{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }
 
 @media (max-width: 550px) {
@@ -875,6 +893,13 @@ input[type="number"] {
 }
 
 @media (max-width: 520px) {
+    .orderNow{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    .smallSingle img{
+        height: 11rem;
+    }
     .thankTop{
         padding: 2rem 1rem;
     }
@@ -891,6 +916,9 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+    .orderAndContity{
+        padding-right: 1rem;
+    }
     /* .leargeImgSingle {
         height: 24rem;
     } */
@@ -900,6 +928,16 @@ input[type="number"] {
 }
 
 @media (max-width: 440px) {
+    .orderAndContity{
+        width: 100%;
+    }
+    .smallSingle img{
+        height: 13rem;
+    }
+    .orderNow{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
     .productImg {
         height: 11rem;
     }
@@ -918,9 +956,10 @@ input[type="number"] {
 }
 
 @media (max-width: 405px) {
-    .orderNow {
-        padding: 0;
+    .smallSingle img{
+        height: 12rem;
     }
+    
     .productImg {
         height: 10.2rem;
     }
@@ -945,6 +984,13 @@ input[type="number"] {
 }
 
 @media (max-width: 365px) {
+    .orderNow{
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .smallSingle img{
+        height: 11.2rem;
+    }
     /* .leargeImgSingle {
         height: 19rem;
     } */
