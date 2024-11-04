@@ -12,20 +12,16 @@
 
 @section('page_conent')
  <section class="productdetailsSection">
-        <form action="#" class="orderForm">
+        <form action="{{route('checkout',[$data->slug])}}" method="GET" class="orderForm">
         <div class="container">
             <div class="sectionDevider top">
             </div>
             <div class="productDetailsMain row">
-
-                <!-- product photo -->
                 <div class="pdLeft col-lg-6">
-
                     <div class="leargeImage">
                         @foreach ($data->productGallery as $img)
                             <img class="leargeImgSingle @if($loop->first) active @endif" src="/{{$img->imageGallery->img}}" alt="{{$data->title}}">
                         @endforeach
-
                     </div>
                     <div class="smallImgs">
                          @foreach ($data->productGallery as $simg)
