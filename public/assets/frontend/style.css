@@ -113,20 +113,18 @@ body {
     column-gap: 0.5rem;
     margin-bottom: 0.5rem;
 }
-.productRating svg{
+.productRating svg {
     color: #f39c12;
     width: 1.2rem;
 }
-.productRating svg:last-child {
-    color: rgba(0, 0, 0, 0.15);
-}
+
 .stokcSingle {
     display: flex;
     justify-content: center;
     align-items: center;
     column-gap: 0.5rem;
 }
-.stokcSingle svg{
+.stokcSingle svg {
     width: 1.3rem;
 }
 .stokcSingle .inStock {
@@ -194,7 +192,7 @@ body {
 .smallSingle.active {
     opacity: 1;
 }
-.btn_primary.whatapp{
+.btn_primary.whatapp {
     background: #00b512;
 }
 .pdsColor {
@@ -244,7 +242,7 @@ body {
 .orderAndContity .btn_primary {
     margin-left: 0;
 }
-.callBtns{
+.callBtns {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -257,10 +255,10 @@ body {
     display: block;
     text-align: center;
     width: fit-content;
-    padding: .5rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     border-radius: 0.8rem;
 }
-.callBtn.whatsappbnt{
+.callBtn.whatsappbnt {
     background: #00b512;
 }
 .countShow {
@@ -433,7 +431,7 @@ input[type="number"] {
     column-gap: 4%;
     flex-direction: row-reverse;
 }
-.checkoutProductTitle{
+.checkoutProductTitle {
     font-size: 1.2rem;
     font-weight: 600;
     color: #000015;
@@ -513,7 +511,7 @@ input[type="number"] {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
     padding: 1.5rem;
 }
-.orderprocess table{
+.orderprocess table {
     width: 100%;
 }
 .orderproces {
@@ -547,11 +545,11 @@ input[type="number"] {
 }
 
 /* Footer style start */
-.footerSection{
+.footerSection {
     padding: 4rem 0;
     background: #130f40;
 }
-.footerMain{
+.footerMain {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -559,118 +557,119 @@ input[type="number"] {
     flex-wrap: wrap;
     row-gap: 1rem;
 }
-.footerSingle{
+.footerSingle {
     width: 32%;
 }
-.footerParagraph{
+.footerParagraph {
     font-size: 1rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, .7);
+    color: rgba(255, 255, 255, 0.7);
 }
-.fLeftInner{
+.fLeftInner {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     column-gap: 1rem;
     margin-bottom: 1rem;
 }
-.fLeftInner svg{
+.fLeftInner svg {
     width: 1.5rem;
     color: var(--primary-color);
 }
-.fLeftInner a{
+.fLeftInner a {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, .7);
-    transition: .4s;
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.4s;
 }
-.footerBotto{
+.footerBotto {
     padding: 2rem;
     background: #000000;
     text-align: center;
 }
-.footerBottomData{
+.footerBottomData {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
     font-size: 1rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, .7);
+    color: rgba(255, 255, 255, 0.7);
 }
-.footerBottomData a{
+.footerBottomData a {
     font-weight: 700;
     color: var(--primary-color);
-    transition: .4s ease;
+    transition: 0.4s ease;
     text-decoration: none;
 }
-.footerBottomData a:hover{
-    color: rgba(255, 255, 255, .7);
+.footerBottomData a:hover {
+    color: rgba(255, 255, 255, 0.7);
 }
-.fLeftInner a:hover{
+.fLeftInner a:hover {
     color: var(--primary-color);
 }
-.footerTitle{
+.footerTitle {
     font-size: 1.2rem;
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 1.5rem;
 }
-.footerLink{
+.footerLink {
     font-size: 1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, .7);
-    transition: .4s ease;
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.4s ease;
     display: block;
     margin-bottom: 1rem;
     text-decoration: none;
 }
-.footerMiddle{
+.footerMiddle {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
 }
-.footerLink:hover{
+.footerLink:hover {
     color: var(--primary-color);
 }
-.fLeftInner span{
+.fLeftInner span {
     font-size: 1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, .7);
+    color: rgba(255, 255, 255, 0.7);
 }
-.footerSocialMain{
+.footerSocialMain {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    column-gap: .5rem;
+    column-gap: 0.5rem;
 }
-.footerRight{
+.footerRight {
     width: fit-content;
     margin-left: auto;
 }
-.footerSocial svg{
+.footerSocial svg {
     color: transparent;
     border-radius: 50%;
     padding: 0.5rem;
     width: 2.1rem;
     height: 2.1rem;
 }
-.footerSocial.facebook svg{
-    background: #1877F2;
+.footerSocial.facebook svg {
+    background: #1877f2;
     color: #ffffff;
 }
-.footerSocial.twitter svg{
-    background: #1DA1F2;
+.footerSocial.twitter svg {
+    background: #1da1f2;
 }
-.footerSocial.youtube svg{
-    background:  #FF0000;
+.footerSocial.youtube svg {
+    background: #ff0000;
 }
-.footerSocial.linkedin svg{
-    background:  #0077B5;
+.footerSocial.linkedin svg {
+    background: #0077b5;
 }
 
-.thankyouSection{
+
+.thankyouSection {
     padding: 4rem 0;
     background: #f5fbfe;
 }
@@ -721,13 +720,13 @@ input[type="number"] {
 }
 /* REsponsive design  strat*/
 @media (max-width: 1400px) {
-    .orderAndContity{
+    .orderAndContity {
         column-gap: 1rem;
     }
-    .callBtn p{
+    .callBtn p {
         font-size: 1.2rem;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 30rem;
     }
 }
@@ -735,36 +734,36 @@ input[type="number"] {
     .productSingleMain {
         width: 25%;
     }
-    .orderNow{
+    .orderNow {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
     }
-    .callBtns{
+    .callBtns {
         flex-direction: column;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 26rem;
     }
 }
 
 @media (max-width: 992px) {
-    .callBtns{
+    .callBtns {
         flex-direction: row;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 33rem;
     }
-    .footerSingle{
+    .footerSingle {
         width: 48%;
     }
-    .footerRight{
+    .footerRight {
         margin-left: 0;
         margin-right: auto;
     }
     .productSingleMain {
         width: 33.33%;
     }
-    .footerMiddle{
+    .footerMiddle {
         margin-right: 0;
         width: fit-content;
     }
@@ -784,10 +783,10 @@ input[type="number"] {
     .productSingleMain {
         width: 50%;
     }
-    .footerSingle{
+    .footerSingle {
         width: 100%;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 29rem;
     }
 }
@@ -802,7 +801,7 @@ input[type="number"] {
     .footerSection{
         padding: 3rem 0;
     }
-    .deliveryCharge{
+    .deliveryCharge {
         margin-bottom: -1rem;
     }
     .checkoutFormRight {
@@ -840,27 +839,27 @@ input[type="number"] {
         font-size: 0.9rem;
         padding: 0.3rem 0.6rem;
     }
-    .orderprocess table{
+    .orderprocess table {
         width: unset;
         overflow-x: auto;
     }
-    .accordion-header.top{
+    .accordion-header.top {
         flex-direction: column;
         margin-top: 0.5rem;
     }
 }
 
 @media (max-width: 550px) {
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 26rem;
     }
-    .callBtns{
+    .callBtns {
         flex-direction: column;
     }
-    .priceDetails{
+    .priceDetails {
         font-size: 1.3rem;
     }
-    .priceDetails span{
+    .priceDetails span {
         font-size: 1.3rem;
     }
 }
@@ -872,16 +871,16 @@ input[type="number"] {
     .productImg {
         height: 13rem;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 25rem;
     }
-    .priceDetails{
+    .priceDetails {
         margin-top: 2rem;
     }
 }
 
 @media (max-width: 480px) {
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 24rem;
     }
 }
@@ -890,22 +889,22 @@ input[type="number"] {
     .productImg {
         height: 12rem;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 22rem;
     }
-    .orderAndContity .contity{
-        column-gap: .5rem;
+    .orderAndContity .contity {
+        column-gap: 0.5rem;
     }
-    .countShow{
+    .countShow {
         width: 1.4rem;
     }
-    .orderAndContity{
-        padding: 1rem .5rem;
+    .orderAndContity {
+        padding: 1rem 0.5rem;
     }
 }
 
 @media (max-width: 405px) {
-    .orderNow{
+    .orderNow {
         padding: 0;
     }
     .productImg {
@@ -914,7 +913,7 @@ input[type="number"] {
     .productSingleMain {
         padding: 0.5rem;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 21rem;
     }
 }
@@ -923,16 +922,16 @@ input[type="number"] {
     .productImg {
         height: 10rem;
     }
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 20rem;
     }
-    .orderAndContity{
-        column-gap: .5rem;
+    .orderAndContity {
+        column-gap: 0.5rem;
     }
 }
 
 @media (max-width: 365px) {
-    .leargeImgSingle{
+    .leargeImgSingle {
         height: 19rem;
     }
 }

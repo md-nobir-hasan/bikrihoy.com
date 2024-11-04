@@ -9,10 +9,17 @@
 @push('custom-js')
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
-        $('.smallSingle').on('click',function(){
+       $(document).ready(function(){
+         $('.smallSingle').each(function(){
             let id = $(this).attr('id');
             $('#color_id').val(id);
         })
+
+         $('.smallSingle').on('click',function(){
+            let id = $(this).attr('id');
+            $('#color_id').val(id);
+        })
+       })
     </script>
 @endpush
 
@@ -32,7 +39,7 @@
                     <input type="hidden" name="color_id" id="color_id">
                     <div class="smallImgs">
                          @foreach ($data->productGallery as $simg)
-                                <div class="smallSingle active" id="{{$simg->color_id}}">
+                                <div class="smallSingle @if($loop->first) active @endif" id="{{$simg->color_id}}">
                                     <p class="pdsColor">{{$simg->color->c_name}}</p>
                                     <img src="/{{$simg->imageGallery->img}}" alt="{{$data->title}}">
                                 </div>
