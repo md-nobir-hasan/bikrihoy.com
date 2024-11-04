@@ -1,5 +1,60 @@
 @extends('frontend.layouts.app')
 
+@push('custom-js')
+<script>
+    $(document).ready(function () {
+    function calculateTotal() {
+        // Get values
+        let price = parseFloat($('.price').text());
+        let discount = parseFloat($('.discount').text());
+        let quantity = parseInt($('.countShow').val());
+        let shipping = parseFloat($('input[name="shipping_id"]:checked').val());
+
+        // Calculate subtotal and total
+        let subtotal = (price - discount) * quantity;
+        let total = subtotal + shipping;
+
+        // Update HTML
+        $('.subtotal').text(subtotal.toFixed(2));
+        $('.total').text(total.toFixed(2));
+    }
+
+    // Initial calculation on page load
+    calculateTotal();
+
+    // Update quantity when plus or minus buttons are clicked
+    $('.plusBtn').on('click', function () {
+        let count = parseInt($('.countShow').val());
+        $('.countShow').val(count + 1);
+        calculateTotal();
+    });
+
+    $('.minusBtn').on('click', function () {
+        let count = parseInt($('.countShow').val());
+        if (count > 1) {
+            $('.countShow').val(count - 1);
+            calculateTotal();
+        }
+    });
+
+    // Update shipping when a different option is selected
+    $('.shipping-option').on('change', function () {
+        calculateTotal();
+    });
+
+    // Update subtotal and total when quantity input field is changed manually
+    $('.countShow').on('input', function () {
+        if ($(this).val() < 1) {
+            $(this).val(1); // Ensure quantity is at least 1
+        }
+        calculateTotal();
+    });
+});
+
+
+</script>
+@endpush
+
 @section('page_conent')
     <section class="checkoutSection">
         <div class="container">
@@ -28,51 +83,57 @@
                     <div class="checkoutFormRight">
                         <div class="orderprocess">
                             <h3 class="orderproces">Your Order</h3>
-                            <h4 class="checkoutProductTitle"></h4>
+                            <h4 class="checkoutProductTitle">Product Name Will be here</h4>
                             
+                            
+
                             <table>
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     @foreach ($cart_products as $product)
-                                     <input type="hidden" name="slug" value="{{$product->slug}}">
-                                     <input type="hidden" name="qty" value="1">
-                                        <tr>
-                                            <td>{{$product->title}}</td>
-                                            <td>৳ <span>{{$product->price}}</span></td>
-                                        </tr>
-                                        {{-- <input type="hidden" name="order_item [{{$loop->index}}][product_id]" value="$product"> --}}
-                                    @endforeach
+                                    <input type="hidden" name="slug" value="{{$product->slug}}">
+                                    <input type="hidden" name="qty" value="1">
                                     <tr>
-                                        <td><b>Discount</b></td>
-                                        <td><b>৳ <span>{{$product->discount}}</span></b></td>
+                                        <td><b>Price</b></td>
+                                        <td><b>৳ <span class="price">{{$product->price}}</span></b></td>
+                                    </tr>
+                                    @endforeach
+                            
+                                    <tr>
+                                        <td>Discount</td>
+                                        <td><b>৳ <span class="discount">{{$product->discount}}</span></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quantity</td>
+                                        <td>
+                                            <div class="quantity">
+                                                <input class="minusBtn" type="button" value="-">
+                                                <input class="countShow" type="number" min="1" value="1">
+                                                <input class="plusBtn" type="button" value="+">
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><b>Subtotal</b></td>
-                                        <td><b>৳ <span>{{ $sub_total = $product->price - $product->discount}}</span></b></td>
+                                        <td><b>৳ <span class="subtotal"></span></b></td>
                                     </tr>
                                     <tr>
                                         <td><b>Shipping</b></td>
                                         <td class="checkradio">
                                             @foreach ($shippings as $shipping)
-
                                             <div>
-                                                <label for="outDhaka">{{$shipping->type}}: <span>৳ <span>{{$shipping->price}}</span></span></label>
-                                                <input type="radio" name="shipping_id" value="{{$shipping->id}}" id="OutDhaka" checked>
+                                                <label>{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
+                                                <input type="radio" name="shipping_id" class="shipping-option" value="{{$shipping->price}}" {{ $loop->first ? 'checked' : '' }}>
                                             </div>
                                             @endforeach
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><b>Total</b></td>
-                                        <td><strong>৳ <span>{{$sub_total + $shipping->price }}</span></strong></td>
+                                        <td><strong>৳ <span class="total"></span></strong></td>
                                     </tr>
                                 </tbody>
                             </table>
+                            
                         </div>
                     </div>
 
