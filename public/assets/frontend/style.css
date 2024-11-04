@@ -185,6 +185,7 @@ body {
 .smallSingle img {
     width: 100%;
     cursor: pointer;
+    height: 9rem;
 }
 .smallSingle {
     position: relative;
