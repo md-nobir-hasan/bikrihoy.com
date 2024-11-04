@@ -740,8 +740,8 @@ input[type="number"] {
         width: 25%;
     }
     .orderNow {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
     .callBtns {
         flex-direction: column;
@@ -752,6 +752,10 @@ input[type="number"] {
 }
 
 @media (max-width: 992px) {
+    .orderNow{
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
     .orderAndContity{
         padding-right: 2rem;
     }
@@ -867,6 +871,10 @@ input[type="number"] {
         flex-direction: column;
         margin-top: 0.5rem;
     }
+    .orderNow{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }
 
 @media (max-width: 550px) {
@@ -885,6 +893,10 @@ input[type="number"] {
 }
 
 @media (max-width: 520px) {
+    .orderNow{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
     .smallSingle img{
         height: 11rem;
     }
@@ -904,6 +916,9 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+    .orderAndContity{
+        padding-right: 1rem;
+    }
     /* .leargeImgSingle {
         height: 24rem;
     } */
@@ -913,8 +928,15 @@ input[type="number"] {
 }
 
 @media (max-width: 440px) {
+    .orderAndContity{
+        width: 100%;
+    }
     .smallSingle img{
         height: 13rem;
+    }
+    .orderNow{
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
     .productImg {
         height: 11rem;
@@ -937,9 +959,7 @@ input[type="number"] {
     .smallSingle img{
         height: 12rem;
     }
-    .orderNow {
-        padding: 0;
-    }
+    
     .productImg {
         height: 10.2rem;
     }
@@ -964,6 +984,10 @@ input[type="number"] {
 }
 
 @media (max-width: 365px) {
+    .orderNow{
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
     .smallSingle img{
         height: 11.2rem;
     }
