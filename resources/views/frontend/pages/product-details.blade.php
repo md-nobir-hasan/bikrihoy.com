@@ -44,8 +44,8 @@
 
                             <h2 class="sub_title">{{$data->title}}</h2>
                             <div class="priceDetails">
-                                <del>&#2547;6500</del>
-                                <span>&#2547;4600</span>
+                                <del class="originalPrice" data-price="6500">&#2547;6500</del>
+                                <span class="discountPrice" data-price="4600">&#2547;4600</span>
                             </div>
 
                             <div class="orderAndContity">
@@ -69,7 +69,7 @@
                                 <p class="callIndicate">কল করতে ক্লিক করুন</p>
                                 <p>+880 1518-460933</p>
                             </a>
-                            <a class="whatsappbnt" href="tel: +880 1518-460933">
+                            <a class="callBtn whatsappbnt" href="tel: +880 1518-460933">
                                 <p class="callIndicate">হোয়াটসঅ্যাপ করুন</p>
                                 <p>+880 1518-460933</p>
                             </a>

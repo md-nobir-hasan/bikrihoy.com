@@ -43,18 +43,53 @@ $(document).ready(function () {
     }
 
     {
+        // let count = 1;
+        // let countInput = $(".countShow");
+        
+        // $(".plusBtn").click(function () {
+        //     count++;
+        //     countInput.val(count);
+        // });
+        // $(".minusBtn").click(function () {
+        //     if (count > 1) {
+        //         count = count - 1;
+        //         countInput.val(count);
+        //     }
+        // });
+
         let count = 1;
         let countInput = $(".countShow");
+        let originalPriceEl = $(".originalPrice");
+        let discountPriceEl = $(".discountPrice");
+
+        // Get base prices from data attributes
+        let baseOriginalPrice = parseFloat(originalPriceEl.data("price"));
+        let baseDiscountPrice = parseFloat(discountPriceEl.data("price"));
+
+        function updatePrices() {
+            // Calculate new prices based on quantity
+            let newOriginalPrice = baseOriginalPrice * count;
+            let newDiscountPrice = baseDiscountPrice * count;
+
+            // Update the displayed prices
+            originalPriceEl.html(`&#2547;${newOriginalPrice.toLocaleString()}`);
+            discountPriceEl.html(`&#2547;${newDiscountPrice.toLocaleString()}`);
+        }
+
         $(".plusBtn").click(function () {
             count++;
             countInput.val(count);
+            updatePrices();
         });
+
         $(".minusBtn").click(function () {
             if (count > 1) {
-                count = count - 1;
+                count--;
                 countInput.val(count);
+                updatePrices();
             }
         });
+
 
         $(".apply").click(function (e) {
             e.preventDefault();
