@@ -16,20 +16,6 @@
                             here to enter your code
                         </button>
                       </h2>
-                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                          <form action="#" class="couponDivMain">
-                            <div class="couponaply">
-                                <span>If you have a coupon code, please apply it below.</span>
-                                <div class="couponDiv">
-                                    <input type="text" placeholder="Coupon code">
-                                    <button class="btn_primary apply">Apply Coupon</button>
-                                </div>
-                            </div>
-                            <p class="couponApplied"><b>Coupon</b> Applied</p>
-                          </form>
-                        </div>
-                      </div>
                     </div>
 
                 </div>
@@ -51,6 +37,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($cart_products as $product)
+                                     <input type="hidden" name="slug" value="{{$product->slug}}">
                                         <tr>
                                             <td>{{$product->title}}</td>
                                             <td>৳ <span>{{$product->price}}</span></td>
