@@ -135,7 +135,7 @@
                                 <a href="{{route('product_details',[$rproduct->slug])}}">
                                     <div class="productImg">
                                         <img class="pImgMain" src="{{$rproduct->photo}}" alt="">
-                                        <div class="pDiscount">{{$rproduct->discount * 100 / $rproduct->price}}% off</div>
+                                        <div class="pDiscount">{{round($rproduct->discount * 100 / $rproduct->price)}}% off</div>
                                     </div>
                                 </a>
                                 <div class="productData">
