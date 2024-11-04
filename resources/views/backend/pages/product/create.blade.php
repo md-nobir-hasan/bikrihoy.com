@@ -153,7 +153,7 @@
                                         @enderror
                                     </div>
                                     @if (!serviceCheck('No Color & Size'))
-                                        @if (!serviceCheck('Color Specific'))
+                                        @if (serviceCheck('Color Specific'))
                                             <div class="mb-4 custom-border">
                                                 <label>Product Colors: <span class="ml-2" id="add_product_color"></span></label>
                                                 <button type="button" class="btn btn-primary ml-5 btn-sm"
@@ -207,7 +207,7 @@
 
                                         @endif
 
-                                        @if (!serviceCheck('Size Specific'))
+                                        @if (serviceCheck('Size Specific'))
                                             <div class="mb-3 custom-border">
 
                                                 <label>Product Sizes: <span  class="ml-2" id="add_product_size"></span></label>
