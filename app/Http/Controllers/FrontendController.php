@@ -286,18 +286,13 @@ class FrontendController extends Controller
     }
 
     // Product details code
-    public function product_details($id)
+    public function product_details($slug)
     {
-        $n['data'] = Product::with(['productGallery', 'productGallery.imageGallery', 'productGallery.color', 'productGallery.size', 'productSize', 'productSize.size', 'color', 'color.color'])->find($id);
+        $n['data'] = Product::with(['productGallery', 'productGallery.imageGallery', 'productGallery.color', 'color', 'color.color'])->where('slug', $slug)->first();
         $n['shippings'] = Shipping::all();
-        $n['payments'] = Payment::all();
-        $n['reviews'] = Review::with(['user'])->where('product_id', $id)->get();
-        $n['quality_rating'] = $n['data']->qualityRatting();
-        // dd($n);
-
 
         // related product collection
-        $n['related_products'] = Product::where('cat_id', $n['data']->cat_id)->get();
+        $n['related_products'] = DB::table('products')->limit('19')->get();
 
         return view('frontend.pages.product-details', $n);
     }

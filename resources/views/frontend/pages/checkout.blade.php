@@ -57,13 +57,18 @@
                                         </tr>
                                     @endforeach
                                     <tr>
+                                        <td><b>Discount</b></td>
+                                        <td><b>৳ <span>{{$product->discount}}</span></b></td>
+                                    </tr>
+                                    <tr>
                                         <td><b>Subtotal</b></td>
-                                        <td><b>৳ 6,800.00</b></td>
+                                        <td><b>৳ <span>{{ $sub_total = $product->price - $product->discount}}</span></b></td>
                                     </tr>
                                     <tr>
                                         <td><b>Shipping</b></td>
                                         <td class="checkradio">
                                             @foreach ($shippings as $shipping)
+
                                             <div>
                                                 <label for="outDhaka">{{$shipping->type}}: <span>৳ <span>{{$shipping->price}}</span></span></label>
                                                 <input type="radio" name="shipping_id" value="{{$shipping->id}}" id="OutDhaka" checked>
@@ -73,7 +78,7 @@
                                     </tr>
                                     <tr>
                                         <td><b>Total</b></td>
-                                        <td><strong>৳ 6,930.00</strong></td>
+                                        <td><strong>৳ <span>{{$sub_total + $shipping->price }}</span></strong></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -1,5 +1,15 @@
 @extends('frontend.layouts.app')
 
+
+@push('custom-js')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+@endpush
+
+@push('custom-js')
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+@endpush
+
 @section('page_conent')
  <section class="productdetailsSection">
         <div class="container">
@@ -50,7 +60,7 @@
                 <div class="pdRight col-lg-6">
                     <div class="pdrightInner">
                         <form action="#" class="orderForm">
-                            <h2 class="sub_title">NAVIFORCE 9188 Man’s Premium Watch Blue</h2>
+                            <h2 class="sub_title">{{$data->title}}</h2>
                             <div class="priceDetails">
                                 <del>&#2547;6500</del>
                                 <span>&#2547;4600</span>
@@ -64,10 +74,10 @@
                                     <input class="plusBtn" type="button" value="+">
                                 </div>
                                 <button class="btn_primary whatapp">
-                                    <a href="{{route('checkout')}}" class="orderNow">অর্ডার করুন</a>
+                                    <a href="{{route('checkout',[$data->slug])}}" class="orderNow">অর্ডার করুন</a>
                                 </button>
                                 <button class="btn_primary ">
-                                    <a href="{{route('checkout')}}" class="orderNow ">buy now</a>
+                                    <a href="{{route('checkout',[$data->slug])}}" class="orderNow ">buy now</a>
                                 </button>
                             </div>
                         </form>
@@ -93,14 +103,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>ঢাকার মধ্যে়</td>
-                                        <td>&#2547;70.00</td>
+                                    @foreach ($shippings as $shipping)
+                                        <tr>
+                                        <td>{{$shipping->type}}</td>
+                                        <td>&#2547;<span>{{$shipping->price}}</span></td>
                                     </tr>
-                                    <tr>
-                                        <td>ঢাকার বাইরে</td>
-                                        <td>&#2547;130.00</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -116,18 +124,7 @@
             <!-- Description  -->
             <div class="descriptionMain">
                 <h3 class="descTitle">Description</h3>
-                <p class="dParagraph my-3 my-lg-4">নিজেকে এবং প্রিয়জনকে উপহার দেয়ার জন্য “Exclusive Gift Box” হতে পারে প্রিমিয়াম কোয়ালিটির OLEVS 1005 মডেলের ডায়মন্ড কাট ডিজাইনের 100% Authentic  হাত ঘড়ি।</p>
-                <p class="dParagraph">⌚ 5 বছর মেশিন  Replacement Guaranty</p>
-                <p class="dParagraph">⌚ সাথে ১ বছর Color গ্যারান্টি পাবেন।</p>
-                <p class="dParagraph">⌚ ১০০% ওয়াটার প্রুফ, ওজু করতে পারবেন।</p>
-                <p class="dParagraph">⌚ চেইন ছোট করার মেশিন ফ্রি পাবেন।</p>
-                <p class="dParagraph">⌚ ছবিতে দেখানো ঘড়িটাই আপনি হাতে পাবেন।</p>
-                <p class="dParagraph">⌚ পছন্দ না হলে, সাথে সাথে ফেরত দিতে পারবেন।</p>
-                <p class="dParagraph">⌚ অরিজিনাল এই ঘড়িটি সংগ্রহে রাখতে,অর্ডার করুন।</p>
-                <p class="dParagraph">⌚ একটি টাকাও আপনাকে অগ্রিম দিতে হচ্ছে না।</p>
-                <p class="dParagraph">⌚ ডেলিভারি ম্যানের সামনে চেক করে টাকা দিবেন।</p>
-                <p class="dParagraph">⌚ ৩ দিনের মধ্যে হোম-ডেলিভারি পাবেন।</p>
-            </div>
+                <p class="dParagraph my-3 my-lg-4">{!! $data->description !!}</div>
         </div>
     </section>
 
@@ -139,53 +136,18 @@
 
                 <div class="productBody">
 
-                    <!-- Product Single -->
-                    <div class="productSingleMain">
-                        <a href="{{route('product_details'[$data->slug])}}">
-                            <div class="productSingle">
-                                <div class="productImg">
-                                    <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
-                                    <div class="pDiscount">20% off</div>
-                                </div>
-                                <div class="productData">
-                                    <a href="{{route('product_details'[$data->slug])}}" class="productTitle">NAVIFORCE 9188 Man’s Premium Watch Blue</a>
-                                    <div class="productRating">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                    <div class="productStockavility">
-                                        <div class="inStock stokcSingle">
-                                            <i class="fa-solid fa-check"></i>
-                                            <h4 class="inStock">In stock</h4>
-                                        </div>
-                                        <div class="outStock stokcSingle">
-                                            <i class="fa-solid fa-xmark"></i>
-                                            <h4 class="inStock">Out of stock</h4>
-                                        </div>
-                                    </div>
-                                    <div class="productPrice">
-                                        <del>&#2547; 6500</del>
-                                        <span>&#2547 4600</span>
-                                    </div>
-                                    <a href="{{route('product_details'[$data->slug])}}" class="btn_primary">অর্ডার করুন </a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    @foreach ($related_products as $rproduct)
 
-                    <!-- Product Single -->
-                    <div class="productSingleMain">
-                        <a href="{{route('product_details'[$data->slug])}}">
+                        <div class="productSingleMain">
                             <div class="productSingle">
-                                <div class="productImg">
-                                    <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
-                                    <div class="pDiscount">20% off</div>
-                                </div>
+                                <a href="{{route('product_details',[$rproduct->slug])}}">
+                                    <div class="productImg">
+                                        <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
+                                        <div class="pDiscount">{{$rproduct->discount}}% off</div>
+                                    </div>
+                                </a>
                                 <div class="productData">
-                                    <a href="{{route('product_details'[$data->slug])}}" class="productTitle">NAVIFORCE 9188 Man’s Premium Watch Blue</a>
+                                    <a href="{{route('product_details',[$rproduct->slug])}}" class="productTitle">{{$rproduct->title}}</a>
                                     <div class="productRating">
                                         <i class="fa-solid fa-star"></i>
                                         <i class="fa-solid fa-star"></i>
@@ -204,162 +166,15 @@
                                         </div>
                                     </div>
                                     <div class="productPrice">
-                                        <del>&#2547; 6500</del>
-                                        <span>&#2547 4600</span>
+                                        <del>&#2547; {{$rproduct->price}}</del>
+                                        <span>&#2547 {{$rproduct->price - $rproduct->discount}}</span>
                                     </div>
-                                    <a href="{{route('product_details'[$data->slug])}}" class="btn_primary">অর্ডার করুন </a>
+                                    <a href="{{route('product_details',[$rproduct->slug])}}" class="btn_primary">অর্ডার করুন </a>
                                 </div>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    @endforeach
 
-                    <!-- Product Single -->
-                    <div class="productSingleMain">
-                        <a href="{{route('product_details'[$data->slug])}}">
-                            <div class="productSingle">
-                                <div class="productImg">
-                                    <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
-                                    <div class="pDiscount">20% off</div>
-                                </div>
-                                <div class="productData">
-                                    <a href="{{route('product_details'[$data->slug])}}" class="productTitle">NAVIFORCE 9188 Man’s Premium Watch Blue</a>
-                                    <div class="productRating">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                    <div class="productStockavility">
-                                        <div class="inStock stokcSingle">
-                                            <i class="fa-solid fa-check"></i>
-                                            <h4 class="inStock">In stock</h4>
-                                        </div>
-                                        <div class="outStock stokcSingle">
-                                            <i class="fa-solid fa-xmark"></i>
-                                            <h4 class="inStock">Out of stock</h4>
-                                        </div>
-                                    </div>
-                                    <div class="productPrice">
-                                        <del>&#2547; 6500</del>
-                                        <span>&#2547 4600</span>
-                                    </div>
-                                    <a href="{{route('product_details'[$data->slug])}}" class="btn_primary">অর্ডার করুন </a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Product Single -->
-                    <div class="productSingleMain">
-                        <a href="{{route('product_details'[$data->slug])}}">
-                            <div class="productSingle">
-                                <div class="productImg">
-                                    <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
-                                    <div class="pDiscount">20% off</div>
-                                </div>
-                                <div class="productData">
-                                    <a href="{{route('product_details'[$data->slug])}}" class="productTitle">NAVIFORCE 9188 Man’s Premium Watch Blue</a>
-                                    <div class="productRating">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                    <div class="productStockavility">
-                                        <div class="inStock stokcSingle">
-                                            <i class="fa-solid fa-check"></i>
-                                            <h4 class="inStock">In stock</h4>
-                                        </div>
-                                        <div class="outStock stokcSingle">
-                                            <i class="fa-solid fa-xmark"></i>
-                                            <h4 class="inStock">Out of stock</h4>
-                                        </div>
-                                    </div>
-                                    <div class="productPrice">
-                                        <del>&#2547; 6500</del>
-                                        <span>&#2547 4600</span>
-                                    </div>
-                                    <a href="{{route('product_details'[$data->slug])}}" class="btn_primary">অর্ডার করুন </a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Product Single -->
-                    <div class="productSingleMain">
-                        <a href="{{route('product_details'[$data->slug])}}">
-                            <div class="productSingle">
-                                <div class="productImg">
-                                    <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
-                                    <div class="pDiscount">20% off</div>
-                                </div>
-                                <div class="productData">
-                                    <a href="{{route('product_details'[$data->slug])}}" class="productTitle">NAVIFORCE 9188 Man’s Premium Watch Blue</a>
-                                    <div class="productRating">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                    <div class="productStockavility">
-                                        <div class="inStock stokcSingle">
-                                            <i class="fa-solid fa-check"></i>
-                                            <h4 class="inStock">In stock</h4>
-                                        </div>
-                                        <div class="outStock stokcSingle">
-                                            <i class="fa-solid fa-xmark"></i>
-                                            <h4 class="inStock">Out of stock</h4>
-                                        </div>
-                                    </div>
-                                    <div class="productPrice">
-                                        <del>&#2547; 6500</del>
-                                        <span>&#2547 4600</span>
-                                    </div>
-                                    <a href="{{route('product_details'[$data->slug])}}" class="btn_primary">অর্ডার করুন </a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Product Single -->
-                    <div class="productSingleMain">
-                        <a href="{{route('product_details'[$data->slug])}}">
-                            <div class="productSingle">
-                                <div class="productImg">
-                                    <img class="pImgMain" src="/images/ignore/1.1-564x600.jpg" alt="">
-                                    <div class="pDiscount">20% off</div>
-                                </div>
-                                <div class="productData">
-                                    <a href="{{route('product_details'[$data->slug])}}" class="productTitle">NAVIFORCE 9188 Man’s Premium Watch Blue</a>
-                                    <div class="productRating">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                    <div class="productStockavility">
-                                        <div class="inStock stokcSingle">
-                                            <i class="fa-solid fa-check"></i>
-                                            <h4 class="inStock">In stock</h4>
-                                        </div>
-                                        <div class="outStock stokcSingle">
-                                            <i class="fa-solid fa-xmark"></i>
-                                            <h4 class="inStock">Out of stock</h4>
-                                        </div>
-                                    </div>
-                                    <div class="productPrice">
-                                        <del>&#2547; 6500</del>
-                                        <span>&#2547 4600</span>
-                                    </div>
-                                    <a href="{{route('product_details'[$data->slug])}}" class="btn_primary">অর্ডার করুন </a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
