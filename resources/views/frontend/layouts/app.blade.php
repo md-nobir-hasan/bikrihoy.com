@@ -5,13 +5,12 @@
 
     <body>
 
-        @if($gt = $google_tags->gtag_header)
+         @isset($google_tag->gtag_header)
         <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{$gt}}"
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{$google_tag->gtag_header}}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
-        @endif
-
+        @endisset
         {{-- notification  --}}
         @include('frontend.partials.notification')
         {{-- End notification  --}}
