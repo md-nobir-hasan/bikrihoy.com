@@ -4,10 +4,14 @@
     @include('frontend.layouts.header')
 
     <body>
+
+        @if($gt = $google_tags->gtag_header)
         <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJ5X4FH6"
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{$gt}}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
+        @endif
+
         {{-- notification  --}}
         @include('frontend.partials.notification')
         {{-- End notification  --}}
