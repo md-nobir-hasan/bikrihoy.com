@@ -741,8 +741,8 @@ input[type="number"] {
 
 /* Landing page */
 .landingPageSection{
-    padding: 5rem 0;
-    background: #F5FBFE;
+    padding: 5rem 6rem;
+    background: #eef9fe;
 }
 .landingMain{
     padding: 5rem;
@@ -1034,6 +1034,9 @@ h5.subtitle{
 /* REsponsive design  strat*/
 @media (max-width: 1400px) {
 
+    .landingPageSection{
+        padding: 3rem;
+    }
     .orderAndContity {
         column-gap: 1rem;
     }
@@ -1048,6 +1051,13 @@ h5.subtitle{
     }
 }
 @media (max-width: 1200px) {
+
+    .landingPageSection{
+        padding: 1rem;
+    }
+    .landingMain{
+        padding: 3rem;
+    }
     .productSingleMain {
         width: 25%;
     }
@@ -1067,6 +1077,12 @@ h5.subtitle{
 }
 
 @media (max-width: 992px) {
+    .landingMain{
+        padding: 2.5rem;
+    }
+    .orderLeftL, .orderRightL{
+        width: 100%;
+    }
     .reviewSection{
         padding: 3rem 0;
     }
@@ -1148,6 +1164,18 @@ h5.subtitle{
 
 @media (max-width: 768px) {
 
+    .landing_title{
+        font-size: 1.65rem;
+    }
+    .subtitle2, .landingParagraph{
+        font-size: 1.1rem;
+    }
+    .orderParagraph{
+        font-size: 1.2rem;
+    }
+    .orderformtitle, .subtitle, .colorTitle{
+        font-size: 1.4rem;
+    }
     .reviewSingle{
         padding: 0;
     }
@@ -1166,6 +1194,16 @@ h5.subtitle{
 }
 
 @media (max-width: 576px) {
+
+    .landingMain{
+        padding: 1.8rem 1rem;
+    }
+    .landingPageSection{
+        padding: 0;
+    }
+    .colorTitle{
+        padding: 0.3rem;
+    }
     .thankTop{
         padding: 2rem;
     }
@@ -1267,6 +1305,10 @@ h5.subtitle{
 }
 
 @media (max-width: 480px) {
+
+    .orderformtitle, .subtitle, .colorTitle{
+        font-size: 1.3rem;
+    }
     .orderprocess{
         padding: 1.5rem .5rem;
     }
