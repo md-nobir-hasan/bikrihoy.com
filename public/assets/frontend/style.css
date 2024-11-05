@@ -13,12 +13,12 @@ body {
 }
 
 :root {
-    --primary-color: #5433ed;
+    --primary-color: #2c81f8;
 }
 
 /* Style start */
 .header {
-    background: #5433ed;
+    background: #2c81f8;
     position: sticky;
     top: 0;
     z-index: 999;
@@ -122,10 +122,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 0.5rem;
+    column-gap: 0.3rem;
 }
 .stokcSingle svg {
-    width: 1.3rem;
+    width: 1.2rem;
+    margin-bottom: .5rem;
 }
 .stokcSingle .inStock {
     font-size: 1rem;
@@ -351,6 +352,7 @@ input[type="number"] {
     padding-left: 1rem;
     display: block;
 }
+
 .descTitle {
     font-size: 1.3rem;
     font-weight: 600;
@@ -754,6 +756,9 @@ input[type="number"] {
 
 @media (max-width: 992px) {
 
+    .pdrightInner .sub_title{
+        margin-top: 1.5rem;
+    }
     .productdetailsSection{
         padding: 3rem 0 1rem 0;
     }
@@ -834,7 +839,7 @@ input[type="number"] {
         margin-bottom: -1rem;
     }
     .checkoutFormRight {
-        padding: 1rem 0.5rem;
+        padding: 0 0.5rem;
     }
     .sub_title {
         font-size: 1.75rem;
