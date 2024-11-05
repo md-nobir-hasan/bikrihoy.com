@@ -759,6 +759,14 @@ input[type="number"] {
 }
 
 @media (max-width: 992px) {
+    .pdrightInner .sub_title{
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .priceDetails{
+        text-align: center;
+    }
 
     .pdrightInner .sub_title{
         margin-top: 1.5rem;
@@ -771,7 +779,14 @@ input[type="number"] {
         padding-right: 2.5rem;
     }
     .orderAndContity{
-        padding-right: 2rem;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .callBtns{
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
     }
     .headerMain .headerLogo{
         width: fit-content;
