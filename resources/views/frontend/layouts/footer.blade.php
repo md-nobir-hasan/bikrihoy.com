@@ -27,10 +27,11 @@
 
             {{-- Footer single section --}}
             <div class="footerMiddle footerSingle">
-                <h3 class="footerTitle">Footer Menu</h3>
-                <a href="#" class="footerLink">Shop</a>
-                <a href="#" class="footerLink">Contact us</a>
-                <a href="#" class="footerLink">About us</a>
+                <h3 class="footerTitle">Important Links</h3>
+                <a href="#" class="footerLink">Terms & Conditions</a>
+                <a href="#" class="footerLink">Returns and Refund Policy</a>
+                <a href="#" class="footerLink">Privacy Policy</a>
+                <a href="#" class="footerLink">Delivery Timeline</a>
             </div>
 
             {{-- Footer single section --}}
