@@ -1,6 +1,6 @@
 <head>
     <!-- Google Tag Manager -->
-    @if($gt = $google_tags->gtag_header)
+    @if($gt = $google_tag->gtag_header)
     <script>
         (function(w,d,s,l,i){
             w[l]=w[l]||[];
