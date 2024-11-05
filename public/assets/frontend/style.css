@@ -352,6 +352,8 @@ input[type="number"] {
     margin-top: 1rem;
     padding-left: 1rem;
     display: block;
+    position: sticky;
+    top: 70px;
 }
 
 .descTitle {
@@ -723,6 +725,20 @@ input[type="number"] {
     font-weight: 500;
     color: #000015;
 }
+.reviewSingle{
+    padding: 0 .5rem;
+}
+.reviewMain .sub_title{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.reviewSection{
+    padding: 4rem 0;
+}
+.reviewSingle img{
+    width: 100%;
+}
+
 /* REsponsive design  strat*/
 @media (max-width: 1400px) {
 
@@ -759,6 +775,12 @@ input[type="number"] {
 }
 
 @media (max-width: 992px) {
+    .reviewSection{
+        padding: 3rem 0;
+    }
+    .reviewSingle{
+        padding: 0.3rem 0;
+    }
     .pdrightInner .sub_title{
         width: fit-content;
         margin-left: auto;
@@ -834,6 +856,9 @@ input[type="number"] {
 
 @media (max-width: 768px) {
 
+    .reviewSingle{
+        padding: 0;
+    }
     .productImg{
         height: 13.5rem;
     }
@@ -953,6 +978,12 @@ input[type="number"] {
     .orderprocess{
         padding: 1.5rem .5rem;
     }
+    .callBtns{
+        gap: .5rem;
+    }
+    .callBtn{
+        padding: 0.5rem 1rem;
+    }
     .orderAndContity{
         padding-right: 1rem;
     }
@@ -967,6 +998,9 @@ input[type="number"] {
 @media (max-width: 440px) {
     .orderAndContity{
         width: 100%;
+    }
+    .callBtn{
+        padding: 0.5rem;
     }
     .smallSingle img{
         height: 13rem;
@@ -993,6 +1027,9 @@ input[type="number"] {
 }
 
 @media (max-width: 405px) {
+    .callBtn p{
+        font-size: 0.95rem;
+    }
     .smallSingle img{
         height: 12rem;
     }
