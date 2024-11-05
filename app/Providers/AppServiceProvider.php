@@ -68,10 +68,10 @@ class AppServiceProvider extends ServiceProvider
         //     }
 
         if (Schema::hasTable('google_tags')) {
-            view()->share('google_tag', GoogleTag::first());
+            view()->share('google_tag', GoogleTag::where('status', 'status')->first());
         }
         if (Schema::hasTable('pixel_tags')) {
-            view()->share('pixel_tag', PixelTag::first());
+            view()->share('pixel_tag', PixelTag::where('status', 'status')->first());
         }
 
     }
