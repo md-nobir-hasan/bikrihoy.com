@@ -18,10 +18,11 @@ body {
 
 /* Style start */
 .header {
-    background: #2c81f8;
+    background: #ffffff;
     position: sticky;
     top: 0;
     z-index: 999;
+    border-bottom: 1px solid #3388ff;
 }
 
 .headerMain .headerLogo {
@@ -746,8 +747,11 @@ input[type="number"] {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
-    .callBtns {
-        flex-direction: column;
+    .callIndicate{
+        font-size: 1rem;
+    }
+    .callBtn p{
+        font-size: 1rem;
     }
     /* .leargeImgSingle {
         height: 26rem;
@@ -777,8 +781,8 @@ input[type="number"] {
     .smallSingle img{
         height: 12rem;
     }
-    .callBtns {
-        flex-direction: row;
+    .callIndicate{
+        font-size: 1rem;
     }
     /* .leargeImgSingle {
         height: 33rem;
@@ -891,9 +895,7 @@ input[type="number"] {
     /* .leargeImgSingle {
         height: 26rem;
     } */
-    .callBtns {
-        flex-direction: column;
-    }
+    
     .priceDetails {
         font-size: 1.3rem;
     }
