@@ -1,6 +1,6 @@
 <head>
     <!-- Google Tag Manager -->
-    @if($gt = $google_tag->gtag_header)
+    @isset($google_tag->gtag_header)
     <script>
         (function(w,d,s,l,i){
             w[l]=w[l]||[];
@@ -14,9 +14,9 @@
             j.async=true;
             j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
             f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-{{$gt}}');
+        })(window,document,'script','dataLayer','GTM-{{$google_tag->gtag_header}}');
     </script>
-    @endif
+    @endisset
 
     <!-- Meta Tags -->
     <meta charset="UTF-8">
