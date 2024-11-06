@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'JARIFTRADING') }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/ignore/logo/design-14.png') }}">
+
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">

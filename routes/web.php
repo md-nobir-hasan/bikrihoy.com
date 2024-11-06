@@ -41,6 +41,10 @@ use App\Http\Controllers\WishlishtController;
 |
 */
 
+Route::get('/landing/', function () {
+    return view('frontend/pages/landing-page');
+});
+
 //frontend route
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/ajax-fetch', [AjaxController::class, 'ajaxFetch'])->name('ajax-fetch');

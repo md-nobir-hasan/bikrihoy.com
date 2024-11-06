@@ -120,6 +120,48 @@
     </form>
     </section>
 
+    {{-- Review Section --}}
+    <section class="reviewSection">
+        <div class="container">
+            <div class="reviewMain">
+                <h2 class="sub_title">Customer Review</h2>
+
+                <div class="reviewInner">
+
+                    {{-- review Single --}}
+                    <div class="reviewSingle">
+                        <img src="{{asset('/images/ignore/review/r2.png.webp')}}" alt="">
+                    </div>
+
+                    {{-- review Single --}}
+                    <div class="reviewSingle">
+                        <img src="{{asset('/images/ignore/review/r4n.png.webp')}}" alt="">
+                    </div>
+
+                    {{-- review Single --}}
+                    <div class="reviewSingle">
+                        <img src="{{asset('/images/ignore/review/r5.png.webp')}}" alt="">
+                    </div>
+
+                    {{-- review Single --}}
+                    <div class="reviewSingle">
+                        <img src="{{asset('/images/ignore/review/r6.png.webp')}}" alt="">
+                    </div>
+
+                    {{-- review Single --}}
+                    <div class="reviewSingle">
+                        <img src="{{asset('/images/ignore/review/r8.png.webp')}}" alt="">
+                    </div>
+
+                    {{-- review Single --}}
+                    <div class="reviewSingle">
+                        <img src="{{asset('/images/ignore/review/Watch-Review-1.png.webp')}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Product section -->
     <section class="production">
         <div class="container">

@@ -352,6 +352,8 @@ input[type="number"] {
     margin-top: 1rem;
     padding-left: 1rem;
     display: block;
+    position: sticky;
+    top: 70px;
 }
 
 .descTitle {
@@ -723,9 +725,318 @@ input[type="number"] {
     font-weight: 500;
     color: #000015;
 }
+.reviewSingle{
+    padding: 0 .5rem;
+}
+.reviewMain .sub_title{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.reviewSection{
+    padding: 4rem 0;
+}
+.reviewSingle img{
+    width: 100%;
+}
+
+/* Landing page */
+.landingPageSection{
+    padding: 5rem 6rem;
+    background: #eef9fe;
+}
+.landingMain{
+    padding: 5rem;
+    background: #ffffff;
+    box-shadow: 0 0 2px #2c81f854;
+    text-align: center;
+}
+.landing_title{
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.landingParagraph{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000015;
+}
+.subtitle{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+.landingMain .imgDiv{
+    margin: 1rem auto;
+}
+.landingBtn{
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff;
+    padding: .7rem 2rem;
+    background: #00b512;
+    transition: .4s ease;
+    display: block;
+    text-decoration: none;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.landingBtn:hover{
+    background: var(--primary-color);
+}
+.landingMain .imgDiv img{
+    width: 100%;
+}
+.subtitle2{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000015;
+}
+h5.subtitle{
+    color: #f8a32c;
+}
+.subtitle1{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000015;
+}
+.landingofferList{
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 1.5rem;
+}
+.colorTitle{
+    background: #0d8efd;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+.landingOfferItem .subtitle2:last-child{
+    border-bottom: none;
+}
+.colorTitlecall{
+    background: #0d8efd;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+}
+.landingOfferItem .subtitle2{
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+}
+.colorparagraph{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #f85c05;
+}
+.orderParagraph{
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: blueviolet;
+    margin-top: 2rem;
+}
+.orderParagraph b{
+    color: #130f40;
+}
+.orderFormInnerL{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 2%;
+    row-gap: 1rem;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+}
+.orderformtitle{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000015;
+    margin-bottom: 1rem;
+}
+.orderFormLanding{
+    padding: 1.5rem;
+    background: #e8f3fa;
+}
+.orderLeftL, .orderRightL{
+    width: 49%;
+    background: #ffffff;
+    padding: 1rem;
+}
+.orderFormLanding label{
+    display: block;
+}
+.orderLeftL{
+    text-align: left;
+}
+.orderLeftL label{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0077b5;
+}
+.orderLeftL input{
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: .4rem;
+    background: #e8f3fa;
+    border: none;
+    outline: none;
+    margin-bottom: 1.2rem;
+}
+.shipingAreaCheck{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: .5rem;
+    flex-direction: row-reverse;
+    text-align: left;
+    width: fit-content;
+    margin-right: auto;
+    margin-bottom: 0.5rem;
+}
+.shipingAreaCheck input{
+    display: block;
+    margin-bottom: 0;
+    width: 1rem;
+    margin-left: 0;
+    text-align: left;
+}
+.orderLeftL textarea{
+    width: 100%;
+    padding: 0.6rem;
+    background: #e8f3fa;
+    height: 10rem;
+    border-radius: .4rem;
+    border: none;
+    outline: none;
+}
+.lanOrderConirm{
+    width: 100%;
+    padding: .8rem;
+    background: #00b512;
+    margin-top: 1rem;
+    border-radius: .4rem;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.contitymainLan{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 1rem;
+    margin-bottom: 1rem;
+}
+.lancpara{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000015;
+    margin-bottom: 0;
+}
+.productFill{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: .5rem;
+    background: #ffffff;
+    padding: 1rem;
+    margin: 1rem auto;
+}
+.contitymainLan .contity{
+    background: #ffffff;
+    padding: 0 0.5rem;
+}
+.productName{
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    column-gap: .5rem;
+    width: 75%;
+}
+.productName img{
+    width: 3rem;
+}
+.LanPrice{
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #000015;
+}
+.lancotityTk{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: .5rem;
+}
+.orderRightL{
+    background: #e8f3fa;
+    padding: 0;
+}
+.shipingCostLand:last-child{
+    border-bottom: 0;
+    padding-top: 0.5rem;
+    font-weight: 600;
+    color: #000015;
+}
+.shipingCostLand{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: .5rem;
+    border-bottom: 1px dashed green;
+    color: rgba(0, 0, 0, 0.7);
+}
+.cashonDeliLan div svg{
+    width: 1.25rem;
+    background: #00b512;
+    border-radius: 50%;
+    padding: .1rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+.cashonDeliLan div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: .5rem;
+}
+.cashonDeliLan div .cashLan{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000015;
+    margin-bottom: 0;
+}
+.shipingCostTotal{
+    background: #ffffff;
+    padding: 1rem;
+}
+
+.payrntTypelan{
+    margin-top: 1rem;
+    text-align: left;
+    background: #ffffff;
+    padding: 1rem;
+}
+.lanpName{
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.2rem;
+}
+
 /* REsponsive design  strat*/
 @media (max-width: 1400px) {
 
+    .landingPageSection{
+        padding: 3rem;
+    }
     .orderAndContity {
         column-gap: 1rem;
     }
@@ -740,6 +1051,13 @@ input[type="number"] {
     }
 }
 @media (max-width: 1200px) {
+
+    .landingPageSection{
+        padding: 1rem;
+    }
+    .landingMain{
+        padding: 3rem;
+    }
     .productSingleMain {
         width: 25%;
     }
@@ -759,6 +1077,18 @@ input[type="number"] {
 }
 
 @media (max-width: 992px) {
+    .landingMain{
+        padding: 2.5rem;
+    }
+    .orderLeftL, .orderRightL{
+        width: 100%;
+    }
+    .reviewSection{
+        padding: 3rem 0;
+    }
+    .reviewSingle{
+        padding: 0.3rem 0;
+    }
     .pdrightInner .sub_title{
         width: fit-content;
         margin-left: auto;
@@ -834,6 +1164,21 @@ input[type="number"] {
 
 @media (max-width: 768px) {
 
+    .landing_title{
+        font-size: 1.65rem;
+    }
+    .subtitle2, .landingParagraph{
+        font-size: 1.1rem;
+    }
+    .orderParagraph{
+        font-size: 1.2rem;
+    }
+    .orderformtitle, .subtitle, .colorTitle{
+        font-size: 1.4rem;
+    }
+    .reviewSingle{
+        padding: 0;
+    }
     .productImg{
         height: 13.5rem;
     }
@@ -849,6 +1194,16 @@ input[type="number"] {
 }
 
 @media (max-width: 576px) {
+
+    .landingMain{
+        padding: 1.8rem 1rem;
+    }
+    .landingPageSection{
+        padding: 0;
+    }
+    .colorTitle{
+        padding: 0.3rem;
+    }
     .thankTop{
         padding: 2rem;
     }
@@ -950,8 +1305,18 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+
+    .orderformtitle, .subtitle, .colorTitle{
+        font-size: 1.3rem;
+    }
     .orderprocess{
         padding: 1.5rem .5rem;
+    }
+    .callBtns{
+        gap: .5rem;
+    }
+    .callBtn{
+        padding: 0.5rem 1rem;
     }
     .orderAndContity{
         padding-right: 1rem;
@@ -967,6 +1332,9 @@ input[type="number"] {
 @media (max-width: 440px) {
     .orderAndContity{
         width: 100%;
+    }
+    .callBtn{
+        padding: 0.5rem;
     }
     .smallSingle img{
         height: 13rem;
@@ -993,6 +1361,9 @@ input[type="number"] {
 }
 
 @media (max-width: 405px) {
+    .callBtn p{
+        font-size: 0.95rem;
+    }
     .smallSingle img{
         height: 12rem;
     }
