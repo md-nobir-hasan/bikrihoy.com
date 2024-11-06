@@ -25,11 +25,12 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->text('photo');
             $table->integer('stock')->nullable()->default(1);
-            $table->enum('condition',['default','new','hot'])->default('default');
-            $table->enum('status',['active','inactive'])->default('inactive');
+            $table->enum('condition', ['default', 'new', 'hot'])->default('default');
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->float('price');
             $table->float('discount')->nullabale();
             $table->boolean('is_featured')->deault(false);
+            $table->boolean('is_landing')->deault(false);
             $table->date('time_to')->nullable();
             $table->timestamps();
         });

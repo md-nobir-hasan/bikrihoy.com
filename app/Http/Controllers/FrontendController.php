@@ -51,7 +51,6 @@ class FrontendController extends Controller
     {
 
 
-
         $n['sliders'] = Slider::all();
         $n['banners1'] = DB::table('banners')->orderBy('id', 'ASC')->limit('1')->first();
         $n['banners2'] = DB::table('banners')->orderBy('id', 'DESC')->limit('1')->first();
@@ -289,6 +288,11 @@ class FrontendController extends Controller
     public function product_details($slug)
     {
         $n['data'] = Product::with(['productGallery', 'productGallery.imageGallery', 'productGallery.color', 'color', 'color.color'])->where('slug', $slug)->first();
+
+        if ($n['data'] && $n['data']->is_landing) {
+            return view('frontend.pages.landing-page', $n);
+        }
+
         $n['shippings'] = Shipping::all();
 
         // related product collection
