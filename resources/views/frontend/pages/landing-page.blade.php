@@ -1,7 +1,7 @@
 @include('frontend/layouts/header')
 
 
-@push('custom-js')
+{{-- @push('custom-js')
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
 		
@@ -35,7 +35,7 @@
 
 
     </script>
-@endpush
+@endpush --}}
 
 <section class="landingPageSection">
 	<div class="landingMain">
@@ -80,24 +80,16 @@
 			</li>
 		</ul>
 		<h3 class="colorTitlecall">প্রয়োজনে কল করুন- 09639 81 25 25 , 01979 91 25 25</h3>
-		<p class="orderParagraph"><b>"The Watch"</b> নেয়ার জন্য, নিচের ফর্মটি সম্পূর্ণ পূরণ করুন</p>
+		{{-- <p class="orderParagraph"><b>"The Watch"</b> নেয়ার জন্য, নিচের ফর্মটি সম্পূর্ণ পূরণ করুন</p> --}}
 
 		{{-- Order form --}}
-		<form action="#" class="orderFormLanding">
+		{{-- <form action="#" class="orderFormLanding">
 			
 			<div class="orderFormInnerL">
-				{{-- Order right --}}
+				
 				<div class="orderRightL">
 					<h3 class="orderformtitle">NAVIFORCE 9188 Man’s Premium Watch Blue</h3>
-					{{-- <div class="contitymainLan">
-						<div class="contity">
-
-							<input class="minusBtn" type="button" value="-">
-							<input class="countShow" name="qty" type="number" min="1" value="1">
-							<input class="plusBtn" type="button" value="+">
-						</div>
-						<p class="lancpara">QTY <small>(pcs)</small></p>
-					</div> --}}
+					
 
 					<div class="productFill">
 						<div class="productName">
@@ -113,7 +105,7 @@
 							<p class="LandTk" id="shippingCost">50 Tk</p>
 						</div>
 						
-						<!-- Total Cost Display Section -->
+						
 						<div class="shipingCostLand">
 							<p class="shipingLan">Total Cost</p>
 							<p class="LandTk" id="totalCost">2050 Tk</p>
@@ -134,7 +126,7 @@
 					</div>
 				</div>
 
-				{{-- order left --}}
+				
 				<div class="orderLeftL">
 					<p class="oaragraph">Billing info.</p>
 					<label for="LanName">নাম (Name)*</label>
@@ -157,7 +149,7 @@
 					<button class="lanOrderConirm" id="orderButton">place Order Tk 2,060.00</button>
 				</div>
 			</div>
-		</form>
+		</form> --}}
 	</div>
 </section>
 
