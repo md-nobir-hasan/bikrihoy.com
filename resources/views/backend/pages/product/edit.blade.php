@@ -281,6 +281,17 @@
                                     <!-- Add product gallery modal -->
                                     <input type="file" name="galleryphoto" class="multiple-img">
 
+                                     {{-- @if (check('landing page')) --}}
+                                        <div class="form-group">
+                                            <label for="is_landing">Landing page</label>
+                                            <select name="is_landing" class="form-control">
+                                                {{-- <option @selected($product->is_landing == 0) > No </option> --}}
+                                                <option value="1" @if(!$product->is_landing) selected @endif  >No</option>
+                                                <option value="1"@if($product->is_landing) selected @endif >Yes</option>
+                                            </select>
+                                        </div>
+                                    {{-- @endif --}}
+
                                     <div class="form-group">
                                         <label for="status" class="col-form-label">Status <span
                                                 class="text-danger">*</span></label>

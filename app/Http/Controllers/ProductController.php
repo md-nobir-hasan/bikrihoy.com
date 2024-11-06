@@ -87,6 +87,7 @@ class ProductController extends Controller
         $insert->condition = $request->condition ?? 'default';
         $insert->stock = $request->stock;
         $insert->status = $request->status;
+        $insert->is_landing = $request->is_landing ? 1 : 0;
         // if($request->time_from){
         $insert->time_to = $request->time_to;
         // dd($request->all());
@@ -207,6 +208,7 @@ class ProductController extends Controller
         $update->condition = $request->condition ?? 'default';
         $update->stock = $request->stock;
         $update->status = $request->status;
+        $update->is_landing = $request->is_landing ? 1 : 0;
         $update->photo = ProductGallery::orderBy('id', 'desc')->first()->imageGallery->img;
         $update->slug = $request->title;
         $update->is_featured = $request->input('is_featured', 0);
