@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LandingPageSection;
 use App\Http\Requests\StoreLandingPageSectionRequest;
 use App\Http\Requests\UpdateLandingPageSectionRequest;
+use App\Models\Product;
 
 class LandingPageSectionController extends Controller
 {
@@ -56,9 +57,11 @@ class LandingPageSectionController extends Controller
      * @param  \App\Models\LandingPageSection  $landingPageSection
      * @return \Illuminate\Http\Response
      */
-    public function edit(LandingPageSection $landingPageSection)
+    public function edit($id)
     {
-        dd($landingPageSection);
+        $n['data'] = LandingPageSection::where('product_id', $id)->get();
+        $n['product_id'] = $id;
+        return view('backend.pages.landing-page.sections', $n);
     }
 
     /**
@@ -68,9 +71,9 @@ class LandingPageSectionController extends Controller
      * @param  \App\Models\LandingPageSection  $landingPageSection
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLandingPageSectionRequest $request, LandingPageSection $landingPageSection)
+    public function update(UpdateLandingPageSectionRequest $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**

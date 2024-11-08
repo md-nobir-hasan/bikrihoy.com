@@ -89,11 +89,13 @@ Route::controller(AjaxController::class)->prefix('ajax')->name('ajax.')->group(f
 
 //admin routes
 Route::group(['middleware' => ['auth']], function () {
+
     // Admin home
     Route::get('/admin', [HomeController::class, 'home'])->name('admin');
 
     //Landing page sections
-    Route::resource('landing-page-section', LandingPageSectionController::class);
+    // Route::get('landing-page-section/{id}', [LandingPageSectionController::class, 'edit'])->name('lp.edit');
+
     //company details
     Route::get('company-details/index', [CompanyDetailsController::class, 'create'])->name('company-details.index');
     Route::get('company-details/index', [CompanyDetailsController::class, 'create'])->name('company-details.create');
@@ -110,6 +112,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [CategoryController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    //Landing page sections
+    Route::group(['as' => 'lp.', 'prefix' => 'landing-page-section'], function () {
+        Route::get('/edit/{id}', [LandingPageSectionController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [LandingPageSectionController::class, 'update'])->name('update');
     });
 
     //Sub-category Mangement
