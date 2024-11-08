@@ -284,6 +284,39 @@
     </li>
 @endif
 
+{{-- Landing Page section Management  --}}
+{{-- @if ($n =check('Landing Page')) --}}
+    {{-- <li class="nav-item {{ Request::is('landing-page-section/*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
+            <i class="fa-brands fa-product-hunt"></i>
+            <p>
+                Landing Page Sections
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            @if ($n->show)
+                <li class="nav-item">
+                    <a href="{{ route('landing-page-section.index') }}"
+                        class="nav-link {{ Request::is('landing-page-section/index') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>Show landing Page Sections</p>
+                    </a>
+                </li>
+            @endif
+            @if ($n->add)
+                <li class="nav-item">
+                    <a href="{{ route('landing-page-section.create') }}"
+                        class="nav-link {{ Request::is('landing-page-section/create') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>Add landing Page Section</p>
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </li> --}}
+{{-- @endif --}}
+
 {{-- Order Management  --}}
 @if ($n =check('Order'))
     <li class="nav-item {{ Request::is('order/*') ? 'menu-open' : '' }}">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingPageSectionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddToCartController;
 use App\Http\Controllers\BannerController;
@@ -86,10 +87,13 @@ Route::controller(AjaxController::class)->prefix('ajax')->name('ajax.')->group(f
 });
 
 
+//admin routes
 Route::group(['middleware' => ['auth']], function () {
     // Admin home
     Route::get('/admin', [HomeController::class, 'home'])->name('admin');
 
+    //Landing page sections
+    Route::resource('landing-page-section', LandingPageSectionController::class);
     //company details
     Route::get('company-details/index', [CompanyDetailsController::class, 'create'])->name('company-details.index');
     Route::get('company-details/index', [CompanyDetailsController::class, 'create'])->name('company-details.create');
