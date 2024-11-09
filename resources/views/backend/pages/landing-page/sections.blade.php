@@ -193,7 +193,7 @@
                                                            name="sections[{{$loop->index}}][title]"
                                                            value="{{$datum->title}}"
                                                            placeholder="Enter title"
-                                                           class="form-control">
+                                                           class="form-control csummernote">
                                                     @error("sections.{$loop->index}.title")
                                                         <span class="invalid-feedback">{{ $message }}</span>
                                                     @enderror
@@ -208,7 +208,7 @@
                                                            name="sections[{{$loop->index}}][sub_title]"
                                                            value="{{$datum->sub_title}}"
                                                            placeholder="Enter sub-title"
-                                                           class="form-control">
+                                                           class="form-control csummernote">
                                                     @error("sections.{$loop->index}.sub_title")
                                                         <span class="invalid-feedback">{{ $message }}</span>
                                                     @enderror
@@ -219,7 +219,7 @@
                                                     <label for="description_{{$loop->index}}" class="col-form-label ">
                                                         Description
                                                     </label>
-                                                    <textarea class="form-control description"
+                                                    <textarea class="form-control csummernote"
                                                               id="description_{{$loop->index}}"
                                                               name="sections[{{$loop->index}}][description]">{!! $datum->description !!}</textarea>
                                                     @error("sections.{$loop->index}.description")
@@ -289,7 +289,7 @@
                                                     <input id="title_0" type="text"
                                                            name="sections[0][title]"
                                                            placeholder="Enter title"
-                                                           class="form-control">
+                                                           class="form-control csummernote">
                                                 </div>
 
                                                 <div class="form-group">
@@ -299,14 +299,14 @@
                                                     <input id="sub_title_0" type="text"
                                                            name="sections[0][sub_title]"
                                                            placeholder="Enter sub-title"
-                                                           class="form-control">
+                                                           class="form-control csummernote">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="description_0" class="col-form-label">
                                                         Description
                                                     </label>
-                                                    <textarea class="form-control"
+                                                    <textarea class="form-control csummernote"
                                                               id="description_0"
                                                               name="sections[0][description]"></textarea>
                                                 </div>
@@ -355,7 +355,7 @@
 $(document).ready(function() {
 
     //Summar note
-    $('.description').summernote({
+    $('.csummernote').summernote({
         placeholder: "Write short description.....",
         tabsize: 2,
         height: 100
@@ -404,17 +404,17 @@ $(document).ready(function() {
 
                 <div class="form-group">
                     <label for="inputTitle_${sectionCount}" class="col-form-label">Title </label>
-                    <input id="inputTitle_${sectionCount}" type="text" name="sections[${sectionCount}][title]" placeholder="Enter title" class="form-control">
+                    <input id="inputTitle_${sectionCount}" type="text" name="sections[${sectionCount}][title]" placeholder="Enter title" class="form-control csummernote${sectionCount}">
                 </div>
 
                 <div class="form-group">
                     <label for="sub_title_${sectionCount}" class="col-form-label">Sub Title </label>
-                    <input id="sub_title_${sectionCount}" type="text" name="sections[${sectionCount}][sub_title]" placeholder="Enter sub-title" class="form-control">
+                    <input id="sub_title_${sectionCount}" type="text" name="sections[${sectionCount}][sub_title]" placeholder="Enter sub-title" class="form-control csummernote${sectionCount}">
                 </div>
 
                 <div class="form-group">
                     <label for="description_${sectionCount}" class="col-form-label">Description </label>
-                    <textarea class="form-control" id="description_${sectionCount}" name="sections[${sectionCount}][description]"></textarea>
+                    <textarea class="form-control csummernote${sectionCount}" id="description_${sectionCount}" name="sections[${sectionCount}][description]"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -426,7 +426,7 @@ $(document).ready(function() {
 
         $('#sections-container').append(newSection);
         //Summar note
-        $(`#description_${sectionCount}`).summernote({
+        $(`.csummernote${sectionCount}`).summernote({
             placeholder: "Write short description.....",
             tabsize: 2,
             height: 100
