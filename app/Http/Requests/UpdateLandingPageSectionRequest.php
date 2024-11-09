@@ -29,11 +29,11 @@ class UpdateLandingPageSectionRequest extends FormRequest
             'sections' => ['nullable', 'array', 'min:1'],
             'sections.*.is_with_previous' => ['nullable', 'boolean'],
             'sections.*.image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:300'],
-            'sections.*.video_link' => ['nullable', 'string', 'max:1000'],
-            'sections.*.title' => ['nullable', 'string', 'max:255'],
-            'sections.*.sub_title' => ['nullable', 'string', 'max:255'],
+            'sections.*.video_link' => ['nullable', 'string'],
+            'sections.*.title' => ['nullable', 'string'],
+            'sections.*.sub_title' => ['nullable', 'string'],
             'sections.*.description' => ['nullable', 'string'],
-            'sections.*.button' => ['nullable', 'string', 'max:50'],
+            'sections.*.button' => ['nullable', 'string', 'max:50', 'max:255'],
         ];
     }
 

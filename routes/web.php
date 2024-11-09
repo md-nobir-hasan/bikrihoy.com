@@ -42,9 +42,7 @@ use App\Http\Controllers\WishlishtController;
 |
 */
 
-Route::get('/landing', function () {
-    return view('frontend/pages/landing-page');
-})->name('landing');
+// Route::get('/landing/{slug}', [FrontendController::class, 'landing'])->name('landing');
 
 //frontend route
 Route::get('/', [FrontendController::class, 'index'])->name('home');

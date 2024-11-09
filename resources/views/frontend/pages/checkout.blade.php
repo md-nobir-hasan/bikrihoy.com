@@ -63,12 +63,12 @@
                  <form action="{{route('order.store')}}" method="POST" class="ckeckoutForm">
                     @csrf
 
-                    <input type="hidden" name="color_id" value="{{$color->id}}">
+                    <input type="hidden" name="color_id" value="{{$color->id ?? null}}">
                     <!-- Payment amout calculate -->
                     <div class="checkoutFormRight">
                         <div class="orderprocess">
                             <h3 class="orderproces">Your Order</h3>
-                            <h4 class="checkoutProductTitle">{{$product->title}} | {{$color->c_name}}</h4>
+                            <h4 class="checkoutProductTitle">{{$product->title}} @if ($color)  | {{$color->c_name }} @endif</h4>
                             <table>
                                 <tbody>
                                     <input type="hidden" name="slug" value="{{$product->slug}}">
@@ -87,7 +87,7 @@
                                         <td>
                                             <div class="quantity">
                                                 <input class="minusBtn" type="button" value="-">
-                                                <input class="countShow" name="qty" type="number" min="1" value="{{$qty}}">
+                                                <input class="countShow" name="qty" type="number" min="1" value="{{$qty ?? 1}}">
                                                 <input class="plusBtn" type="button" value="+">
                                             </div>
                                         </td>

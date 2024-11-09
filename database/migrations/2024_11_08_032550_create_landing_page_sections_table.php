@@ -18,12 +18,12 @@ class CreateLandingPageSectionsTable extends Migration
             $table->id();
             $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('is_with_previous')->default(false);
-            $table->string('image', 500)->nullable();
-            $table->string('video_link', 1000)->nullable();
-            $table->string('title', 500)->nullable();
-            $table->string('sub_title', 500)->nullable();
-            $table->text('description')->nullable();
-            $table->string('button', 100)->nullable();
+            $table->text('image')->nullable();
+            $table->text('video_link')->nullable();
+            $table->text('title')->nullable();
+            $table->text('sub_title')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('button', 255)->nullable();
             $table->timestamps();
         });
     }
