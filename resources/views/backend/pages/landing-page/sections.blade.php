@@ -2,6 +2,10 @@
 
 @section('title', 'Page Section')
 
+@push('third_party_stylesheets')
+    <link rel="stylesheet" href="{{ asset('assets/backend/library/summernote/summernote.min.css') }}">
+@endpush
+
 @push('page_css')
     <style>
         .w20px{
@@ -212,10 +216,10 @@
 
                                                 {{-- Description --}}
                                                 <div class="form-group">
-                                                    <label for="description_{{$loop->index}}" class="col-form-label">
+                                                    <label for="description_{{$loop->index}}" class="col-form-label ">
                                                         Description
                                                     </label>
-                                                    <textarea class="form-control"
+                                                    <textarea class="form-control description"
                                                               id="description_{{$loop->index}}"
                                                               name="sections[{{$loop->index}}][description]">{!! $datum->description !!}</textarea>
                                                     @error("sections.{$loop->index}.description")
@@ -343,10 +347,19 @@
         </div>
     </div>
 @endsection
-
+@push('third_party_scripts')
+    <script src="{{ asset('assets/backend/library/summernote/summernote.min.js') }}"></script>
+@endpush
 @push('page_scripts')
 <script>
 $(document).ready(function() {
+
+    //Summar note
+    $('.description').summernote({
+        placeholder: "Write short description.....",
+        tabsize: 2,
+        height: 100
+    });
     // Image preview functionality
     $(document).on('change', '.image-input', function() {
         const file = this.files[0];
@@ -412,6 +425,12 @@ $(document).ready(function() {
         `;
 
         $('#sections-container').append(newSection);
+        //Summar note
+        $(`#description_${sectionCount}`).summernote({
+            placeholder: "Write short description.....",
+            tabsize: 2,
+            height: 100
+        });
         reorderSections();
     });
 
@@ -450,6 +469,8 @@ $(document).ready(function() {
             });
         });
     }
+
+
 });
 </script>
 @endpush
