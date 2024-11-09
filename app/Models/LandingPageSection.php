@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LandingPageSection extends Model
 {
     use HasFactory;
+    protected $fillable = ['product_id', 'is_with_previous', 'image', 'video_link', 'title', 'sub_title', 'description', 'button', 'created_at', 'updated_at'];
 
     public function product()
     {

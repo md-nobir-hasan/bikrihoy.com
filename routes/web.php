@@ -117,7 +117,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Landing page sections
     Route::group(['as' => 'lp.', 'prefix' => 'landing-page-section'], function () {
         Route::get('/edit/{id}', [LandingPageSectionController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}', [LandingPageSectionController::class, 'update'])->name('update');
+        Route::post('/update/{product_id}', [LandingPageSectionController::class, 'update'])->name('update');
     });
 
     //Sub-category Mangement

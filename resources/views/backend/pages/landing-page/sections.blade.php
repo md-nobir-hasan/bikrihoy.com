@@ -115,8 +115,15 @@
                                     {{ csrf_field() }}
                                     @method('POST')
 
+                                    <div>
+                                        @foreach ($errors->all() as $error)
+                                            <p class="text-danger">{{$error}}</p>
+                                        @endforeach
+                                    </div>
+
                                     <div id="sections-container">
                                         @forelse ($data as $datum)
+                                            <input type="hidden" name="sections[{{$loop->index}}][id]" value="{{$datum->id}}">
                                             <section class="card card-body mt-3 section-controls">
                                                 <div class="section-number">{{ $loop->iteration }}</div>
                                                 <div class="section-header">
@@ -128,9 +135,9 @@
 
                                                 {{-- Is with previous section --}}
                                                 <div class="form-group d-flex justify-content-center align-items-center">
-                                                    <input id="is_with_previous_{{$loop->index}}" type="checkbox"
+                                                    <input id="is_with_previous_{{$loop->index}}" type="checkbox" value="1"
                                                            name="sections[{{$loop->index}}][is_with_previous]"
-                                                           @checked($datum->is_with_previous)
+                                                           @if($datum->is_with_previous) checked @endif
                                                            class="form-control w20px mr-2">
                                                     <label for="is_with_previous_{{$loop->index}}" class="col-form-label">
                                                         Is with previous section?
@@ -140,15 +147,17 @@
                                                 {{-- Image --}}
                                                 <div class="form-group">
                                                     <label for="image_{{$loop->index}}" class="col-form-label">
-                                                        Image<span class="text-danger">*</span>
+                                                        Image
                                                     </label>
                                                     <input id="image_{{$loop->index}}" type="file"
                                                            name="sections[{{$loop->index}}][image]"
                                                            class="form-control image-input"
-                                                           accept="image/*">
+                                                           accept="image/*"
+                                                           value="{{$datum->image}}"
+                                                           >
                                                     <div class="image-preview-container">
                                                         @if($datum->image)
-                                                            <img src="{{ asset($datum->image) }}"
+                                                            <img src="/storage/{{ $datum->image }}"
                                                                  class="image-preview"
                                                                  alt="Section Image">
                                                         @endif
@@ -161,7 +170,7 @@
                                                 {{-- Video --}}
                                                 <div class="form-group">
                                                     <label for="video_link_{{$loop->index}}" class="col-form-label">
-                                                        Video (Embedded Code) <span class="text-danger">*</span>
+                                                        Video (Embedded Code)
                                                     </label>
                                                     <textarea class="form-control"
                                                               id="video_link_{{$loop->index}}"
@@ -174,7 +183,7 @@
                                                 {{-- Title --}}
                                                 <div class="form-group">
                                                     <label for="title_{{$loop->index}}" class="col-form-label">
-                                                        Title <span class="text-danger">*</span>
+                                                        Title
                                                     </label>
                                                     <input id="title_{{$loop->index}}" type="text"
                                                            name="sections[{{$loop->index}}][title]"
@@ -189,7 +198,7 @@
                                                 {{-- Sub Title --}}
                                                 <div class="form-group">
                                                     <label for="sub_title_{{$loop->index}}" class="col-form-label">
-                                                        Sub Title <span class="text-danger">*</span>
+                                                        Sub Title
                                                     </label>
                                                     <input id="sub_title_{{$loop->index}}" type="text"
                                                            name="sections[{{$loop->index}}][sub_title]"
@@ -204,7 +213,7 @@
                                                 {{-- Description --}}
                                                 <div class="form-group">
                                                     <label for="description_{{$loop->index}}" class="col-form-label">
-                                                        Description <span class="text-danger">*</span>
+                                                        Description
                                                     </label>
                                                     <textarea class="form-control"
                                                               id="description_{{$loop->index}}"
@@ -217,7 +226,7 @@
                                                 {{-- Button --}}
                                                 <div class="form-group">
                                                     <label for="button_{{$loop->index}}" class="col-form-label">
-                                                        Button Text <span class="text-danger">*</span>
+                                                        Button Text
                                                     </label>
                                                     <input id="button_{{$loop->index}}" type="text"
                                                            name="sections[{{$loop->index}}][button]"
@@ -241,7 +250,7 @@
 
                                                 <!-- Empty state form fields -->
                                                 <div class="form-group d-flex justify-content-center align-items-center">
-                                                    <input id="is_with_previous_0" type="checkbox"
+                                                    <input id="is_with_previous_0" type="checkbox" value="1"
                                                            name="sections[0][is_with_previous]"
                                                            class="form-control w20px mr-2">
                                                     <label for="is_with_previous_0" class="col-form-label">
@@ -251,7 +260,7 @@
 
                                                 <div class="form-group">
                                                     <label for="image_0" class="col-form-label">
-                                                        Image<span class="text-danger">*</span>
+                                                        Image
                                                     </label>
                                                     <input id="image_0" type="file"
                                                            name="sections[0][image]"
@@ -262,7 +271,7 @@
 
                                                 <div class="form-group">
                                                     <label for="video_link_0" class="col-form-label">
-                                                        Video (Embedded Code) <span class="text-danger">*</span>
+                                                        Video (Embedded Code)
                                                     </label>
                                                     <textarea class="form-control"
                                                               id="video_link_0"
@@ -271,7 +280,7 @@
 
                                                 <div class="form-group">
                                                     <label for="title_0" class="col-form-label">
-                                                        Title <span class="text-danger">*</span>
+                                                        Title
                                                     </label>
                                                     <input id="title_0" type="text"
                                                            name="sections[0][title]"
@@ -281,7 +290,7 @@
 
                                                 <div class="form-group">
                                                     <label for="sub_title_0" class="col-form-label">
-                                                        Sub Title <span class="text-danger">*</span>
+                                                        Sub Title
                                                     </label>
                                                     <input id="sub_title_0" type="text"
                                                            name="sections[0][sub_title]"
@@ -291,7 +300,7 @@
 
                                                 <div class="form-group">
                                                     <label for="description_0" class="col-form-label">
-                                                        Description <span class="text-danger">*</span>
+                                                        Description
                                                     </label>
                                                     <textarea class="form-control"
                                                               id="description_0"
@@ -300,7 +309,7 @@
 
                                                 <div class="form-group">
                                                     <label for="button_0" class="col-form-label">
-                                                        Button Text <span class="text-danger">*</span>
+                                                        Button Text
                                                     </label>
                                                     <input id="button_0" type="text"
                                                            name="sections[0][button]"
@@ -365,38 +374,38 @@ $(document).ready(function() {
                 <button type="button" class="btn btn-danger btn-sm remove-section"><i class="fas fa-minus"></i></button>
 
                 <div class="form-group d-flex justify-content-center align-items-center">
-                    <input id="is_with_previous_${sectionCount}" type="checkbox" name="sections[${sectionCount}][is_with_previous]" placeholder="Enter title" class="form-control w20px mr-2">
+                    <input id="is_with_previous_${sectionCount}" type="checkbox" value="1" name="sections[${sectionCount}][is_with_previous]" placeholder="Enter title" class="form-control w20px mr-2">
                     <label for="is_with_previous_${sectionCount}" class="col-form-label">Is with previous section?</label>
                 </div>
 
                 <div class="form-group">
-                    <label for="image_${sectionCount}" class="col-form-label">Image<span class="text-danger">*</span></label>
+                    <label for="image_${sectionCount}" class="col-form-label">Image</label>
                     <input id="image_${sectionCount}" type="file" name="sections[${sectionCount}][image]" class="form-control image-input" accept="image/*">
                     <div class="image-preview-container"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="video_link_${sectionCount}" class="col-form-label">Video (Embeded Code) <span class="text-danger">*</span></label>
+                    <label for="video_link_${sectionCount}" class="col-form-label">Video (Embeded Code) </label>
                     <textarea class="form-control" id="video_link_${sectionCount}" name="sections[${sectionCount}][video_link]"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputTitle_${sectionCount}" class="col-form-label">Title <span class="text-danger">*</span></label>
+                    <label for="inputTitle_${sectionCount}" class="col-form-label">Title </label>
                     <input id="inputTitle_${sectionCount}" type="text" name="sections[${sectionCount}][title]" placeholder="Enter title" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="sub_title_${sectionCount}" class="col-form-label">Sub Title <span class="text-danger">*</span></label>
+                    <label for="sub_title_${sectionCount}" class="col-form-label">Sub Title </label>
                     <input id="sub_title_${sectionCount}" type="text" name="sections[${sectionCount}][sub_title]" placeholder="Enter sub-title" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="description_${sectionCount}" class="col-form-label">Description <span class="text-danger">*</span></label>
+                    <label for="description_${sectionCount}" class="col-form-label">Description </label>
                     <textarea class="form-control" id="description_${sectionCount}" name="sections[${sectionCount}][description]"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="button_${sectionCount}" class="col-form-label">Text for Button<span class="text-danger">*</span></label>
+                    <label for="button_${sectionCount}" class="col-form-label">Text for Button</label>
                     <input id="button_${sectionCount}" type="text" name="sections[${sectionCount}][button]" placeholder="Enter text for button" class="form-control">
                 </div>
             </section>
