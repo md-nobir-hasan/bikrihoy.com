@@ -42,7 +42,7 @@
 
     {{-- description  --}}
     @if ($datum->description)
-        <p class="landingParagraph my-3 my-lg-4">{{$datum->description}}</p>
+        <p class="landingParagraph my-3 my-lg-4">{!! $datum->description !!}</p>
     @endif
 
     {{-- button  --}}
