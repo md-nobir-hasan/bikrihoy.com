@@ -47,7 +47,7 @@ class LandingPageSectionController extends Controller
                 $imagePath = $datum['image']->store('landing-page', 'public');
                 $datum['image'] = $imagePath;
             }
-
+            
             $datum['created_at'] = now();
             $datum['product_id'] = $product_id;
             $datum['video_link'] = $datum['video_link'] ?? null;
@@ -55,7 +55,7 @@ class LandingPageSectionController extends Controller
             $datum['sub_title'] = $datum['sub_title'] ?? null;
             $datum['description'] = $datum['description'] ?? null;
             $datum['button'] = $datum['button'] ?? null;
-            $datum['is_with_previous'] = $datum['is_with_previous'] == 1 ? true : false;
+            $datum['is_with_previous'] = $datum['is_with_previous'] ?? false;
 
             // dd($datum);
             if (isset($datum['id'])) {
