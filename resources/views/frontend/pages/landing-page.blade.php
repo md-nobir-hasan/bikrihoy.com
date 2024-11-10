@@ -2,20 +2,26 @@
 
 
 @foreach ($data->landing_page_sections as $datum)
-    @if (!$datum->is_with_previous)
-        @if ($loop->index != 0)
+
+    {{-- Section starting or attaching --}}
+    @if ($loop->first)
+     <section class="landingPageSection section section{{$loop->index}}">
+        <div class="landingMain">
+    @else
+        @if (!$datum->is_with_previous)
                 </div>
             </section>
-        @endif
 
-        <section class="landingPageSection section section{{$loop->index}}">
-             <div class="landingMain">
+            <section class="landingPageSection section section{{$loop->index}}">
+                <div class="landingMain">
+        @endif
     @endif
+
 
     {{-- image  --}}
     @if ($datum->image)
         <div class="imgDiv image-div image-div{{$loop->index}}">
-            <img class="image image{{$loop->index}}" src="/storage/{{$datum->image}}" alt="{{$datum->title}}">
+            <img class="image image{{$loop->index}}" src="/storage/{{$datum->image}}" alt="Product Image">
         </div>
     @endif
 
@@ -46,6 +52,7 @@
         <a href="{{route('checkout',$data->slug)}}" class="landingBtn button button{{$loop->index}}">{{$datum->button}}</a>
     @endif
 
+    {{-- Section ending --}}
     @if ($loop->last)
         </div>
             </section>
