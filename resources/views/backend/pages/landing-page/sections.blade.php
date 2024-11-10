@@ -190,11 +190,12 @@
                                                         <label for="title_{{$loop->index}}" class="col-form-label">
                                                             Title
                                                         </label>
-                                                        <input id="title_{{$loop->index}}" type="text"
-                                                            name="sections[{{$loop->index}}][title]"
-                                                            value="{{$datum['title'] ?? null}}"
-                                                            placeholder="Enter title"
-                                                            class="form-control csummernote">
+
+
+                                                        <textarea class="form-control csummernote"
+                                                        id="title_{{$loop->index}}"
+                                                        name="sections[{{$loop->index}}][title]">{!! $datum['title'] ?? null !!}</textarea>
+
                                                         @error("sections.{$loop->index}.title")
                                                             <span class="invalid-feedback">{{ $message }}</span>
                                                         @enderror
@@ -205,12 +206,10 @@
                                                         <label for="sub_title_{{$loop->index}}" class="col-form-label">
                                                             Sub Title
                                                         </label>
-                                                        <input id="sub_title_{{$loop->index}}" type="text"
-                                                            name="sections[{{$loop->index}}][sub_title]"
-                                                            value="{{$datum['sub_title'] ?? null}}"
-                                                            placeholder="Enter sub-title"
-                                                            class="form-control csummernote">
-                                                            
+                                                        <textarea class="form-control csummernote"
+                                                                id="sub_title_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][sub_title]">{!! $datum['sub_title'] ?? null !!}</textarea>
+
                                                         @error("sections.{$loop->index}.sub_title")
                                                             <span class="invalid-feedback">{{ $message }}</span>
                                                         @enderror
@@ -309,11 +308,10 @@
                                                         <label for="title_{{$loop->index}}" class="col-form-label">
                                                             Title
                                                         </label>
-                                                        <input id="title_{{$loop->index}}" type="text"
-                                                            name="sections[{{$loop->index}}][title]"
-                                                            value="{{$datum->title}}"
-                                                            placeholder="Enter title"
-                                                            class="form-control csummernote">
+                                                                    <textarea class="form-control csummernote"
+                                                        id="title_{{$loop->index}}"
+                                                        name="sections[{{$loop->index}}][title]">{!! $datum->title ?? null !!}</textarea>
+
                                                         @error("sections.{$loop->index}.title")
                                                             <span class="invalid-feedback">{{ $message }}</span>
                                                         @enderror
@@ -324,11 +322,9 @@
                                                         <label for="sub_title_{{$loop->index}}" class="col-form-label">
                                                             Sub Title
                                                         </label>
-                                                        <input id="sub_title_{{$loop->index}}" type="text"
-                                                            name="sections[{{$loop->index}}][sub_title]"
-                                                            value="{{$datum->sub_title}}"
-                                                            placeholder="Enter sub-title"
-                                                            class="form-control csummernote">
+                                                        <textarea class="form-control csummernote"
+                                                                id="sub_title_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][sub_title]">{!! $datum->sub_title ?? null !!}</textarea>
                                                         @error("sections.{$loop->index}.sub_title")
                                                             <span class="invalid-feedback">{{ $message }}</span>
                                                         @enderror
@@ -406,20 +402,18 @@
                                                         <label for="title_0" class="col-form-label">
                                                             Title
                                                         </label>
-                                                        <input id="title_0" type="text"
-                                                            name="sections[0][title]"
-                                                            placeholder="Enter title"
-                                                            class="form-control csummernote">
+                                                        <textarea class="form-control csummernote"
+                                                        id="title_0"  placeholder="Enter title"
+                                                        name="sections[0][title]"></textarea>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="sub_title_0" class="col-form-label">
                                                             Sub Title
                                                         </label>
-                                                        <input id="sub_title_0" type="text"
-                                                            name="sections[0][sub_title]"
-                                                            placeholder="Enter sub-title"
-                                                            class="form-control csummernote">
+                                                        <textarea class="form-control csummernote"
+                                                                id="sub_title_0" placeholder="Enter sub-title"
+                                                                name="sections[0][sub_title]"></textarea>
                                                     </div>
 
                                                     <div class="form-group">
@@ -525,13 +519,13 @@ $(document).ready(function() {
                 </div>
 
                 <div class="form-group">
-                    <label for="inputTitle_${sectionCount}" class="col-form-label">Title </label>
-                    <input id="inputTitle_${sectionCount}" type="text" name="sections[${sectionCount}][title]" placeholder="Enter title" class="form-control csummernote${sectionCount}">
+                    <label for="title_${sectionCount}" class="col-form-label">Title </label>
+                    <textarea class="form-control csummernote${sectionCount}" id="title_${sectionCount}"  placeholder="Enter title" name="sections[${sectionCount}][title]"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="sub_title_${sectionCount}" class="col-form-label">Sub Title </label>
-                    <input id="sub_title_${sectionCount}" type="text" name="sections[${sectionCount}][sub_title]" placeholder="Enter sub-title" class="form-control csummernote${sectionCount}">
+                    <textarea class="form-control csummernote${sectionCount}" id="sub_title_${sectionCount}" placeholder="Enter sub-title" name="sections[${sectionCount}][sub_title]"></textarea>
                 </div>
 
                 <div class="form-group">
