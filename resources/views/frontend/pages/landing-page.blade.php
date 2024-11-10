@@ -24,18 +24,18 @@
     {{-- Video  --}}
     @if ($datum->video)
         <div class="imgDiv">
-            {{$datum->video_link}}
+            {!! $datum->video_link !!}
         </div>
     @endif
 
     {{-- Title  --}}
     @if ($datum->title)
-        <h1 class="landing_title">{{$datum->title}}</h1>
+        <h1 class="landing_title">{!! $datum->title !!}</h1>
     @endif
 
     {{-- Subtitle  --}}
     @if ($datum->sub_title)
-        <h4 class="subtitle">{{$datum->sub_title}}</h4>
+        <h4 class="subtitle">{!! $datum->sub_title !!}</h4>
     @endif
 
     {{-- description  --}}
