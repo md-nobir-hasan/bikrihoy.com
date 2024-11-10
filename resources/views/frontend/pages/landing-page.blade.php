@@ -35,7 +35,7 @@
 
     {{-- Subtitle  --}}
     @if ($datum->sub_title)
-        <h5 class="subtitle">{{$datum->sub_title}}</h5>
+        <h4 class="subtitle">{{$datum->sub_title}}</h4>
     @endif
 
     {{-- description  --}}
