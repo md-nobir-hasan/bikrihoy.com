@@ -10,47 +10,9 @@ use DB;
 
 class LandingPageSectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreLandingPageSectionRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreLandingPageSectionRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\LandingPageSection  $landingPageSection
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LandingPageSection $landingPageSection)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -77,7 +39,7 @@ class LandingPageSectionController extends Controller
         // DB::table('landing_page_sections')->where('product_id', $product_id)->delete();
 
         $data = $request->validated();
-
+        // dd($data);
         foreach ($data['sections'] as $datum) {
 
             // Handle image upload
@@ -85,8 +47,16 @@ class LandingPageSectionController extends Controller
                 $imagePath = $datum['image']->store('landing-page', 'public');
                 $datum['image'] = $imagePath;
             }
+
             $datum['created_at'] = now();
             $datum['product_id'] = $product_id;
+            $datum['video_link'] = $datum['video_link'] ?? null;
+            $datum['title'] = $datum['title'] ?? null;
+            $datum['sub_title'] = $datum['sub_title'] ?? null;
+            $datum['description'] = $datum['description'] ?? null;
+            $datum['button'] = $datum['button'] ?? null;
+            $datum['is_with_previous'] = $datum['is_with_previous'] ?? false;
+
             // dd($datum);
             if (isset($datum['id'])) {
                 DB::table('landing_page_sections')->where('id', $datum['id'])->update($datum);
@@ -101,14 +71,5 @@ class LandingPageSectionController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\LandingPageSection  $landingPageSection
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(LandingPageSection $landingPageSection)
-    {
-        //
-    }
+
 }
