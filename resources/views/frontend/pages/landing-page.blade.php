@@ -1,9 +1,7 @@
 @include('frontend/layouts/header')
 
 
-{{-- @push('custom-js') --}}
 
-{{-- @endpush --}}
 
 @foreach ($data->landing_page_sections as $datum)
     @if (!$datum->is_with_previous)
@@ -70,9 +68,9 @@ $('.order-now-button-track').on('click',function(){
 	fbq('track', 'OrderNow');
 });
 </script>
-{{-- in page js  --}}
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script>
+    {{-- in page js  --}}
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
 
 		$(document).ready(function() {
         const productPrice = parseInt($('#productPrice').text()); // Product price in Tk
@@ -95,12 +93,14 @@ $('.order-now-button-track').on('click',function(){
             $('#orderButton').text('Place Order Tk ' + totalCost);
         }
 
-    // Initialize the costs on page load
-    updateCosts();
+        // Initialize the costs on page load
+        updateCosts();
 
-    // Update costs when the shipping option changes
-    $("input[name='LanShiping']").on('change', updateCosts);
-});
+        // Update costs when the shipping option changes
+        $("input[name='LanShiping']").on('change', updateCosts);
+    });
 
+</script>
 
-    </script>
+</body>
+</html>

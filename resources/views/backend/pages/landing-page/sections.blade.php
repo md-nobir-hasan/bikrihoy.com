@@ -126,202 +126,318 @@
                                     </div>
 
                                     <div id="sections-container">
-                                        @forelse ($data as $datum)
-                                            <input type="hidden" name="sections[{{$loop->index}}][id]" value="{{$datum->id}}">
-                                            <section class="card card-body mt-3 section-controls">
-                                                <div class="section-number">{{ $loop->iteration }}</div>
-                                                <div class="section-header">
-                                                    <h5 class="section-title">Section {{ $loop->iteration }}</h5>
-                                                    <button type="button" class="btn btn-danger btn-sm remove-section">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-
-                                                {{-- Is with previous section --}}
-                                                <div class="form-group d-flex justify-content-center align-items-center">
-                                                    <input id="is_with_previous_{{$loop->index}}" type="checkbox" value="1"
-                                                           name="sections[{{$loop->index}}][is_with_previous]"
-                                                           @if($datum->is_with_previous) checked @endif
-                                                           class="form-control w20px mr-2">
-                                                    <label for="is_with_previous_{{$loop->index}}" class="col-form-label">
-                                                        Is with previous section?
-                                                    </label>
-                                                </div>
-
-                                                {{-- Image --}}
-                                                <div class="form-group">
-                                                    <label for="image_{{$loop->index}}" class="col-form-label">
-                                                        Image
-                                                    </label>
-                                                    <input id="image_{{$loop->index}}" type="file"
-                                                           name="sections[{{$loop->index}}][image]"
-                                                           class="form-control image-input"
-                                                           accept="image/*"
-                                                           value="{{$datum->image}}"
-                                                           >
-                                                    <div class="image-preview-container">
-                                                        @if($datum->image)
-                                                            <img src="/storage/{{ $datum->image }}"
-                                                                 class="image-preview"
-                                                                 alt="Section Image">
-                                                        @endif
+                                        @if (old('sections'))
+                                            @foreach (old('sections') as $datum)
+                                                <input type="hidden" name="sections[{{$loop->index}}][id]" value="{{$datum['id'] ?? null }}">
+                                                <section class="card card-body mt-3 section-controls">
+                                                    <div class="section-number">{{ $loop->iteration }}</div>
+                                                    <div class="section-header">
+                                                        <h5 class="section-title">Section {{ $loop->iteration }}</h5>
+                                                        <button type="button" class="btn btn-danger btn-sm remove-section">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
                                                     </div>
-                                                    @error("sections.{$loop->index}.image")
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
 
-                                                {{-- Video --}}
-                                                <div class="form-group">
-                                                    <label for="video_link_{{$loop->index}}" class="col-form-label">
-                                                        Video (Embedded Code)
-                                                    </label>
-                                                    <textarea class="form-control"
-                                                              id="video_link_{{$loop->index}}"
-                                                              name="sections[{{$loop->index}}][video_link]">{!! $datum->video_link !!}</textarea>
-                                                    @error("sections.{$loop->index}.video_link")
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                                    {{-- Is with previous section --}}
+                                                    <div class="form-group d-flex justify-content-center align-items-center">
+                                                        <input id="is_with_previous_{{$loop->index}}" type="checkbox" value="1"
+                                                            name="sections[{{$loop->index}}][is_with_previous]"
+                                                            @if($datum['is_with_previous'] ?? null) checked @endif
+                                                            class="form-control w20px mr-2">
+                                                        <label for="is_with_previous_{{$loop->index}}" class="col-form-label">
+                                                            Is with previous section?
+                                                        </label>
+                                                    </div>
 
-                                                {{-- Title --}}
-                                                <div class="form-group">
-                                                    <label for="title_{{$loop->index}}" class="col-form-label">
-                                                        Title
-                                                    </label>
-                                                    <input id="title_{{$loop->index}}" type="text"
-                                                           name="sections[{{$loop->index}}][title]"
-                                                           value="{{$datum->title}}"
-                                                           placeholder="Enter title"
-                                                           class="form-control csummernote">
-                                                    @error("sections.{$loop->index}.title")
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                                    {{-- Image --}}
+                                                    <div class="form-group">
+                                                        <label for="image_{{$loop->index}}" class="col-form-label">
+                                                            Image
+                                                        </label>
+                                                        <input id="image_{{$loop->index}}" type="file"
+                                                            name="sections[{{$loop->index}}][image]"
+                                                            class="form-control image-input"
+                                                            accept="image/*"
+                                                            value="{{$datum['image'] ?? null}}"
+                                                            >
+                                                        <div class="image-preview-container">
+                                                            @if($datum['image'] ?? null)
+                                                                <img src="/storage/{{ $datum['image'] ?? null }}"
+                                                                    class="image-preview"
+                                                                    alt="Section Image">
+                                                            @endif
+                                                        </div>
+                                                        @error("sections.{$loop->index}.image")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                                {{-- Sub Title --}}
-                                                <div class="form-group">
-                                                    <label for="sub_title_{{$loop->index}}" class="col-form-label">
-                                                        Sub Title
-                                                    </label>
-                                                    <input id="sub_title_{{$loop->index}}" type="text"
-                                                           name="sections[{{$loop->index}}][sub_title]"
-                                                           value="{{$datum->sub_title}}"
-                                                           placeholder="Enter sub-title"
-                                                           class="form-control csummernote">
-                                                    @error("sections.{$loop->index}.sub_title")
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                                    {{-- Video --}}
+                                                    <div class="form-group">
+                                                        <label for="video_link_{{$loop->index}}" class="col-form-label">
+                                                            Video (Embedded Code)
+                                                        </label>
+                                                        <textarea class="form-control"
+                                                                id="video_link_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][video_link]">{!! $datum['video_link'] ?? null !!}</textarea>
+                                                        @error("sections.{$loop->index}.video_link")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                                {{-- Description --}}
-                                                <div class="form-group">
-                                                    <label for="description_{{$loop->index}}" class="col-form-label ">
-                                                        Description
-                                                    </label>
-                                                    <textarea class="form-control csummernote"
-                                                              id="description_{{$loop->index}}"
-                                                              name="sections[{{$loop->index}}][description]">{!! $datum->description !!}</textarea>
-                                                    @error("sections.{$loop->index}.description")
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                                    {{-- Title --}}
+                                                    <div class="form-group">
+                                                        <label for="title_{{$loop->index}}" class="col-form-label">
+                                                            Title
+                                                        </label>
 
-                                                {{-- Button --}}
-                                                <div class="form-group">
-                                                    <label for="button_{{$loop->index}}" class="col-form-label">
-                                                        Button Text
-                                                    </label>
-                                                    <input id="button_{{$loop->index}}" type="text"
-                                                           name="sections[{{$loop->index}}][button]"
-                                                           value="{{$datum->button}}"
-                                                           placeholder="Enter button text"
-                                                           class="form-control">
-                                                    @error("sections.{$loop->index}.button")
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </section>
-                                        @empty
-                                            <section class="card card-body mt-3 section-controls">
-                                                <div class="section-number">1</div>
-                                                <div class="section-header">
-                                                    <h5 class="section-title">Section 1</h5>
-                                                    <button type="button" class="btn btn-danger btn-sm remove-section">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
 
-                                                <!-- Empty state form fields -->
-                                                <div class="form-group d-flex justify-content-center align-items-center">
-                                                    <input id="is_with_previous_0" type="checkbox" value="1"
-                                                           name="sections[0][is_with_previous]"
-                                                           class="form-control w20px mr-2">
-                                                    <label for="is_with_previous_0" class="col-form-label">
-                                                        Is with previous section?
-                                                    </label>
-                                                </div>
+                                                        <textarea class="form-control csummernote"
+                                                        id="title_{{$loop->index}}"
+                                                        name="sections[{{$loop->index}}][title]">{!! $datum['title'] ?? null !!}</textarea>
 
-                                                <div class="form-group">
-                                                    <label for="image_0" class="col-form-label">
-                                                        Image
-                                                    </label>
-                                                    <input id="image_0" type="file"
-                                                           name="sections[0][image]"
-                                                           class="form-control image-input"
-                                                           accept="image/*">
-                                                    <div class="image-preview-container"></div>
-                                                </div>
+                                                        @error("sections.{$loop->index}.title")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="video_link_0" class="col-form-label">
-                                                        Video (Embedded Code)
-                                                    </label>
-                                                    <textarea class="form-control"
-                                                              id="video_link_0"
-                                                              name="sections[0][video_link]"></textarea>
-                                                </div>
+                                                    {{-- Sub Title --}}
+                                                    <div class="form-group">
+                                                        <label for="sub_title_{{$loop->index}}" class="col-form-label">
+                                                            Sub Title
+                                                        </label>
+                                                        <textarea class="form-control csummernote"
+                                                                id="sub_title_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][sub_title]">{!! $datum['sub_title'] ?? null !!}</textarea>
 
-                                                <div class="form-group">
-                                                    <label for="title_0" class="col-form-label">
-                                                        Title
-                                                    </label>
-                                                    <input id="title_0" type="text"
-                                                           name="sections[0][title]"
-                                                           placeholder="Enter title"
-                                                           class="form-control csummernote">
-                                                </div>
+                                                        @error("sections.{$loop->index}.sub_title")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="sub_title_0" class="col-form-label">
-                                                        Sub Title
-                                                    </label>
-                                                    <input id="sub_title_0" type="text"
-                                                           name="sections[0][sub_title]"
-                                                           placeholder="Enter sub-title"
-                                                           class="form-control csummernote">
-                                                </div>
+                                                    {{-- Description --}}
+                                                    <div class="form-group">
+                                                        <label for="description_{{$loop->index}}" class="col-form-label ">
+                                                            Description
+                                                        </label>
+                                                        <textarea class="form-control csummernote"
+                                                                id="description_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][description]">{!! $datum['description'] ?? null !!}</textarea>
+                                                        @error("sections.{$loop->index}.description")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="description_0" class="col-form-label">
-                                                        Description
-                                                    </label>
-                                                    <textarea class="form-control csummernote"
-                                                              id="description_0"
-                                                              name="sections[0][description]"></textarea>
-                                                </div>
+                                                    {{-- Button --}}
+                                                    <div class="form-group">
+                                                        <label for="button_{{$loop->index}}" class="col-form-label">
+                                                            Button Text
+                                                        </label>
+                                                        <input id="button_{{$loop->index}}" type="text"
+                                                            name="sections[{{$loop->index}}][button]"
+                                                            value="{{$datum['button'] ?? null}}"
+                                                            placeholder="Enter button text"
+                                                            class="form-control">
+                                                        @error("sections.{$loop->index}.button")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </section>
+                                            @endforeach
+                                        @else
+                                            @forelse ($data as $datum)
+                                                <input type="hidden" name="sections[{{$loop->index}}][id]" value="{{$datum->id}}">
+                                                <section class="card card-body mt-3 section-controls">
+                                                    <div class="section-number">{{ $loop->iteration }}</div>
+                                                    <div class="section-header">
+                                                        <h5 class="section-title">Section {{ $loop->iteration }}</h5>
+                                                        <button type="button" class="btn btn-danger btn-sm remove-section">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="button_0" class="col-form-label">
-                                                        Button Text
-                                                    </label>
-                                                    <input id="button_0" type="text"
-                                                           name="sections[0][button]"
-                                                           placeholder="Enter button text"
-                                                           class="form-control">
-                                                </div>
-                                            </section>
-                                        @endforelse
+                                                    {{-- Is with previous section --}}
+                                                    <div class="form-group d-flex justify-content-center align-items-center">
+                                                        <input id="is_with_previous_{{$loop->index}}" type="checkbox" value="1"
+                                                            name="sections[{{$loop->index}}][is_with_previous]"
+                                                            @if($datum->is_with_previous) checked @endif
+                                                            class="form-control w20px mr-2">
+                                                        <label for="is_with_previous_{{$loop->index}}" class="col-form-label">
+                                                            Is with previous section?
+                                                        </label>
+                                                    </div>
+
+                                                    {{-- Image --}}
+                                                    <div class="form-group">
+                                                        <label for="image_{{$loop->index}}" class="col-form-label">
+                                                            Image
+                                                        </label>
+                                                        <input id="image_{{$loop->index}}" type="file"
+                                                            name="sections[{{$loop->index}}][image]"
+                                                            class="form-control image-input"
+                                                            accept="image/*"
+                                                            value="{{$datum->image}}"
+                                                            >
+                                                        <div class="image-preview-container">
+                                                            @if($datum->image)
+                                                                <img src="/storage/{{ $datum->image }}"
+                                                                    class="image-preview"
+                                                                    alt="Section Image">
+                                                            @endif
+                                                        </div>
+                                                        @error("sections.{$loop->index}.image")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    {{-- Video --}}
+                                                    <div class="form-group">
+                                                        <label for="video_link_{{$loop->index}}" class="col-form-label">
+                                                            Video (Embedded Code)
+                                                        </label>
+                                                        <textarea class="form-control"
+                                                                id="video_link_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][video_link]">{!! $datum->video_link !!}</textarea>
+                                                        @error("sections.{$loop->index}.video_link")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    {{-- Title --}}
+                                                    <div class="form-group">
+                                                        <label for="title_{{$loop->index}}" class="col-form-label">
+                                                            Title
+                                                        </label>
+                                                                    <textarea class="form-control csummernote"
+                                                        id="title_{{$loop->index}}"
+                                                        name="sections[{{$loop->index}}][title]">{!! $datum->title ?? null !!}</textarea>
+
+                                                        @error("sections.{$loop->index}.title")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    {{-- Sub Title --}}
+                                                    <div class="form-group">
+                                                        <label for="sub_title_{{$loop->index}}" class="col-form-label">
+                                                            Sub Title
+                                                        </label>
+                                                        <textarea class="form-control csummernote"
+                                                                id="sub_title_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][sub_title]">{!! $datum->sub_title ?? null !!}</textarea>
+                                                        @error("sections.{$loop->index}.sub_title")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    {{-- Description --}}
+                                                    <div class="form-group">
+                                                        <label for="description_{{$loop->index}}" class="col-form-label ">
+                                                            Description
+                                                        </label>
+                                                        <textarea class="form-control csummernote"
+                                                                id="description_{{$loop->index}}"
+                                                                name="sections[{{$loop->index}}][description]">{!! $datum->description !!}</textarea>
+                                                        @error("sections.{$loop->index}.description")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    {{-- Button --}}
+                                                    <div class="form-group">
+                                                        <label for="button_{{$loop->index}}" class="col-form-label">
+                                                            Button Text
+                                                        </label>
+                                                        <input id="button_{{$loop->index}}" type="text"
+                                                            name="sections[{{$loop->index}}][button]"
+                                                            value="{{$datum->button}}"
+                                                            placeholder="Enter button text"
+                                                            class="form-control">
+                                                        @error("sections.{$loop->index}.button")
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </section>
+                                            @empty
+                                                <section class="card card-body mt-3 section-controls">
+                                                    <div class="section-number">1</div>
+                                                    <div class="section-header">
+                                                        <h5 class="section-title">Section 1</h5>
+                                                        <button type="button" class="btn btn-danger btn-sm remove-section">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Empty state form fields -->
+                                                    <div class="form-group d-flex justify-content-center align-items-center">
+                                                        <input id="is_with_previous_0" type="checkbox" value="1"
+                                                            name="sections[0][is_with_previous]"
+                                                            class="form-control w20px mr-2">
+                                                        <label for="is_with_previous_0" class="col-form-label">
+                                                            Is with previous section?
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="image_0" class="col-form-label">
+                                                            Image
+                                                        </label>
+                                                        <input id="image_0" type="file"
+                                                            name="sections[0][image]"
+                                                            class="form-control image-input"
+                                                            accept="image/*">
+                                                        <div class="image-preview-container"></div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="video_link_0" class="col-form-label">
+                                                            Video (Embedded Code)
+                                                        </label>
+                                                        <textarea class="form-control"
+                                                                id="video_link_0"
+                                                                name="sections[0][video_link]"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="title_0" class="col-form-label">
+                                                            Title
+                                                        </label>
+                                                        <textarea class="form-control csummernote"
+                                                        id="title_0"  placeholder="Enter title"
+                                                        name="sections[0][title]"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="sub_title_0" class="col-form-label">
+                                                            Sub Title
+                                                        </label>
+                                                        <textarea class="form-control csummernote"
+                                                                id="sub_title_0" placeholder="Enter sub-title"
+                                                                name="sections[0][sub_title]"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="description_0" class="col-form-label">
+                                                            Description
+                                                        </label>
+                                                        <textarea class="form-control csummernote"
+                                                                id="description_0"
+                                                                name="sections[0][description]"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="button_0" class="col-form-label">
+                                                            Button Text
+                                                        </label>
+                                                        <input id="button_0" type="text"
+                                                            name="sections[0][button]"
+                                                            placeholder="Enter button text"
+                                                            class="form-control">
+                                                    </div>
+                                                </section>
+                                            @endforelse
+                                        @endif
+
                                     </div>
 
                                     <div class="text-center">
@@ -403,13 +519,13 @@ $(document).ready(function() {
                 </div>
 
                 <div class="form-group">
-                    <label for="inputTitle_${sectionCount}" class="col-form-label">Title </label>
-                    <input id="inputTitle_${sectionCount}" type="text" name="sections[${sectionCount}][title]" placeholder="Enter title" class="form-control csummernote${sectionCount}">
+                    <label for="title_${sectionCount}" class="col-form-label">Title </label>
+                    <textarea class="form-control csummernote${sectionCount}" id="title_${sectionCount}"  placeholder="Enter title" name="sections[${sectionCount}][title]"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="sub_title_${sectionCount}" class="col-form-label">Sub Title </label>
-                    <input id="sub_title_${sectionCount}" type="text" name="sections[${sectionCount}][sub_title]" placeholder="Enter sub-title" class="form-control csummernote${sectionCount}">
+                    <textarea class="form-control csummernote${sectionCount}" id="sub_title_${sectionCount}" placeholder="Enter sub-title" name="sections[${sectionCount}][sub_title]"></textarea>
                 </div>
 
                 <div class="form-group">
