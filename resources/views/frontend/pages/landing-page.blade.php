@@ -1,8 +1,6 @@
 @include('frontend/layouts/header')
 
 
-
-
 @foreach ($data->landing_page_sections as $datum)
     @if (!$datum->is_with_previous)
         @if ($loop->index != 0)
@@ -10,42 +8,42 @@
             </section>
         @endif
 
-        <section class="landingPageSection">
+        <section class="landingPageSection section section{{$loop->index}}">
              <div class="landingMain">
     @endif
 
     {{-- image  --}}
     @if ($datum->image)
-        <div class="imgDiv image{{$loop->index}}">
-            <img src="/storage/{{$datum->image}}" alt="{{$datum->title}}">
+        <div class="imgDiv image-div image-div{{$loop->index}}">
+            <img class="image image{{$loop->index}}" src="/storage/{{$datum->image}}" alt="{{$datum->title}}">
         </div>
     @endif
 
     {{-- Video  --}}
-    @if ($datum->video)
-        <div class="imgDiv">
+    @if ($datum->video_link)
+        <div class="video_div video_div{{$loop->index}}">
             {!! $datum->video_link !!}
         </div>
     @endif
 
     {{-- Title  --}}
     @if ($datum->title)
-        <h1 class="landing_title">{!! $datum->title !!}</h1>
+        <h1 class="landing_title title title{{$loop->index}}">{!! $datum->title !!}</h1>
     @endif
 
     {{-- Subtitle  --}}
     @if ($datum->sub_title)
-        <h4 class="subtitle">{!! $datum->sub_title !!}</h4>
+        <h4 class="subtitle subtitle{{$loop->index}}">{!! $datum->sub_title !!}</h4>
     @endif
 
     {{-- description  --}}
     @if ($datum->description)
-        <p class="landingParagraph my-3 my-lg-4">{!! $datum->description !!}</p>
+        <p class="landingParagraph my-3 my-lg-4 description description{{$loop->index}}">{!! $datum->description !!}</p>
     @endif
 
     {{-- button  --}}
     @if ($datum->button)
-        <a href="{{route('checkout',$data->slug)}}" class="landingBtn">{{$datum->button}}</a>
+        <a href="{{route('checkout',$data->slug)}}" class="landingBtn button button{{$loop->index}}">{{$datum->button}}</a>
     @endif
 
     @if ($loop->last)
