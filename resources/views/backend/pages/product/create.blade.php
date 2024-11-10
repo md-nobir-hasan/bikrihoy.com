@@ -271,7 +271,7 @@
                                         <div class="form-group">
                                             <label for="is_landing">Landing page</label>
                                             <select name="is_landing" class="form-control">
-                                            <option >No</option>
+                                            <option value="">No</option>
                                             <option value="1"  >Yes</option>
                                             </select>
                                         </div>
@@ -282,7 +282,7 @@
                                             <label for="is_show_in_website">Is it show in website</label>
                                             <select name="is_show_in_website" class="form-control">
                                                 {{-- <option @selected($product->is_show_in_website == 0) > No </option> --}}
-                                                <option >No</option>
+                                                <option value="">No</option>
                                                 <option value="1">Yes</option>
                                             </select>
                                         </div>

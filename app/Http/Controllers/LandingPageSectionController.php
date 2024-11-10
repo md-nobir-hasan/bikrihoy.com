@@ -55,7 +55,7 @@ class LandingPageSectionController extends Controller
             $datum['sub_title'] = $datum['sub_title'] ?? null;
             $datum['description'] = $datum['description'] ?? null;
             $datum['button'] = $datum['button'] ?? null;
-            $datum['is_with_previous'] = $datum['is_with_previous'] ?? false;
+            $datum['is_with_previous'] = $datum['is_with_previous'] == 1 ? true : false;
 
             // dd($datum);
             if (isset($datum['id'])) {
