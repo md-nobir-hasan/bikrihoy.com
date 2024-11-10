@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingPageSectionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddToCartController;
 use App\Http\Controllers\BannerController;
@@ -41,9 +42,7 @@ use App\Http\Controllers\WishlishtController;
 |
 */
 
-Route::get('/landing', function () {
-    return view('frontend/pages/landing-page');
-})->name('landing');
+// Route::get('/landing/{slug}', [FrontendController::class, 'landing'])->name('landing');
 
 //frontend route
 Route::get('/', [FrontendController::class, 'index'])->name('home');
@@ -86,9 +85,14 @@ Route::controller(AjaxController::class)->prefix('ajax')->name('ajax.')->group(f
 });
 
 
+//admin routes
 Route::group(['middleware' => ['auth']], function () {
+
     // Admin home
     Route::get('/admin', [HomeController::class, 'home'])->name('admin');
+
+    //Landing page sections
+    // Route::get('landing-page-section/{id}', [LandingPageSectionController::class, 'edit'])->name('lp.edit');
 
     //company details
     Route::get('company-details/index', [CompanyDetailsController::class, 'create'])->name('company-details.index');
@@ -106,6 +110,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
         Route::patch('/update/{id}', [CategoryController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    //Landing page sections
+    Route::group(['as' => 'lp.', 'prefix' => 'landing-page-section'], function () {
+        Route::get('/edit/{id}', [LandingPageSectionController::class, 'edit'])->name('edit');
+        Route::post('/update/{product_id}', [LandingPageSectionController::class, 'update'])->name('update');
     });
 
     //Sub-category Mangement

@@ -301,6 +301,13 @@ class FrontendController extends Controller
         return view('frontend.pages.product-details', $n);
     }
 
+    // public function landing($slug)
+    // {
+    //     $product = DB::table('products')->where('slug', $slug)->get();
+    //     $n['sections'] = DB::table('landing_page_sections')->where('product_id', $product->slug)->get();
+    //     return view('frontend/pages/landing-page', $n);
+    // }
+
     public function review(Request $req)
     {
         $insert = new Review();

@@ -107,6 +107,11 @@ class Product extends Model
         return $check;
     }
 
+    public function landing_page_sections()
+    {
+        return $this->hasMany(LandingPageSection::class, 'product_id', 'id');
+    }
+
     public function qualityRatting()
     {
         $rating = 0;

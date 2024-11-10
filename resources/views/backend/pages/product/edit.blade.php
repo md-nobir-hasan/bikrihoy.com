@@ -286,8 +286,19 @@
                                             <label for="is_landing">Landing page</label>
                                             <select name="is_landing" class="form-control">
                                                 {{-- <option @selected($product->is_landing == 0) > No </option> --}}
-                                                <option value="1" @if(!$product->is_landing) selected @endif  >No</option>
+                                                <option @if(!$product->is_landing) selected @endif  >No</option>
                                                 <option value="1"@if($product->is_landing) selected @endif >Yes</option>
+                                            </select>
+                                        </div
+                                    {{-- @endif --}}
+
+                                     {{-- @if (check('landing page')) --}}
+                                        <div class="form-group">
+                                            <label for="is_show_in_website">Is it show in website</label>
+                                            <select name="is_show_in_website" class="form-control">
+                                                {{-- <option @selected($product->is_show_in_website == 0) > No </option> --}}
+                                                <option  @if(!$product->is_show_in_website) selected @endif  >No</option>
+                                                <option value="1"@if($product->is_show_in_website) selected @endif >Yes</option>
                                             </select>
                                         </div>
                                     {{-- @endif --}}

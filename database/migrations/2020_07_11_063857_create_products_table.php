@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->float('discount')->nullabale();
             $table->boolean('is_featured')->deault(false);
             $table->boolean('is_landing')->deault(false);
+            $table->boolean('is_show_in_website')->deault(true);
             $table->date('time_to')->nullable();
             $table->timestamps();
         });
