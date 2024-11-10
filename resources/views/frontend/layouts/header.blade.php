@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="bn">
 <head>
     <!-- Google Tag Manager -->
     @isset($google_tag->gtag_header)
@@ -66,3 +68,11 @@
     </noscript>
     @endisset
 </head>
+
+<body>
+    @isset($google_tag->gtag_header)
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{$google_tag->gtag_header}}"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    @endisset
