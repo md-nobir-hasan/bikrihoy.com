@@ -101,3 +101,6 @@ $('.order-now-button-track').on('click',function(){
     });
 
 </script>
+
+</body>
+</html>
