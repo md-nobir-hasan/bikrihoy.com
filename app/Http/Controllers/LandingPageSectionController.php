@@ -47,7 +47,7 @@ class LandingPageSectionController extends Controller
                 $imagePath = $datum['image']->store('landing-page', 'public');
                 $datum['image'] = $imagePath;
             }
-
+            
             $datum['created_at'] = now();
             $datum['product_id'] = $product_id;
             $datum['video_link'] = $datum['video_link'] ?? null;
