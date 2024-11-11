@@ -17,6 +17,15 @@
         @endif
     @endif
 
+    {{-- Title  --}}
+    @if ($datum->title)
+        <h1 class="landing_title title title{{$loop->index}}">{!! $datum->title !!}</h1>
+    @endif
+
+    {{-- description  --}}
+    @if ($datum->description)
+        <p class="shortParagrapg landingParagraph my-3 my-lg-4 description description{{$loop->index}}">{!! $datum->description !!}</p>
+    @endif
 
     {{-- image  --}}
     @if ($datum->image)
@@ -32,10 +41,6 @@
         </div>
     @endif
 
-    {{-- Title  --}}
-    @if ($datum->title)
-        <h1 class="landing_title title title{{$loop->index}}">{!! $datum->title !!}</h1>
-    @endif
 
     {{-- Subtitle  --}}
     @if ($datum->sub_title)
@@ -55,7 +60,7 @@
     {{-- Section ending --}}
     @if ($loop->last)
         </div>
-            </section>
+    </section>
     @endif
     
 @endforeach
