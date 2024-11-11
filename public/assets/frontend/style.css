@@ -400,6 +400,9 @@ input[type="number"] {
     transition: 0.4s ease;
     width: fit-content;
 }
+.video_div iframe{
+    margin-bottom: 1.5rem;
+}
 .checkout:hover {
     color: #000015;
     text-decoration: underline;
