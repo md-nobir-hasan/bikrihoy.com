@@ -1192,6 +1192,9 @@ h5.subtitle{
 
 @media (max-width: 768px) {
 
+    .video_div iframe{
+        height: 370px;
+    }
     .landing_title{
         font-size: 1.65rem;
     }
@@ -1219,6 +1222,12 @@ h5.subtitle{
     /* .leargeImgSingle {
         height: 29rem;
     } */
+}
+
+@media (max-width: 660px) {
+    .video_div iframe{
+        height: 320px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1307,6 +1316,9 @@ h5.subtitle{
 }
 
 @media (max-width: 520px) {
+    .video_div iframe{
+        height: 285px;
+    }
     .orderNow{
         padding-left: 1.5rem;
         padding-right: 1.5rem;
@@ -1358,6 +1370,9 @@ h5.subtitle{
 }
 
 @media (max-width: 440px) {
+    .video_div iframe{
+        height: 245px;
+    }
     .orderAndContity{
         width: 100%;
     }
@@ -1408,6 +1423,9 @@ h5.subtitle{
 }
 
 @media (max-width: 380px) {
+    .video_div iframe{
+        height: 205px;
+    }
     .productImg {
         height: 9.5rem;
     }
