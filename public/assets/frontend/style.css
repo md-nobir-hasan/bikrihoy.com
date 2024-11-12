@@ -400,14 +400,23 @@ input[type="number"] {
     transition: 0.4s ease;
     width: fit-content;
 }
-.video_div iframe{
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--primary-color);
+.video_div iframe {
+    margin: 2rem auto;
+    box-shadow: 0 0 .4rem #2cb8f8ad;
     border-radius: .4rem;
+    width: 100%;
+    max-width: 768px;
+    height: 430px;
+    padding: .5rem;
+    transform: scale(.2);
+    transition: transform 1s ease-in-out;
 }
 .checkout:hover {
     color: #000015;
     text-decoration: underline;
+}
+.landing_title, .shortParagrapg{
+    padding: .5rem;
 }
 .couponDiv {
     display: flex;
@@ -754,9 +763,7 @@ input[type="number"] {
     text-align: center;
     padding: 2rem;
 }
-.landingMain .elementor-heading-title.elementor-size-default{
-    font-size: 2rem !important;
-}
+
 
 .landing_title.title{
     font-size: 1.2rem;
@@ -782,15 +789,15 @@ input[type="number"] {
     color: #ffffff;
     padding: .7rem 2rem;
     background: var(--primary-color);
-    transition: .4s ease;
+    transition: all .5s ease-in-out;
     display: block;
     text-decoration: none;
     width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: .4rem;
     box-shadow: 0 0 4px #ffffff;
-    margin-bottom: 2rem;
+    margin: 2rem auto;
+    transform: translate(100px);
+    opacity: .4;
 }
 .landingBtn:hover{
     background: blue;
@@ -798,12 +805,15 @@ input[type="number"] {
 }
 .landingBtn:nth-child(even){
     background: #8a2be2;
+    transform: translate(-100px);
 }
 .landingBtn:nth-child(even):hover{
     background: #3e0970;
 }
 .landingMain .imgDiv img{
     width: 100%;
+    transform: scale(.3);
+    transition: transform 1s ease-in-out;
 }
 .subtitle2{
     font-size: 1.2rem;
