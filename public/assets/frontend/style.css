@@ -798,17 +798,48 @@ input[type="number"] {
     margin: 2rem auto;
     transform: translate(100px);
     opacity: .4;
+    animation: ScaleUp 3s infinite ease-in-out;
+}
+@keyframes ScaleUp{
+    0%{
+        transform: scale(.9);
+        background: var(--primary-color);
+    }
+    50%{
+        transform: scale(1);
+        background: blue;
+    }
+    100%{
+        transform: scale(1.1);
+        background: blueviolet;
+    }
 }
 .landingBtn:hover{
     background: blue;
+    animation: unset;
     transform: scale(1.1);
 }
 .landingBtn:nth-child(even){
-    background: #8a2be2;
     transform: translate(-100px);
+    animation: ScaleUp2 3s infinite ease-in-out;
+}
+@keyframes ScaleUp2{
+    0%{
+        transform: scale(.9);
+        background: #8a2be2;
+    }
+    50%{
+        transform: scale(1.1);
+        background: #520a95;
+    }
+    100%{
+        transform: scale(.9);
+        background: #8a2be2;
+    }
 }
 .landingBtn:nth-child(even):hover{
     background: #3e0970;
+    animation: unset;
 }
 .landingMain .imgDiv img{
     width: 100%;
