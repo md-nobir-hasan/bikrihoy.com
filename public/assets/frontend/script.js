@@ -1,4 +1,30 @@
 $(document).ready(function () {
+function handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Apply CSS transformations when the element is in the viewport
+        $(entry.target).css({
+          transform: "scale(1)",
+          opacity: "1",
+          translate: "0"
+        });
+      }
+    });
+  }
+  
+  // Create an Intersection Observer
+  const observer = new IntersectionObserver(handleIntersection, {
+    root: null, // Use the viewport as the root
+    rootMargin: "0px",
+    threshold: 0.1 // Trigger when 10% of the element is in view
+  });
+  
+  // Target elements to observe
+  $(".video_div iframe, .landingMain .imgDiv img, .landingBtn").each((index, element) => {
+    observer.observe(element);
+  });
+  
+    
     $(".smallImgs").slick({
         infinite: false,
         speed: 300,
