@@ -819,7 +819,7 @@ input[type="number"] {
     animation: unset;
     transform: scale(1.1);
 }
-.landingBtn:nth-child(even){
+.landingBtn:nth-child(odd){
     transform: translate(-100px);
     animation: ScaleUp2 3s infinite ease-in-out;
 }
