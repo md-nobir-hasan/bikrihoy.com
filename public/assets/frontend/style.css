@@ -821,6 +821,7 @@ input[type="number"] {
 }
 .landingBtn:nth-child(odd){
     transform: translateY(100px);
+    transition: .6s ease;
     animation: ScaleUp2 2.5s 3s infinite ease-in;
 }
 @keyframes ScaleUp2{
