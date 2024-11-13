@@ -400,9 +400,23 @@ input[type="number"] {
     transition: 0.4s ease;
     width: fit-content;
 }
+.video_div iframe {
+    margin: 2rem auto;
+    box-shadow: 0 0 .4rem #2cb8f8ad;
+    border-radius: .4rem;
+    width: 100%;
+    max-width: 768px;
+    height: 430px;
+    padding: .5rem;
+    transform: scale(.2);
+    transition: transform 1s ease-in-out;
+}
 .checkout:hover {
     color: #000015;
     text-decoration: underline;
+}
+.landing_title, .shortParagrapg{
+    padding: .5rem;
 }
 .couponDiv {
     display: flex;
@@ -745,13 +759,14 @@ input[type="number"] {
     background: #eef9fe;
 }
 .landingMain{
-    padding: 5rem;
-    background: #ffffff;
     box-shadow: 0 0 2px #2c81f854;
     text-align: center;
+    padding: 2rem;
 }
-.landing_title{
-    font-size: 1.8rem;
+
+
+.landing_title.title{
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--primary-color);
 }
@@ -773,19 +788,64 @@ input[type="number"] {
     font-weight: 600;
     color: #ffffff;
     padding: .7rem 2rem;
-    background: #00b512;
-    transition: .4s ease;
+    background: var(--primary-color);
+    transition: all .5s ease-in-out;
     display: block;
     text-decoration: none;
     width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: .4rem;
+    box-shadow: 0 0 4px #ffffff;
+    margin: 2rem auto;
+    transform: translate(100px);
+    opacity: .4;
+    animation: ScaleUp 2.5s 1.5s infinite ease-in-out;
+}
+@keyframes ScaleUp{
+    0%{
+        transform: translateX(-80px);
+        background: var(--primary-color);
+    }
+    50%{
+        transform: translateX(0);
+        background: blue;
+    }
+    100%{
+        transform: translateX(-80px);
+        background: blueviolet;
+    }
 }
 .landingBtn:hover{
-    background: var(--primary-color);
+    background: blue;
+    animation: unset;
+    transform: scale(1.1);
+}
+.landingBtn:nth-child(odd){
+    transform: translateY(100px);
+    transition: .6s ease;
+    animation: ScaleUp2 2.5s 3s infinite ease-in;
+}
+@keyframes ScaleUp2{
+    0%{
+        transform: scale(.9);
+        background: #8a2be2;
+    }
+    50%{
+        transform: scale(1.1);
+        background: #520a95;
+    }
+    100%{
+        transform: scale(.9);
+        background: #8a2be2;
+    }
+}
+.landingBtn:nth-child(odd):hover{
+    background: #3e0970;
+    animation: unset;
 }
 .landingMain .imgDiv img{
     width: 100%;
+    transform: scale(.3);
+    transition: transform 1s ease-in-out;
 }
 .subtitle2{
     font-size: 1.2rem;
@@ -1164,6 +1224,9 @@ h5.subtitle{
 
 @media (max-width: 768px) {
 
+    .video_div iframe{
+        height: 370px;
+    }
     .landing_title{
         font-size: 1.65rem;
     }
@@ -1191,6 +1254,12 @@ h5.subtitle{
     /* .leargeImgSingle {
         height: 29rem;
     } */
+}
+
+@media (max-width: 660px) {
+    .video_div iframe{
+        height: 320px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1279,6 +1348,9 @@ h5.subtitle{
 }
 
 @media (max-width: 520px) {
+    .video_div iframe{
+        height: 285px;
+    }
     .orderNow{
         padding-left: 1.5rem;
         padding-right: 1.5rem;
@@ -1330,6 +1402,9 @@ h5.subtitle{
 }
 
 @media (max-width: 440px) {
+    .video_div iframe{
+        height: 245px;
+    }
     .orderAndContity{
         width: 100%;
     }
@@ -1380,6 +1455,9 @@ h5.subtitle{
 }
 
 @media (max-width: 380px) {
+    .video_div iframe{
+        height: 205px;
+    }
     .productImg {
         height: 9.5rem;
     }
