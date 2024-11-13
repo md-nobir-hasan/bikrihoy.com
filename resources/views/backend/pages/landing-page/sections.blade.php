@@ -112,6 +112,8 @@
                         </span>
                     </div>
                     <div class="card-body bg80808047">
+                        @include('backend.partial.flush-message')
+
                         <div class="row">
                             <div class="col-md-10 m-auto">
                                 <form method="post" id="landing-page-form" action="{{ route('lp.update', $product_id ?? null) }}"
