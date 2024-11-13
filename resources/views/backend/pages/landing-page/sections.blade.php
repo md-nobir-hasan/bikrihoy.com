@@ -100,6 +100,7 @@
 
 @section('content')
     <div class="container-fluid">
+        @include('backend.partial.flush-message')
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-12">
                 <div class="card">
