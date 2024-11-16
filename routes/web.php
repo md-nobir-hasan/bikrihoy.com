@@ -338,8 +338,8 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Admin Review Management Routes
-    Route::prefix('admin/reviews')->name('admin.reviews.')->middleware(['auth', 'admin'])->group(function () {
-    
+    Route::prefix('admin/reviews')->name('admin.reviews.')->middleware(['auth'])->group(function () {
+
         Route::get('/', [ReviewController::class, 'index'])->name('index');
         Route::get('/create', [ReviewController::class, 'create'])->name('create');
         Route::post('/store', [ReviewController::class, 'store'])->name('store');

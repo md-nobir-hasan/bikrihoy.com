@@ -55,14 +55,14 @@
                                                             <div class="review-images">
                                                                 @foreach($review->images as $image)
                                                                     <div class="review-image-item">
-                                                                        <img src="{{ asset('storage/'.$image->image_path) }}" 
-                                                                             alt="Review Image" 
+                                                                        <img src="{{ asset('storage/'.$image->image_path) }}"
+                                                                             alt="Review Image"
                                                                              class="img-thumbnail review-thumbnail"
-                                                                             data-toggle="modal" 
+                                                                             data-toggle="modal"
                                                                              data-target="#imageModal"
                                                                              data-image="{{ asset('storage/'.$image->image_path) }}">
-                                                                        <button type="button" 
-                                                                                class="btn btn-danger btn-sm delete-image" 
+                                                                        <button type="button"
+                                                                                class="btn btn-danger btn-sm delete-image"
                                                                                 data-id="{{ $image->id }}">
                                                                             <i class="fas fa-trash"></i>
                                                                         </button>
@@ -76,10 +76,10 @@
                                                 </td>
                                                 <td>
                                                     <div class="custom-control custom-switch">
-                                                        <input type="checkbox" 
-                                                               class="custom-control-input status-toggle" 
+                                                        <input type="checkbox"
+                                                               class="custom-control-input status-toggle"
                                                                id="status_{{ $review->id }}"
-                                                               data-id="{{ $review->id }}" 
+                                                               data-id="{{ $review->id }}"
                                                                {{ $review->is_active ? 'checked' : '' }}>
                                                         <label class="custom-control-label" for="status_{{ $review->id }}"></label>
                                                     </div>
@@ -87,17 +87,17 @@
                                                 <td>{{ $review->created_at->format('M d, Y') }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="{{ route('admin.reviews.edit', $review) }}" 
+                                                        <a href="{{ route('admin.reviews.edit', $review) }}"
                                                            class="btn btn-sm btn-info">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <form action="{{ route('admin.reviews.destroy', $review) }}" 
-                                                              method="POST" 
+                                                        <form action="{{ route('admin.reviews.destroy', $review) }}"
+                                                              method="POST"
                                                               class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" 
-                                                                    class="btn btn-sm btn-danger delete-review" 
+                                                            <button type="submit"
+                                                                    class="btn btn-sm btn-danger delete-review"
                                                                     data-id="{{ $review->id }}">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
@@ -133,131 +133,132 @@
 </div>
 
 <style>
-.review-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+    .review-images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-.review-image-item {
-    position: relative;
-    width: 60px;
-    height: 60px;
-}
+    .review-image-item {
+        position: relative;
+        width: 60px;
+        height: 60px;
+    }
 
-.review-thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
+    .review-thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
 
-.review-thumbnail:hover {
-    transform: scale(1.05);
-}
+    .review-thumbnail:hover {
+        transform: scale(1.05);
+    }
 
-.review-image-item .btn-danger {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    padding: 2px 6px;
-    font-size: 10px;
-    opacity: 0;
-    transition: opacity 0.2s;
-    border-radius: 50%;
-}
+    .review-image-item .btn-danger {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        padding: 2px 6px;
+        font-size: 10px;
+        opacity: 0;
+        transition: opacity 0.2s;
+        border-radius: 50%;
+    }
 
-.review-image-item:hover .btn-danger {
-    opacity: 1;
-}
+    .review-image-item:hover .btn-danger {
+        opacity: 1;
+    }
 
-.review-images-container {
-    max-width: 200px;
-}
+    .review-images-container {
+        max-width: 200px;
+    }
 
-#modalImage {
-    max-height: 80vh;
-    object-fit: contain;
-}
+    #modalImage {
+        max-height: 80vh;
+        object-fit: contain;
+    }
 </style>
 
-@push('scripts')
-<script>
-$(document).ready(function() {
-    // Image modal
-    $('#imageModal').on('show.bs.modal', function (event) {
-        const button = $(event.relatedTarget);
-        const imageUrl = button.data('image');
-        const modal = $(this);
-        modal.find('#modalImage').attr('src', imageUrl);
-    });
 
-    // Status toggle
-    $('.status-toggle').change(function() {
-        const id = $(this).data('id');
-        const isActive = $(this).prop('checked');
-        
-        $.ajax({
-            url: `/admin/reviews/${id}`,
-            type: 'PUT',
-            data: {
-                is_active: isActive,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(response) {
-                if(response.success) {
-                    toastr.success('Status updated successfully');
-                }
-            },
-            error: function() {
-                toastr.error('Failed to update status');
-                // Revert the toggle if the request failed
-                $(this).prop('checked', !isActive);
-            }
-        });
-    });
+@endsection
+@push('page_scripts')
+    <script>
+        $(document).ready(function() {
+            // Image modal
+            $('#imageModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget);
+                const imageUrl = button.data('image');
+                const modal = $(this);
+                modal.find('#modalImage').attr('src', imageUrl);
+            });
 
-    // Delete image
-    $('.delete-image').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const button = $(this);
-        const id = button.data('id');
-        
-        if(confirm('Are you sure you want to delete this image?')) {
-            $.ajax({
-                url: `/admin/reviews/image/${id}`,
-                type: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if(response.success) {
-                        button.closest('.review-image-item').fadeOut(300, function() {
-                            $(this).remove();
-                            if($('.review-image-item').length === 0) {
-                                $('.review-images').html('<span class="text-muted">No images</span>');
-                            }
-                        });
-                        toastr.success('Image deleted successfully');
+            // Status toggle
+            $('.status-toggle').change(function() {
+                const id = $(this).data('id');
+                const isActive = $(this).prop('checked');
+
+                $.ajax({
+                    url: `/admin/reviews/${id}`,
+                    type: 'PUT',
+                    data: {
+                        is_active: isActive,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if(response.success) {
+                            toastr.success('Status updated successfully');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Failed to update status');
+                        // Revert the toggle if the request failed
+                        $(this).prop('checked', !isActive);
                     }
-                },
-                error: function() {
-                    toastr.error('Failed to delete image');
+                });
+            });
+
+            // Delete image
+            $('.delete-image').click(function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const button = $(this);
+                const id = button.data('id');
+
+                if(confirm('Are you sure you want to delete this image?')) {
+                    $.ajax({
+                        url: `/admin/reviews/image/${id}`,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if(response.success) {
+                                button.closest('.review-image-item').fadeOut(300, function() {
+                                    $(this).remove();
+                                    if($('.review-image-item').length === 0) {
+                                        $('.review-images').html('<span class="text-muted">No images</span>');
+                                    }
+                                });
+                                toastr.success('Image deleted successfully');
+                            }
+                        },
+                        error: function() {
+                            toastr.error('Failed to delete image');
+                        }
+                    });
                 }
             });
-        }
-    });
 
-    // Delete review confirmation
-    $('.delete-review').click(function(e) {
-        if(!confirm('Are you sure you want to delete this review? This action cannot be undone.')) {
-            e.preventDefault();
-        }
-    });
-});
-</script>
+            // Delete review confirmation
+            $('.delete-review').click(function(e) {
+                if(!confirm('Are you sure you want to delete this review? This action cannot be undone.')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 @endpush
-@endsection
