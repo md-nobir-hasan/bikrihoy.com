@@ -338,13 +338,15 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Admin Review Management Routes
-    Route::group(['as' => 'admin.reviews.', 'prefix' => 'admin/reviews'], function () {
+    Route::prefix('admin/reviews')->name('admin.reviews.')->middleware(['auth', 'admin'])->group(function () {
+    
         Route::get('/', [ReviewController::class, 'index'])->name('index');
         Route::get('/create', [ReviewController::class, 'create'])->name('create');
         Route::post('/store', [ReviewController::class, 'store'])->name('store');
         Route::get('/{review}/edit', [ReviewController::class, 'edit'])->name('edit');
         Route::put('/{review}', [ReviewController::class, 'update'])->name('update');
         Route::delete('/{review}', [ReviewController::class, 'destroy'])->name('destroy');
+        Route::delete('/image/{id}', [ReviewController::class, 'deleteImage'])->name('deleteImage');
     });
 
     //Review Management

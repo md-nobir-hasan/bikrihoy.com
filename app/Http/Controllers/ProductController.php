@@ -88,7 +88,8 @@ class ProductController extends Controller
         $insert->stock = $request->stock;
         $insert->status = $request->status;
         $insert->is_landing = $request->is_landing ? 1 : 0;
-        $insert->is_landing = $request->is_show_in_website ? 1 : 0;
+        $insert->is_show_in_website = $request->is_show_in_website ? 1 : 0;
+        // dd($insert);
         // if($request->time_from){
         $insert->time_to = $request->time_to;
         // dd($request->all());

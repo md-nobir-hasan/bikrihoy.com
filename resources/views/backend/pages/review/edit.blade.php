@@ -2,12 +2,11 @@
 
 @section('content')
 <div class="">
-
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ isset($review) ? 'Edit Review' : 'Add New Review' }}</h1>
+                    <h1>Edit Review</h1>
                 </div>
                 <div class="col-sm-6">
                     <a href="{{ route('admin.reviews.index') }}" class="btn btn-secondary float-right">Back to Reviews</a>
@@ -22,21 +21,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ isset($review) ? route('admin.reviews.update', $review) : route('admin.reviews.store') }}" 
+                            <form action="{{ route('admin.reviews.update', $review) }}" 
                                   method="POST" 
                                   enctype="multipart/form-data">
                                 @csrf
-                                @if(isset($review))
-                                    @method('PUT')
-                                @endif
+                                @method('PUT')
 
                                 <div class="form-group">
                                     <label for="product_id">Product (Optional - Leave empty for global review)</label>
+                                   
                                     <select name="product_id" id="product_id" class="form-control @error('product_id') is-invalid @enderror">
                                         <option value="">Global Review (Show on all products)</option>
+                                        
                                         @foreach($products as $product)
                                             <option value="{{ $product->id }}" 
-                                                {{ (isset($review) && $review->product_id == $product->id) || old('product_id') == $product->id ? 'selected' : '' }}>
+                                                {{ $review->product_id == $product->id ? 'selected' : '' }}>
                                                 {{ $product->title }}
                                             </option>
                                         @endforeach
@@ -46,11 +45,12 @@
                                     @enderror
                                 </div>
 
+                                
                                 <div class="form-group">
-                                    <label for="images">Images <span class="text-danger">*</span></label>
+                                    <label for="images">Add More Images</label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('images.*') is-invalid @enderror" 
-                                               id="images" name="images[]" multiple accept="image/*" required>
+                                               id="images" name="images[]" multiple accept="image/*">
                                         <label class="custom-file-label" for="images">Choose images</label>
                                     </div>
                                     @error('images.*')
@@ -58,7 +58,7 @@
                                     @enderror
                                 </div>
 
-                                @if(isset($review) && $review->images->count() > 0)
+                                @if($review->images->count() > 0)
                                 <div class="form-group">
                                     <label>Current Images</label>
                                     <div class="review-images">
@@ -79,13 +79,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="reviewer_name">Reviewer Name </label>
+                                    <label for="reviewer_name">Reviewer Name</label>
                                     <input type="text" 
                                            name="reviewer_name" 
                                            id="reviewer_name" 
                                            class="form-control @error('reviewer_name') is-invalid @enderror"
-                                           value="{{ isset($review) ? $review->reviewer_name : old('reviewer_name') }}" 
-                                           >
+                                           value="{{ $review->reviewer_name }}">
                                     @error('reviewer_name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -95,8 +94,7 @@
                                     <label for="rating">Rating</label>
                                     <select name="rating" id="rating" class="form-control @error('rating') is-invalid @enderror">
                                         @for($i = 1; $i <= 5; $i++)
-                                            <option value="{{ $i }}" 
-                                                {{ (isset($review) && $review->rating == $i) || old('rating') == $i ? 'selected' : '' }}>
+                                            <option value="{{ $i }}" {{ $review->rating == $i ? 'selected' : '' }}>
                                                 {{ $i }} Star{{ $i > 1 ? 's' : '' }}
                                             </option>
                                         @endfor
@@ -111,8 +109,7 @@
                                     <textarea name="review_text" 
                                               id="review_text" 
                                               class="form-control @error('review_text') is-invalid @enderror" 
-                                              rows="4" 
-                                              >{{ isset($review) ? $review->review_text : old('review_text') }}</textarea>
+                                              rows="4">{{ $review->review_text }}</textarea>
                                     @error('review_text')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -121,12 +118,12 @@
                                 <div class="form-group">
                                     <label for="is_active">Status</label>
                                     <select name="is_active" id="is_active" class="form-control">
-                                        <option value="1" {{ (isset($review) && $review->is_active) || old('is_active') == '1' ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ (isset($review) && !$review->is_active) || old('is_active') == '0' ? 'selected' : '' }}>Inactive</option>
+                                        <option value="1" {{ $review->is_active ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ !$review->is_active ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">{{ isset($review) ? 'Update' : 'Create' }} Review</button>
+                                <button type="submit" class="btn btn-primary">Update Review</button>
                             </form>
                         </div>
                     </div>
@@ -136,107 +133,86 @@
     </div>
 </div>
 
+@push('custom-css')
 <style>
-.review-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.review-image-item {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
-}
-
-.review-image-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-.review-image-item .btn-danger {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 2px 6px;
-    font-size: 12px;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.review-image-item:hover .btn-danger {
-    opacity: 1;
-}
-
-#image-preview img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin: 5px;
-    border-radius: 4px;
-}
+    .review-images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 10px;
+    }
+    .review-image-item {
+        position: relative;
+        width: 150px;
+    }
+    .review-image-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+    .delete-image {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        padding: 5px 8px;
+        border-radius: 50%;
+    }
 </style>
+@endpush
 
-@push('scripts')
+@push('custom-js')
 <script>
-$(document).ready(function() {
-    // Image preview
-    $('#images').change(function() {
-        const preview = $('#image-preview');
-        preview.empty();
-        
-        if (this.files) {
-            [...this.files].forEach(file => {
-                if (file.type.startsWith('image/')) {
+    $(document).ready(function() {
+        // Image preview for new uploads
+        $('#images').on('change', function() {
+            const preview = $('#image-preview');
+            preview.empty();
+            
+            if (this.files) {
+                [...this.files].forEach(file => {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        preview.append(`<img src="${e.target.result}" class="img-thumbnail">`);
+                        preview.append(`
+                            <div class="position-relative" style="width: 150px; margin: 10px;">
+                                <img src="${e.target.result}" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+                            </div>
+                        `);
                     }
                     reader.readAsDataURL(file);
-                }
-            });
-        }
-    });
+                });
+            }
+        });
 
-    // Custom file input
-    $('.custom-file-input').on('change', function() {
-        let fileName = Array.from(this.files).map(file => file.name).join(', ');
-        $(this).next('.custom-file-label').html(fileName || 'Choose images');
-    });
-
-    // Delete image
-    $('.delete-image').click(function() {
-        const button = $(this);
-        const id = button.data('id');
-        if(confirm('Are you sure you want to delete this image?')) {
-            $.ajax({
-                url: `/admin/reviews/image/${id}`,
-                type: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if(response.success) {
-                        button.closest('.review-image-item').fadeOut(300, function() {
-                            $(this).remove();
-                            if($('.review-image-item').length === 0) {
-                                $('.review-images').html('<span class="text-muted">No images</span>');
-                            }
-                        });
-                        toastr.success('Image deleted successfully');
+        // Delete existing images
+        $('.delete-image').on('click', function() {
+            const button = $(this);
+            const imageId = button.data('id');
+            
+            if (confirm('Are you sure you want to delete this image?')) {
+                $.ajax({
+                    url: `{{ url('admin/reviews/image') }}/${imageId}`,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            button.closest('.review-image-item').remove();
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Error deleting image. Please try again.');
                     }
-                },
-                error: function() {
-                    toastr.error('Failed to delete image');
-                }
-            });
-        }
+                });
+            }
+        });
+
+        // Update file input label with selected files
+        $('.custom-file-input').on('change', function() {
+            let fileName = Array.from(this.files).map(file => file.name).join(', ');
+            $(this).next('.custom-file-label').html(fileName || 'Choose images');
+        });
     });
-});
 </script>
 @endpush
 @endsection
