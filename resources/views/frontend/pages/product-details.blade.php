@@ -1,6 +1,5 @@
 @extends('frontend.layouts.app')
 
-
 @push('custom-js')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -127,36 +126,34 @@
                 <h2 class="sub_title">Customer Review</h2>
 
                 <div class="reviewInner">
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r2.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r4n.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r5.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r6.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r8.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/Watch-Review-1.png.webp')}}" alt="">
-                    </div>
+                    @forelse($data->reviews()->where('is_active', true)->get() as $review)
+                        <div class="reviewSingle">
+                            <div class="reviewHeader">
+                                @if($review->reviewer_image)
+                                    <img src="{{ asset('storage/'.$review->reviewer_image) }}" alt="{{ $review->reviewer_name }}">
+                                @endif
+                                <div class="reviewInfo">
+                                    <h4>{{ $review->reviewer_name }}</h4>
+                                    <div class="rating">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= $review->rating)
+                                                <i class="fa fa-star text-warning"></i>
+                                            @else
+                                                <i class="fa fa-star-o"></i>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reviewContent">
+                                <p>{{ $review->review_text }}</p>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="text-center py-4">
+                            <p>No reviews yet.</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>

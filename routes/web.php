@@ -30,6 +30,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\WishlishtController;
+use App\Http\Controllers\Backend\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +85,6 @@ Route::controller(AjaxController::class)->prefix('ajax')->name('ajax.')->group(f
     Route::post('/delete', 'delete')->name('delete');
 });
 
-
 //admin routes
 Route::group(['middleware' => ['auth']], function () {
 
@@ -127,7 +127,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/update/{id}', [SubcatController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [SubcatController::class, 'destroy'])->name('destroy');
     });
-
 
     //Brand Mangement
     Route::group(['as' => 'brand.', 'prefix' => 'brand'], function () {
@@ -338,6 +337,26 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    // Admin Review Management Routes
+    Route::group(['as' => 'admin.reviews.', 'prefix' => 'admin/reviews'], function () {
+        Route::get('/', [ReviewController::class, 'index'])->name('index');
+        Route::get('/create', [ReviewController::class, 'create'])->name('create');
+        Route::post('/store', [ReviewController::class, 'store'])->name('store');
+        Route::get('/{review}/edit', [ReviewController::class, 'edit'])->name('edit');
+        Route::put('/{review}', [ReviewController::class, 'update'])->name('update');
+        Route::delete('/{review}', [ReviewController::class, 'destroy'])->name('destroy');
+    });
+
+    //Review Management
+    Route::group(['as' => 'reviews.', 'prefix' => 'reviews'], function () {
+        Route::get('/index', [ReviewController::class, 'index'])->name('index');
+        Route::get('/create', [ReviewController::class, 'create'])->name('create');
+        Route::post('/store', [ReviewController::class, 'store'])->name('store');
+        Route::get('/edit/{review}', [ReviewController::class, 'edit'])->name('edit');
+        Route::put('/update/{review}', [ReviewController::class, 'update'])->name('update');
+        Route::delete('/destroy/{review}', [ReviewController::class, 'destroy'])->name('destroy');
+    });
+
 });
 
 //Contact frontend code
@@ -345,6 +364,4 @@ Route::group(['as' => 'contact.', 'prefix' => 'contact'], function () {
     Route::post('/contact', [ContactController::class, 'contact'])->name('contact');
 });
 
-
 require __DIR__ . '/auth.php';
-
