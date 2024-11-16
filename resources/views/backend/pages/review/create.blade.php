@@ -22,8 +22,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ isset($review) ? route('admin.reviews.update', $review) : route('admin.reviews.store') }}" 
-                                  method="POST" 
+                            <form action="{{ isset($review) ? route('admin.reviews.update', $review) : route('admin.reviews.store') }}"
+                                  method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @if(isset($review))
@@ -35,7 +35,7 @@
                                     <select name="product_id" id="product_id" class="form-control @error('product_id') is-invalid @enderror">
                                         <option value="">Global Review (Show on all products)</option>
                                         @foreach($products as $product)
-                                            <option value="{{ $product->id }}" 
+                                            <option value="{{ $product->id }}"
                                                 {{ (isset($review) && $review->product_id == $product->id) || old('product_id') == $product->id ? 'selected' : '' }}>
                                                 {{ $product->title }}
                                             </option>
@@ -49,7 +49,7 @@
                                 <div class="form-group">
                                     <label for="images">Images <span class="text-danger">*</span></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input @error('images.*') is-invalid @enderror" 
+                                        <input type="file" class="custom-file-input @error('images.*') is-invalid @enderror"
                                                id="images" name="images[]" multiple accept="image/*" required>
                                         <label class="custom-file-label" for="images">Choose images</label>
                                     </div>
@@ -80,11 +80,11 @@
 
                                 <div class="form-group">
                                     <label for="reviewer_name">Reviewer Name </label>
-                                    <input type="text" 
-                                           name="reviewer_name" 
-                                           id="reviewer_name" 
+                                    <input type="text"
+                                           name="reviewer_name"
+                                           id="reviewer_name"
                                            class="form-control @error('reviewer_name') is-invalid @enderror"
-                                           value="{{ isset($review) ? $review->reviewer_name : old('reviewer_name') }}" 
+                                           value="{{ isset($review) ? $review->reviewer_name : old('reviewer_name') }}"
                                            >
                                     @error('reviewer_name')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -95,7 +95,7 @@
                                     <label for="rating">Rating</label>
                                     <select name="rating" id="rating" class="form-control @error('rating') is-invalid @enderror">
                                         @for($i = 1; $i <= 5; $i++)
-                                            <option value="{{ $i }}" 
+                                            <option value="{{ $i }}"
                                                 {{ (isset($review) && $review->rating == $i) || old('rating') == $i ? 'selected' : '' }}>
                                                 {{ $i }} Star{{ $i > 1 ? 's' : '' }}
                                             </option>
@@ -108,10 +108,10 @@
 
                                 <div class="form-group">
                                     <label for="review_text">Review Text</label>
-                                    <textarea name="review_text" 
-                                              id="review_text" 
-                                              class="form-control @error('review_text') is-invalid @enderror" 
-                                              rows="4" 
+                                    <textarea name="review_text"
+                                              id="review_text"
+                                              class="form-control @error('review_text') is-invalid @enderror"
+                                              rows="4"
                                               >{{ isset($review) ? $review->review_text : old('review_text') }}</textarea>
                                     @error('review_text')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -181,62 +181,64 @@
 }
 </style>
 
-@push('scripts')
+
+@endsection
+
+@push('page_scripts')
 <script>
-$(document).ready(function() {
-    // Image preview
-    $('#images').change(function() {
-        const preview = $('#image-preview');
-        preview.empty();
-        
-        if (this.files) {
-            [...this.files].forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        preview.append(`<img src="${e.target.result}" class="img-thumbnail">`);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-        }
-    });
+    $(document).ready(function() {
+        // Image preview
+        $('#images').change(function() {
+            const preview = $('#image-preview');
+            preview.empty();
 
-    // Custom file input
-    $('.custom-file-input').on('change', function() {
-        let fileName = Array.from(this.files).map(file => file.name).join(', ');
-        $(this).next('.custom-file-label').html(fileName || 'Choose images');
-    });
-
-    // Delete image
-    $('.delete-image').click(function() {
-        const button = $(this);
-        const id = button.data('id');
-        if(confirm('Are you sure you want to delete this image?')) {
-            $.ajax({
-                url: `/admin/reviews/image/${id}`,
-                type: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if(response.success) {
-                        button.closest('.review-image-item').fadeOut(300, function() {
-                            $(this).remove();
-                            if($('.review-image-item').length === 0) {
-                                $('.review-images').html('<span class="text-muted">No images</span>');
-                            }
-                        });
-                        toastr.success('Image deleted successfully');
+            if (this.files) {
+                [...this.files].forEach(file => {
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.append(`<img src="${e.target.result}" class="img-thumbnail">`);
+                        }
+                        reader.readAsDataURL(file);
                     }
-                },
-                error: function() {
-                    toastr.error('Failed to delete image');
-                }
-            });
-        }
+                });
+            }
+        });
+
+        // Custom file input
+        $('.custom-file-input').on('change', function() {
+            let fileName = Array.from(this.files).map(file => file.name).join(', ');
+            $(this).next('.custom-file-label').html(fileName || 'Choose images');
+        });
+
+        // Delete image
+        $('.delete-image').click(function() {
+            const button = $(this);
+            const id = button.data('id');
+            if(confirm('Are you sure you want to delete this image?')) {
+                $.ajax({
+                    url: `/admin/reviews/image/${id}`,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if(response.success) {
+                            button.closest('.review-image-item').fadeOut(300, function() {
+                                $(this).remove();
+                                if($('.review-image-item').length === 0) {
+                                    $('.review-images').html('<span class="text-muted">No images</span>');
+                                }
+                            });
+                            toastr.success('Image deleted successfully');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Failed to delete image');
+                    }
+                });
+            }
+        });
     });
-});
 </script>
 @endpush
-@endsection
