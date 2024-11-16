@@ -1,6 +1,5 @@
 @extends('frontend.layouts.app')
 
-
 @push('custom-js')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -121,6 +120,7 @@
     </section>
 
     {{-- Review Section --}}
+    {{-- Review Section --}}
     <section class="reviewSection">
         <div class="container">
             <div class="reviewMain">
@@ -128,35 +128,24 @@
 
                 <div class="reviewInner">
 
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r2.png.webp')}}" alt="">
-                    </div>
+                    @if ($specific_review)
+                        @foreach ( $specific_review->images as $image)
+                            {{-- review Single --}}
+                            <div class="reviewSingle">
+                                <img src="/storage/{{$image->image_path}}" alt="">
+                            </div>
+                        @endforeach
+                    @endif
 
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r4n.png.webp')}}" alt="">
-                    </div>
+                     @if ($global_review)
+                        @foreach ( $global_review->images as $image)
+                            {{-- review Single --}}
+                            <div class="reviewSingle">
+                                <img src="/storage/{{$image->image_path}}" alt="">
+                            </div>
+                        @endforeach
+                    @endif
 
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r5.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r6.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/r8.png.webp')}}" alt="">
-                    </div>
-
-                    {{-- review Single --}}
-                    <div class="reviewSingle">
-                        <img src="{{asset('/images/ignore/review/Watch-Review-1.png.webp')}}" alt="">
-                    </div>
                 </div>
             </div>
         </div>

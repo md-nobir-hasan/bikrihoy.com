@@ -289,9 +289,12 @@ class FrontendController extends Controller
     {
         $n['data'] = Product::with(['productGallery', 'productGallery.imageGallery', 'productGallery.color', 'color', 'color.color'])->where('slug', $slug)->first();
 
+
         if ($n['data'] && $n['data']->is_landing) {
             return view('frontend.pages.landing-page', $n);
         }
+        $n['global_review'] = Review::with('images')->where('product_id', null)->first();
+        $n['specific_review'] = Review::with('images')->where('product_id', $n['data']->id)->first();
 
         $n['shippings'] = Shipping::all();
 

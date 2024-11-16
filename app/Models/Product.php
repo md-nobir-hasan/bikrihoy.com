@@ -128,4 +128,9 @@ class Product extends Model
         return ceil($ratting);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }

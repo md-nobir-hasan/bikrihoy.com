@@ -214,8 +214,6 @@
 
 
 
-
-
 {{-- Product setup menu  --}}
 @if (check('Images'))
     <li
@@ -498,6 +496,31 @@
     </li>
 @endif
 
+{{-- Reviews Management --}}
+<li class="nav-item {{ Request::is('reviews/*') ? 'menu-open' : '' }}">
+    <a href="#" class="nav-link">
+        <i class="fas fa-star"></i>
+        <p>
+            Reviews
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('admin.reviews.index') }}" class="nav-link {{ Request::is('reviews/index') ? 'active' : '' }}">
+                <i class="nav-icon far fa-circle"></i>
+                <p>All Reviews</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.reviews.create') }}" class="nav-link {{ Request::is('reviews/create') ? 'active' : '' }}">
+                <i class="nav-icon far fa-circle"></i>
+                <p>Add Review</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
 {{-- Setting  --}}
 @if (check('Setting'))
     <li class="nav-item {{ Request::is('setting/*') ? 'menu-open' : '' }}">
@@ -509,78 +532,6 @@
             </p>
         </a>
         <ul class="nav nav-treeview">
-            @if (check('Setting Setup'))
-            <li class="nav-item {{ Request::is('setting/setup*') ? 'menu-open' : '' }}">
-                <a href="#"
-                    class="nav-link">
-                    <i class="fa-solid fa-wrench"></i>
-                    <p>Setup <i class="fas fa-angle-left right"></i></p>
-                </a>
-                <ul class="nav nav-treeview">
-                    @if ($n = check('Main Keys'))
-                    <li class="nav-item {{ Request::is('setting/setup/mainKey*') ? 'menu-open' : '' }}">
-                        <a href="#"
-                            class="nav-link">
-                            <i class="fa-solid fa-key"></i>
-                            <p>Main Key<i class="fas fa-angle-left right"></i></p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @if ($n->show)
-                                <li class="nav-item">
-                                    <a href="{{ route('setting.setup.key.index') }}"
-                                        class="nav-link {{ Request::is('setting/setup/mainKey') ? 'active' : '' }}">
-                                        <i class="nav-icon far fa-circle"></i>
-                                        <p>Show Keys</p>
-                                    </a>
-                                </li>
-                            @endif
-                            @if ($n->add)
-                                <li class="nav-item">
-                                    <a href="{{ route('setting.setup.key.create') }}"
-                                        class="nav-link {{ Request::is('setting/setup/mainKey/create') ? 'active' : '' }}">
-                                        <i class="nav-icon far fa-circle"></i>
-                                        <p>Add Key</p>
-                                    </a>
-                                </li>
-                            @endif
-
-                        </ul>
-                    </li>
-                @endif
-                    @if ($n = check('Services'))
-                        <li class="nav-item {{ Request::is('setting/setup/services*') ? 'menu-open' : '' }}">
-                            <a href="#"
-                                class="nav-link">
-                                <i class="fa-brands fa-servicestack"></i>
-                                <p>Services<i class="fas fa-angle-left right"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                @if ($n->show)
-                                    <li class="nav-item">
-                                        <a href="{{ route('setting.setup.services.index') }}"
-                                            class="nav-link {{ Request::is('setting/setup/services') ? 'active' : '' }}">
-                                            <i class="nav-icon far fa-circle"></i>
-                                            <p>Show Services</p>
-                                        </a>
-                                    </li>
-                                @endif
-                                @if ($n->add)
-                                    <li class="nav-item">
-                                        <a href="{{ route('setting.setup.services.create') }}"
-                                            class="nav-link {{ Request::is('setting/setup/services/create') ? 'active' : '' }}">
-                                            <i class="nav-icon far fa-circle"></i>
-                                            <p>Create Services</p>
-                                        </a>
-                                    </li>
-                                @endif
-
-                            </ul>
-                        </li>
-                    @endif
-
-                </ul>
-            </li>
-        @endif
             @if ($n = check('Site Info'))
                 <li class="nav-item">
                     <a href="{{ route('company-details.create') }}"
@@ -690,5 +641,3 @@
         </ul>
     </li>
 @endif
-
-
