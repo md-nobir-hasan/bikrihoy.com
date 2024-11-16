@@ -6,7 +6,10 @@
 html {
     scroll-behavior: smooth;
 }
-
+.landingPageBody{
+    font-family: "Baloo Da 2", sans-serif;
+    font-style: normal;
+}
 body {
     font-family: "Work Sans", sans-serif;
     transition: 0.4s ease;
@@ -802,15 +805,15 @@ input[type="number"] {
 }
 @keyframes ScaleUp{
     0%{
-        transform: translateX(-80px);
+        transform: translateX(-40px);
         background: var(--primary-color);
     }
     50%{
-        transform: translateX(0);
+        transform: translateX(40px);
         background: blue;
     }
     100%{
-        transform: translateX(-80px);
+        transform: translateX(-40px);
         background: blueviolet;
     }
 }

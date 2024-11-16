@@ -1,69 +1,71 @@
 @include('frontend/layouts/header')
 
 
-@foreach ($data->landing_page_sections as $datum)
+<div class="landingPageBody">
+    @foreach ($data->landing_page_sections as $datum)
 
-    {{-- Section starting or attaching --}}
-    @if ($loop->first)
-     <section class="landingPageSection section section{{$loop->index}}">
-        <div class="landingMain">
-    @else
-        @if (!$datum->is_with_previous)
-                </div>
-            </section>
+        {{-- Section starting or attaching --}}
+        @if ($loop->first)
+        <section class="landingPageSection section section{{$loop->index}}">
+            <div class="landingMain">
+        @else
+            @if (!$datum->is_with_previous)
+                    </div>
+                </section>
 
-            <section class="landingPageSection section section{{$loop->index}}">
-                <div class="landingMain">
+                <section class="landingPageSection section section{{$loop->index}}">
+                    <div class="landingMain">
+            @endif
         @endif
-    @endif
 
-    {{-- Title  --}}
-    @if ($datum->title)
-        <h1 class="landing_title title title{{$loop->index}}">{!! $datum->title !!}</h1>
-    @endif
+        {{-- Title  --}}
+        @if ($datum->title)
+            <h1 class="landing_title title title{{$loop->index}}">{!! $datum->title !!}</h1>
+        @endif
 
-    {{-- description  --}}
-    @if ($datum->description)
-        <p class="shortParagrapg landingParagraph my-3 my-lg-4 description description{{$loop->index}}">{!! $datum->description !!}</p>
-    @endif
+        {{-- description  --}}
+        @if ($datum->description)
+            <p class="shortParagrapg landingParagraph my-3 my-lg-4 description description{{$loop->index}}">{!! $datum->description !!}</p>
+        @endif
 
-    {{-- image  --}}
-    @if ($datum->image)
-        <div class="imgDiv image-div image-div{{$loop->index}}">
-            <img class="image image{{$loop->index}}" src="/storage/{{$datum->image}}" alt="Product Image">
-        </div>
-    @endif
+        {{-- image  --}}
+        @if ($datum->image)
+            <div class="imgDiv image-div image-div{{$loop->index}}">
+                <img class="image image{{$loop->index}}" src="/storage/{{$datum->image}}" alt="Product Image">
+            </div>
+        @endif
 
-    {{-- Video  --}}
-    @if ($datum->video_link)
-        <div class="video_div video_div{{$loop->index}}">
-            {!! $datum->video_link !!}
-        </div>
-    @endif
+        {{-- Video  --}}
+        @if ($datum->video_link)
+            <div class="video_div video_div{{$loop->index}}">
+                {!! $datum->video_link !!}
+            </div>
+        @endif
 
 
-    {{-- Subtitle  --}}
-    @if ($datum->sub_title)
-        <h4 class="subtitle subtitle{{$loop->index}}">{!! $datum->sub_title !!}</h4>
-    @endif
+        {{-- Subtitle  --}}
+        @if ($datum->sub_title)
+            <h4 class="subtitle subtitle{{$loop->index}}">{!! $datum->sub_title !!}</h4>
+        @endif
 
-    {{-- description  --}}
-    @if ($datum->description)
-        <p class="landingParagraph my-3 my-lg-4 description description{{$loop->index}}">{!! $datum->description !!}</p>
-    @endif
+        {{-- description  --}}
+        @if ($datum->description)
+            <p class="landingParagraph my-3 my-lg-4 description description{{$loop->index}}">{!! $datum->description !!}</p>
+        @endif
 
-    {{-- button  --}}
-    @if ($datum->button)
-        <a href="{{route('checkout',$data->slug)}}" class="landingBtn button button{{$loop->index}}">{{$datum->button}}</a>
-    @endif
+        {{-- button  --}}
+        @if ($datum->button)
+            <a href="{{route('checkout',$data->slug)}}" class="landingBtn button button{{$loop->index}}">{{$datum->button}}</a>
+        @endif
 
-    {{-- Section ending --}}
-    @if ($loop->last)
-        </div>
-    </section>
-    @endif
-    
-@endforeach
+        {{-- Section ending --}}
+        @if ($loop->last)
+            </div>
+        </section>
+        @endif
+        
+    @endforeach
+</div>
 
 
 
