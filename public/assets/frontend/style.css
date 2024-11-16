@@ -6,7 +6,10 @@
 html {
     scroll-behavior: smooth;
 }
-
+.landingPageBody{
+    font-family: "Baloo Da 2", sans-serif;
+    font-style: normal;
+}
 body {
     font-family: "Work Sans", sans-serif;
     transition: 0.4s ease;
