@@ -119,38 +119,39 @@
     </form>
     </section>
 
+
     {{-- Review Section --}}
-    {{-- Review Section --}}
-    <section class="reviewSection">
-        <div class="container">
-            <div class="reviewMain">
-                <h2 class="sub_title">Customer Review</h2>
+    @if ($specific_review || $global_review)
+        <section class="reviewSection">
+            <div class="container">
+                <div class="reviewMain">
+                    <h2 class="sub_title">Customer Review</h2>
 
-                <div class="reviewInner">
+                    <div class="reviewInner">
 
-                    @if ($specific_review)
-                        @foreach ( $specific_review->images as $image)
-                            {{-- review Single --}}
-                            <div class="reviewSingle">
-                                <img src="/storage/{{$image->image_path}}" alt="">
-                            </div>
-                        @endforeach
-                    @endif
+                        @if ($specific_review)
+                            @foreach ( $specific_review->images as $image)
+                                {{-- review Single --}}
+                                <div class="reviewSingle">
+                                    <img src="/storage/{{$image->image_path}}" alt="">
+                                </div>
+                            @endforeach
+                        @endif
 
-                     @if ($global_review)
-                        @foreach ( $global_review->images as $image)
-                            {{-- review Single --}}
-                            <div class="reviewSingle">
-                                <img src="/storage/{{$image->image_path}}" alt="">
-                            </div>
-                        @endforeach
-                    @endif
+                        @if ($global_review)
+                            @foreach ( $global_review->images as $image)
+                                {{-- review Single --}}
+                                <div class="reviewSingle">
+                                    <img src="/storage/{{$image->image_path}}" alt="">
+                                </div>
+                            @endforeach
+                        @endif
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    @endif
     <!-- Product section -->
     <section class="production">
         <div class="container">
