@@ -1094,6 +1094,22 @@ h5.subtitle{
     line-height: 1.2rem;
 }
 
+/* Facebook plugin design */
+.facebook-section {
+    display: flex;
+    justify-content: center; /* Centers the Facebook page horizontally */
+    align-items: center; /* Centers it vertically (if needed) */
+    width: 100%; /* Full width */
+    padding: 20px; /* Optional padding for spacing */
+}
+
+/* Style for the Facebook plugin */
+.facebook-section .fb-page {
+    width: 500px !important; /* Desired width */
+    height: 700px !important; /* Desired height */
+}
+
+
 /* REsponsive design  strat*/
 @media (max-width: 1400px) {
 
@@ -1227,6 +1243,10 @@ h5.subtitle{
 
 @media (max-width: 768px) {
 
+    .facebook-section .fb-page {
+        width: 100% !important; 
+        height: 500px !important; 
+    }
     .video_div iframe{
         height: 370px;
     }
