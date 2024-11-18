@@ -99,49 +99,55 @@
         <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61569026849619" data-tabs="timeline" data-width="300" data-height="600" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=61569026849619" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a></blockquote></div>
     </section> --}}
 
+    
     <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Facebook Page Plugin</title>
-    <style>
-        .fb-container {
-            max-width: 850px; /* Maximum width */
-            margin: 0 auto; /* Center alignment */
-            width: 100%; /* Responsive width */
-        }
-
-        .fb-container iframe {
-            width: 100% !important; /* Force iframe to match the container */
-        }
-    </style>
-</head>
-<body>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" 
-            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0"></script>
-
-    <section class="text-center fb-container">
-        <div class="fb-page" 
-             data-href="https://www.facebook.com/profile.php?id=61569026849619" 
-             data-tabs="timeline" 
-             data-width="100%" 
-             data-height="600" 
-             data-small-header="true" 
-             data-adapt-container-width="true" 
-             data-hide-cover="false" 
-             data-show-facepile="true">
-            <blockquote cite="https://www.facebook.com/profile.php?id=61569026849619" 
-                        class="fb-xfbml-parse-ignore">
-                <a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a>
-            </blockquote>
-        </div>
-    </section>
-</body>
-</html>
-
-    </section>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Responsive Facebook Page Plugin</title>
+        <style>
+            .fb-container {
+                max-width: 850px; /* Maximum width */
+                margin: 0 auto; /* Center alignment */
+                width: 100%; /* Full width for responsiveness */
+            }
+    
+            .fb-page {
+                display: inline-block; /* Ensures proper scaling */
+                width: 100% !important; /* Forces the plugin to adapt to the container width */
+            }
+    
+            iframe {
+                max-width: 100% !important; /* Ensures iframe fits within the container */
+                height: auto !important; /* Adjust height for aspect ratio */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" 
+                src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0"></script>
+    
+        <section class="text-center fb-container">
+            <div class="fb-page" 
+                 data-href="https://www.facebook.com/profile.php?id=61569026849619" 
+                 data-tabs="timeline" 
+                 data-width="850" 
+                 data-height="600" 
+                 data-small-header="true" 
+                 data-adapt-container-width="true" 
+                 data-hide-cover="false" 
+                 data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/profile.php?id=61569026849619" 
+                            class="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a>
+                </blockquote>
+            </div>
+        </section>
+    </body>
+    </html>
+    
     
 @endsection
 
