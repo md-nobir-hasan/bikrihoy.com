@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('page_conent')
- <section class="sliderSection">
+    <section class="sliderSection">
         <div class="sliderMain">
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -96,7 +96,7 @@
     </section>
 
     <section class='text-center'>
-        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61569026849619" data-tabs="timeline" data-width="300" data-height="600" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=61569026849619" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a></blockquote></div>
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61569026849619" data-tabs="timeline" data-width="100%" data-height="600" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=61569026849619" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a></blockquote></div>
     </section>
 @endsection
 
