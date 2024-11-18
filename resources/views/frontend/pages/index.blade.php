@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('page_conent')
- <section class="sliderSection">
+    <section class="sliderSection">
         <div class="sliderMain">
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
