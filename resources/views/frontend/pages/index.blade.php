@@ -95,7 +95,7 @@
         </div>
     </section>
 
-    <section>
+    <section class='text-center'>
         <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61569026849619" data-tabs="timeline" data-width="300" data-height="600" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=61569026849619" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a></blockquote></div>
     </section>
 @endsection
