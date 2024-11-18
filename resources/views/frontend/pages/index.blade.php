@@ -95,11 +95,34 @@
         </div>
     </section>
 
-    <section class='text-center'>
+    {{-- <section class='text-center'>
         <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61569026849619" data-tabs="timeline" data-width="300" data-height="600" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=61569026849619" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a></blockquote></div>
-    </section>
+    </section> --}}
 
-    {{-- <section class="facebook-section text-center">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Facebook Page Plugin</title>
+    <style>
+        .fb-container {
+            max-width: 850px; /* Maximum width */
+            margin: 0 auto; /* Center alignment */
+            width: 100%; /* Responsive width */
+        }
+
+        .fb-container iframe {
+            width: 100% !important; /* Force iframe to match the container */
+        }
+    </style>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" 
+            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0"></script>
+
+    <section class="text-center fb-container">
         <div class="fb-page" 
              data-href="https://www.facebook.com/profile.php?id=61569026849619" 
              data-tabs="timeline" 
@@ -113,7 +136,11 @@
                         class="fb-xfbml-parse-ignore">
                 <a href="https://www.facebook.com/profile.php?id=61569026849619">Learn with learner</a>
             </blockquote>
-        </div> --}}
+        </div>
+    </section>
+</body>
+</html>
+
     </section>
     
 @endsection
