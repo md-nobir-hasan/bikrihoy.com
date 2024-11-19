@@ -1095,7 +1095,7 @@ h5.subtitle{
 }
 
 /* Facebook design */
-.facebookDesign{
+/* .facebookDesign{
     background: #0dc3fd1a;
     border-top: 1px solid rgba(0, 0, 0, .1);
     padding: 2rem;
@@ -1110,7 +1110,7 @@ h5.subtitle{
 }
 .fb-page.visible {
     transform: scale(1);
-  }
+  } */
 
 /* Responsive design  strat*/
 @media (max-width: 1400px) {
