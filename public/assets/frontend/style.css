@@ -1101,7 +1101,7 @@ h5.subtitle{
     padding: 2rem;
 }
 .fb-page{
-    transform: scale(.2);
+    transform: scale(0);
     transition: 1s ease;
     box-shadow: 0 0 3px var(--primary-color);
     border-radius: .4rem;
