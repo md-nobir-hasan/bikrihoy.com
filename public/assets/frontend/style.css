@@ -1094,23 +1094,25 @@ h5.subtitle{
     line-height: 1.2rem;
 }
 
-/* Facebook plugin design */
-.facebook-section {
-    display: flex;
-    justify-content: center; /* Centers the Facebook page horizontally */
-    align-items: center; /* Centers it vertically (if needed) */
-    width: 100%; /* Full width */
-    padding: 20px; /* Optional padding for spacing */
+/* Facebook design */
+.facebookDesign{
+    background: #0dc3fd1a;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding: 2rem;
 }
-
-/* Style for the Facebook plugin */
-.facebook-section .fb-page {
-    width: 500px !important; /* Desired width */
-    height: 700px !important; /* Desired height */
+.fb-page{
+    transform: scale(.2);
+    transition: 1s ease;
+    box-shadow: 0 0 3px var(--primary-color);
+    border-radius: .4rem;
+    padding: 1rem;
+    background: #ffffff;
 }
+.fb-page.visible {
+    transform: scale(1);
+  }
 
-
-/* REsponsive design  strat*/
+/* Responsive design  strat*/
 @media (max-width: 1400px) {
 
     .landingPageSection{

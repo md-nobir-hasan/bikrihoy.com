@@ -20,7 +20,7 @@ function handleIntersection(entries, observer) {
   });
   
   // Target elements to observe
-  $(".video_div iframe, .landingMain .imgDiv img, .landingBtn").each((index, element) => {
+  $(".video_div iframe, .landingMain .imgDiv img, .landingBtn, .fb-page").each((index, element) => {
     observer.observe(element);
   });
   
@@ -160,4 +160,21 @@ function handleIntersection(entries, observer) {
             $(".couponApplied").show();
         });
     }
+
+    $(window).on("scroll", function () {
+        $(".fb-page").each(function () {
+            const $this = $(this);
+            const elementTop = $this.offset().top;
+            const elementBottom = elementTop + $this.outerHeight();
+            const viewportTop = $(window).scrollTop();
+            const viewportBottom = viewportTop + $(window).height();
+    
+            // Check if the element is fully or partially visible
+            if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                $this.addClass("visible");
+            } else {
+                $this.removeClass("visible");
+            }
+        });
+    });
 });
