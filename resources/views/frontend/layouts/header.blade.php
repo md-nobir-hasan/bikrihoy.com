@@ -26,19 +26,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="{{$site_info->title}}">
+    <meta property="og:title" content="{{$title ?? $site_info->title}}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset($site_info->logo) }}">
-    <meta property="og:description" content="{{$site_info->title}}">
+    <meta property="og:image" content="{{ asset($share_image ?? $site_info->logo) }}">
+    <meta property="og:description" content="{{$title ?? $site_info->title}}">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{$site_info->title}}">
-    <meta name="twitter:image" content="{{ asset($site_info->logo) }}">
+    <meta name="twitter:title" content="{{$title ?? $site_info->title}}">
+    <meta name="twitter:image" content="{{ asset($share_image ?? $site_info->logo) }}">
 
     <!-- Title -->
-    <title>{{$site_info->title}}</title>
+    <title>{{$title ?? $site_info->title}}</title>
 
     <!-- Preconnect to External Domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@
 
     {{-- Tab icon  --}}
     <!-- or for PNG favicon -->
-    <link rel="shortcut icon" href="/{{$site_info->logo}}" type="image/png">
+    <link rel="shortcut icon" href="/{{$image ?? $site_info->logo}}" type="image/png">
 
     <!-- Facebook Pixel Code -->
     @isset($pixel_tag)
