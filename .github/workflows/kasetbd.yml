@@ -14,6 +14,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ftp://145.223.17.234
+        server: 145.223.17.234
         username: u498337615.kasetbd.com
         password: ${{ secrets.KASSETBD_FTP_PASSWORD }}
