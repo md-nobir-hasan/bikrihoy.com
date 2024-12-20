@@ -17,7 +17,7 @@ use App\Models\PaSize;
 use App\Models\Subcat;
 use Faker\Core\Color;
 use Illuminate\Support\Facades\Artisan;
-use Str;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -213,7 +213,7 @@ class ProductController extends Controller
         $update->is_landing = $request->is_landing ? 1 : 0;
         $update->is_show_in_website = $request->is_show_in_website ? 1 : 0;
         $update->photo = ProductGallery::orderBy('id', 'desc')->first()->imageGallery->img;
-        $update->slug = $request->title;
+        $update->slug = Str::slug($request->title);
         $update->is_featured = $request->input('is_featured', 0);
         $update->save();
 
