@@ -44,7 +44,7 @@
 
     {{-- Tab icon  --}}
     <!-- or for PNG favicon -->
-    <link rel="icon" href="/{{$site_info->logo}}" type="image/png">
+    <link rel="shortcut icon" href="/{{$site_info->logo}}" type="image/png">
 
     <!-- Facebook Pixel Code -->
     @isset($pixel_tag)
