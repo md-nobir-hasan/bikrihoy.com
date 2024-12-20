@@ -288,7 +288,8 @@ class FrontendController extends Controller
     public function product_details($slug)
     {
         $n['data'] = Product::with(['productGallery', 'productGallery.imageGallery', 'productGallery.color', 'color', 'color.color'])->where('slug', $slug)->first();
-
+        $n['title'] = $n['data']->title;
+        $n['share_image'] = $n['data']->photo;
 
         if ($n['data'] && $n['data']->is_landing) {
             return view('frontend.pages.landing-page', $n);
@@ -300,6 +301,7 @@ class FrontendController extends Controller
 
         // related product collection
         $n['related_products'] = DB::table('products')->limit('19')->get();
+       
 
         return view('frontend.pages.product-details', $n);
     }
