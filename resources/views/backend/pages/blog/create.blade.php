@@ -3,6 +3,7 @@
 @section('title', 'Blog Management')
 
 @push('third_party_stylesheets')
+    <link rel="stylesheet" href="{{ asset('assets/backend/library/summernote/summernote.min.css') }}">
 @endpush
 
 @push('page_css')
@@ -57,8 +58,8 @@
 
                                      {{-- Image --}}
                                      <div class="form-group">
-                                        <label for="image" class="col-form-label">Blog Image </label>
-                                        <input id="image" type="file" name="image" placeholder="Enter image"
+                                        <label for="image" class="col-form-label">Blog Image <span class="text-danger">*</span></label>
+                                        <input id="image" type="file" name="image" placeholder="Enter image" required
                                             value="{{ old('image') }}" class="form-control" onchange="previewBlogImage(this)">
                                         <img id="blog-image-preview" src="#" alt="Blog image preview" style="display: none; max-width: 200px; margin-top: 10px;">
                                         @error('image')
@@ -115,12 +116,20 @@
     </div>
 @endsection
 
+
 @push('third_party_scripts')
-    <script src="{{ asset('assets/js/DataTable/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/library/summernote/summernote.min.js') }}"></script>
 @endpush
 
 @push('page_scripts')
     <script>
+        $(document).ready(function() {
+            $('#content').summernote({
+                placeholder: "Write detail description.....",
+                tabsize: 2,
+                height: 150
+            });
+        });
         function previewBlogImage(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

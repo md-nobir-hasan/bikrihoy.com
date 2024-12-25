@@ -31,7 +31,7 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="{{ asset($share_image ?? $site_info->logo) }}">
     <meta property="og:description" content="{{$title ?? $site_info->title}}">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{$title ?? $site_info->title}}">
@@ -57,6 +57,7 @@
     {{-- Tab icon  --}}
     <!-- or for PNG favicon -->
     <link rel="shortcut icon" href="/{{$image ?? $site_info->logo}}" type="image/png">
+@stack('css')
 
     <!-- Facebook Pixel Code -->
     @isset($pixel_tag)

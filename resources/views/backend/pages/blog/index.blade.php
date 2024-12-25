@@ -52,7 +52,7 @@
                                             <td><img src="{{ asset('storage/'.$value->author_image) }}" alt="{{ $value->author }}"
                                                     class="rounded img-thumbnail secreen-logo"></td>
                                             <td>{{ $value->slug }}</td>
-                                            <td>{{ $value->content }}</td>
+                                            <td>{!! Str::words($value->content, 100) !!}</td>
                                             <td><img src="{{ asset('storage/'.$value->image) }}" alt="{{ $value->title }}"
                                                     class="rounded img-thumbnail secreen-logo"></td>
                                             <td>{{ $value->status_formatted }}</td>

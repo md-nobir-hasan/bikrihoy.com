@@ -19,8 +19,8 @@ class CreateBlogsTable extends Migration
             $table->string('subtitle')->nullable();
             $table->string('author')->nullable();
             $table->string('author_image')->nullable();
-            $table->string('slug');
-            $table->text('content');
+            $table->string('slug')->unique();
+            $table->longText('content');
             $table->string('image')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1=active, 0=inactive');
             $table->timestamps();

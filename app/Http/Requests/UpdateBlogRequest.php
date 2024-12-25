@@ -27,8 +27,8 @@ class UpdateBlogRequest extends FormRequest
             'title' => 'required|string|max:255|unique:blogs,title,'.$this->blog->id,
             'subtitle' => 'nullable|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,Jpeg|max:2048',
-            'author' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,Jpeg|max:2048',
+            'author' => 'nullable|string|max:255',
             'author_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,Jpeg|max:2048',
             'status' => 'required|boolean',
         ];

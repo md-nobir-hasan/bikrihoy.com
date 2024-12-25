@@ -64,6 +64,12 @@ Route::get('order/checkout/{slug}', [OrderController::class, 'checkout'])->name(
 Route::get('/product-details/{id}/', [FrontendController::class, 'product_details'])->name('product_details');
 Route::post('/review', [FrontendController::class, 'review'])->name('review');
 
+//Blog (Frontend)
+Route::prefix('blog')->name('blog.')->group(function(){
+    Route::get('/list', [FrontendController::class, 'list'])->name('list');
+    Route::get('/details/{slug}', [FrontendController::class, 'details'])->name('details');
+});
+
 //Pages
 Route::get('/pages/{title}', [FrontendController::class, 'page'])->name('page');
 //Add to Cart

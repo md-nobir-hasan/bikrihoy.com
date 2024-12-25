@@ -155,4 +155,6 @@ class BlogController extends Controller
         return $delete ? redirect()->route('blog.index')->with('success', 'Blog deleted successfully')
                 : redirect()->back()->with('error', 'Blog deletion failed');
     }
+
+
 }
