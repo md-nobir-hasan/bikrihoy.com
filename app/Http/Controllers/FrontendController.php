@@ -301,7 +301,7 @@ class FrontendController extends Controller
         $n['shippings'] = Shipping::all();
 
         // related product collection
-        $n['related_products'] = DB::table('products')->limit('19')->get();
+        $n['related_products'] = DB::table('products')->where('id', '!=', $n['data']->id)->limit('19')->get();
 
 
         return view('frontend.pages.product-details', $n);

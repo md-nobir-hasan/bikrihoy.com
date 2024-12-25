@@ -287,6 +287,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Page
     Route::resource('/page', PageController::class);
+
+    //optimize clear
+    Route::get('/optimize-clear', [SettingController::class, 'optimizeClear'])->name('optimize-clear');
     //Setting
     Route::group(['as' => 'setting.', 'prefix' => 'setting'], function () {
 

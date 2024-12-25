@@ -8,6 +8,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 
 class SettingController extends Controller
@@ -201,5 +202,11 @@ class SettingController extends Controller
         $data = User::find($id);
         $data->delete();
         return redirect()->back()->with('success', 'User  deleted successfully!');
+    }
+
+    public function optimizeClear()
+    {
+        Artisan::call('optimize:clear');
+        return redirect()->back()->with('success', 'Cache clear successfully!');
     }
 }

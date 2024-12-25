@@ -7,6 +7,12 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="{{ route('optimize-clear') }}" class="nav-link">
+                <i class="fas fa-cog"></i>
+                Cache Clear
+            </a>
+        </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="@if (isset(Auth::user()->image)) {{ asset(Auth::user()->image) }}@else{{ asset('/images/default/human.webp') }} @endif"
