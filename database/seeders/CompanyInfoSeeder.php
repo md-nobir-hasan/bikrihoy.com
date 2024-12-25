@@ -15,7 +15,7 @@ class CompanyInfoSeeder extends Seeder
     public function run()
     {
         $n = [
-            ['name' => 'KasetBD', 'title' => 'KasetBD', 'logo' => 'seeder/logo.webp', 'address' => 'Dhaka'],
+            ['name' => 'KasetBD', 'title' => 'KasetBD', 'logo' => 'images/seeder/logo.png', 'address' => 'Mirpur,Dhaka'],
         ];
         $n2 = [
             ['phone' => '01786743293', 'whatsapp' => '01786743293', 'facebook_group_link' => '', 'email' => 'support@kasetbd.com'],
