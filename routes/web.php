@@ -31,6 +31,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\WishlishtController;
 use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +138,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/update/{id}', [BrandController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('destroy');
     });
+
+    //Blog Management
+    Route::resource('blog',BlogController::class);
 
     //Shippin Mangement
     Route::group(['as' => 'shipping.', 'prefix' => 'shipping'], function () {
