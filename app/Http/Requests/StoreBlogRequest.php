@@ -23,13 +23,14 @@ class StoreBlogRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->all());
         return [
             'title' => 'required|string|max:255|unique:blogs,title',
             'subtitle' => 'nullable|string|max:255',
             'content' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,Jpeg|max:2048',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg,webp,Jpeg|max:2048',
             'author' => 'nullable|string|max:255',
-            'author_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,Jpeg|max:2048',
+            'author_image' => 'nullable|mimes:jpeg,png,jpg,gif,svg,webp,Jpeg|max:2048',
             'status' => 'required|boolean',
         ];
     }
