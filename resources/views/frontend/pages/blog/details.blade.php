@@ -26,7 +26,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 @if($blog->image)
-                    <img src="{{ asset('storage/'.$blog->image) }}" class="blog-image" alt="{{ $blog->title }}">
+                    <img src="{{ asset($blog->image) }}" class="blog-image" alt="{{ $blog->title }}">
                 @else
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <title>{{ $blog->title }}</title>
@@ -54,7 +54,7 @@
             @forelse($relatedBlogs->take(4) as $relatedBlog)
                 <div class="card shadow-sm mb-4">
                     @if($relatedBlog->image)
-                        <img src="{{ asset('storage/'.$relatedBlog->image) }}" class="bd-placeholder-img card-img-top related-blog-image" alt="{{ $relatedBlog->title }}">
+                        <img src="{{ asset($relatedBlog->image) }}" class="bd-placeholder-img card-img-top related-blog-image" alt="{{ $relatedBlog->title }}">
                     @else
                         <svg class="bd-placeholder-img card-img-top related-blog-image" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                             <rect width="100%" height="100%" fill="#55595c"></rect>

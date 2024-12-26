@@ -65,7 +65,7 @@
                                         <label for="image" class="col-form-label">Blog Image <span class="text-danger">*</span></label>
                                         <input id="image" type="file" name="image" placeholder="Enter image" required
                                             value="{{ $blog->image }}" class="form-control" onchange="previewBlogImage(this)">
-                                        <img id="blog-image-preview" src="{{ $blog->image ? asset('storage/'.$blog->image) : '#' }}"
+                                        <img id="blog-image-preview" src="{{ $blog->image ? asset($blog->image) : '#' }}"
                                             alt="Blog image preview" style="{{ $blog->image ? 'display: block;' : 'display: none;' }} max-width: 200px; margin-top: 10px;">
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
@@ -88,7 +88,7 @@
                                         <label for="author_image" class="col-form-label">Author Image </label>
                                         <input id="author_image" type="file" name="author_image" placeholder="Enter author image"
                                             value="{{ $blog->author_image }}" class="form-control" onchange="previewAuthorImage(this)">
-                                        <img id="author-image-preview" src="{{ $blog->author_image ? asset('storage/'.$blog->author_image) : '#' }}"
+                                        <img id="author-image-preview" src="{{ $blog->author_image ? asset($blog->author_image) : '#' }}"
                                             alt="Author image preview" style="{{ $blog->author_image ? 'display: block;' : 'display: none;' }} max-width: 200px; margin-top: 10px;">
                                         @error('author_image')
                                             <span class="text-danger">{{ $message }}</span>

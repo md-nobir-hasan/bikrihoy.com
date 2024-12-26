@@ -49,8 +49,8 @@ class BlogController extends Controller
             $file = $request->file('image');
             $random = rand(100000, 999999);
             $name = time().'-'.$random.'.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('blogs', $name, 'public');
-            $data['image'] = $path;
+            $path = $file->move(public_path('images/blogs'), $name);
+            $data['image'] = 'images/blogs/'.$name;
         }
 
         // Author Image
@@ -58,8 +58,8 @@ class BlogController extends Controller
             $file = $request->file('author_image');
             $random = rand(100000, 999999);
             $name = time().'-'.$random.'.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('blogs', $name, 'public');
-            $data['author_image'] = $path;
+            $path = $file->move(public_path('images/blogs'), $name);
+            $data['author_image'] = 'images/blogs/'.$name;
         }
 
         $insert = Blog::create($data);
@@ -109,8 +109,8 @@ class BlogController extends Controller
             $file = $request->file('image');
             $random = rand(100000, 999999);
             $name = time().'-'.$random.'.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('blogs', $name, 'public');
-            $data['image'] = $path;
+            $path = $file->move(public_path('images/blogs'), $name);
+            $data['image'] = 'images/blogs/'.$name;
 
             // old image delete
             if($blog->image){
@@ -123,8 +123,8 @@ class BlogController extends Controller
             $file = $request->file('author_image');
             $random = rand(100000, 999999);
             $name = time().'-'.$random.'.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('blogs', $name, 'public');
-            $data['author_image'] = $path;
+            $path = $file->move(public_path('images/blogs'), $name);
+            $data['author_image'] = 'images/blogs/'.$name;
 
             // old image delete
             if($blog->author_image){
@@ -147,10 +147,10 @@ class BlogController extends Controller
     {
         $delete = $blog->delete();
         if($blog->image){
-            Storage::delete('public/'.$blog->image);
+         unlink(public_path($blog->image));
         }
         if($blog->author_image){
-            Storage::delete('public/'.$blog->author_image);
+            unlink(public_path($blog->author_image));
         }
         return $delete ? redirect()->route('blog.index')->with('success', 'Blog deleted successfully')
                 : redirect()->back()->with('error', 'Blog deletion failed');

@@ -49,11 +49,11 @@
                                             <td>{{ $value->title }}</td>
                                             <td>{{ $value->subtitle }}</td>
                                             <td>{{ $value->author }}</td>
-                                            <td><img src="{{ asset('storage/'.$value->author_image) }}" alt="{{ $value->author }}"
+                                            <td><img src="{{ asset($value->author_image) }}" alt="{{ $value->author }}"
                                                     class="rounded img-thumbnail secreen-logo"></td>
                                             <td>{{ $value->slug }}</td>
                                             <td>{!! Str::words($value->content, 100) !!}</td>
-                                            <td><img src="{{ asset('storage/'.$value->image) }}" alt="{{ $value->title }}"
+                                            <td><img src="{{ asset($value->image) }}" alt="{{ $value->title }}"
                                                     class="rounded img-thumbnail secreen-logo"></td>
                                             <td>{{ $value->status_formatted }}</td>
                                             <td class="text-middle py-0 align-middle @if (!check('Blog')->edit && !check('Blog')->delete) d-none @endif">

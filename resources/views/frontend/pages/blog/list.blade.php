@@ -30,7 +30,7 @@
                         <div class="col">
                         <div class="card shadow-sm">
                             @if($blog->image)
-                            <img src="{{ asset('storage/'.$blog->image) }}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="{{ $blog->title }}">
+                            <img src="{{ asset($blog->image) }}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="{{ $blog->title }}">
                             @else
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                                 <title>{{ $blog->title }}</title>
