@@ -25,8 +25,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-10 m-auto">
-                                <form method="post" action="{{ route('blog.store') }}" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
+                                <form method="GET" action="{{ route('blog.get.store') }}" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label">Title <span class="text-danger">*</span></label>
                                         <input id="title" type="text" name="title" placeholder="Enter title"

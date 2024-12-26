@@ -147,6 +147,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Blog Management
     Route::resource('blog',BlogController::class);
+    Route::get('blog/get/store', [BlogController::class, 'store'])->name('blog.get.store');
 
     //Shippin Mangement
     Route::group(['as' => 'shipping.', 'prefix' => 'shipping'], function () {

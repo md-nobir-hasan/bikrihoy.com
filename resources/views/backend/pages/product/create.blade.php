@@ -313,7 +313,6 @@
 @endsection
 
 @push('third_party_scripts')
-    <script src="{{ asset('assets/js/DataTable/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/backend/library/summernote/summernote.min.js') }}"></script>
 @endpush
 
