@@ -62,8 +62,11 @@
                                                         class="btn btn-dark btnEdit @if (!check('Blog')->edit) d-none @endif"><i class="fas fa-edit"></i></a>
                                                     {{-- @endif --}}
                                                     {{-- @if (Auth::user()->can('delete brand') || Auth::user()->role->id == 1) --}}
-                                                    <a href="{{ route('blog.destroy', $value->id) }}"
-                                                        class="btn btn-danger btnDelete @if (!check('Blog')->delete) d-none @endif"><i class="fas fa-trash"></i></a>
+                                                    <form action="{{ route('blog.destroy', $value->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger btnDelete @if (!check('Blog')->delete) d-none @endif"><i class="fas fa-trash"></i></button>
+                                                    </form>
                                                     {{-- @endif --}}
                                                 </div>
                                             </td>
