@@ -96,8 +96,8 @@
                                 <tbody>
                                     @foreach ($data->productShipping as $shipping)
                                         <tr>
-                                        <td>{{$shipping?->shipping?->type}}</td>
-                                        <td>&#2547;<span>{{$shipping?->shipping?->price}}</span></td>
+                                        <td>{{$shipping->shipping->type}}</td>
+                                        <td>&#2547;<span>{{$shipping->shipping->price}}</span></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
