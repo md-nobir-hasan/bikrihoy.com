@@ -67,12 +67,12 @@
                                     </div>
                                     @if (check('Category'))
                                         <div class="form-group">
-                                            <label for="cat_id">Category <span class="text-danger">*</span></label>
+                                            <label for="cat_id">Category </label>
                                             <select name="cat_id" id="cat_id" class="form-control">
                                                 <option value="">--Select any category--</option>
                                                 @foreach ($categories as $key => $cat_data)
                                                     <option value='{{ $cat_data->id }}'
-                                                        @if ($cat_data->id == $product->cat_info->id) selected @endif>
+                                                        @if ($product->cat_info && ($cat_data->id == $product->cat_info->id)) selected @endif>
                                                         {{ $cat_data->title }}</option>
                                                 @endforeach
                                             </select>
@@ -81,8 +81,8 @@
 
                                     @if (check('Sub-category'))
                                         <div class="form-group">
-                                            <label for="sub_cat_id">Sub-category <span class="text-danger">*</span></label>
-                                            <select name="sub_cat_id" id="sub_cat_id" class="form-control" required>
+                                            <label for="sub_cat_id">Sub-category</label>
+                                            <select name="sub_cat_id" id="sub_cat_id" class="form-control" >
                                                 <option value="">--Select any sub-category--</option>
                                                 @foreach ($sub_cats as $key => $sub_cat)
                                                     <option value='{{ $sub_cat->id }}'
