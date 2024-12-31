@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Models\Shipping;
 class CreateProductsTable extends Migration
 {
     /**
@@ -40,6 +40,7 @@ class CreateProductsTable extends Migration
             $table->foreign('cat_id', 'products_cat_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('subcat_id', 'products_subcat_id')->references('id')->on('subcats')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('brand_id', 'products_brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

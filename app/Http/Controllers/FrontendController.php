@@ -287,7 +287,7 @@ class FrontendController extends Controller
     // Product details code
     public function product_details($slug)
     {
-        $n['data'] = Product::with(['productGallery', 'productGallery.imageGallery', 'productGallery.color', 'color', 'color.color'])->where('slug', $slug)->first();
+        $n['data'] = Product::with(['productGallery', 'productGallery.imageGallery', 'productGallery.color', 'color', 'color.color','productShipping','productShipping.shipping'])->where('slug', $slug)->first();
         $n['title'] = $n['data']->title;
         $n['share_image'] = $n['data']->photo;
 
@@ -297,11 +297,9 @@ class FrontendController extends Controller
         $n['global_review'] = Review::with('images')->where('product_id', null)->first();
         $n['specific_review'] = Review::with('images')->where('product_id', $n['data']->id)->first();
 
-        $n['shippings'] = Shipping::all();
-
         // related product collection
         $n['related_products'] = DB::table('products')->limit('19')->get();
-       
+
 
         return view('frontend.pages.product-details', $n);
     }

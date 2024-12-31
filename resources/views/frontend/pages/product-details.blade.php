@@ -84,6 +84,7 @@
                             </a>
                         </div>
 
+                        @if($data->productShipping->count()>0)
                         <div class="deliveryCharge">
                             <table class="table table-responsive table-bordered bg-light">
                                 <thead>
@@ -93,15 +94,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($shippings as $shipping)
+                                    @foreach ($data->productShipping as $shipping)
                                         <tr>
-                                        <td>{{$shipping->type}}</td>
-                                        <td>&#2547;<span>{{$shipping->price}}</span></td>
+                                        <td>{{$shipping?->shipping?->type}}</td>
+                                        <td>&#2547;<span>{{$shipping?->shipping?->price}}</span></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
