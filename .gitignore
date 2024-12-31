@@ -8,4 +8,4 @@ Homestead.yaml
 /vendor
 /node_modules
 /public/storage
-/storage
+/storage/app/public
