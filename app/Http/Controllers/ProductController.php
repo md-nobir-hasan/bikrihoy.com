@@ -57,6 +57,7 @@ class ProductController extends Controller
         $n['category'] = Category::all();
         $n['colors'] = ProductColor::all();
         $n['sizes'] = ProductSize::all();
+        $n['shippings'] = DB::table('shippings')->where('status','active')->get();
 
         return view('backend.pages.product.create', $n);
     }
@@ -99,6 +100,14 @@ class ProductController extends Controller
         $insert->is_featured = $request->input('is_featured', 0);
         $insert->save();
 
+        if($request->shipping_id){
+            foreach($request->shipping_id as $shipping){
+                Shipping::create([
+                    'product_id'=>$insert->id,
+                    'shipping_id'=>$shipping
+                ]);
+            }
+        }
         // $product_gallery = new ProductGallery();
         // $product_gallery->product_id = $insert->id;
         // $product_gallery->gallery_id = $imge_gallery->id;

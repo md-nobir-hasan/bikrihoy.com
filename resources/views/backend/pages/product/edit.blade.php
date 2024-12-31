@@ -127,6 +127,20 @@
                                             </select>
                                         </div>
                                     @endif
+
+                                    {{-- Product shipping --}}
+                                    @if (check('Product Shipping'))
+                                    <div class="form-group">
+                                        <label for="shipping_id">Shippings</label>
+                                        <select name="shipping_id" class="form-control" multiple>
+                                            <option value="" hidden>--Select Shipping--</option>
+                                            @foreach ($shippings as $shipping)
+                                                <option value="{{ $shipping->id }}" @if($product->productShipping->contains('shipping_id',$shipping->id)) selected @endif>{{ $shipping->type }} - {{ $shipping->price }} tk</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                  @endif
+
                                     @if (check('Timmer Product'))
                                         <div class="form-group">
                                             <label for="is_timer">Timer Product</label>

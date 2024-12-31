@@ -123,6 +123,21 @@
                                             </select>
                                         </div>
                                     @endif
+
+                                    {{-- Product shipping --}}
+                                    @if (check('Product Shipping'))
+                                        <div class="form-group">
+                                            <label for="shipping_id">Shippings</label>
+                                            <select name="shipping_id" class="form-control" multiple>
+                                                <option value="" hidden>--Select Shipping--</option>
+                                                @foreach ($shippings as $shipping)
+                                                    <option value="{{ $shipping->id }}">{{ $shipping->type }} - {{ $shipping->price }} tk</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
+
+
                                     {{-- @dd(check('Timer Product')) --}}
                                     @if (serviceCheck('Timer Product'))
                                         <div class="form-group">
