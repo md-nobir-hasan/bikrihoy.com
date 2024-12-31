@@ -18,7 +18,8 @@ use App\Models\Subcat;
 use Faker\Core\Color;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\ProductShipping;
 class ProductController extends Controller
 {
     public $checking_info;
@@ -100,12 +101,15 @@ class ProductController extends Controller
         $insert->is_featured = $request->input('is_featured', 0);
         $insert->save();
 
-        if($request->shipping_id){
+         // Product shipping
+         if($request->shipping_id){
             foreach($request->shipping_id as $shipping){
-                Shipping::create([
-                    'product_id'=>$insert->id,
-                    'shipping_id'=>$shipping
-                ]);
+                if($shipping){
+                    ProductShipping::create([
+                        'product_id'=>$update->id,
+                        'shipping_id'=>$shipping
+                    ]);
+                }
             }
         }
         // $product_gallery = new ProductGallery();
@@ -184,12 +188,13 @@ class ProductController extends Controller
             return redirect()->back();
         }
         $n['brands'] = Brand::get();
-        $n['product'] = Product::findOrFail($id);
+        $n['product'] = Product::with('productShipping','productShipping.shipping')->findOrFail($id);
         $n['categories'] = Category::all();
         $n['sub_cats'] = Subcat::where('cat_id', $n['product']->cat_id)->orderBy('id', 'desc')->get();
         // $n['products']=Product::all();
         $n['colors'] = ProductColor::all();
         $n['sizes'] = ProductSize::all();
+        $n['shippings'] = DB::table('shippings')->where('status','active')->get();
         // return $items;
         return view('backend.pages.product.edit', $n);
     }
@@ -226,6 +231,18 @@ class ProductController extends Controller
         $update->is_featured = $request->input('is_featured', 0);
         $update->save();
 
+        // Product shipping
+        if($request->shipping_id){
+            ProductShipping::where('product_id',$update->id)->delete();
+            foreach($request->shipping_id as $shipping){
+                if($shipping){
+                    ProductShipping::create([
+                        'product_id'=>$update->id,
+                        'shipping_id'=>$shipping
+                    ]);
+                }
+            }
+        }
         // color size thakle ai code
         if ($request->pa_color_id) {
             foreach ($request->pa_color_id as $val) {

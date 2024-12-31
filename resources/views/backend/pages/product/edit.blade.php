@@ -132,11 +132,11 @@
                                     @if (check('Product Shipping'))
                                     <div class="form-group">
                                         <label for="shipping_id">Shippings</label>
-                                        <select name="shipping_id" class="form-control" multiple>
-                                            <option value="" hidden>--Select Shipping--</option>
+                                        <select name="shipping_id[]" class="form-control" multiple>
                                             @foreach ($shippings as $shipping)
                                                 <option value="{{ $shipping->id }}" @if($product->productShipping->contains('shipping_id',$shipping->id)) selected @endif>{{ $shipping->type }} - {{ $shipping->price }} tk</option>
                                             @endforeach
+                                            <option value="">*None of theme</option>
                                         </select>
                                     </div>
                                   @endif

@@ -44,6 +44,7 @@ class FeatureSeeder extends Seeder
             ['name' => 'Pixel tag', 'status' => 1],
             ['name' => 'Google tag', 'status' => 1],
             ['name' => 'Page', 'status' => 1],
+            ['name' => 'Product Shipping', 'status' => 1],
         ];
 
         DB::table('features')->insert($n);
