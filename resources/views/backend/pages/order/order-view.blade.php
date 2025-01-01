@@ -86,7 +86,6 @@
                                         $total_dis = 0;
                                     @endphp
                                     @forelse($order->orderItem as $key => $item)
-
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td> {{ $item->product->title }}</td>
