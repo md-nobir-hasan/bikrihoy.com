@@ -129,10 +129,10 @@
                                         <div class="form-group">
                                             <label for="shipping_id">Shippings</label>
                                             <select name="shipping_id[]" class="form-control" multiple>
-                                                <option value="" hidden>--Select Shipping--</option>
                                                 @foreach ($shippings as $shipping)
                                                     <option value="{{ $shipping->id }}">{{ $shipping->type }} - {{ $shipping->price }} tk</option>
                                                 @endforeach
+                                                <option value="" >None of them</option>
                                             </select>
                                         </div>
                                     @endif
