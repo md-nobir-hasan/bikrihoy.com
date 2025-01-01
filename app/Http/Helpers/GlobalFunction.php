@@ -108,4 +108,8 @@ function companyContact(){
     return DB::table('company_contacts')->first();
 
 }
+function companyInfo(){
+    return DB::table('company_infos')->first();
+
+}
 
