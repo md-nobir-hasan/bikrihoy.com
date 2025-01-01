@@ -23,7 +23,7 @@
                 <div class="carousel-inner">
                     @foreach ($sliders as $slider)
                         <div class="carousel-item @if($loop->index) active @endif">
-                            <img src="{{$slider->image}}" class="d-block w-100" alt="{{$site_info->title}}">
+                            <img src="{{$slider->image}}" class="d-block w-100" alt="{{$site_info->title}}" loading="eager">
                         </div>
                     @endforeach
                 </div>
@@ -51,7 +51,7 @@
                             <div class="col">
                                 <div class="card h-100">
                                     <a href="{{ route('product_details',[$product->slug]) }}">
-                                        <img src="{{$product->photo}}" class="card-img-top" alt="{{$product->title}}">
+                                        <img src="{{$product->photo}}" class="card-img-top" alt="{{$product->title}}" loading="lazy">
                                         <div class="position-absolute top-0 end-0 m-2 badge bg-danger">
                                             {{$product->discountPercent()}}% off
                                         </div>

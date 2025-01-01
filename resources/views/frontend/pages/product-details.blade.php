@@ -46,7 +46,7 @@
                 <div class="pdLeft col-lg-6">
                     <div class="leargeImage">
                         @foreach ($data->productGallery as $img)
-                            <img class="leargeImgSingle @if($loop->first) active @endif" src="/{{$img->imageGallery->img}}" alt="{{$data->title}}">
+                            <img class="leargeImgSingle @if($loop->first) active @endif" src="/{{$img->imageGallery->img}}" alt="{{$data->title}}" loading="eager">
                         @endforeach
                     </div>
                     <input type="hidden" name="color_id" id="color_id">
@@ -54,7 +54,7 @@
                          @foreach ($data->productGallery as $simg)
                                 <div class="smallSingle @if($loop->first) active @endif" id="{{$simg->color_id}}">
                                     <p class="pdsColor">{{$simg->color->c_name}}</p>
-                                    <img src="/{{$simg->imageGallery->img}}" alt="{{$data->title}}">
+                                    <img src="/{{$simg->imageGallery->img}}" alt="{{$data->title}}" loading="eager">
                                 </div>
 
                         @endforeach
@@ -149,7 +149,7 @@
                             @foreach ( $specific_review->images as $image)
                                 {{-- review Single --}}
                                 <div class="reviewSingle">
-                                    <img src="/storage/{{$image->image_path}}" alt="">
+                                    <img src="/storage/{{$image->image_path}}" alt="" loading="lazy">
                                 </div>
                             @endforeach
                         @endif
@@ -158,7 +158,7 @@
                             @foreach ( $global_review->images as $image)
                                 {{-- review Single --}}
                                 <div class="reviewSingle">
-                                    <img src="/storage/{{$image->image_path}}" alt="">
+                                    <img src="/storage/{{$image->image_path}}" alt="" loading="lazy">
                                 </div>
                             @endforeach
                         @endif
@@ -182,7 +182,7 @@
                             <div class="col">
                                 <div class="card h-100">
                                     <a href="{{ route('product_details',[$rproduct->slug]) }}">
-                                        <img src="/{{$rproduct->photo}}" class="card-img-top" alt="{{$rproduct->title}}">
+                                        <img src="/{{$rproduct->photo}}" class="card-img-top" alt="{{$rproduct->title}}" loading="lazy" >
                                         <div class="position-absolute top-0 end-0 m-2 badge bg-danger">
                                             {{round($rproduct->discount * 100 / $rproduct->price)}}% off
                                         </div>
