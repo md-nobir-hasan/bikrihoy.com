@@ -223,6 +223,9 @@
                                             <span class="ms-2 fw-bold">&#2547; {{ $rproduct->price - $rproduct->discount}}</span>
                                         </div>
 
+
+                                    </div>
+                                    <div class="card-footer">
                                         <a href="{{route('product_details',[$rproduct->slug])}}" class="btn btn-primary w-100">অর্ডার করুন</a>
                                     </div>
                                 </div>

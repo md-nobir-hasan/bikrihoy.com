@@ -76,7 +76,7 @@
                         <div class="orderprocess">
                             <h3 class="orderproces">Your Order</h3>
                             <h4 class="checkoutProductTitle">{{$product->title}} @if ($color)  | {{$color->c_name }} @endif</h4>
-                            <table>
+                            <table class="w-100">
                                 <tbody>
                                     <input type="hidden" name="slug" value="{{$product->slug}}">
 
