@@ -16,9 +16,10 @@ class OrderMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $order;
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -28,6 +29,7 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('mail.order-mail-admin')
+                    ->subject('New Order');
     }
 }

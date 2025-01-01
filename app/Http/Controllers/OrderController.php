@@ -166,7 +166,7 @@ class OrderController extends Controller
             Mail::to($comany_contact->email)->send(new OrderMail($insert));
 
             //Mail send to user
-            Mail::to($request->email)->send(new OrderMail($insert));
+            // Mail::to($request->email)->send(new OrderMail($insert));
 
         }catch(\Exception $e){
             log::error($e->getMessage());
