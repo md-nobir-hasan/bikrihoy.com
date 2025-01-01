@@ -3,6 +3,8 @@
 @push('custom-js')
 <script>
     $(document).ready(function () {
+
+
     function calculateTotal() {
         // Get values
         let price = parseFloat($('.price').text());
@@ -60,7 +62,7 @@
         <div class="container">
             <div class="checkoutMain">
                 <!-- main form -->
-                 <form action="{{route('order.store')}}" method="POST" class="ckeckoutForm">
+                 <form action="{{route('order.store')}}" method="POST" class="multiple-submit-prevent ckeckoutForm">
                     @csrf
 
                     <input type="hidden" name="color_id" value="{{$color->id ?? null}}">

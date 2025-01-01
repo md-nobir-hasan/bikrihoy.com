@@ -62,7 +62,7 @@
                                 <tbody>
                                     @forelse($orders as $key => $order)
                                         <tr>
-                                            <td class="align-middle">{{ $loop->index }}</td>
+                                            <td class="align-middle">{{ $loop->index+1 }}</td>
                                             <td class="align-middle">{{ $order->order_number }}</td>
                                             <td class="align-middle">{{ $order->name }}</td>
                                             <td class="align-middle">{{ $order->phone }}</td>
