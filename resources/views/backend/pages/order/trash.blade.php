@@ -49,7 +49,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $order->order_number }}</td>
-                                            <td>{{ $order->first_name }}</td>
+                                            <td>{{ $order->name }}</td>
                                             <td>{{ $order->phone }}</td>
                                             <td>{{ $order->email }}</td>
                                             <td>{{ $order->quantity }}</td>

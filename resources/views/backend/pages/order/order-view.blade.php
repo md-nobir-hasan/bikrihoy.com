@@ -90,9 +90,9 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td> {{ $item->product->title }}</td>
                                             <td>{{ $item->product->price }}</td>
-                                            <td>{{ $item->product->discount * $item->qty }}</td>
+                                            <td>{{ $item->product->discount  }}</td>
                                             <td>{{ $item->qty }}</td>
-                                            <td>{{ $item->price - ($total_dis += ($item->product->discount * $item->qty))}}</td>
+                                            <td>{{ $item->price }}</td>
                                         </tr>
                                     @empty
                                     @endforelse
@@ -112,7 +112,7 @@
                                         <td></td>
                                         <td></td>
                                         <td class="fw-bold h5">Total =</td>
-                                        <td class="fw-bold h5">{{ $order->total- $total_dis }}৳</td>
+                                        <td class="fw-bold h5">{{ $order->total - $total_dis }}৳</td>
                                     </tr>
                                 </tfoot>
                             </table>
