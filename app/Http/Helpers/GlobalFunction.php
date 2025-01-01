@@ -104,3 +104,8 @@ function serviceCheck($service_name){
     }
 }
 
+function companyContact(){
+    return DB::table('company_contacts')->first();
+
+}
+

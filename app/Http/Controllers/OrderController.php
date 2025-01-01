@@ -18,6 +18,9 @@ use App\Models\AddToCart;
 use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -73,7 +76,11 @@ class OrderController extends Controller
         //     'shipping_id'=>'Shipping Method'
         // ];
         // Validator::make($request->all(),$rule,$msg,$attributes);
-
+        $comany_contact = companyContact();
+        $order = Order::where('phone',$request->phone)->first();
+        if($order){
+            return redirect()->back()->with('success', "You already placed a order. Please, contact with us on {$comany_contact->phone} or {$comany_contact->email}");
+        }
         $order_number = 'ORD-' . strtoupper(Str::random(10));
         if (Auth::user()) {
             $user_id = Auth::user()->id;
@@ -106,6 +113,7 @@ class OrderController extends Controller
             }
         }
         $product = DB::table('products')->where('slug', $request->slug)->first();
+        $shipping = Shipping::find($request->shipping_id);
         $insert = new Order();
         $insert->order_number = $order_number;
         $insert->user_id = $user_id;
@@ -118,7 +126,7 @@ class OrderController extends Controller
         $insert->address = $request->address;
         $insert->note = $request->note;
         $insert->subtotal = $product->price - $product->discount;
-        $insert->total = ($insert->subtotal * $request->qty) + Shipping::find($request->shipping_id)->price;
+        $insert->total = ($insert->subtotal * $request->qty) + ($shipping ? $shipping->price : 0);
         $insert->payment_number = $request->payment_number;
         $insert->transection = $request->transection;
         $insert->country = $request->country;
@@ -152,9 +160,20 @@ class OrderController extends Controller
         $order_item->price = $insert->total;
         $order_item->save();
         // }
+        try{
 
+            //Mail send to admin
+            Mail::to($comany_contact->email)->send(new OrderMail($insert));
+
+            //Mail send to user
+            Mail::to($request->email)->send(new OrderMail($insert));
+
+        }catch(\Exception $e){
+            log::error($e->getMessage());
+        }
 
         request()->session()->flash('success', " Order successfully placed");
+
         return redirect()->route('order.thanks', [$insert->order_number]);
     }
 
@@ -370,21 +389,23 @@ class OrderController extends Controller
     public function checkout(Request $request, $slug = null)
     {
         // dd($request->all());
-        $n['shippings'] = DB::table('shippings')->get();
+
         $n['payments'] = DB::table('payments')->get();
         $n['color'] = DB::table('product_colors')->where('id', $request->color_id)->first();
         $n['qty'] = $request->qty;
 
         if ($slug) {
-            $n['product'] = DB::table('products')->where('slug', $slug)->first();
+            $n['product'] = Product::with('productShipping', 'productShipping.shipping')->where('slug', $slug)->first();
+            $n['shippings'] = DB::table('product_shippings')->where('product_id', $n['product']->id)->get();
         } else {
 
             if (serviceCheck('Database Add To Cart')) {
                 $user_ip = $_SERVER['REMOTE_ADDR'];
-                $n['cart_products'] = AddToCart::where('ip_address', $user_ip)->orderBy('id', 'desc')->get();
+                $n['cart_products'] = AddToCart::with('product', 'product.productShipping', 'product.productShipping.shipping')->where('ip_address', $user_ip)->orderBy('id', 'desc')->get();
                 if (Auth::user()) {
-                    $n['cart_products'] = AddToCart::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+                    $n['cart_products'] = AddToCart::with('product', 'product.productShipping', 'product.productShipping.shipping')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
                 }
+
             }
         }
 

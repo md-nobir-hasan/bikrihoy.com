@@ -11,7 +11,7 @@
         let discount = parseFloat($('.discount').text());
         let quantity = parseInt($('.countShow').val());
         let shipping = parseFloat($('input[name="shipping_id"]:checked').attr('id'));
-
+         shipping = shipping ? shipping : 0;
         // Calculate subtotal and total
         let subtotal = (price - discount) * quantity;
         let total = subtotal + shipping;
@@ -60,6 +60,11 @@
 @section('page_conent')
     <section class="checkoutSection">
         <div class="container">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="checkoutMain">
                 <!-- main form -->
                  <form action="{{route('order.store')}}" method="POST" class="multiple-submit-prevent ckeckoutForm">
@@ -98,17 +103,19 @@
                                         <td><b>Subtotal</b></td>
                                         <td><b>৳ <span class="subtotal"></span></b></td>
                                     </tr>
-                                    <tr>
-                                        <td><b>Shipping</b></td>
-                                        <td class="checkradio">
-                                            @foreach ($shippings as $shipping)
-                                            <div>
-                                                <label for="{{$shipping->price}}">{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
-                                                <input type="radio" name="shipping_id" id="{{$shipping->price}}" class="shipping-option" value="{{$shipping->id}}"  checked>
-                                            </div>
-                                            @endforeach
-                                        </td>
-                                    </tr>
+                                    @if($product->productShipping->count() > 0)
+                                        <tr>
+                                            <td><b>Shipping</b></td>
+                                            <td class="checkradio">
+                                                @foreach ($product->productShipping as $shipping)
+                                                    <div>
+                                                        <label for="{{$shipping->price}}">{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
+                                                        <input type="radio" name="shipping_id" id="{{$shipping->price}}" class="shipping-option" value="{{$shipping->id}}"  checked>
+                                                    </div>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td><b>Total</b></td>
                                         <td><strong>৳ <span class="total"></span></strong></td>

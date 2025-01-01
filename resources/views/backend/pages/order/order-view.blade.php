@@ -49,7 +49,7 @@
                                     </tr>
                                     <tr>
                                         <td>Shipping Price:</td>
-                                        <td>{{ $order->shipping->price }}</td>
+                                        <td>{{ $order->shipping ? $order->shipping->price : 0 }}</td>
                                     </tr>
                                     <tr>
                                         <td>Payment Method:</td>
@@ -91,9 +91,9 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td> {{ $item->product->title }}</td>
                                             <td>{{ $item->product->price }}</td>
-                                            <td>{{ $item->product->discount }}</td>
+                                            <td>{{ $item->product->discount * $item->qty }}</td>
                                             <td>{{ $item->qty }}</td>
-                                            <td>{{ $item->price - ($total_dis += $item->product->discount *2)}}</td>
+                                            <td>{{ $item->price - ($total_dis += ($item->product->discount * $item->qty))}}</td>
                                         </tr>
                                     @empty
                                     @endforelse
@@ -105,7 +105,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>Shipping =</td>
-                                        <td>{{ $order->shipping->price }}৳</td>
+                                        <td>{{ $order->shipping ? $order->shipping->price : 0 }}৳</td>
                                     </tr>
                                     <tr>
                                         <td></td>
