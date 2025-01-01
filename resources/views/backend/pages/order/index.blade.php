@@ -79,7 +79,7 @@
                                             </td>
                                             {{-- <td>{{ $order->payment_number }}</td> --}}
                                             {{-- <td>{{ $order->pamyment_method}}</td> --}}
-                                            <td class="align-middle">{{ date('d-m-Y', strtotime($order->created_at)) }}
+                                            <td class="align-middle">{{ $order->created_at->format('d-m-Y h:i A') }}
                                             </td>
                                             @if (serviceCheck('Order Status'))
                                                 <td class="align-middle">
