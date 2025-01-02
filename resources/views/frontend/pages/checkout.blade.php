@@ -142,6 +142,9 @@
                         <label for="Caddress">পুর্ণ ঠিকানা *</label>
                         <input type="text" name="address" id="Caddress" required>
 
+                        <label for="note">আর্ডার নোট </label>
+                        <textarea name="note" id="note" class="form-control" cols="30" rows="6"></textarea>
+
                         <div class="pamentInfoMain">
                             <div class="address">
                                 <span class="numberCountBill">2.</span>
