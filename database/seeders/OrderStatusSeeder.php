@@ -15,11 +15,11 @@ class OrderStatusSeeder extends Seeder
     public function run()
     {
         $n = [
-            ['name' => 'New','status' => 1],
-            ['name' => 'Processing','status' => 1],
-            ['name' => 'Shipped','status' => 1],
-            ['name' => 'Delivered','status' => 1],
-            ['name' => 'Cancel','status' => 1],
+            ['name' => 'new','status' => 'active'],
+            ['name' => 'processing','status' => 'active'],
+            ['name' => 'shipped','status' => 'active'],
+            ['name' => 'delivered','status' => 'active'],
+            ['name' => 'cancel','status' => 'active'],
         ];
 
         DB::table('order_statuses')->insert($n);

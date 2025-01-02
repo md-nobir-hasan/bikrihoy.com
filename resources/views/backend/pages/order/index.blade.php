@@ -106,9 +106,9 @@
                                             @endif
                                             <td class="align-middle @if (!check('Order')->edit && !check('Order')->delete) d-none @endif">
                                                 <div class="btn-group">
-                                                    {{-- <a href="{{ route('order.edit', $order->id) }}"
+                                                    <a href="{{ route('order.edit', $order->id) }}"
                                                         class="btn btn-dark btnEdit" title="Edit"><i
-                                                            class="fas fa-edit"></i></a> --}}
+                                                            class="fas fa-edit"></i></a>
 
                                                     <a href="{{ route('order.view', $order->id) }}"
                                                         class="btn btn-info view-btn @if (!check('Order')->edit) d-none @endif" title="View Order Details"><i
