@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\UpdateOrderReqeust;
 
 class OrderController extends Controller
 {
@@ -203,8 +204,10 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = Order::find($id);
-        return view('backend.order.edit')->with('order', $order);
+        $n['order'] = Order::find($id);
+        $n['order_statuses'] = OrderStatus::where('status','active')->get();
+
+        return view('backend.pages.order.edit',$n);
     }
 
     /**
@@ -214,13 +217,12 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOrderReqeust $request, $id)
     {
         $order = Order::find($id);
-        $this->validate($request, [
-            'status' => 'required|in:new,process,delivered,cancel'
-        ]);
-        $data = $request->all();
+
+        $data = $request->validated();
+
         // return $request->status;
         if ($request->status == 'delivered') {
             foreach ($order->cart as $cart) {
@@ -230,13 +232,13 @@ class OrderController extends Controller
                 $product->save();
             }
         }
-        $status = $order->fill($data)->save();
+        $status = $order->update($data);
         if ($status) {
             request()->session()->flash('success', 'Successfully updated order');
         } else {
             request()->session()->flash('error', 'Error while updating order');
         }
-        return redirect()->route('order.index');
+        return redirect()->route('order.index')->with('success', 'Successfully updated order');
     }
 
     // trash function
