@@ -224,7 +224,7 @@ class OrderController extends Controller
         $data = $request->validated();
 
         // return $request->status;
-        if ($request->status == 'delivered') {
+        if ($request->order_status == 'delivered') {
             foreach ($order->cart as $cart) {
                 $product = $cart->product;
                 // return $product;
