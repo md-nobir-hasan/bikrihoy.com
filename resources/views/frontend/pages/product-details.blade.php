@@ -88,11 +88,11 @@
 
                         <!-- Call btn -->
                         <div class="callBtns">
-                            <a class="callBtn" href="tel:{{$site_info->phone}}">
+                            <a class="callBtn" href="tel:{{$site_contact_info->phone}}">
                                 <p class="callIndicate">কল করতে ক্লিক করুন</p>
                                 <p>{{$site_info->phone}}</p>
                             </a>
-                            <a class="callBtn whatsappbnt" href="https://wa.me/{{$site_info->whatsapp}}">
+                            <a class="callBtn whatsappbnt" href="https://wa.me/{{$site_contact_info->whatsapp}}">
                                 <p class="callIndicate">হোয়াটসঅ্যাপ করুন</p>
                                 <p>{{$site_info->whatsapp}}</p>
                             </a>
