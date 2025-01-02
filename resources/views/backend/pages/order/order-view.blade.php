@@ -55,6 +55,10 @@
                                         <td>Payment Method:</td>
                                         <td>{{ $order->payment->payment }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Order Note:</td>
+                                        <td>{{ $order->note }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
