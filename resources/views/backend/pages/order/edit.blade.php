@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label for="name" class="col-form-label">Name <span
                                                 class="text-danger">*</span></label>
-                                        <input id="name" type="text" name="name" placeholder="Enter title"
+                                        <input id="name" type="text" name="name" placeholder="Enter title" required
                                             value="{{ $order->name }}" class="form-control">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <label for="phone" class="col-form-label">Phone <span
                                                 class="text-danger">*</span></label>
-                                        <input id="phone" type="text" name="phone" placeholder="Enter phone"
+                                        <input id="phone" type="text" name="phone" placeholder="Enter phone" required
                                             value="{{ $order->phone }}" class="form-control">
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
@@ -50,8 +50,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="address" class="col-form-label">Address</label>
-                                        <textarea class="form-control" id="address" name="address">{{ $order->address }}</textarea>
+                                        <label for="address" class="col-form-label">Address <span
+                                                class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="address" name="address" required>{{ $order->address }}</textarea>
                                         @error('address')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -59,8 +60,7 @@
 
 
                                     <div class="form-group">
-                                        <label for="email" class="col-form-label">Email <span
-                                                class="text-danger">*</span></label>
+                                        <label for="email" class="col-form-label">Email</label>
                                         <input id="email" type="text" name="email" placeholder="Enter email"
                                             value="{{ $order->email }}" class="form-control">
                                         @error('email')
@@ -69,9 +69,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="total" class="col-form-label">Paid Amount</label>
+                                        <label for="total" class="col-form-label">Paid Amount <span
+                                                class="text-danger">*</span></label>
                                         <input id="total" type="number" name="total" min="0" step="1"
-                                            placeholder="Enter total" value="{{ $order->total }}"
+                                            placeholder="Enter total" value="{{ $order->total }}" required
                                             class="form-control">
                                         @error('total')
                                             <span class="text-danger">{{ $message }}</span>
@@ -90,7 +91,7 @@
                                     <div class="form-group">
                                         <label for="status" class="col-form-label">Order Status <span
                                                 class="text-danger">*</span></label>
-                                        <select name="status" class="form-control" name="status">
+                                        <select name="status" class="form-control" name="order_status">
                                             @foreach ($order_statuses as $order_status)
                                                 <option value="{{ $order_status->name }}"
                                                     @if ($order_status->name == $order->status) selected @endif>

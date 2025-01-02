@@ -30,7 +30,7 @@ class UpdateOrderReqeust extends FormRequest
             'address' => 'required|string|max:255',
             'total' => 'required|numeric|min:0',
             'note' => 'nullable|string|max:255',
-            'status' => 'nullable|in:new,process,shipped,delivered,cancel',
+            'order_status' => 'nullable|in:new,process,shipped,delivered,cancel',
         ];
     }
 }
