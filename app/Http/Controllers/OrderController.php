@@ -38,7 +38,7 @@ class OrderController extends Controller
             return back();
         }
 
-        $orders = Order::with(['shipping'])->where('status', 'active')->get();
+        $orders = Order::with(['shipping'])->orderBy('id', 'DESC')->where('status', 'active')->get();
         return view('backend.pages.order.index')->with('orders', $orders);
     }
 
@@ -78,10 +78,9 @@ class OrderController extends Controller
         // ];
         // Validator::make($request->all(),$rule,$msg,$attributes);
         $comany_contact = companyContact();
-        $order = Order::where('phone',$request->phone)->where('status','!=',1)->first();
-        // dd($order);
+        $order = Order::where('phone',$request->phone)->first();
         if($order){
-            return redirect()->back()->with('success', $order->phone);
+            return redirect()->back()->with('success', "You already placed a order. Please, contact with us on {$comany_contact->phone} or {$comany_contact->email}");
         }
         $order_number = 'ORD-' . strtoupper(Str::random(10));
         if (Auth::user()) {
