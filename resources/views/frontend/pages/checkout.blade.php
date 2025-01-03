@@ -61,8 +61,11 @@
     <section class="checkoutSection">
         <div class="container">
             @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
+                <div class="alert alert-danger">
+                    আপনি ইতিপূর্বেই {{ session('success') }} নাম্বার দিয়ে আর্ডার সম্পূর্ণ করেছেন।
+                    অর্ডার সম্পর্কে বিস্তারিত জানতে - <br>
+                    Call: <a href="tel:{{$site_contact_info->phone}}"> {{$site_contact_info->phone}}</a> <br>
+                    Whatsapp: <a href="https://wa.me/{{$site_contact_info->whatsapp}}"> {{$site_contact_info->whatsapp}}</a>
                 </div>
             @endif
             <div class="checkoutMain">
@@ -142,7 +145,7 @@
                         <label for="Caddress">পুর্ণ ঠিকানা *</label>
                         <input type="text" name="address" id="Caddress" required>
 
-                        <label for="note">আর্ডার নোট </label>
+                        <label for="note">আপনার মতামত এখানে লিখুন </label>
                         <textarea name="note" id="note" class="form-control" cols="30" rows="6"></textarea>
 
                         <div class="pamentInfoMain">
