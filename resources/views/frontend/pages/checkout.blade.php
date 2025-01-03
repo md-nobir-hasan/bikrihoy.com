@@ -57,7 +57,7 @@
 </script>
 @endpush
 
-@section('page_conent')
+@section('page_content')
     <section class="checkoutSection">
         <div class="container">
             @if(session('success'))

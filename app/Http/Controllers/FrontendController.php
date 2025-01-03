@@ -55,7 +55,7 @@ class FrontendController extends Controller
         $n['sliders'] = Slider::all();
         $n['banners1'] = DB::table('banners')->orderBy('id', 'ASC')->limit('1')->first();
         $n['banners2'] = DB::table('banners')->orderBy('id', 'DESC')->limit('1')->first();
-
+        $n['products'] = [];
         if (serviceCheck('No Product Type')) {
             $n['products'] = Product::orderBy('id', 'DESC')->limit('20')->get();
         } else {
@@ -72,7 +72,7 @@ class FrontendController extends Controller
                 }
             }
         }
-
+       $n['shippings'] = DB::table('shippings')->where('status', 'active')->get();
         return view('frontend.pages.index', $n);
     }
 

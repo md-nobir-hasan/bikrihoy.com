@@ -371,95 +371,123 @@
                 <li>দীর্ঘস্থায়ী: একবার কিনলে মাসের পর মাস ব্যবহার করুন।</li>
             </ul>
         </div>
-
-        <!-- Product Selection -->
-        <div class="product-selection">
-            <h3>পণ্য নির্বাচন করুন</h3>
-            <div class="product-option">
-                <input type="radio" name="product" id="product1" value="650" class="product-radio" checked>
-                <label for="product1" class="product-details">
-                    <img src="/path-to-product-image-1.jpg" alt="Product 1" class="product-image">
-                    <div class="product-info">
-                        <div class="product-title">২টি ওয়াশেবল ডায়াপার প্যাক</div>
-                        <div class="product-price">৳650.00</div>
+        <form action="{{route('order.store')}}" method="POST" id="orderForm">
+            @csrf
+            <!-- Product Selection -->
+            <div class="product-selection">
+                <h3>পণ্য নির্বাচন করুন</h3>
+                @foreach($products as $product)
+                    <div class="product-option">
+                        <input
+                            type="radio"
+                            name="slug"
+                            id="product{{ $product->id }}"
+                            value="{{ $product->slug }}"
+                            class="product-radio"
+                            {{ $loop->first ? 'checked' : '' }}
+                        >
+                        <label for="product{{ $product->id }}" class="product-details">
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->title }}" class="product-image">
+                            <div class="product-info">
+                                <div class="product-title">{{ $product->title }}</div>
+                                <div class="product-price">৳{{ number_format($product->price, 2) }}</div>
+                            </div>
+                        </label>
                     </div>
-                </label>
+                @endforeach
             </div>
-            <div class="product-option">
-                <input type="radio" name="product" id="product2" value="1150" class="product-radio">
-                <label for="product2" class="product-details">
-                    <img src="/path-to-product-image-2.jpg" alt="Product 2" class="product-image">
-                    <div class="product-info">
-                        <div class="product-title">৪টি ওয়াশেবল ডায়াপার প্যাক</div>
-                        <div class="product-price">৳1,150.00</div>
+
+            <!-- Shipping Selection -->
+            <div class="shipping-selection">
+                <h3>ডেলিভারি চার্জ নির্বাচন করুন</h3>
+                @foreach($shippings as $shipping)
+                    <div class="shipping-option">
+                        <input
+                            type="radio"
+                            name="shipping_id"
+                            id="shipping{{ $shipping->id }}"
+                            value="{{ $shipping->id }}"
+                            class="shipping-radio"
+                            {{ $loop->first ? 'checked' : '' }}
+                        >
+                        <label for="shipping{{ $shipping->id }}" class="shipping-details">
+                            <div class="shipping-info">{{ $shipping->type }}</div>
+                            <div class="shipping-price">৳{{ number_format($shipping->price, 2) }}</div>
+                        </label>
                     </div>
-                </label>
+                @endforeach
             </div>
-        </div>
 
-        <!-- Shipping Selection -->
-        <div class="shipping-selection">
-            <h3>ডেলিভারি চার্জ নির্বাচন করুন</h3>
-            <div class="shipping-option">
-                <input type="radio" name="shipping" id="shipping1" value="50" class="shipping-radio" checked>
-                <label for="shipping1" class="shipping-details">
-                    <div class="shipping-info">ঢাকার ভিতরে</div>
-                    <div class="shipping-price">৳50</div>
-                </label>
-            </div>
-            <div class="shipping-option">
-                <input type="radio" name="shipping" id="shipping2" value="100" class="shipping-radio">
-                <label for="shipping2" class="shipping-details">
-                    <div class="shipping-info">ঢাকার বাহিরে</div>
-                    <div class="shipping-price">৳100</div>
-                </label>
-            </div>
-        </div>
-
-        <!-- Order Summary -->
-        <div class="order-summary">
-            <h3>অর্ডার সামারি</h3>
-            <div class="summary-item">
-                <span class="item-name">Selected Product:</span>
-                <span class="item-value" id="selectedProductName">২টি ওয়াশেবল ডায়াপার প্যাক</span>
-            </div>
-            <div class="summary-item">
-                <span>সাবটোটাল:</span>
-                <span id="subtotal">৳650.00</span>
-            </div>
-            <div class="summary-item">
-                <span>শিপিং:</span>
-                <span id="shipping-cost">৳50.00</span>
-            </div>
-            <div class="summary-item summary-total">
-                <span>টোটাল:</span>
-                <span id="total">৳700.00</span>
-            </div>
-        </div>
-
-        <!-- Order Form -->
-        <div class="order-form">
-            <h3>অর্ডার করতে নিচের ফরমটি পূরণ করুন</h3>
-            <form id="orderForm">
-                <div class="form-group">
-                    <label class="form-label">আপনার নাম</label>
-                    <input type="text" class="form-control" required>
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>অর্ডার সামারি</h3>
+                <div class="summary-item">
+                    <span class="item-name">Selected Product:</span>
+                    <span class="item-value" id="selectedProductName">{{ $products->first()->title }}</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">মোবাইল নাম্বার</label>
-                    <input type="tel" class="form-control" required>
+                <div class="summary-item">
+                    <span>সাবটোটাল:</span>
+                    <span id="subtotal">৳{{ number_format($products->first()->price, 2) }}</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">সম্পূর্ণ ঠিকানা</label>
-                    <textarea class="form-control" rows="3" required></textarea>
+                <div class="summary-item">
+                    <span>শিপিং:</span>
+                    <span id="shipping-cost">৳{{ number_format($shippings->first()->price, 2) }}</span>
                 </div>
-                <input type="hidden" id="productName" name="productName" value="২টি ওয়াশেবল ডায়াপার প্যাক">
-                <input type="hidden" id="productPrice" name="productPrice" value="650">
-                <input type="hidden" id="shippingCost" name="shippingCost" value="50">
-                <button type="submit" class="cta-button">অর্ডার কনফার্ম করুন</button>
-            </form>
-        </div>
+                <div class="summary-item summary-total">
+                    <span>টোটাল:</span>
+                    <span id="total">৳{{ number_format($products->first()->price + $shippings->first()->price, 2) }}</span>
+                </div>
+            </div>
 
+            <!-- Order Form -->
+            <div class="order-form">
+                <h3>অর্ডার করতে নিচের ফরমটি পূরণ করুন</h3>
+                @if(session('success'))
+                    <div class="alert alert-danger">
+                        আপনি ইতিপূর্বেই {{ session('success') }} নাম্বার দিয়ে অর্ডার সম্পূর্ণ করেছেন।
+                        অর্ডার সম্পর্কে বিস্তারিত জানতে - <br>
+                        Call: <a href="tel:{{$site_contact_info->phone}}"> {{$site_contact_info->phone}}</a> <br>
+                        Whatsapp: <a href="https://wa.me/{{$site_contact_info->whatsapp}}"> {{$site_contact_info->whatsapp}}</a>
+                    </div>
+                @endif
+                    <div class="form-group">
+                        <label class="form-label" for="name">আপনার নাম <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">মোবাইল নাম্বার <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                        @error('phone')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="address">সম্পূর্ণ ঠিকানা <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="address" rows="3" name="address" required></textarea>
+                        @error('address')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="note">আপনার মতামত এখানে লিখুন</label>
+                        <textarea class="form-control" id="note" rows="3" name="note" ></textarea>
+                        @error('note')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <input type="hidden" id="productName" name="productName" value="{{ $products->first()->title }}">
+                    <input type="hidden" id="productPrice" name="productPrice" value="{{ $products->first()->price }}">
+                    <input type="hidden" id="shippingCost" name="shippingCost" value="{{ $shippings->first()->price }}">
+                    <button type="submit" class="cta-button">অর্ডার কনফার্ম করুন</button>
+
+            </div>
+        </form>
         <!-- Messenger Button -->
         <div class="messenger-button">
             <i class="fab fa-facebook-messenger"></i>
@@ -481,34 +509,66 @@
 
         // Form submission handling
         $('#orderForm').on('submit', function(e) {
-            e.preventDefault();
-            // Add your form submission logic here
+            const submitButton = $(this).find('button[type="submit"]');
+
+            // If the button is already disabled, stop here
+            if (submitButton.prop('disabled')) {
+                return false;
+            }
+
+            const name = $('#name').val();
+            const phone = $('#phone').val();
+            const address = $('#address').val();
+
+            if (!name || !phone || !address) {
+                alert('Please fill in all required fields');
+                return false;
+            }
+
+            // Disable the submit button and change text
+            submitButton.prop('disabled', true)
+                        .html('<i class="fas fa-spinner fa-spin"></i> Processing...');
+
+            // Enable the button after 30 seconds (failsafe in case of network issues)
+            setTimeout(function() {
+                submitButton.prop('disabled', false)
+                           .html('অর্ডার কনফার্ম করুন');
+            }, 30000);
+
+            return true;
         });
 
         function updateTotal() {
-            const selectedPrice = $('input[name="product"]:checked').val();
-            const shippingCost = $('input[name="shipping"]:checked').val();
-            const total = parseInt(selectedPrice) + parseInt(shippingCost);
+            const selectedProduct = $('input[name="product"]:checked');
+            const selectedShipping = $('input[name="shipping_id"]:checked');
 
-            $('#subtotal').text('৳' + selectedPrice + '.00');
-            $('#shipping-cost').text('৳' + shippingCost + '.00');
-            $('#total').text('৳' + total + '.00');
+            // Get prices from the product-price and shipping-price divs
+            const productPrice = parseFloat(selectedProduct.closest('.product-option')
+                .find('.product-price').text().replace('৳', '').replace(',', ''));
+            const shippingPrice = parseFloat(selectedShipping.closest('.shipping-option')
+                .find('.shipping-price').text().replace('৳', '').replace(',', ''));
+
+            const total = productPrice + shippingPrice;
+
+            $('#subtotal').text('৳' + productPrice.toFixed(2));
+            $('#shipping-cost').text('৳' + shippingPrice.toFixed(2));
+            $('#total').text('৳' + total.toFixed(2));
 
             // Update hidden inputs
-            $('#shippingCost').val(shippingCost);
+            $('#productPrice').val(productPrice);
+            $('#shippingCost').val(shippingPrice);
         }
 
         // Handle product selection
         $('input[name="product"]').change(function() {
-            const productName = $(this).siblings('label').find('.product-title').text();
+            const productName = $(this).closest('.product-option').find('.product-title').text();
             $('#selectedProductName').text(productName);
             $('#productName').val(productName);
-            $('#productPrice').val($(this).val());
             updateTotal();
         });
 
         // Handle shipping selection
-        $('input[name="shipping"]').change(function() {
+        $('input[name="shipping_id"]').change(function() {
             updateTotal();
         });
     });

@@ -36,7 +36,7 @@
     </script>
 @endpush
 
-@section('page_conent')
+@section('page_content')
  <section class="productdetailsSection">
         <form action="{{route('checkout',[$data->slug])}}" method="GET" class="orderForm">
         <div class="container">

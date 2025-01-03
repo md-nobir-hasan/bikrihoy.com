@@ -113,6 +113,7 @@ class OrderController extends Controller
                 $user_id = $user_create->id;
             }
         }
+        // dd($request->all());
         $product = DB::table('products')->where('slug', $request->slug)->first();
         $shipping = Shipping::find($request->shipping_id);
         $insert = new Order();
@@ -157,7 +158,7 @@ class OrderController extends Controller
         //     $order_item->p_color_id = $order['p_color_id'];
         // }
 
-        $order_item->qty = $request->qty;
+        $order_item->qty = $request->qty ?: 1;
         $order_item->price = $insert->total;
         $order_item->save();
         // }
@@ -390,7 +391,7 @@ class OrderController extends Controller
 
     public function checkout(Request $request, $slug = null)
     {
-        // dd($request->all());
+
 
         $n['payments'] = DB::table('payments')->get();
         $n['color'] = DB::table('product_colors')->where('id', $request->color_id)->first();
