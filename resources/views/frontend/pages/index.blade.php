@@ -2,11 +2,18 @@
 
 @push('css')
     <style>
+        :root {
+            --title-size: 28px;
+            --text-size: 23px;
+            --text-size-small: 20px;
+        }
+
         /* Main Container */
         .main-container {
             max-width: 800px;
             margin: 0 auto;
             background: #fff;
+            font-size: var(--text-size);
         }
 
         /* Hero Section */
@@ -20,7 +27,7 @@
 
         .hero-title {
             color: #000;
-            font-size: 18px;
+            font-size: var(--title-size);
             line-height: 1.5;
             margin-bottom: 15px;
             padding: 10px;
@@ -29,7 +36,7 @@
         }
 
         .hero-subtitle {
-            font-size: 16px;
+            font-size: var(--text-size);
             margin-bottom: 20px;
         }
 
@@ -73,7 +80,7 @@
             border: none;
             border-radius: 8px;
             padding: 15px 20px;
-            font-size: 16px;
+            font-size: var(--text-size);
             font-weight: 500;
         }
 
@@ -93,6 +100,7 @@
             padding: 20px;
             margin-top: -1px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: var(--text-size-small);
         }
 
         .additional-faq {
@@ -135,7 +143,7 @@
             color: white;
             text-align: center;
             margin-bottom: 20px;
-            font-size: 18px;
+            font-size: var(--title-size);
         }
 
         .benefits-list {
@@ -175,6 +183,7 @@
             display: block;
             margin-bottom: 5px;
             color: #333;
+            font-size: var(--text-size);
         }
 
         .form-control {
@@ -182,6 +191,7 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-size: var(--text-size);
         }
 
         /* Product Selection Styles */
@@ -225,6 +235,7 @@
         .product-title {
             font-weight: bold;
             margin-bottom: 5px;
+            font-size: var(--title-size);
         }
 
         .product-price, .shipping-price {
@@ -263,12 +274,12 @@
 
         <!-- Hero Section -->
         <div class="hero-section">
-            <h1 class="hero-title">আপনার সন্তানের আরাম ও সুরক্ষায় নিশ্চিত থাকুন,সাশ্রয় করুন আপনার কষ্টের টাকায় এবং থাকুন সেরাটা</h1>
+            <h1 class="hero-title fw-bolder">আপনার সন্তানের আরাম ও সুরক্ষায় নিশ্চিত থাকুন,সাশ্রয় করুন আপনার কষ্টের টাকায় এবং থাকুন সেরাটা</h1>
             <p class="hero-subtitle">আপনার সন্তানের জন্য সেরা খুঁজে, এখন মাত্রের দাগজালে সাশ্রয়ী মূল্যে উন্নত মানের ওয়াশেবল ডায়াপার এখনই কিনুন</p>
             <div class="discount-banner">
                 এখনই অর্ডার করুন এবং ২০% ছাড় পান। সীমিত সময়ের জন্য!
             </div>
-            <button class="cta-button">অর্ডার করতে ক্লিক করুন</button>
+            <button class="cta-button fw-bold">অর্ডার করতে ক্লিক করুন</button>
         </div>
 
         <!-- Main FAQ Section -->
