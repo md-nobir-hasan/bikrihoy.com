@@ -279,7 +279,7 @@
             <div class="discount-banner">
                 এখনই অর্ডার করুন এবং ২০% ছাড় পান। সীমিত সময়ের জন্য!
             </div>
-            <button class="cta-button fw-bold">অর্ডার করতে ক্লিক করুন</button>
+            <a href="#order_detials" class="cta-button fw-bold">অর্ডার করতে ক্লিক করুন</a>
         </div>
 
         <!-- Main FAQ Section -->
@@ -459,7 +459,7 @@
             </div>
 
             <!-- Order Form -->
-            <div class="order-form">
+            <div class="order-form" id='order_detials'>
                 <h3>অর্ডার করতে নিচের ফরমটি পূরণ করুন</h3>
                 @if(session('success'))
                     <div class="alert alert-danger">
