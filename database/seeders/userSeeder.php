@@ -26,7 +26,7 @@ class userSeeder extends Seeder
             [
                 'name' => "Super Admin",
                 'email' => "support@babu.bikrihoy.com",
-                'phone' => "01781666859",
+                'phone' => "01900000000",
                 'role_id' => 2,
                 'password' => Hash::make('fke59@5f9@'),
             ]

@@ -387,7 +387,7 @@
                             {{ $loop->first ? 'checked' : '' }}
                         >
                         <label for="product{{ $product->id }}" class="product-details">
-                            <img src="{{ asset($product->image) }}" alt="{{ $product->title }}" class="product-image">
+                            <img src="{{ asset($product->photo) }}" alt="{{ $product->title }}" class="product-image">
                             <div class="product-info">
                                 <div class="product-title">{{ $product->title }}</div>
                                 <div class="product-price">৳{{ number_format($product->price, 2) }}</div>
