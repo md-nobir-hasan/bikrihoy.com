@@ -57,6 +57,20 @@
     {{-- Tab icon  --}}
     <!-- or for PNG favicon -->
     <link rel="shortcut icon" href="/{{$image ?? $site_info->logo}}" type="image/png">
+    <style>
+        .h25px{
+            height: 25px;
+        }
+        .star-rating{
+            color: #f39c12;
+            width: 1.2rem;
+        }
+        .rating-div{
+            column-gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+    </style>
     @stack('css')
     <!-- Facebook Pixel Code -->
     @isset($pixel_tag)

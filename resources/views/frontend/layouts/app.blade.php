@@ -13,7 +13,7 @@
         <div class="toastr-div">
         </div>
 
-        @yield('page_conent')
+        @yield('page_content')
 
         @include('frontend.layouts.footer')
     </body>

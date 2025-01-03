@@ -2,440 +2,514 @@
 
 @push('css')
     <style>
-        /* Common Styles */
-        .section-title {
-            font-size: 2rem;
-            color: #333;
-            text-align: center;
-            margin-bottom: 3rem;
+        /* Main Container */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
         }
 
-        /* Hero Section */
+        /* Top Banner Section */
         .hero-section {
-            background: #f8f9fa;
-            padding: 4rem 0;
+            background: linear-gradient(180deg, #fff 0%, #e7b3f3 100%);
+            padding: 20px;
             text-align: center;
+            border-bottom-left-radius: 50% 10%;
+            border-bottom-right-radius: 50% 10%;
         }
 
         .hero-title {
-            font-size: 2.2rem;
-            color: #333;
-            margin-bottom: 1.5rem;
+            color: #000;
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
         }
 
         .hero-subtitle {
-            font-size: 1.4rem;
-            color: #555;
-            margin-bottom: 2rem;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
 
-        /* Why Choose Us Section */
-        .why-choose-section {
-            padding: 4rem 0;
-            background: #fff;
-        }
-
-        .choose-card {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .choose-icon {
-            font-size: 3rem;
-            color: #2ecc71;
-            margin-bottom: 1rem;
-        }
-
-        /* Problem Solution Section */
-        .problem-section {
-            background: #f8f9fa;
-            padding: 4rem 0;
-        }
-
-        .problem-card {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 4rem 0;
-            background: #fff;
-        }
-
-        .feature-box {
-            text-align: center;
-            padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-        }
-
-        /* Product Benefits */
-        .benefits-section {
-            background: #f8f9fa;
-            padding: 4rem 0;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .benefit-icon {
-            color: #2ecc71;
-            margin-right: 1rem;
-        }
-
-        /* Products Section */
-        .products-section {
-            padding: 4rem 0;
-            background: #fff;
-        }
-
-        .product-card {
-            border: none;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #e74c3c;
+        .discount-banner {
+            background: #ff69b4;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 15px 0;
+            font-weight: bold;
         }
 
-        /* Usage Guide */
-        .usage-guide {
-            padding: 4rem 0;
-            background: #f8f9fa;
-        }
-
-        .guide-step {
-            text-align: center;
-            margin-bottom: 2rem;
+        .cta-button {
+            background: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0;
+            border: none;
+            transition: all 0.3s ease;
         }
 
         /* FAQ Section */
         .faq-section {
-            padding: 4rem 0;
-            background: #fff;
+            background: #4a148c;
+            padding: 15px;
+            margin: 20px 0;
         }
 
-        .accordion-button:not(.collapsed) {
-            background-color: #2ecc71;
+        .faq-item {
             color: white;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
         }
 
-        /* CTA Sections */
-        .cta-section {
-            background: #e74c3c;
+        /* Additional FAQ Section */
+        .additional-faq {
+            background: #ff69b4;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .additional-faq .faq-item {
             color: white;
-            padding: 3rem 0;
-            text-align: center;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .btn-cta {
-            background: #2ecc71;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
+        /* Video Section */
+        .video-section {
+            margin: 20px 0;
+            padding: 15px;
         }
 
-        .btn-cta:hover {
-            background: #27ae60;
-            color: white;
-            transform: translateY(-2px);
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
         }
 
-        /* Customer Reviews */
-        .reviews-section {
-            padding: 4rem 0;
-            background: #f8f9fa;
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
-        .review-card {
-            background: #fff;
-            padding: 2rem;
+        /* Benefits Section */
+        .benefits-section {
+            background: #ff69b4;
+            padding: 20px;
             border-radius: 10px;
-            margin-bottom: 2rem;
+            margin: 20px 0;
         }
 
-        /* Free Shipping Banner */
-        .free-shipping {
-            background: #f1c40f;
-            color: #2c3e50;
-            padding: 0.5rem;
+        .benefits-title {
+            color: white;
             text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .benefits-list li {
+            color: white;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .benefits-list li:before {
+            content: "✓";
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Order Form Section */
+        .order-form {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Product Summary */
+        .product-summary {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: #ff5722;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        /* Messenger Button */
+        .messenger-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: #6E45E2;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Product Selection Styles */
+        .product-selection {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .product-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-option:last-child {
+            border-bottom: none;
+        }
+
+        .product-radio {
+            margin-right: 15px;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .product-info {
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #ff69b4;
+            font-weight: bold;
+        }
+
+        /* Order Summary Styles */
+        .order-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary-total {
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        /* Shipping Selection Styles */
+        .shipping-selection {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .shipping-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .shipping-option:last-child {
+            border-bottom: none;
+        }
+
+        .shipping-radio {
+            margin-right: 15px;
+        }
+
+        .shipping-details {
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .shipping-info {
+            font-size: 14px;
+        }
+
+        .shipping-price {
+            color: #ff69b4;
             font-weight: bold;
         }
     </style>
 @endpush
 
-@section('page_conent')
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">আপনার সিশুর জন্য সেরা ওয়াশেবল ডায়াপার</h1>
-            <p class="hero-subtitle">নিরাপদ, আরামদায়ক এবং পরিবেশবান্ধব সমাধান</p>
-            <a href="#products" class="btn-cta">এখনই অর্ডার করুন - ২০% ছাড়!</a>
+@section('page_content')
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">আপনার সন্তানের আরাম ও সুরক্ষায় নিশ্চিত থাকুন,সাশ্রয় করুন আপনার কষ্টের টাকায় এবং থাকুন সেরাটা</h1>
+            <p class="hero-subtitle">আপনার সন্তানের জন্য সেরা খুঁজে, এখন মাত্রের দাগজালে সাশ্রয়ী মূল্যে উন্নত মানের ওয়াশেবল ডায়াপার এখনই কিনুন</p>
+            <div class="discount-banner">
+                এখনই অর্ডার করুন এবং ২০% ছাড় পান। সীমিত সময়ের জন্য!
+            </div>
+            <button class="cta-button">অর্ডার করতে ক্লিক করুন</button>
         </div>
-    </section>
 
-    <!-- Why Choose Us -->
-    <section class="why-choose-section">
-        <div class="container">
-            <h2 class="section-title">কেন আমাদের পণ্য বেছে নেবেন?</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="choose-card">
-                        <div class="choose-icon">🌿</div>
-                        <h3>পরিবেশবান্ধব</h3>
-                        <p>প্লাস্টিক ডায়াপার থেকে পরিবেশকে রক্ষা করুন</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="choose-card">
-                        <div class="choose-icon">💰</div>
-                        <h3>সাশ্রয়ী</h3>
-                        <p>দীর্ঘমেয়াদী ব্যবহারে অর্থ সাশ্রয় করুন</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="choose-card">
-                        <div class="choose-icon">👶</div>
-                        <h3>শিশুর জন্য নিরাপদ</h3>
-                        <p>১০০% নিরাপদ ও আরামদায়ক</p>
-                    </div>
-                </div>
+        <!-- Main FAQ Section -->
+        <div class="faq-section">
+            <div class="faq-item">শার্টিক ডায়াপার কি আপনার সন্তানের আরাম বেড়ে দিবে?</div>
+            <div class="faq-item">কেন আমাদের এখানের ডায়াপার নেবে?</div>
+            <div class="faq-item">সেরার সিক্রেট: কোনো সিক্রেট নয়া</div>
+        </div>
+
+        <!-- Additional FAQ Section -->
+        <div class="additional-faq">
+            <div class="faq-item">এটি কি এক বারের জন্য ব্যবহারযোগ্য?</div>
+            <div class="faq-item">কতদিন টিকে থাকে?</div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/your-video-id" allowfullscreen></iframe>
             </div>
         </div>
-    </section>
 
-    <!-- Problem Solution Section -->
-    <section class="problem-section">
-        <div class="container">
-            <h2 class="section-title">আপনার সমস্যার সমাধান</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="problem-card">
-                        <h3>সমস্যা</h3>
-                        <ul class="list-unstyled">
-                            <li>✗ ডিসপোজেবল ডায়াপারের উচ্চ খরচ</li>
-                            <li>✗ ত্বকের সমস্যা</li>
-                            <li>✗ পরিবেশ দূষণ</li>
-                        </ul>
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+            <h3 class="benefits-title">শুধু ডায়াপার নয়, এটি একটি বিনিয়োগ:</h3>
+            <ul class="benefits-list">
+                <li>সাশ্রয়ী: বারবার ব্যবহারের মাধ্যমে খরচ কমায়।</li>
+                <li>পরিবেশবান্ধব: রাষ্ট্রিক খরচা কমায়।</li>
+                <li>স্বাস্থ্যকর: শিশুর ত্বকে কোনো ক্ষতিকারক রাসায়নিক নেই।</li>
+                <li>সহজ পরিচর্যা: মাত্র কয়েক ধাপেই ধুয়ে পুনরায় ব্যবহার করুন।</li>
+                <li>দীর্ঘস্থায়ী: একবার কিনলে মাসের পর মাস ব্যবহার করুন।</li>
+            </ul>
+        </div>
+
+        <!-- Product Selection -->
+        <div class="product-selection">
+            <h3>পণ্য নির্বাচন করুন</h3>
+            <div class="product-option">
+                <input type="radio" name="product" id="product1" value="650" class="product-radio" checked>
+                <label for="product1" class="product-details">
+                    <img src="/path-to-product-image-1.jpg" alt="Product 1" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">২টি ওয়াশেবল ডায়াপার প্যাক</div>
+                        <div class="product-price">৳650.00</div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="problem-card">
-                        <h3>সমাধান</h3>
-                        <ul class="list-unstyled">
-                            <li>✓ একবার কিনুন, দীর্ঘদিন ব্যবহার করুন</li>
-                            <li>✓ নরম কাপড়ের তৈরি, ত্বকের জন্য নিরাপদ</li>
-                            <li>✓ পুনঃব্যবহারযোগ্য, পরিবেশবান্ধব</li>
-                        </ul>
+                </label>
+            </div>
+            <div class="product-option">
+                <input type="radio" name="product" id="product2" value="1150" class="product-radio">
+                <label for="product2" class="product-details">
+                    <img src="/path-to-product-image-2.jpg" alt="Product 2" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">৪টি ওয়াশেবল ডায়াপার প্যাক</div>
+                        <div class="product-price">৳1,150.00</div>
                     </div>
-                </div>
+                </label>
             </div>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <h2 class="section-title">বিশেষ বৈশিষ্ট্য</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="feature-box">
-                        <h3>উন্নত ফেব্রিক</h3>
-                        <p>১০০% কটন ফেব্রিক, শিশুর ত্বকের জন্য নিরাপদ</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-box">
-                        <h3>৪-লেয়ার সিস্টেম</h3>
-                        <p>লিকেজ প্রতিরোধী উন্নত লেয়ার সিস্টেম</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-box">
-                        <h3>ইলাস্টিক ফিটিং</h3>
-                        <p>পারফেক্ট ফিটিং নিশ্চিত করে</p>
-                    </div>
-                </div>
+        <!-- Shipping Selection -->
+        <div class="shipping-selection">
+            <h3>ডেলিভারি চার্জ নির্বাচন করুন</h3>
+            <div class="shipping-option">
+                <input type="radio" name="shipping" id="shipping1" value="50" class="shipping-radio" checked>
+                <label for="shipping1" class="shipping-details">
+                    <div class="shipping-info">ঢাকার ভিতরে</div>
+                    <div class="shipping-price">৳50</div>
+                </label>
+            </div>
+            <div class="shipping-option">
+                <input type="radio" name="shipping" id="shipping2" value="100" class="shipping-radio">
+                <label for="shipping2" class="shipping-details">
+                    <div class="shipping-info">ঢাকার বাহিরে</div>
+                    <div class="shipping-price">৳100</div>
+                </label>
             </div>
         </div>
-    </section>
 
-    <!-- Product section -->
-    <section class="production">
-        <div class="container">
-            <div class="productMain">
-                <h2 class="sub_title">Our Products</h2>
-
-                <div class="productBody">
-                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 g-4">
-                        @foreach ($products as $product)
-                            <div class="col w-100">
-                                <div class="card h-100">
-                                    <a href="{{ route('product_details',[$product->slug]) }}">
-                                        <img src="{{$product->photo}}" class="card-img-top" alt="{{$product->title}}" loading="lazy">
-                                        <div class="position-absolute top-0 end-0 m-2 badge bg-danger">
-                                            {{$product->discountPercent()}}% off
-                                        </div>
-                                    </a>
-                                    <div class="card-body">
-                                        <a href="{{route('product_details',[$product->slug])}}" class="text-decoration-none">
-                                            <h5 class="card-title">{{$product->title}}</h5>
-                                        </a>
-
-                                        <div class="d-flex text-warning mb-2 justify-content-center rating-div">
-                                            @for ($i = 0; $i < 5; $i++)
-                                                <svg class="star-rating" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
-                                                    <path fill-rule="evenodd" d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z" clip-rule="evenodd" />
-                                                </svg>
-                                            @endfor
-                                        </div>
-
-                                        <div class="mb-2">
-                                            @if($product->stock>0)
-                                                <div class="text-success d-flex align-items-center gap-1 justify-content-center">
-                                                    <svg class="h25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
-                                                        <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <span>In stock</span>
-                                                </div>
-                                            @else
-                                                <div class="text-danger d-flex align-items-center gap-1 justify-content-center">
-                                                    <svg class="h25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
-                                                        <path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
-                                                    </svg>
-                                                    <span>Out of stock</span>
-                                                </div>
-                                            @endif
-                                        </div>
-
-                                        <div class="mb-3 text-center">
-                                            <del class="text-muted">&#2547; {{ $product->price}}</del>
-                                            <span class="ms-2 fw-bold">&#2547; {{ $product->price - $product->discount}}</span>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <a href="{{route('product_details',[$product->slug])}}" class="btn btn-primary w-100">অর্ডার করুন</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h3>অর্ডার সামারি</h3>
+            <div class="summary-item">
+                <span class="item-name">Selected Product:</span>
+                <span class="item-value" id="selectedProductName">২টি ওয়াশেবল ডায়াপার প্যাক</span>
+            </div>
+            <div class="summary-item">
+                <span>সাবটোটাল:</span>
+                <span id="subtotal">৳650.00</span>
+            </div>
+            <div class="summary-item">
+                <span>শিপিং:</span>
+                <span id="shipping-cost">৳50.00</span>
+            </div>
+            <div class="summary-item summary-total">
+                <span>টোটাল:</span>
+                <span id="total">৳700.00</span>
             </div>
         </div>
-    </section>
 
-    <!-- Usage Guide -->
-    <section class="usage-guide">
-        <div class="container">
-            <h2 class="section-title">ব্যবহার পদ্ধতি</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="guide-step">
-                        <h3>১. ধোয়া</h3>
-                        <p>সাবান দিয়ে ভালোভাবে ধুয়ে নিন</p>
-                    </div>
+        <!-- Order Form -->
+        <div class="order-form">
+            <h3>অর্ডার করতে নিচের ফরমটি পূরণ করুন</h3>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label class="form-label">আপনার নাম</label>
+                    <input type="text" class="form-control" required>
                 </div>
-                <div class="col-md-4">
-                    <div class="guide-step">
-                        <h3>২. শুকানো</h3>
-                        <p>রোদে ভালোভাবে শুকিয়ে নিন</p>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">মোবাইল নাম্বার</label>
+                    <input type="tel" class="form-control" required>
                 </div>
-                <div class="col-md-4">
-                    <div class="guide-step">
-                        <h3>৩. ব্যবহার</h3>
-                        <p>পুনরায় ব্যবহার করুন</p>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">সম্পূর্ণ ঠিকানা</label>
+                    <textarea class="form-control" rows="3" required></textarea>
                 </div>
-            </div>
+                <input type="hidden" id="productName" name="productName" value="২টি ওয়াশেবল ডায়াপার প্যাক">
+                <input type="hidden" id="productPrice" name="productPrice" value="650">
+                <input type="hidden" id="shippingCost" name="shippingCost" value="50">
+                <button type="submit" class="cta-button">অর্ডার কনফার্ম করুন</button>
+            </form>
         </div>
-    </section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">সাধারণ জিজ্ঞাসা</h2>
-            <div class="accordion" id="faqAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                            কতদিন ব্যবহার করা যাবে?
-                        </button>
-                    </h2>
-                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            সঠিকভাবে ব্যবহার করলে ৬-১২ মাস পর্যন্ত ব্যবহার করা যায়।
-                        </div>
-                    </div>
-                </div>
-                <!-- Add more FAQ items as needed -->
-            </div>
+        <!-- Messenger Button -->
+        <div class="messenger-button">
+            <i class="fab fa-facebook-messenger"></i>
         </div>
-    </section>
-
-    <!-- Customer Reviews -->
-    <section class="reviews-section">
-        <div class="container">
-            <h2 class="section-title">গ্রাহকদের মতামত</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="review-card">
-                        <div class="stars mb-2">⭐⭐⭐⭐⭐</div>
-                        <p>"খুবই ভালো প্রোডাক্ট, আমার বাচ্চা খুব আরামে থাকে"</p>
-                        <small>- সাবরিনা আক্তার</small>
-                    </div>
-                </div>
-                <!-- Add more review cards -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2 class="mb-4">এখনই অর্ডার করুন এবং পান ২০% ছাড়!</h2>
-            <p class="mb-4">সীমিত সময়ের জন্য বিশেষ অফার</p>
-            <a href="#products" class="btn-cta">অর্ডার করুন</a>
-        </div>
-    </section>
+    </div>
 @endsection
 
 @push('custom-js')
 <script>
     $(document).ready(function() {
-        // Smooth scroll
+        // Smooth scroll for anchor links
         $('a[href^="#"]').on('click', function(e) {
             e.preventDefault();
-            var target = $($(this).attr('href'));
-            if (target.length) {
-                $('html, body').animate({
-                    scrollTop: target.offset().top - 70
-                }, 1000);
-            }
+            var target = $(this.hash);
+            $('html, body').animate({
+                scrollTop: target.offset().top - 20
+            }, 800);
+        });
+
+        // Form submission handling
+        $('#orderForm').on('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+        });
+
+        function updateTotal() {
+            const selectedPrice = $('input[name="product"]:checked').val();
+            const shippingCost = $('input[name="shipping"]:checked').val();
+            const total = parseInt(selectedPrice) + parseInt(shippingCost);
+
+            $('#subtotal').text('৳' + selectedPrice + '.00');
+            $('#shipping-cost').text('৳' + shippingCost + '.00');
+            $('#total').text('৳' + total + '.00');
+
+            // Update hidden inputs
+            $('#shippingCost').val(shippingCost);
+        }
+
+        // Handle product selection
+        $('input[name="product"]').change(function() {
+            const productName = $(this).siblings('label').find('.product-title').text();
+            $('#selectedProductName').text(productName);
+            $('#productName').val(productName);
+            $('#productPrice').val($(this).val());
+            updateTotal();
+        });
+
+        // Handle shipping selection
+        $('input[name="shipping"]').change(function() {
+            updateTotal();
         });
     });
 </script>
