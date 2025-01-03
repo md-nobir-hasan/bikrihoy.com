@@ -48,7 +48,7 @@
                 <div class="productBody">
                     <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 g-4">
                         @foreach ($products as $product)
-                            <div class="col">
+                            <div class="col w-100">
                                 <div class="card h-100">
                                     <a href="{{ route('product_details',[$product->slug]) }}">
                                         <img src="{{$product->photo}}" class="card-img-top" alt="{{$product->title}}" loading="lazy">
