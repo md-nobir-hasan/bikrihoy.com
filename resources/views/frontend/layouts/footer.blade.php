@@ -28,6 +28,7 @@
             {{-- Footer single section --}}
             <div class="footerMiddle footerSingle">
                 <h3 class="footerTitle">Important Links</h3>
+                <a href="{{route('blog.list')}}" class="footerLink">Blogs</a>
                 <a href="#" class="footerLink">Terms & Conditions</a>
                 <a href="#" class="footerLink">Returns and Refund Policy</a>
                 <a href="#" class="footerLink">Privacy Policy</a>

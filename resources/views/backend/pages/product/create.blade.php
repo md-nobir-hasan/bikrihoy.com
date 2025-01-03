@@ -31,9 +31,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-10 m-auto">
-                                <form method="post" id="form" action="{{ route('product.store') }}"
-                                    enctype="multipart/form-data" id="uploadForm">
-                                    {{ csrf_field() }}
+                                <form method="POST" id="form" action="{{ route('product.store') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="inputTitle" class="col-form-label">Title <span
                                                 class="text-danger">*</span></label>
@@ -328,7 +328,6 @@
 @endsection
 
 @push('third_party_scripts')
-    <script src="{{ asset('assets/js/DataTable/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/backend/library/summernote/summernote.min.js') }}"></script>
 @endpush
 

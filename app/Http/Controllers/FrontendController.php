@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddToCart;
+use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Slider;
@@ -298,7 +299,7 @@ class FrontendController extends Controller
         $n['specific_review'] = Review::with('images')->where('product_id', $n['data']->id)->first();
 
         // related product collection
-        $n['related_products'] = DB::table('products')->limit('19')->get();
+        $n['related_products'] = DB::table('products')->where('id', '!=', $n['data']->id)->limit('19')->get();
 
 
         return view('frontend.pages.product-details', $n);
@@ -329,4 +330,14 @@ class FrontendController extends Controller
         return view('frontend.page', $n);
     }
 
+    public function list(){
+        $n['blogs'] = Blog::orderBy('id', 'desc')->get();
+        return view('frontend.pages.blog.list', $n);
+    }
+
+    public function details($slug){
+        $n['blog'] = Blog::where('slug', $slug)->first();
+        $n['relatedBlogs'] = Blog::where('id', '!=', $n['blog']->id)->orderBy('id', 'desc')->get();
+        return view('frontend.pages.blog.details', $n);
+    }
 }

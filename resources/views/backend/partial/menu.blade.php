@@ -210,6 +210,39 @@
     </li>
 @endif
 
+{{-- Blog Management  --}}
+@if ($n =check('Blog'))
+    <li class="nav-item {{ Request::is('blog/*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
+            <i class="fa-solid fa-blog"></i>
+            <p>
+                Blog
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            @if ($n->show)
+                <li class="nav-item">
+                    <a href="{{ route('blog.index') }}"
+                        class="nav-link {{ Request::is('blog/index') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>Show Blog</p>
+                    </a>
+                </li>
+            @endif
+            @if ($n->add)
+                <li class="nav-item">
+                    <a href="{{ route('blog.create') }}"
+                        class="nav-link {{ Request::is('blog/create') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>Add Blog</p>
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </li>
+@endif
+
 
 
 

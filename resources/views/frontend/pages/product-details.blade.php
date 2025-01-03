@@ -130,7 +130,8 @@
             <!-- Description  -->
             <div class="descriptionMain">
                 <h3 class="descTitle">Description</h3>
-                <p class="dParagraph my-3 my-lg-4">{!! $data->description !!}</div>
+                <p class="dParagraph my-3 my-lg-4">{!! $data->summary !!}</p>
+            </div>
         </div>
     </form>
     </section>
@@ -173,7 +174,7 @@
     <section class="production">
         <div class="container">
             <div class="productMain">
-                <h2 class="sub_title">Our Products</h2>
+                <h2 class="sub_title">Related Products</h2>
 
                 <div class="productBody">
 
