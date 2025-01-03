@@ -49,11 +49,11 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $order->order_number }}</td>
-                                            <td>{{ $order->first_name }}</td>
+                                            <td>{{ $order->name }}</td>
                                             <td>{{ $order->phone }}</td>
                                             <td>{{ $order->email }}</td>
                                             <td>{{ $order->quantity }}</td>
-                                            <td>{{ $order->shipping->price }}</td>
+                                            <td>{{ $order->shipping ? $order->shipping->price : 0 }}</td>
                                             <td>TK{{ number_format($order->total_amount, 2) }}
                                             </td>
                                             <td>{{ $order->payment_number }}</td>

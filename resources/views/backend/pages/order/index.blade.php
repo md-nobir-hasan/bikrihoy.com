@@ -62,7 +62,7 @@
                                 <tbody>
                                     @forelse($orders as $key => $order)
                                         <tr>
-                                            <td class="align-middle">{{ $loop->index }}</td>
+                                            <td class="align-middle">{{ $loop->index+1 }}</td>
                                             <td class="align-middle">{{ $order->order_number }}</td>
                                             <td class="align-middle">{{ $order->name }}</td>
                                             <td class="align-middle">{{ $order->phone }}</td>
@@ -79,7 +79,7 @@
                                             </td>
                                             {{-- <td>{{ $order->payment_number }}</td> --}}
                                             {{-- <td>{{ $order->pamyment_method}}</td> --}}
-                                            <td class="align-middle">{{ date('d-m-Y', strtotime($order->created_at)) }}
+                                            <td class="align-middle">{{ $order->created_at->format('d-m-Y h:i A') }}
                                             </td>
                                             @if (serviceCheck('Order Status'))
                                                 <td class="align-middle">
@@ -106,9 +106,9 @@
                                             @endif
                                             <td class="align-middle @if (!check('Order')->edit && !check('Order')->delete) d-none @endif">
                                                 <div class="btn-group">
-                                                    {{-- <a href="{{ route('order.edit', $order->id) }}"
+                                                    <a href="{{ route('order.edit', $order->id) }}"
                                                         class="btn btn-dark btnEdit" title="Edit"><i
-                                                            class="fas fa-edit"></i></a> --}}
+                                                            class="fas fa-edit"></i></a>
 
                                                     <a href="{{ route('order.view', $order->id) }}"
                                                         class="btn btn-info view-btn @if (!check('Order')->edit) d-none @endif" title="View Order Details"><i

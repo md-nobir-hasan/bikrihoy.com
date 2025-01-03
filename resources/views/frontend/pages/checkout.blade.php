@@ -3,13 +3,15 @@
 @push('custom-js')
 <script>
     $(document).ready(function () {
+
+
     function calculateTotal() {
         // Get values
         let price = parseFloat($('.price').text());
         let discount = parseFloat($('.discount').text());
         let quantity = parseInt($('.countShow').val());
         let shipping = parseFloat($('input[name="shipping_id"]:checked').attr('id'));
-
+         shipping = shipping ? shipping : 0;
         // Calculate subtotal and total
         let subtotal = (price - discount) * quantity;
         let total = subtotal + shipping;
@@ -58,9 +60,17 @@
 @section('page_conent')
     <section class="checkoutSection">
         <div class="container">
+            @if(session('success'))
+                <div class="alert alert-danger">
+                    আপনি ইতিপূর্বেই {{ session('success') }} নাম্বার দিয়ে অর্ডার সম্পূর্ণ করেছেন।
+                    অর্ডার সম্পর্কে বিস্তারিত জানতে - <br>
+                    Call: <a href="tel:{{$site_contact_info->phone}}"> {{$site_contact_info->phone}}</a> <br>
+                    Whatsapp: <a href="https://wa.me/{{$site_contact_info->whatsapp}}"> {{$site_contact_info->whatsapp}}</a>
+                </div>
+            @endif
             <div class="checkoutMain">
                 <!-- main form -->
-                 <form action="{{route('order.store')}}" method="POST" class="ckeckoutForm">
+                 <form action="{{route('order.store')}}" method="POST" class="multiple-submit-prevent ckeckoutForm">
                     @csrf
 
                     <input type="hidden" name="color_id" value="{{$color->id ?? null}}">
@@ -69,7 +79,7 @@
                         <div class="orderprocess">
                             <h3 class="orderproces">Your Order</h3>
                             <h4 class="checkoutProductTitle">{{$product->title}} @if ($color)  | {{$color->c_name }} @endif</h4>
-                            <table>
+                            <table class="w-100">
                                 <tbody>
                                     <input type="hidden" name="slug" value="{{$product->slug}}">
 
@@ -96,17 +106,19 @@
                                         <td><b>Subtotal</b></td>
                                         <td><b>৳ <span class="subtotal"></span></b></td>
                                     </tr>
-                                    <tr>
-                                        <td><b>Shipping</b></td>
-                                        <td class="checkradio">
-                                            @foreach ($shippings as $shipping)
-                                            <div>
-                                                <label for="{{$shipping->price}}">{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
-                                                <input type="radio" name="shipping_id" id="{{$shipping->price}}" class="shipping-option" value="{{$shipping->id}}"  checked>
-                                            </div>
-                                            @endforeach
-                                        </td>
-                                    </tr>
+                                    @if($product->productShipping->count() > 0)
+                                        <tr>
+                                            <td><b>Shipping</b></td>
+                                            <td class="checkradio">
+                                                @foreach ($product->productShipping as $shipping)
+                                                    <div>
+                                                        <label for="{{$shipping->price}}">{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
+                                                        <input type="radio" name="shipping_id" id="{{$shipping->price}}" class="shipping-option" value="{{$shipping->id}}"  checked>
+                                                    </div>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td><b>Total</b></td>
                                         <td><strong>৳ <span class="total"></span></strong></td>
@@ -132,6 +144,9 @@
 
                         <label for="Caddress">পুর্ণ ঠিকানা *</label>
                         <input type="text" name="address" id="Caddress" required>
+
+                        <label for="note">আপনার মতামত এখানে লিখুন </label>
+                        <textarea name="note" id="note" class="form-control" cols="30" rows="6"></textarea>
 
                         <div class="pamentInfoMain">
                             <div class="address">

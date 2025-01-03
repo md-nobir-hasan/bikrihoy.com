@@ -49,11 +49,15 @@
                                     </tr>
                                     <tr>
                                         <td>Shipping Price:</td>
-                                        <td>{{ $order->shipping->price }}</td>
+                                        <td>{{ $order->shipping ? $order->shipping->price : 0 }}</td>
                                     </tr>
                                     <tr>
                                         <td>Payment Method:</td>
                                         <td>{{ $order->payment->payment }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Order Note:</td>
+                                        <td>{{ $order->note }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -86,14 +90,13 @@
                                         $total_dis = 0;
                                     @endphp
                                     @forelse($order->orderItem as $key => $item)
-
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td> {{ $item->product->title }}</td>
                                             <td>{{ $item->product->price }}</td>
-                                            <td>{{ $item->product->discount }}</td>
+                                            <td>{{ $item->product->discount  }}</td>
                                             <td>{{ $item->qty }}</td>
-                                            <td>{{ $item->price - ($total_dis += $item->product->discount *2)}}</td>
+                                            <td>{{ $item->price }}</td>
                                         </tr>
                                     @empty
                                     @endforelse
@@ -105,7 +108,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>Shipping =</td>
-                                        <td>{{ $order->shipping->price }}৳</td>
+                                        <td>{{ $order->shipping ? $order->shipping->price : 0 }}৳</td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -113,7 +116,7 @@
                                         <td></td>
                                         <td></td>
                                         <td class="fw-bold h5">Total =</td>
-                                        <td class="fw-bold h5">{{ $order->total- $total_dis }}৳</td>
+                                        <td class="fw-bold h5">{{ $order->total - $total_dis }}৳</td>
                                     </tr>
                                 </tfoot>
                             </table>

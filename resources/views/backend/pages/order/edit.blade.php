@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Product Management')
+@section('title', 'Edit Order')
 
 @push('third_party_stylesheets')
 @endpush
@@ -9,145 +9,100 @@
 @endpush
 
 @section('content')
+
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <span class="float-left">
-                            <h4>Update Product</h4>
+                            <h4>Update Order</h4>
                         </span>
                         <span class="float-right">
-                            <a href="{{ route('product.index') }}" class="btn btn-info">Back</a>
+                            <a href="{{ route('order.index') }}" class="btn btn-info">Back</a>
                         </span>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-10 m-auto">
-                                <form method="post" action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('order.update',$order->id) }}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     @method('PUT')
+
                                     <div class="form-group">
-                                        <label for="inputTitle" class="col-form-label">Title <span
+                                        <label for="name" class="col-form-label">Name <span
                                                 class="text-danger">*</span></label>
-                                        <input id="inputTitle" type="text" name="title" placeholder="Enter title"
-                                            value="{{ $product->title }}" class="form-control">
-                                        @error('title')
+                                        <input id="name" type="text" name="name" placeholder="Enter title" required
+                                            value="{{ $order->name }}" class="form-control">
+                                        @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="summary" class="col-form-label">Why this product <span
+                                        <label for="phone" class="col-form-label">Phone <span
                                                 class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="summary" name="summary">{{ $product->summary }}</textarea>
-                                        @error('summary')
+                                        <input id="phone" type="text" name="phone" placeholder="Enter phone" required
+                                            value="{{ $order->phone }}" class="form-control">
+                                        @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="description" class="col-form-label">Description</label>
-                                        <textarea class="form-control" id="description" name="description">{{ $product->summary }}</textarea>
-                                        @error('description')
+                                        <label for="address" class="col-form-label">Address <span
+                                                class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="address" name="address" required>{{ $order->address }}</textarea>
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="email" class="col-form-label">Email</label>
+                                        <input id="email" type="text" name="email" placeholder="Enter email"
+                                            value="{{ $order->email }}" class="form-control">
+                                        @error('email')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="cat_id">Category <span class="text-danger">*</span></label>
-                                        <select name="cat_id" id="cat_id" class="form-control">
-                                            <option value="">--Select any category--</option>
-                                            @foreach ($categories as $key => $cat_data)
-                                                <option value='{{ $cat_data->id }}'
-                                                    @if ($cat_data->id == $product->cat_info->id) selected @endif>
-                                                    {{ $cat_data->title }}</option>
+                                        <label for="total" class="col-form-label">Paid Amount <span
+                                                class="text-danger">*</span></label>
+                                        <input id="total" type="number" name="total" min="0" step="1"
+                                            placeholder="Enter total" value="{{ $order->total }}" required
+                                            class="form-control">
+                                        @error('total')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="note" class="col-form-label">User Note</label>
+                                        <textarea class="form-control" id="note" name="note">{{ $order->note }}</textarea>
+                                        @error('note')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    {{-- Order status --}}
+                                    <div class="form-group">
+                                        <label for="status" class="col-form-label">Order Status <span
+                                                class="text-danger">*</span></label>
+                                        <select name="status" class="form-control" name="order_status">
+                                            @foreach ($order_statuses as $order_status)
+                                                <option value="{{ $order_status->name }}"
+                                                    @if ($order_status->name == $order->status) selected @endif>
+                                                    {{ $order_status->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="price" class="col-form-label">Price(NRS) <span
-                                                class="text-danger">*</span></label>
-                                        <input id="price" type="number" name="price" placeholder="Enter price"
-                                            value="{{ $product->price }}" class="form-control">
-                                        @error('price')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="discount" class="col-form-label">Discount(%)</label>
-                                        <input id="discount" type="number" name="discount" min="0" max="100"
-                                            placeholder="Enter discount" value="{{ $product->discount }}"
-                                            class="form-control">
-                                        @error('discount')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="brand_id">Brand</label>
-                                        {{-- {{$brands}} --}}
-
-                                        <select name="brand_id" class="form-control">
-                                            <option value="">--Select Brand--</option>
-                                            @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}"
-                                                    @if ($brand->id == $product->brand_info->id) selected @endif>{{ $brand->title }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="condition">Condition</label>
-                                        <select name="condition" class="form-control">
-                                            <option value="">--Select Condition--</option>
-                                            <option value="default" @if ($product->condition == 'default') selected @endif>
-                                                Default</option>
-                                            <option value="new" @if ($product->condition == 'new') selected @endif>New
-                                            </option>
-                                            <option value="hot" @if ($product->condition == 'hot') selected @endif>Hot
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="stock">Quantity <span class="text-danger">*</span></label>
-                                        <input id="quantity" type="number" name="stock" min="0"
-                                            placeholder="Enter quantity" value="{{ $product->stock }}"
-                                            class="form-control">
-                                        @error('stock')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-
-                                        <label for="inputPhoto" class="col-form-label">Photo <span
-                                                class="text-danger">*</span></label>
-                                        <input id="photo" type="file" name="photo"
-                                            placeholder="Enter Product Photo" value="{{ $product->price }}"
-                                            class="form-control">
-                                        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
-                                        @error('photo')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="status" class="col-form-label">Status <span
-                                                class="text-danger">*</span></label>
-                                        <select name="status" class="form-control">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                        @error('status')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
                                     <div class="form-group mb-3">
                                         <button type="reset" class="btn btn-warning">Reset</button>
-                                        <button class="btn btn-success" type="submit">Submit</button>
+                                        <button class="btn btn-success" type="submit">Update</button>
                                     </div>
                                 </form>
                             </div>

@@ -1,8 +1,8 @@
-name: 🚀 Deploy website on push
+name: 🚀 Deploy to bikrihoy.com on push
 on:
  push:
-  branches: main
-  
+  branches: bikrihoy.com
+
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
-    
+
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:

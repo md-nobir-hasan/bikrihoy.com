@@ -23,6 +23,10 @@ class Product extends Model
     {
         return $this->hasOne('App\Models\Category', 'id', 'child_cat_id');
     }
+    public function productShipping()
+    {
+        return $this->hasMany(ProductShipping::class);
+    }
     public static function getAllProduct()
     {
         return Product::with(['cat_info', 'sub_cat_info'])->orderBy('id', 'desc')->paginate(10);

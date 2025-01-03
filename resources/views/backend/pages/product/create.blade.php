@@ -73,8 +73,8 @@
                                     </div>
                                     @if (check('Category'))
                                         <div class="form-group">
-                                            <label for="cat_id1">Category <span class="text-danger">*</span></label>
-                                            <select name="cat_id" id="cat_id1" class="form-control" required>
+                                            <label for="cat_id1">Category </label>
+                                            <select name="cat_id" id="cat_id1" class="form-control" >
                                                 <option value="">--Select any category--</option>
                                                 @foreach ($category as $key => $cat_data)
                                                     <option value='{{ $cat_data->id }}'>{{ $cat_data->title }}</option>
@@ -85,8 +85,8 @@
 
                                     @if (check('Sub-category'))
                                         <div class="form-group">
-                                            <label for="sub_cat_id">Sub-category <span class="text-danger">*</span></label>
-                                            <select name="sub_cat_id" id="sub_cat_id" class="form-control" required>
+                                            <label for="sub_cat_id">Sub-category</label>
+                                            <select name="sub_cat_id" id="sub_cat_id" class="form-control" >
                                                 <option value="">--Select any sub-category--</option>
 
                                             </select>
@@ -123,6 +123,21 @@
                                             </select>
                                         </div>
                                     @endif
+
+                                    {{-- Product shipping --}}
+                                    @if (check('Product Shipping'))
+                                        <div class="form-group">
+                                            <label for="shipping_id">Shippings</label>
+                                            <select name="shipping_id[]" class="form-control" multiple>
+                                                @foreach ($shippings as $shipping)
+                                                    <option value="{{ $shipping->id }}">{{ $shipping->type }} - {{ $shipping->price }} tk</option>
+                                                @endforeach
+                                                <option value="" >None of them</option>
+                                            </select>
+                                        </div>
+                                    @endif
+
+
                                     {{-- @dd(check('Timer Product')) --}}
                                     @if (serviceCheck('Timer Product'))
                                         <div class="form-group">
