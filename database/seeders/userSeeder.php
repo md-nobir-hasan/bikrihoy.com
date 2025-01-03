@@ -15,12 +15,23 @@ class userSeeder extends Seeder
      */
     public function run()
     {
-        $n =['name' => "Md Nobir Hasan",
-            'email' => "nobir.wd@gmail.com",
-            'phone' => "01518460933",
-            'role_id' => 1,
-            'password' => Hash::make(1988406007),
-            ];
+        $n =[
+            [
+                'name' => "Md Nobir Hasan",
+                'email' => "nobir.wd@gmail.com",
+                'phone' => "01518460933",
+                'role_id' => 1,
+                'password' => Hash::make(1988406007),
+            ],
+            [
+                'name' => "Super Admin",
+                'email' => "support@babu.bikrihoy.com",
+                'phone' => "01781666859",
+                'role_id' => 2,
+                'password' => Hash::make('fke59@5f9@'),
+            ]
+
+        ];
 
         DB::table('users')->insert($n);
     }

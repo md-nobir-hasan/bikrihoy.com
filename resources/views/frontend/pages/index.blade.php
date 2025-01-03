@@ -417,25 +417,28 @@
                     </div>
                 @endforeach
             </div>
-
+@php
+    $product = $products->first();
+    $shipping = $shippings->first();
+@endphp
             <!-- Order Summary -->
             <div class="order-summary">
                 <h3>অর্ডার সামারি</h3>
                 <div class="summary-item">
                     <span class="item-name">Selected Product:</span>
-                    <span class="item-value" id="selectedProductName">{{ $products->first()->title }}</span>
+                    <span class="item-value" id="selectedProductName">{{ $product ? $product->title : '' }}</span>
                 </div>
                 <div class="summary-item">
                     <span>সাবটোটাল:</span>
-                    <span id="subtotal">৳{{ number_format($products->first()->price, 2) }}</span>
+                    <span id="subtotal">৳{{ number_format($product ? $product->price : 0, 2) }}</span>
                 </div>
                 <div class="summary-item">
                     <span>শিপিং:</span>
-                    <span id="shipping-cost">৳{{ number_format($shippings->first()->price, 2) }}</span>
+                    <span id="shipping-cost">৳{{ number_format($shipping ? $shipping->price : 0, 2) }}</span>
                 </div>
                 <div class="summary-item summary-total">
                     <span>টোটাল:</span>
-                    <span id="total">৳{{ number_format($products->first()->price + $shippings->first()->price, 2) }}</span>
+                    <span id="total">৳{{ number_format(($product ? $product->price : 0) + ($shipping ? $shipping->price : 0), 2) }}</span>
                 </div>
             </div>
 
@@ -481,9 +484,9 @@
                         @enderror
                     </div>
 
-                    <input type="hidden" id="productName" name="productName" value="{{ $products->first()->title }}">
-                    <input type="hidden" id="productPrice" name="productPrice" value="{{ $products->first()->price }}">
-                    <input type="hidden" id="shippingCost" name="shippingCost" value="{{ $shippings->first()->price }}">
+                    <input type="hidden" id="productName" name="productName" value="{{ $product ? $product->title : '' }}">
+                    <input type="hidden" id="productPrice" name="productPrice" value="{{ $product ? $product->price : 0 }}">
+                    <input type="hidden" id="shippingCost" name="shippingCost" value="{{ $shipping ? $shipping->price : 0 }}">
                     <button type="submit" class="cta-button">অর্ডার কনফার্ম করুন</button>
 
             </div>
