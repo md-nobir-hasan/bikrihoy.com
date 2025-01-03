@@ -1,7 +1,7 @@
 name: 🚀 Deploy to babu on push
 on:
  push:
-  branches: daiper
+  branches: diaper
 
 jobs:
   web-deploy:
