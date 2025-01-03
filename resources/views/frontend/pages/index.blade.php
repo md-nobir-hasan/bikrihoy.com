@@ -9,7 +9,7 @@
             background: #fff;
         }
 
-        /* Top Banner Section */
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(180deg, #fff 0%, #e7b3f3 100%);
             padding: 20px;
@@ -58,29 +58,47 @@
 
         /* FAQ Section */
         .faq-section {
-            background: #4a148c;
-            padding: 15px;
             margin: 20px 0;
         }
 
-        .faq-item {
-            color: white;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 16px;
+        .faq-section .accordion-item {
+            border: none;
+            background: transparent;
+            margin-bottom: 10px;
         }
 
-        /* Additional FAQ Section */
+        .faq-section .accordion-button {
+            background: linear-gradient(135deg, #e7b3f3 0%, #8a4fff 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .faq-section .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, #8a4fff 0%, #e7b3f3 100%);
+            color: white;
+            box-shadow: none;
+        }
+
+        .faq-section .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .faq-section .accordion-body {
+            background: white;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+            margin-top: -1px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         .additional-faq {
             background: #ff69b4;
             padding: 15px;
             margin: 20px 0;
-        }
-
-        .additional-faq .faq-item {
-            color: white;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Video Section */
@@ -140,7 +158,7 @@
             font-weight: bold;
         }
 
-        /* Order Form Section */
+        /* Form Styles */
         .order-form {
             background: #fff;
             padding: 20px;
@@ -166,58 +184,8 @@
             border-radius: 5px;
         }
 
-        /* Product Summary */
-        .product-summary {
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .product-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .product-image {
-            width: 80px;
-            height: 80px;
-            margin-right: 15px;
-        }
-
-        /* Footer CTA */
-        .footer-cta {
-            background: #ff5722;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-
-        /* Messenger Button */
-        .messenger-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: #6E45E2;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
         /* Product Selection Styles */
-        .product-selection {
+        .product-selection, .shipping-selection {
             margin: 20px 0;
             padding: 15px;
             background: #fff;
@@ -225,22 +193,18 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        .product-option {
+        .product-option, .shipping-option {
             display: flex;
             align-items: center;
             padding: 10px;
             border-bottom: 1px solid #eee;
         }
 
-        .product-option:last-child {
-            border-bottom: none;
-        }
-
-        .product-radio {
+        .product-radio, .shipping-radio {
             margin-right: 15px;
         }
 
-        .product-details {
+        .product-details, .shipping-details {
             display: flex;
             align-items: center;
             flex-grow: 1;
@@ -263,12 +227,12 @@
             margin-bottom: 5px;
         }
 
-        .product-price {
+        .product-price, .shipping-price {
             color: #ff69b4;
             font-weight: bold;
         }
 
-        /* Order Summary Styles */
+        /* Order Summary */
         .order-summary {
             background: #f8f9fa;
             padding: 15px;
@@ -287,49 +251,16 @@
             font-weight: bold;
             color: #ff69b4;
         }
-
-        /* Shipping Selection Styles */
-        .shipping-selection {
-            margin: 15px 0;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        .shipping-option {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .shipping-option:last-child {
-            border-bottom: none;
-        }
-
-        .shipping-radio {
-            margin-right: 15px;
-        }
-
-        .shipping-details {
-            display: flex;
-            justify-content: space-between;
-            flex-grow: 1;
-        }
-
-        .shipping-info {
-            font-size: 14px;
-        }
-
-        .shipping-price {
-            color: #ff69b4;
-            font-weight: bold;
-        }
     </style>
 @endpush
 
 @section('page_content')
     <div class="main-container">
+        @php
+            $product = $products->first();
+            $shipping = $shippings->first();
+        @endphp
+
         <!-- Hero Section -->
         <div class="hero-section">
             <h1 class="hero-title">আপনার সন্তানের আরাম ও সুরক্ষায় নিশ্চিত থাকুন,সাশ্রয় করুন আপনার কষ্টের টাকায় এবং থাকুন সেরাটা</h1>
@@ -341,22 +272,91 @@
         </div>
 
         <!-- Main FAQ Section -->
-        <div class="faq-section">
-            <div class="faq-item">শার্টিক ডায়াপার কি আপনার সন্তানের আরাম বেড়ে দিবে?</div>
-            <div class="faq-item">কেন আমাদের এখানের ডায়াপার নেবে?</div>
-            <div class="faq-item">সেরার সিক্রেট: কোনো সিক্রেট নয়া</div>
+        <div class="faq-section additional-faq">
+            <div class="accordion" id="mainFaqAccordion">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            শার্টিক ডায়াপার কি আপনার সন্তানের আরাম বেড়ে দিবে?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
+                        <div class="accordion-body">
+                            উচ্চ মানের ওয়াশেবল ডায়াপার এখনই কিনুন
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            কেন আমাদের এখানের ডায়াপার নেবে?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
+                        <div class="accordion-body">
+                            উচ্চ মানের সার্টিফিকেট বিশিষ্ট নরম হাতের কাজ করা সামগ্রী।
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            লেয়ার সিস্টেম: কোনো লিকেজ নয়।
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
+                        <div class="accordion-body">
+                            ডাবল সেলাই: পেশাব লিক হওয়ার ঝুঁকি নেই। প্যাড চেঞ্জ সিস্টেম: পুরো ডায়াপার চেঞ্জ করার দরকার নেই। কাস্টমাইজড বাটন: শিশুর মাপ অনুযায়ী সহজে সেট করুন।
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4  -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            এটা কি সব বয়সের শিশুদের জন্য উপযোগী?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
+                        <div class="accordion-body">
+                            হ্যাঁ, ০-৩ বছর বয়সের শিশুর জন্য সহজে মানানসই।
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            কতদিন ব্যবহার করা যাবে?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
+                        <div class="accordion-body">
+                            সঠিক যত্ন নিলে ৬-১২ মাস পর্যন্ত।
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <!-- Additional FAQ Section -->
-        <div class="additional-faq">
+        {{-- <div class="additional-faq">
             <div class="faq-item">এটি কি এক বারের জন্য ব্যবহারযোগ্য?</div>
             <div class="faq-item">কতদিন টিকে থাকে?</div>
-        </div>
+        </div> --}}
 
         <!-- Video Section -->
         <div class="video-section">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/your-video-id" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/92jIukxdaBo" allowfullscreen></iframe>
             </div>
         </div>
 
@@ -371,56 +371,61 @@
                 <li>দীর্ঘস্থায়ী: একবার কিনলে মাসের পর মাস ব্যবহার করুন।</li>
             </ul>
         </div>
+
+        <!-- Order Form -->
         <form action="{{route('order.store')}}" method="POST" id="orderForm">
             @csrf
+
             <!-- Product Selection -->
-            <div class="product-selection">
-                <h3>পণ্য নির্বাচন করুন</h3>
-                @foreach($products as $product)
-                    <div class="product-option">
-                        <input
-                            type="radio"
-                            name="slug"
-                            id="product{{ $product->id }}"
-                            value="{{ $product->slug }}"
-                            class="product-radio"
-                            {{ $loop->first ? 'checked' : '' }}
-                        >
-                        <label for="product{{ $product->id }}" class="product-details">
-                            <img src="{{ asset($product->photo) }}" alt="{{ $product->title }}" class="product-image">
-                            <div class="product-info">
-                                <div class="product-title">{{ $product->title }}</div>
-                                <div class="product-price">৳{{ number_format($product->price, 2) }}</div>
-                            </div>
-                        </label>
-                    </div>
-                @endforeach
-            </div>
+            @if($products->count() > 0)
+                <div class="product-selection">
+                    <h3>পণ্য নির্বাচন করুন</h3>
+                    @foreach($products as $product)
+                        <div class="product-option">
+                            <input
+                                type="radio"
+                                name="slug"
+                                id="product{{ $product->id }}"
+                                value="{{ $product->slug }}"
+                                class="product-radio"
+                                {{ $loop->first ? 'checked' : '' }}
+                            >
+                            <label for="product{{ $product->id }}" class="product-details">
+                                <img src="{{ asset($product->photo) }}" alt="{{ $product->title }}" class="product-image">
+                                <div class="product-info">
+                                    <div class="product-title">{{ $product->title }}</div>
+                                    <div class="product-price">৳{{ number_format($product->price, 2) }}</div>
+                                </div>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
 
             <!-- Shipping Selection -->
-            <div class="shipping-selection">
-                <h3>ডেলিভারি চার্জ নির্বাচন করুন</h3>
-                @foreach($shippings as $shipping)
-                    <div class="shipping-option">
-                        <input
-                            type="radio"
-                            name="shipping_id"
-                            id="shipping{{ $shipping->id }}"
-                            value="{{ $shipping->id }}"
-                            class="shipping-radio"
-                            {{ $loop->first ? 'checked' : '' }}
-                        >
-                        <label for="shipping{{ $shipping->id }}" class="shipping-details">
-                            <div class="shipping-info">{{ $shipping->type }}</div>
-                            <div class="shipping-price">৳{{ number_format($shipping->price, 2) }}</div>
-                        </label>
-                    </div>
-                @endforeach
-            </div>
-@php
-    $product = $products->first();
-    $shipping = $shippings->first();
-@endphp
+            @if($shippings->count() > 0)
+                <div class="shipping-selection">
+                    <h3>ডেলিভারি চার্জ নির্বাচন করুন</h3>
+                    @foreach($shippings as $shipping)
+                        <div class="shipping-option">
+                            <input
+                                type="radio"
+                                name="shipping_id"
+                                id="shipping{{ $shipping->id }}"
+                                value="{{ $shipping->id }}"
+                                class="shipping-radio"
+                                {{ $loop->first ? 'checked' : '' }}
+                            >
+                            <label for="shipping{{ $shipping->id }}" class="shipping-details">
+                                <div class="shipping-info">{{ $shipping->type }}</div>
+                                <div class="shipping-price">৳{{ number_format($shipping->price, 2) }}</div>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+
             <!-- Order Summary -->
             <div class="order-summary">
                 <h3>অর্ডার সামারি</h3>
@@ -434,7 +439,7 @@
                 </div>
                 <div class="summary-item">
                     <span>শিপিং:</span>
-                    <span id="shipping-cost">৳{{ number_format($shipping ? $shipping->price : 0, 2) }}</span>
+                    <span id="shipping-cost">{{ $shipping ? '৳ ' . number_format($shipping->price, 2) : 'Free' }}</span>
                 </div>
                 <div class="summary-item summary-total">
                     <span>টোটাল:</span>
@@ -542,19 +547,33 @@
         });
 
         function updateTotal() {
-            const selectedProduct = $('input[name="product"]:checked');
+            const selectedProduct = $('input[name="slug"]:checked');
             const selectedShipping = $('input[name="shipping_id"]:checked');
 
             // Get prices from the product-price and shipping-price divs
-            const productPrice = parseFloat(selectedProduct.closest('.product-option')
-                .find('.product-price').text().replace('৳', '').replace(',', ''));
-            const shippingPrice = parseFloat(selectedShipping.closest('.shipping-option')
-                .find('.shipping-price').text().replace('৳', '').replace(',', ''));
+            let productPrice = 0;
+            let shippingPrice = 0;
 
+            if (selectedProduct.length) {
+                productPrice = parseFloat(selectedProduct.closest('.product-option')
+                    .find('.product-price').text().replace('৳', '').replace(',', '')) || 0;
+            }
+
+            if (selectedShipping.length) {
+                shippingPrice = parseFloat(selectedShipping.closest('.shipping-option')
+                    .find('.shipping-price').text().replace('৳', '').replace(',', '')) || 0;
+            }
+
+            if (isNaN(productPrice) || isNaN(shippingPrice)) {
+                console.error('Invalid price values detected');
+                return;
+            }
+
+            console.log('Product Price:', productPrice, 'Shipping Price:', shippingPrice);
             const total = productPrice + shippingPrice;
 
             $('#subtotal').text('৳' + productPrice.toFixed(2));
-            $('#shipping-cost').text('৳' + shippingPrice.toFixed(2));
+            $('#shipping-cost').text(shippingPrice === 0 ? 'Free' : '৳' + shippingPrice.toFixed(2));
             $('#total').text('৳' + total.toFixed(2));
 
             // Update hidden inputs
@@ -563,7 +582,7 @@
         }
 
         // Handle product selection
-        $('input[name="product"]').change(function() {
+        $('input[name="slug"]').change(function() {
             const productName = $(this).closest('.product-option').find('.product-title').text();
             $('#selectedProductName').text(productName);
             $('#productName').val(productName);
@@ -573,6 +592,18 @@
         // Handle shipping selection
         $('input[name="shipping_id"]').change(function() {
             updateTotal();
+        });
+
+        $('.faq-question').click(function() {
+            // Toggle active class on question
+            $(this).toggleClass('active');
+
+            // Toggle show class on answer
+            $(this).next('.faq-answer').toggleClass('show');
+
+            // Close other open FAQs (optional)
+            $('.faq-question').not(this).removeClass('active');
+            $('.faq-answer').not($(this).next()).removeClass('show');
         });
     });
 </script>

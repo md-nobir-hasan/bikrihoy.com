@@ -68,28 +68,10 @@
    <!-- Jquery js -->
     <script src="/assets/frontend/bootstrap.min.js"></script>
     <script src="/assets/frontend/jQuery3.7.1.min.js"></script>
-    <script src="/assets/frontend/script.js"></script>
+    {{-- <script src="/assets/frontend/script.js"></script> --}}
 
     {{-- Global js --}}
-    <script>
-        $(document).ready(function(){
 
-            // Prevent multiple form submissions
-            $('.multiple-submit-prevent').on('submit', function(e) {
-                let form = $(this);
-                let submitButton = form.find('button[type="submit"]');
-
-                if (form.data('submitted') === true) {
-                    e.preventDefault();
-                    return;
-                }
-
-                submitButton.prop('disabled', true);
-                submitButton.text('Processing...');
-                form.data('submitted', true);
-            });
-        });
-    </script>
 
 <script>
     $('.order-now-button-track').on('click',function(){
