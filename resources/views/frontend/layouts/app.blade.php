@@ -8,7 +8,7 @@
         {{-- End notification  --}}
 
         <!-- Navbar Start -->
-        @include('frontend.partials.navbar')
+        {{-- @include('frontend.partials.navbar') --}}
         <!-- Navbar End -->
         <div class="toastr-div">
         </div>
