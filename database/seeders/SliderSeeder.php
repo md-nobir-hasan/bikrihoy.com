@@ -15,8 +15,9 @@ class SliderSeeder extends Seeder
     public function run()
     {
         $n = [
-            ['image'=>'seeder/s1.jpg'],
-            ['image'=>'seeder/s2.jpg'],
+            ['image'=>'images/default/slider/slider1.jpg'],
+            ['image'=>'images/default/slider/slider2.jpg'],
+            ['image'=>'images/default/slider/slider3.jpg'],
         ];
 
         DB::table('sliders')->insert($n);

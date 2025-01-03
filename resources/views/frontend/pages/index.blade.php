@@ -13,17 +13,23 @@
             column-gap: 0.5rem;
             margin-bottom: 0.5rem;
         }
+        .max-h-350px{
+            max-height: 350px;
+        }
     </style>
 @endpush
 
 @section('page_conent')
+
+    <!-- Slider section -->
+    @if($sliders->count()>0)
     <section class="sliderSection">
         <div class="sliderMain">
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @foreach ($sliders as $slider)
                         <div class="carousel-item @if($loop->index) active @endif">
-                            <img src="{{$slider->image}}" class="d-block w-100" alt="{{$site_info->title}}" loading="eager">
+                            <img src="/{{$slider->image}}" class="d-block w-100 max-h-350px" alt="{{$site_info->title}}" loading="eager">
                         </div>
                     @endforeach
                 </div>
@@ -38,7 +44,7 @@
               </div>
         </div>
     </section>
-
+    @endif
     <!-- Product section -->
     <section class="production">
         <div class="container">
