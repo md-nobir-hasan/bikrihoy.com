@@ -2,65 +2,212 @@
 
 @push('css')
     <style>
+        /* Color Variables */
         :root {
+            --primary-color: #8a2be2;     /* Main purple */
+            --secondary-color: #ff1493;    /* Deep pink */
+            --gradient-start: #e7b3f3;     /* Light purple */
+            --gradient-end: #8a4fff;       /* Medium purple */
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --background-light: #ffffff;
             --title-size: 28px;
             --text-size: 23px;
             --text-size-small: 20px;
+            --highlight-color: #ff69b4;
+            --success-gradient: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            --shine-gradient: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
         }
 
         /* Main Container */
         .main-container {
             max-width: 800px;
             margin: 0 auto;
-            background: #fff;
+            background: var(--background-light);
             font-size: var(--text-size);
+            padding: 0;
+            overflow: hidden;
         }
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(180deg, #fff 0%, #e7b3f3 100%);
-            padding: 20px;
+            background: linear-gradient(
+                180deg,
+                var(--background-light) 0%,
+                var(--gradient-start) 50%,
+                var(--gradient-end) 100%
+            );
+            padding: 35px 20px 45px;
             text-align: center;
-            border-bottom-left-radius: 50% 10%;
-            border-bottom-right-radius: 50% 10%;
+            position: relative;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        /* Create decorative elements */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: radial-gradient(
+                circle at 50% 50%,
+                rgba(255, 255, 255, 0.8) 0%,
+                rgba(255, 255, 255, 0) 70%
+            );
+            pointer-events: none;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -5%;
+            width: 110%;
+            height: 50px;
+            background: var(--background-light);
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .hero-title {
-            color: #000;
-            font-size: var(--title-size);
-            line-height: 1.5;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 10px;
+            color: var(--text-dark);
+            font-size: calc(var(--title-size) + 2px);
+            line-height: 1.6;
+            margin: 0 auto 20px;
+            padding: 25px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow:
+                0 4px 25px rgba(138, 43, 226, 0.15),
+                0 2px 8px rgba(138, 43, 226, 0.1),
+                inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            position: relative;
+            max-width: 95%;
+            transform: translateZ(0);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .hero-subtitle {
-            font-size: var(--text-size);
-            margin-bottom: 20px;
+        /* Add subtle gradient animation to hero background */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
+        .hero-section {
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        /* Add responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 25px 15px 35px;
+            }
+
+            .hero-title {
+                font-size: var(--title-size);
+                padding: 20px 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                padding: 20px 10px 30px;
+            }
+
+            .hero-title {
+                padding: 15px 20px;
+                font-size: calc(var(--title-size) - 2px);
+            }
+        }
+
+        /* Video Section */
+        .video-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--background-light);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Discount Banner */
         .discount-banner {
-            background: #ff69b4;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
+            background: var(--secondary-color);
+            color: var(--text-light);
+            padding: 12px 25px;
+            border-radius: 30px;
             display: inline-block;
-            margin: 15px 0;
+            margin: 0 auto;
             font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: auto;
+            max-width: 90%;
         }
 
+        /* CTA Button */
         .cta-button {
-            background: #28a745;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            color: var(--text-light);
+            padding: 15px 35px;
+            border-radius: 30px;
             display: inline-block;
             text-decoration: none;
             font-weight: bold;
             margin: 15px 0;
             border: none;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            color: var(--text-light);
+        }
+
+        /* Action Section */
+        .action-section {
+            text-align: center;
+            padding: 5px 0;
+            margin-top: 0;
+        }
+
+        /* Hero Subtitle */
+        .hero-subtitle {
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 0 20px;
+            margin: 0;
+            text-align: center;
         }
 
         /* FAQ Section */
@@ -107,28 +254,6 @@
             background: #ff69b4;
             padding: 15px;
             margin: 20px 0;
-        }
-
-        /* Video Section */
-        .video-section {
-            margin: 20px 0;
-            padding: 15px;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
         }
 
         /* Benefits Section */
@@ -262,6 +387,151 @@
             font-weight: bold;
             color: #ff69b4;
         }
+
+        /* Offer Section Styles */
+        .offer-wrapper {
+            padding: 5px 15px;
+            margin: 10px 0 5px;
+        }
+
+        .discount-banner-container {
+            text-align: center;
+            position: relative;
+        }
+
+        .discount-banner {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--highlight-color) 100%);
+            color: var(--text-light);
+            padding: 12px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: var(--text-size);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            animation: pulse 2s infinite;
+        }
+
+        .discount-highlight {
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .discount-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--shine-gradient);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        /* Action Section Styles */
+        .cta-wrapper {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .cta-button {
+            background: var(--success-gradient);
+            padding: 18px 40px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-text {
+            font-size: var(--text-size);
+            font-weight: bold;
+        }
+
+        .cta-arrow {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover .cta-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Info Section Styles */
+        .info-section {
+            padding: 15px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 15px;
+            margin: 20px 15px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08),
+                0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-subtitle {
+            margin: 0;
+            padding: 0;
+            font-size: var(--text-size);
+            line-height: 1.8;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        /* Add subtle highlight to important text without changing content */
+        .hero-subtitle strong {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .highlight-text {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .emphasis-text {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 576px) {
+            .discount-banner {
+                font-size: var(--text-size-small);
+                padding: 12px 25px;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+            }
+
+            .hero-subtitle {
+                font-size: var(--text-size-small);
+                padding: 15px;
+            }
+        }
     </style>
 @endpush
 
@@ -272,14 +542,47 @@
             $shipping = $shippings->first();
         @endphp
 
-        <!-- Hero Section -->
+        <!-- header Section -->
         <div class="hero-section">
-            <h1 class="hero-title fw-bolder">আপনার সন্তানের আরাম ও সুরক্ষায় নিশ্চিত থাকুন,সাশ্রয় করুন আপনার কষ্টের টাকায় এবং থাকুন সেরাটা</h1>
-            <p class="hero-subtitle">আপনার সন্তানের জন্য সেরা খুঁজে, এখন মাত্রের দাগজালে সাশ্রয়ী মূল্যে উন্নত মানের ওয়াশেবল ডায়াপার এখনই কিনুন</p>
-            <div class="discount-banner">
-                এখনই অর্ডার করুন এবং ২০% ছাড় পান। সীমিত সময়ের জন্য!
+            <h1 class="hero-title fw-bolder">কনকনে শীতে সন্তানের আরাম ও স্বাস্থ্য সুরক্ষায় ডাবল স্টিজ  ওয়াশেবল ডায়পার একমাত্র সমাধান।</h1>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/92jIukxdaBo?autoplay=1" allowfullscreen></iframe>
             </div>
-            <a href="#order_detials" class="cta-button fw-bold">অর্ডার করতে ক্লিক করুন</a>
+        </div>
+
+        <!-- Offer Section -->
+        <div class="offer-wrapper">
+            <div class="discount-banner-container">
+                <div class="discount-banner">
+                    প্রথমবার অর্ডার করলে পাচ্ছেন <span class="discount-highlight"> ২০% ছাড়</span> এবং এক্সট্রা প্যাড ফ্রি এবং এক্সট্রা প্যাড ফ্রি
+                    <div class="discount-shine"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="action-section">
+            <div class="cta-wrapper">
+                <a href="#product_selection" class="cta-button">
+                    <span class="cta-text">অর্ডার করতে ক্লিক করুন</span>
+                    <span class="cta-arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-card">
+                <p class="hero-subtitle">
+                    <span class="highlight-text">আপনার সোনামণির জন্য সেরা যত্ন</span>, এখন হাতের নাগালে। সাশ্রয়ী মূল্যে উন্নত মানের ওয়াশেবল ডায়াপার কিনুন এখনই!
+                    <br><br>
+                    <span class="emphasis-text">নিরাপদ, আরামদায়ক ও পরিবেশবান্ধব</span>, যা আপনার শিশুর কোমল ত্বকের জন্য একদম আদর্শ
+                </p>
+            </div>
         </div>
 
         <!-- Main FAQ Section -->
@@ -289,12 +592,17 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                            শার্টিক ডায়াপার কি আপনার সন্তানের আরাম বেড়ে দিবে?
+                           প্লাস্টিক ডায়াপার কি আপনার শিশুর আরাম কেড়ে নিচ্ছে?
                         </button>
                     </h2>
                     <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
                         <div class="accordion-body">
-                            উচ্চ মানের ওয়াশেবল ডায়াপার এখনই কিনুন
+                            আপনার শিশুর কোমল ত্বকে প্লাস্টিক ডায়াপারের কারণে হতে পারে লালচে দাগ, র‍্যাশ এবং ত্বকের জ্বালাপোড়া। লিকেজ ও বারবার কেনার খরচ তো আছেই।
+                            <br> <br>
+                            সমাধান? <br>
+                            আমাদের ওয়াশেবল ডায়াপার। <br>
+                            ➡️ নরম, আরামদায়ক এবং ত্বক-বান্ধব। <br>
+                            ➡️ লিকেজমুক্ত এবং বারবার ব্যবহারযোগ্য।
                         </div>
                     </div>
                 </div>
@@ -303,12 +611,12 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                            কেন আমাদের এখানের ডায়াপার নেবে?
+                            কেন আমাদের ওয়াশেবল ডায়াপার সেরা?
                         </button>
                     </h2>
                     <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
                         <div class="accordion-body">
-                            উচ্চ মানের সার্টিফিকেট বিশিষ্ট নরম হাতের কাজ করা সামগ্রী।
+                            আমাদের ওয়াশেবল ডায়াপার তৈরি করা হয়েছে উন্নত মানের নরম ফেব্রিক দিয়ে, যা আপনার শিশুর কোমল ত্বকের জন্য একদম উপযোগী।
                         </div>
                     </div>
                 </div>
@@ -317,12 +625,17 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                            লেয়ার সিস্টেম: কোনো লিকেজ নয়।
+                            আমাদের নতুন প্রজন্মের সেরা ডায়াপার: লিকেজ? আর নয়!
                         </button>
                     </h2>
                     <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
                         <div class="accordion-body">
-                            ডাবল সেলাই: পেশাব লিক হওয়ার ঝুঁকি নেই। প্যাড চেঞ্জ সিস্টেম: পুরো ডায়াপার চেঞ্জ করার দরকার নেই। কাস্টমাইজড বাটন: শিশুর মাপ অনুযায়ী সহজে সেট করুন।
+                            <b>ডাবল লেয়ার সিস্টেম:</b> নিশ্চিত লিকেজমুক্ত সুরক্ষা। <br> <br>
+
+                            <b>ডাবল সেলাই:</b> পেশাব লিক হওয়ার ঝুঁকি সম্পূর্ণ দূর।<br>
+                            পুরো ডায়াপার বদলানোর ঝামেলা নেই, শুধু প্যাড বদলালেই হলো! <br> <br>
+
+                           <b> কাস্টমাইজড বাটন:</b> আপনার শিশুর মাপ অনুযায়ী সহজেই সেট করুন।
                         </div>
                     </div>
                 </div>
@@ -336,7 +649,7 @@
                     </h2>
                     <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
                         <div class="accordion-body">
-                            হ্যাঁ, ০-৩ বছর বয়সের শিশুর জন্য সহজে মানানসই।
+                            হ্যাঁ! এটি বিশেষভাবে ০-৩ বছর বয়সের শিশুদের জন্য নিখুঁতভাবে মানানসই।
                         </div>
                     </div>
                 </div>
@@ -350,7 +663,7 @@
                     </h2>
                     <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#mainFaqAccordion">
                         <div class="accordion-body">
-                            সঠিক যত্ন নিলে ৬-১২ মাস পর্যন্ত।
+                            সঠিক যত্ন নিলে, আমাদের পণ্যগুলো আপনাকে ৬ থেকে ১২ মাস পর্যন্ত সন্তুষ্টি দিতে পারবে।
                         </div>
                     </div>
                 </div>
@@ -358,21 +671,11 @@
             </div>
         </div>
 
-        <!-- Additional FAQ Section -->
-        {{-- <div class="additional-faq">
-            <div class="faq-item">এটি কি এক বারের জন্য ব্যবহারযোগ্য?</div>
-            <div class="faq-item">কতদিন টিকে থাকে?</div>
-        </div> --}}
 
-        <!-- Video Section -->
-        <div class="video-section">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/92jIukxdaBo" allowfullscreen></iframe>
-            </div>
-        </div>
+
 
         <!-- Benefits Section -->
-        <div class="benefits-section">
+        {{-- <div class="benefits-section">
             <h3 class="benefits-title">শুধু ডায়াপার নয়, এটি একটি বিনিয়োগ:</h3>
             <ul class="benefits-list">
                 <li>সাশ্রয়ী: বারবার ব্যবহারের মাধ্যমে খরচ কমায়।</li>
@@ -381,7 +684,7 @@
                 <li>সহজ পরিচর্যা: মাত্র কয়েক ধাপেই ধুয়ে পুনরায় ব্যবহার করুন।</li>
                 <li>দীর্ঘস্থায়ী: একবার কিনলে মাসের পর মাস ব্যবহার করুন।</li>
             </ul>
-        </div>
+        </div> --}}
 
         <!-- Order Form -->
         <form action="{{route('order.store')}}" method="POST" id="orderForm">
@@ -389,7 +692,7 @@
 
             <!-- Product Selection -->
             @if($products->count() > 0)
-                <div class="product-selection">
+                <div class="product-selection" id="product_selection">
                     <h3>পণ্য নির্বাচন করুন</h3>
                     @foreach($products as $product)
                         <div class="product-option">
@@ -507,6 +810,7 @@
 
             </div>
         </form>
+
         <!-- Messenger Button -->
         <div class="messenger-button">
             <i class="fab fa-facebook-messenger"></i>
@@ -518,12 +822,10 @@
 <script>
     $(document).ready(function() {
         // Smooth scroll for anchor links
-        $('a[href^="#"]').on('click', function(e) {
+        $('a[href^="#product_selection"]').on('click', function(e) {
             e.preventDefault();
             var target = $(this.hash);
-            $('html, body').animate({
-                scrollTop: target.offset().top - 20
-            }, 800);
+            $('html, body').scrollTop(target.offset().top - 20);
         });
 
         // Form submission handling
