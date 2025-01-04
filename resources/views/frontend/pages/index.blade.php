@@ -43,7 +43,6 @@
             padding: 35px 20px 45px;
             text-align: center;
             position: relative;
-            margin-bottom: 30px;
             overflow: hidden;
         }
 
@@ -127,7 +126,7 @@
 
         @media (max-width: 576px) {
             .hero-section {
-                padding: 20px 10px 30px;
+                padding: 7px 10px 38px;
             }
 
             .hero-title {
@@ -138,7 +137,6 @@
 
         /* Video Section */
         .video-section {
-            margin: 20px 0;
             padding: 15px;
             background: var(--background-light);
         }
@@ -812,7 +810,7 @@
         /* Responsive Adjustments */
         @media (max-width: 576px) {
             .discount-banner {
-                font-size: var(--text-size-small);
+                font-size: var(--text-size-);
                 padding: 12px 25px;
             }
 
