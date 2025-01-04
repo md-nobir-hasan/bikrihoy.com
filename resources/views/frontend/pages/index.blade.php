@@ -19,6 +19,9 @@
             --shine-gradient: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
         }
 
+        .text-red {
+            color: red ;
+        }
         /* Main Container */
         .main-container {
             max-width: 800px;
@@ -293,99 +296,389 @@
 
         /* Form Styles */
         .order-form {
-            background: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);  /* New vibrant gradient */
+            padding: 25px 20px;
+            margin: 25px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .order-form h3 {
+            color: var(--text-light);
+            font-size: var(--title-size);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-inner {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.05),
+                0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-size: var(--text-size);
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: var(--text-size-small);
+            font-weight: 500;
+        }
+
+        .form-label .text-danger {
+            color: #dc3545;
+            margin-left: 4px;
         }
 
         .form-control {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px 15px;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            border-radius: 10px;
+            font-size: var(--text-size-small);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #FF416C;
+            box-shadow: 0 0 0 3px rgba(255, 65, 108, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Error state */
+        .form-control.is-invalid {
+            border-color: #dc3545;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px 16px;
+            padding-right: 40px;
+        }
+
+        .text-danger {
+            display: block;
+            margin-top: 5px;
+            font-size: calc(var(--text-size-small) - 2px);
+            color: #dc3545;
+        }
+
+        /* Alert styles */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+        }
+
+        .alert-danger {
+            background-color: #fff5f5;
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
+        .alert a {
+            color: inherit;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        /* Submit Button */
+        .order-form .cta-button {
+            width: 100%;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
             font-size: var(--text-size);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-form .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .order-form {
+                margin: 20px 10px;
+                padding: 20px 15px;
+            }
+
+            .form-inner {
+                padding: 15px;
+            }
+
+            .form-control {
+                padding: 10px 12px;
+            }
+
+            .form-label {
+                font-size: calc(var(--text-size-small) - 1px);
+            }
         }
 
         /* Product Selection Styles */
-        .product-selection, .shipping-selection {
-            margin: 20px 0;
+        .product-selection {
+            margin: 25px 15px;
+            padding: 25px 20px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-selection h3 {
+            color: var(--text-light);
+            font-size: var(--title-size);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-option {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.05),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-option:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-radio {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
             padding: 15px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .product-option, .shipping-option {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .product-radio, .shipping-radio {
-            margin-right: 15px;
-        }
-
-        .product-details, .shipping-details {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
         }
 
         .product-image {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            margin-right: 15px;
-            border-radius: 5px;
+            border-radius: 12px;
+            margin-right: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .product-info {
-            flex-grow: 1;
+            flex: 1;
         }
 
         .product-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: var(--title-size);
+            font-size: var(--text-size);
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-weight: 500;
+            line-height: 1.4;
         }
 
-        .product-price, .shipping-price {
-            color: #ff69b4;
+        .product-price {
+            font-size: var(--text-size);
+            color: var(--secondary-color);
             font-weight: bold;
         }
 
-        /* Order Summary */
+        /* Selected state styling */
+        .product-radio:checked + .product-details {
+            background: rgba(138, 43, 226, 0.05);
+        }
+
+        .product-radio:checked + .product-details::before {
+            content: '✓';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .product-selection {
+                margin: 20px 10px;
+                padding: 20px 15px;
+            }
+
+            .product-image {
+                width: 80px;
+                height: 80px;
+                margin-right: 15px;
+            }
+
+            .product-title {
+                font-size: var(--text-size-small);
+            }
+
+            .product-price {
+                font-size: var(--text-size-small);
+            }
+        }
+
+        /* Order Summary Styles */
         .order-summary {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 25px 20px;
+            margin: 25px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .order-summary h3 {
+            color: var(--text-light);
+            font-size: var(--title-size);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .summary-item {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
+            align-items: center;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.05),
+                0 1px 2px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .summary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-item span:first-child {
+            color: var(--text-dark);
+            font-size: var(--text-size-small);
+        }
+
+        .summary-item span:last-child {
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: var(--text-size-small);
+        }
+
+        .summary-item.selected-product {
+            background: rgba(255, 255, 255, 0.98);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .summary-item.shipping-cost {
+            background: rgba(255, 255, 255, 0.95);
+            border-left: 4px solid var(--secondary-color);
         }
 
         .summary-total {
+            margin-top: 15px;
+            background: var(--text-light);
+            border-radius: 12px;
+            padding: 18px 20px;
             font-weight: bold;
-            color: #ff69b4;
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            box-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-total span:first-child {
+            color: var(--text-dark);
+            font-size: var(--text-size);
+        }
+
+        .summary-total span:last-child {
+            color: var(--secondary-color);
+            font-size: var(--text-size);
+            font-weight: 800;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .order-summary {
+                margin: 20px 10px;
+                padding: 20px 15px;
+            }
+
+            .summary-item {
+                padding: 12px 15px;
+            }
+
+            .summary-item span:first-child,
+            .summary-item span:last-child {
+                font-size: calc(var(--text-size-small) - 2px);
+            }
+
+            .summary-total span:first-child,
+            .summary-total span:last-child {
+                font-size: var(--text-size-small);
+            }
         }
 
         /* Offer Section Styles */
@@ -530,6 +823,130 @@
             .hero-subtitle {
                 font-size: var(--text-size-small);
                 padding: 15px;
+            }
+        }
+
+        /* Shipping Selection Styles */
+        .shipping-selection {
+            background: linear-gradient(135deg, #20bf55 0%, #01baef 100%);  /* Unique gradient */
+            padding: 25px 20px;
+            margin: 25px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .shipping-selection h3 {
+            color: var(--text-light);
+            font-size: var(--title-size);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .shipping-option {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.05),
+                0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .shipping-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .shipping-option:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .shipping-radio {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .shipping-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .shipping-info {
+            color: var(--text-dark);
+            font-size: var(--text-size-small);
+            font-weight: 500;
+        }
+
+        .shipping-price {
+            color: #20bf55;  /* Match gradient color */
+            font-size: var(--text-size-small);
+            font-weight: bold;
+        }
+
+        /* Selected state styling */
+        .shipping-radio:checked + .shipping-details {
+            background: rgba(32, 191, 85, 0.05);  /* Light green background */
+        }
+
+        .shipping-radio:checked + .shipping-details::before {
+            content: '✓';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: #20bf55;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(32, 191, 85, 0.3);
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                left: -25px;
+                opacity: 0;
+            }
+            to {
+                left: 15px;
+                opacity: 1;
+            }
+        }
+
+        /* Hover effect */
+        .shipping-option:hover .shipping-details {
+            background: rgba(32, 191, 85, 0.02);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .shipping-selection {
+                margin: 20px 10px;
+                padding: 20px 15px;
+            }
+
+            .shipping-details {
+                padding: 12px 15px;
+            }
+
+            .shipping-info,
+            .shipping-price {
+                font-size: calc(var(--text-size-small) - 2px);
             }
         }
     </style>
@@ -743,15 +1160,15 @@
             <!-- Order Summary -->
             <div class="order-summary">
                 <h3>অর্ডার সামারি</h3>
-                <div class="summary-item">
-                    <span class="item-name">Selected Product:</span>
-                    <span class="item-value" id="selectedProductName">{{ $product ? $product->title : '' }}</span>
+                <div class="summary-item selected-product">
+                    <span>Selected Product:</span>
+                    <span id="selectedProductName">{{ $product ? $product->title : '' }}</span>
                 </div>
                 <div class="summary-item">
                     <span>সাবটোটাল:</span>
                     <span id="subtotal">৳{{ number_format($product ? $product->price : 0, 2) }}</span>
                 </div>
-                <div class="summary-item">
+                <div class="summary-item shipping-cost">
                     <span>শিপিং:</span>
                     <span id="shipping-cost">{{ $shipping ? '৳ ' . number_format($shipping->price, 2) : 'Free' }}</span>
                 </div>
@@ -764,32 +1181,35 @@
             <!-- Order Form -->
             <div class="order-form" id='order_detials'>
                 <h3>অর্ডার করতে নিচের ফরমটি পূরণ করুন</h3>
-                @if(session('success'))
-                    <div class="alert alert-danger">
-                        আপনি ইতিপূর্বেই {{ session('success') }} নাম্বার দিয়ে অর্ডার সম্পূর্ণ করেছেন।
-                        অর্ডার সম্পর্কে বিস্তারিত জানতে - <br>
-                        Call: <a href="tel:{{$site_contact_info->phone}}"> {{$site_contact_info->phone}}</a> <br>
-                        Whatsapp: <a href="https://wa.me/{{$site_contact_info->whatsapp}}"> {{$site_contact_info->whatsapp}}</a>
-                    </div>
-                @endif
+                <div class="form-inner">
+                    @if(session('success'))
+                        <div class="alert alert-danger">
+                            আপনি ইতিপূর্বেই {{ session('success') }} নাম্বার দিয়ে অর্ডার সম্পূর্ণ করেছেন।
+                            অর্ডার সম্পর্কে বিস্তারিত জানতে - <br>
+                            Call: <a href="tel:{{$site_contact_info->phone}}"> {{$site_contact_info->phone}}</a> <br>
+                            Whatsapp: <a href="https://wa.me/{{$site_contact_info->whatsapp}}"> {{$site_contact_info->whatsapp}}</a>
+                        </div>
+                    @endif
+
                     <div class="form-group">
-                        <label class="form-label" for="name">আপনার নাম <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label class="form-label" for="name">আপনার নাম <span class="text-red">*</span></label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="form-group">
-                        <label class="form-label" for="phone">মোবাইল নাম্বার <span class="text-danger">*</span></label>
-                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                        <label class="form-label" for="phone">মোবাইল নাম্বার <span class="text-red">*</span></label>
+                        <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" required>
                         @error('phone')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="address">সম্পূর্ণ ঠিকানা <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="address" rows="3" name="address" required></textarea>
+                        <label class="form-label" for="address">সম্পূর্ণ ঠিকানা <span class="text-red">*</span></label>
+                        <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" required></textarea>
                         @error('address')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -797,7 +1217,7 @@
 
                     <div class="form-group">
                         <label class="form-label" for="note">আপনার মতামত এখানে লিখুন</label>
-                        <textarea class="form-control" id="note" rows="3" name="note" ></textarea>
+                        <textarea class="form-control @error('note') is-invalid @enderror" id="note" name="note"></textarea>
                         @error('note')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -806,15 +1226,13 @@
                     <input type="hidden" id="productName" name="productName" value="{{ $product ? $product->title : '' }}">
                     <input type="hidden" id="productPrice" name="productPrice" value="{{ $product ? $product->price : 0 }}">
                     <input type="hidden" id="shippingCost" name="shippingCost" value="{{ $shipping ? $shipping->price : 0 }}">
-                    <button type="submit" class="cta-button">অর্ডার কনফার্ম করুন</button>
 
+                    <button type="submit" class="cta-button">
+                        <span class="button-text">অর্ডার কনফার্ম করুন</span>
+                    </button>
+                </div>
             </div>
         </form>
-
-        <!-- Messenger Button -->
-        <div class="messenger-button">
-            <i class="fab fa-facebook-messenger"></i>
-        </div>
     </div>
 @endsection
 
