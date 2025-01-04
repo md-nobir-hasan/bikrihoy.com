@@ -965,7 +965,16 @@
         <!-- Video Section -->
         <div class="video-section">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/92jIukxdaBo?autoplay=1" allowfullscreen></iframe>
+                <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/92jIukxdaBo?si=rUoNhgimyuMfYyPL&autoplay=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+            ></iframe>
             </div>
         </div>
 
@@ -973,7 +982,7 @@
         <div class="offer-wrapper">
             <div class="discount-banner-container">
                 <div class="discount-banner">
-                    প্রথমবার অর্ডার করলে পাচ্ছেন <span class="discount-highlight"> ২০% ছাড়</span> এবং এক্সট্রা প্যাড ফ্রি এবং এক্সট্রা প্যাড ফ্রি
+                    প্রথমবার অর্ডার করলে পাচ্ছেন <span class="discount-highlight"> ২০% ছাড়</span> এবং এক্সট্রা প্যাড ফ্রি
                     <div class="discount-shine"></div>
                 </div>
             </div>
@@ -1237,6 +1246,15 @@
 @push('custom-js')
 <script>
     $(document).ready(function() {
+        const iframe = $('.video-container iframe');
+        // Wait for any user interaction
+        $(document).one('click', function() {
+            if (iframe.length) {
+                let currentSrc = iframe.attr('src');
+                iframe.attr('src', currentSrc + '&autoplay=1');
+            }
+        });
+
         // Smooth scroll for anchor links
         $('a[href^="#product_selection"]').on('click', function(e) {
             e.preventDefault();
@@ -1267,12 +1285,12 @@
                         .html('<i class="fas fa-spinner fa-spin"></i> Processing...');
 
             // Enable the button after 30 seconds (failsafe in case of network issues)
-            setTimeout(function() {
-                submitButton.prop('disabled', false)
-                           .html('অর্ডার কনফার্ম করুন');
-            }, 30000);
+            // setTimeout(function() {
+            //     submitButton.prop('disabled', false)
+            //                .html('অর্ডার কনফার্ম করুন');
+            // }, 30000);
 
-            return true;
+            // return true;
         });
 
         function updateTotal() {
