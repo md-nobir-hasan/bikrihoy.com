@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Shipping;
@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\UpdateOrderReqeust;
+use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
@@ -173,9 +174,38 @@ class OrderController extends Controller
             log::error($e->getMessage());
         }
 
-        request()->session()->flash('success', " Order successfully placed");
+        //insert order to stead fast courier
+        //data preparation
+        $data = [
+            'invoice' => $insert->order_number,
+            'recipient_name' => $insert->name,
+            'recipient_phone' => $insert->phone,
+            'recipient_address' => $insert->address,
+            'cod_amount' => $insert->total,
+            'note' => $insert->note
+        ];
+        try {
+            $steadFastCourier = steadFastCourier();
+            $insertOrder = $steadFastCourier->createOrder($data);
 
-        return redirect()->route('order.thanks', [$insert->order_number]);
+            if($insertOrder['status'] === 400) {
+                // Convert SteadFast errors to Laravel validation errors
+                $validator = Validator::make([], []); // Empty validator
+                $validator->errors()->merge($insertOrder['errors']);
+
+                throw new ValidationException($validator);
+            }
+
+            return redirect()->route('order.thanks', [$insert->order_number]);
+
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors());
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
+
+
     }
 
     public function view($id)

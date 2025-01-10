@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::prefix('courier')->group(function () {
+//     Route::post('order', 'CourierController@createOrder');
+//     Route::post('bulk-order', 'CourierController@createBulkOrder');
+//     Route::get('track/{type}/{id}', 'CourierController@trackOrder');
+//     Route::get('balance', 'CourierController@getBalance');
+// });

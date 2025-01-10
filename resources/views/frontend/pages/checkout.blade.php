@@ -138,15 +138,30 @@
 
                         <label for="Cname">পুরো নাম *</label>
                         <input type="text" name="name" id="Cname" required>
+                        @error('recipient_name')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
 
                         <label for="Cmobile">মোবাইল নাম্বার *</label>
                         <input type="tel" name="phone" id="Cmobile" required>
+                        @error('recipient_phone')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+
 
                         <label for="Caddress">পুর্ণ ঠিকানা *</label>
                         <input type="text" name="address" id="Caddress" required>
+                        @error('recipient_address')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+
 
                         <label for="note">আপনার মতামত এখানে লিখুন </label>
                         <textarea name="note" id="note" class="form-control" cols="30" rows="6"></textarea>
+                        @error('note')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+
 
                         <div class="pamentInfoMain">
                             <div class="address">
