@@ -456,5 +456,14 @@ class OrderController extends Controller
         return view('frontend.pages.thanks', $n);
     }
 
+    public function checkStatus(Order $order)
+    {
+        $steadFastCourier = steadFastCourier();
+        $newStatus = $steadFastCourier->updateOrderStatus($order);
+
+        return response()->json([
+            'newStatus' => $newStatus
+        ]);
+    }
 
 }

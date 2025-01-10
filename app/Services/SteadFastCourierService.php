@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class SteadFastCourierService
 {
@@ -160,6 +161,58 @@ class SteadFastCourierService
             throw new Exception('Failed to get balance: ' . $response->body());
         } catch (Exception $e) {
             throw new Exception('SteadFast API Error: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Map SteadFast status to system status
+     *
+     * @param string $steadfastStatus
+     * @return string
+     */
+    private function mapStatus($steadfastStatus)
+    {
+        $statusMap = [
+            'pending' => 'new',
+            'in_review' => 'new',
+            'delivered_approval_pending' => 'process',
+            'partial_delivered_approval_pending' => 'process',
+            'cancelled_approval_pending' => 'cancelled',
+            'delivered' => 'delivered',
+            'partial_delivered' => 'delivered',
+            'cancelled' => 'cancelled',
+            'hold' => 'process',
+            'unknown' => 'process',
+            'unknown_approval_pending' => 'process'
+        ];
+
+        return $statusMap[$steadfastStatus] ?? 'new';
+    }
+
+    /**
+     * Update order status from SteadFast
+     *
+     * @param Order $order
+     * @return string|null Returns the new status if changed, null if unchanged
+     */
+    public function updateOrderStatus($order)
+    {
+        try {
+            $response = $this->getStatusByInvoice($order->order_number);
+
+            if ($response['status'] === 200) {
+                $newStatus = $this->mapStatus($response['delivery_status']);
+
+                if ($newStatus !== $order->order_status) {
+                    $order->order_status = $newStatus;
+                    $order->save();
+                    return $newStatus;
+                }
+            }
+            return null;
+        } catch (Exception $e) {
+            Log::error('SteadFast status update failed: ' . $e->getMessage());
+            return null;
         }
     }
 }
