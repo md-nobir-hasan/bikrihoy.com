@@ -3,7 +3,10 @@ use App\Models\Permission;
 use App\Models\Feature;
 use App\Models\Service;
 use App\Models\SiteSetting;
+use App\Services\SteadFastCourierService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 // Number converter from bangla to english and en2bn
 class Converter2
 {
@@ -111,5 +114,9 @@ function companyContact(){
 function companyInfo(){
     return DB::table('company_infos')->first();
 
+}
+
+function steadFastCourier(){
+    return new SteadFastCourierService();
 }
 

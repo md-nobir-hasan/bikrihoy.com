@@ -65,7 +65,9 @@
                                             <td class="align-middle">{{ $loop->index+1 }}</td>
                                             <td class="align-middle">{{ $order->order_number }}</td>
                                             <td class="align-middle">{{ $order->name }}</td>
-                                            <td class="align-middle">{{ $order->phone }}</td>
+                                            <td class="align-middle">
+                                                <a href="tel:{{ $order->phone }}">{{ $order->phone }}</a>
+                                            </td>
                                             <td class="align-middle">{{ $order->total }}</td>
                                             <td class="align-middle">{{count($order->orderItem) }}</td>
                                             <td class="align-middle">{{ $order->address }}</td>

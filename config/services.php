@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'steadfast' => [
+        'api_key' => env('STEADFAST_API_KEY', 'xffkadc5i24kolpvkb1oaas29llk7nsk'),
+        'secret_key' => env('STEADFAST_SECRET_KEY', 'tctlv7bcorrt7yyqwgd3yl1e'),
+        'base_url' => env('STEADFAST_BASE_URL', 'https://portal.packzy.com/api/v1'),
+    ],
+
 ];

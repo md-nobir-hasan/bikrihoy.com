@@ -496,13 +496,13 @@ input[type="number"] {
     display: block;
     font-size: 1rem;
     font-weight: 500;
+    margin-top: 1rem;
 }
 .checkoutFormLeft input {
     width: 100%;
     padding: 0.5rem;
     outline: none;
     border-radius: 0.3rem;
-    margin-bottom: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     transition: 0.4s ease;
 }
