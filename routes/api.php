@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     Route::get('track/{type}/{id}', 'CourierController@trackOrder');
 //     Route::get('balance', 'CourierController@getBalance');
 // });
+
+Route::get('/order/{order}/check-status', [OrderController::class, 'checkStatus']);

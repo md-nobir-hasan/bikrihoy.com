@@ -174,35 +174,6 @@ class OrderController extends Controller
             log::error($e->getMessage());
         }
 
-        //insert order to stead fast courier
-        //data preparation
-        $data = [
-            'invoice' => $insert->order_number,
-            'recipient_name' => $insert->name,
-            'recipient_phone' => $insert->phone,
-            'recipient_address' => $insert->address,
-            'cod_amount' => $insert->total,
-            'note' => $insert->note
-        ];
-        try {
-            $steadFastCourier = steadFastCourier();
-            $insertOrder = $steadFastCourier->createOrder($data);
-
-            if($insertOrder['status'] === 400) {
-                // Convert SteadFast errors to Laravel validation errors
-                $validator = Validator::make([], []); // Empty validator
-                $validator->errors()->merge($insertOrder['errors']);
-
-                throw new ValidationException($validator);
-            }
-
-            return redirect()->route('order.thanks', [$insert->order_number]);
-
-        } catch (ValidationException $e) {
-            return back()->withErrors($e->errors());
-        } catch (\Exception $e) {
-            return back()->with('error', $e->getMessage());
-        }
 
 
 
@@ -213,6 +184,27 @@ class OrderController extends Controller
         $n['order'] = Order::with(['shipping', 'orderItem', 'payment', 'orderItem.product', 'orderItem.color', 'orderItem.color.color', 'orderItem.size', 'orderItem.size.size'])->find($id);
         return view('backend.pages.order.order-view', $n);
     }
+
+    public function sendToCourier($id)
+    {
+        $order = Order::find($id);
+        $sent = $order->sendToCourier();
+
+        if(isset($sent['success'])){
+            if($sent['success']['status'] === 200){
+                return redirect()->route('order.index')->with('success', 'Order sent to courier successfully');
+            }
+            if($sent['success']['status'] === 400){
+                return back()->withErrors($sent['success']['errors']);
+            }
+        }
+
+        if(isset($sent['error'])){
+            return back()->with('error', $sent['error']);
+        }
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -456,5 +448,14 @@ class OrderController extends Controller
         return view('frontend.pages.thanks', $n);
     }
 
+    public function checkStatus(Order $order)
+    {
+        $steadFastCourier = steadFastCourier();
+        $newStatus = $steadFastCourier->updateOrderStatus($order);
+
+        return response()->json([
+            'newStatus' => $newStatus
+        ]);
+    }
 
 }

@@ -24,8 +24,9 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <h3>Cusomer Details</h3>
+                        <a href="{{ url()->previous() }}" class="btn btn-info ml-auto">Back</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
@@ -41,7 +42,7 @@
                                     </tr>
                                     <tr>
                                         <td>Phone:</td>
-                                        <td>{{ $order->phone }}</td>
+                                        <td><a href="tel:{{ $order->phone }}">{{ $order->phone }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Address:</td>
@@ -64,11 +65,64 @@
                         </div>
                     </div>
                 </div>
+                <div class="my-2">
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                    @endif
+                </div>
                 <div class="card">
                     <div class="card-header">
-                        <span class="float-left">
+
+                        <div class="d-flex justify-content-between">
                             <h4>Product Details</h4>
-                        </span>
+                            <div class="d-flex justify-content-right">
+
+                                {{-- Status  --}}
+                                @if (serviceCheck('Order Status'))
+                                    <span class="align-middle">
+                                        <a class="btn">
+                                            @if ($order->order_status == 'new')
+                                                <span class="badge p-2 badge-primary order_status" id="order_status"
+                                                    data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }})"
+                                                    >{{ $order->order_status }}</span>
+                                            @elseif($order->order_status == 'process')
+                                                <span class="badge p-2 badge-warning order_status" id="order_status"
+                                                    data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }})"
+                                                    >{{ $order->order_status }}</span>
+                                            @elseif($order->order_status == 'delivered')
+                                                <span class="badge p-2 badge-success order_status" id="order_status"
+                                                    data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }})"
+                                                    >{{ $order->order_status }}</span>
+                                            @else
+                                                <span class="badge p-2 badge-danger order_status" id="order_status"
+                                                    data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }})"
+                                                    >{{ $order->order_status }}</span>
+                                            @endif
+                                        </a>
+                                    </span>
+                                @endif
+
+                                {{-- order edit and delete  --}}
+                                <div class="align-middle mr-1 @if (!check('Order')->edit && !check('Order')->delete) d-none @endif">
+                                    <div class="btn-group">
+                                        {{-- Edit order  --}}
+                                        <a href="{{ route('order.edit', $order->id) }}" target="_blank"
+                                            class="btn btn-dark btnEdit" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+
+                                        {{-- Delete order  --}}
+                                        <a href="{{ route('order.delete', $order->id) }}"
+                                            class="btn btn-danger btnDelete @if (!check('Order')->delete) d-none @endif" title="Move to trash"><i
+                                                class="fas fa-trash"></i></a>
+                                    </div>
+                                </div>
+                                {{-- Send to curier button  --}}
+                                <a class="btn btn-primary" href="{{route('order.sendToCourier', $order->id)}}">Send to Courier</a>
+
+                            </div>
+                        </div>
 
                     </div>
                     <div class="card-body">
@@ -129,3 +183,98 @@
     </div>
 
 @endsection
+@push('third_party_scripts')
+    <script src="https://www.jqueryscript.net/demo/Dialog-Modal-Dialogify/dist/dialogify.min.js"></script>
+@endpush
+
+@push('page_scripts')
+    <script>
+
+        // Dialogify
+        function orderStatus(order_id) {
+            var options = {
+                ajaxPrefix: ''
+            };
+            new Dialogify('{{ url('order-status/ajax') }}', options)
+                .title("Ordere Status")
+                .buttons([{
+                        text: "Cancle",
+                        type: Dialogify.BUTTON_DANGER,
+                        click: function(e) {
+                            this.close();
+                        }
+                    },
+                    {
+                        text: 'Status update',
+                        type: Dialogify.BUTTON_PRIMARY,
+                        click: function(e) {
+                            var name = $('#order_status_name').val();
+
+                            $.ajax({
+                                cache: false,
+                                url: "{{ route('order-status.order-status-assign') }}",
+                                method: "GET",
+                                data: {
+                                    name: name,
+                                    order_id: order_id
+                                },
+                                success: function(data) {
+                                    if (data != 0) {
+                                        alert('Order Status successfully updated')
+                                        // console.log($('#order_status').html());
+                                        $('#order_status').html(data);
+
+                                    } else {
+                                        alert("Order Status can't update")
+
+                                    }
+                                }
+                            });
+
+                        }
+                        // }
+                    }
+                ]).showModal();
+
+        }
+
+        function updateOrderStatuses() {
+            $('.order_status').each(function() {
+                const orderId = $(this).data('order-id');
+                const statusElement = $(this);
+
+                $.ajax({
+                    url: `/api/order/${orderId}/check-status`,
+                    method: 'GET',
+                    success: function(response) {
+                        if (response.newStatus) {
+                            statusElement.removeClass('badge-primary badge-warning badge-success badge-danger');
+
+                            switch(response.newStatus) {
+                                case 'new':
+                                    statusElement.addClass('badge-primary');
+                                    break;
+                                case 'process':
+                                    statusElement.addClass('badge-warning');
+                                    break;
+                                case 'delivered':
+                                    statusElement.addClass('badge-success');
+                                    break;
+                                default:
+                                    statusElement.addClass('badge-danger');
+                            }
+
+                            statusElement.text(response.newStatus);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Update statuses every 5 minutes
+        setInterval(updateOrderStatuses, 300000);
+
+        // Initial update
+        updateOrderStatuses();
+    </script>
+@endpush

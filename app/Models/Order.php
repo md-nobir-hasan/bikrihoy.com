@@ -2,6 +2,8 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class Order extends Model
 {
@@ -93,4 +95,25 @@ class Order extends Model
     //     return $total_price;
     // }
 
-}
+    public function sendToCourier(){
+                //insert order to stead fast courier
+        //data preparation
+        $data = [
+            'invoice' => $this->order_number,
+            'recipient_name' => $this->name,
+            'recipient_phone' => $this->phone,
+            'recipient_address' => $this->address,
+            'cod_amount' => $this->total,
+            'note' => $this->note
+        ];
+        try {
+            $steadFastCourier = steadFastCourier();
+            $insertOrder = $steadFastCourier->createOrder($data);
+
+            return ['success'=>$insertOrder];
+
+        }catch (\Exception $e) {
+            return ['error'=>$e->getMessage()];
+        }
+    }
+ }

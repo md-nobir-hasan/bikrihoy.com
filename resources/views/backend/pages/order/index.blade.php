@@ -33,7 +33,7 @@
                                 <button  class="btn btn-info" id="excel">Export as Excel</button>
                             @endif
                             <a href="{{ route('order.trash') }}" class="btn btn-danger">View Trash</a>
-                            <a href="{{ route('order.index') }}" class="btn btn-info">Back</a>
+                            <a href="{{ url()->previous() }}" class="btn btn-info">Back</a>
                         </span>
                     </div>
                     <div class="card-body">
@@ -88,19 +88,19 @@
                                                     <a class="btn">
                                                         @if ($order->order_status == 'new')
                                                             <span class="badge badge-primary order_status"
-                                                                onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @elseif($order->order_status == 'process')
                                                             <span class="badge badge-warning order_status"
-                                                                onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @elseif($order->order_status == 'delivered')
                                                             <span class="badge badge-success order_status"
-                                                                onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @else
                                                             <span class="badge badge-danger order_status"
-                                                                onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @endif
                                                     </a>
@@ -221,6 +221,45 @@
                 ]).showModal();
 
         }
+
+        function updateOrderStatuses() {
+            $('.order_status').each(function() {
+                const orderId = $(this).data('order-id');
+                const statusElement = $(this);
+
+                $.ajax({
+                    url: `/api/order/${orderId}/check-status`,
+                    method: 'GET',
+                    success: function(response) {
+                        if (response.newStatus) {
+                            statusElement.removeClass('badge-primary badge-warning badge-success badge-danger');
+
+                            switch(response.newStatus) {
+                                case 'new':
+                                    statusElement.addClass('badge-primary');
+                                    break;
+                                case 'process':
+                                    statusElement.addClass('badge-warning');
+                                    break;
+                                case 'delivered':
+                                    statusElement.addClass('badge-success');
+                                    break;
+                                default:
+                                    statusElement.addClass('badge-danger');
+                            }
+
+                            statusElement.text(response.newStatus);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Update statuses every 5 minutes
+        setInterval(updateOrderStatuses, 300000);
+
+        // Initial update
+        updateOrderStatuses();
     </script>
 @endpush
 

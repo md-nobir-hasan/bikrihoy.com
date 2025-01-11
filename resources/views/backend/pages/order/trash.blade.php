@@ -19,7 +19,7 @@
                             <h4>View Order</h4>
                         </span>
                         <span class="float-right">
-                            <a href="{{ route('order.index') }}" class="btn btn-info">Back</a>
+                            <a href="{{ url()->previous() }}" class="btn btn-info">Back</a>
                         </span>
                     </div>
                     <div class="card-body">
