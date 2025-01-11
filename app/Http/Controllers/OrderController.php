@@ -174,7 +174,7 @@ class OrderController extends Controller
             log::error($e->getMessage());
         }
 
-
+        return redirect()->route('order.thanks', $insert->order_number);
 
 
     }
