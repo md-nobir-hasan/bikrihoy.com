@@ -33,7 +33,7 @@
                                 <button  class="btn btn-info" id="excel">Export as Excel</button>
                             @endif
                             <a href="{{ route('order.trash') }}" class="btn btn-danger">View Trash</a>
-                            <a href="{{ route('order.index') }}" class="btn btn-info">Back</a>
+                            <a href="{{ url()->previous() }}" class="btn btn-info">Back</a>
                         </span>
                     </div>
                     <div class="card-body">
@@ -88,19 +88,19 @@
                                                     <a class="btn">
                                                         @if ($order->order_status == 'new')
                                                             <span class="badge badge-primary order_status"
-                                                                data-order-id="{{ $order->id }}"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @elseif($order->order_status == 'process')
                                                             <span class="badge badge-warning order_status"
-                                                                data-order-id="{{ $order->id }}"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @elseif($order->order_status == 'delivered')
                                                             <span class="badge badge-success order_status"
-                                                                data-order-id="{{ $order->id }}"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @else
                                                             <span class="badge badge-danger order_status"
-                                                                data-order-id="{{ $order->id }}"
+                                                                data-order-id="{{ $order->id }}" onclick="orderStatus({{ $order->id }},{{ $loop->index }})"
                                                                 id="order_status{{ $loop->index }}">{{ $order->order_status }}</span>
                                                         @endif
                                                     </a>

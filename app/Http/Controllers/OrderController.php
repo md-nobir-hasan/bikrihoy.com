@@ -188,11 +188,23 @@ class OrderController extends Controller
     public function sendToCourier($id)
     {
         $order = Order::find($id);
-        $order->sendToCourier();
-        return redirect()->route('order.index')->with('success', 'Order sent to courier successfully');
+        $sent = $order->sendToCourier();
+
+        if(isset($sent['success'])){
+            if($sent['success']['status'] === 200){
+                return redirect()->route('order.index')->with('success', 'Order sent to courier successfully');
+            }
+            if($sent['success']['status'] === 400){
+                return back()->withErrors($sent['success']['errors']);
+            }
+        }
+
+        if(isset($sent['error'])){
+            return back()->with('error', $sent['error']);
+        }
     }
 
-   
+
     /**
      * Display the specified resource.
      *

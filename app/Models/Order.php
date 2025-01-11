@@ -110,20 +110,10 @@ class Order extends Model
             $steadFastCourier = steadFastCourier();
             $insertOrder = $steadFastCourier->createOrder($data);
 
-            if($insertOrder['status'] === 400) {
-                // Convert SteadFast errors to Laravel validation errors
-                $validator = Validator::make([], []); // Empty validator
-                $validator->errors()->merge($insertOrder['errors']);
+            return ['success'=>$insertOrder];
 
-                throw new ValidationException($validator);
-            }
-            return true;
-
-        } catch (ValidationException $e) {
-            return back()->withErrors($e->errors());
-        } catch (\Exception $e) {
-            return back()->with('error', $e->getMessage());
+        }catch (\Exception $e) {
+            return ['error'=>$e->getMessage()];
         }
     }
-
-}
+ }
