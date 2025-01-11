@@ -1,7 +1,7 @@
 <?php
 use App\Services\SteadFastCourierService;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 class CourierController extends Controller
 {
     protected $steadfastService;

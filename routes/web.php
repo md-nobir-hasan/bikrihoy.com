@@ -64,6 +64,8 @@ Route::get('order/checkout/{slug}', [OrderController::class, 'checkout'])->name(
 Route::get('/product-details/{id}/', [FrontendController::class, 'product_details'])->name('product_details');
 Route::post('/review', [FrontendController::class, 'review'])->name('review');
 
+
+
 //Blog (Frontend)
 Route::prefix('blog')->name('blog.')->group(function(){
     Route::get('/list', [FrontendController::class, 'list'])->name('list');
@@ -181,6 +183,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/restore/{id}', [OrderController::class, 'restore'])->name('restore');
         Route::get('/destroy/{id}', [OrderController::class, 'destroy'])->name('destroy');
         Route::get('view/{order_number}', [OrderController::class, 'view'])->name('view');
+        //send to courier
+        Route::get('/sendToCourier/{id}', [OrderController::class, 'sendToCourier'])->name('sendToCourier');
+
 
     });
 

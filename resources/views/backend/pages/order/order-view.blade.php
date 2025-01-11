@@ -66,9 +66,33 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <span class="float-left">
+                        <div class="d-flex justify-content-between">
                             <h4>Product Details</h4>
-                        </span>
+                            @if (serviceCheck('Order Status'))
+                                <span class="align-middle">
+                                    <a class="btn">
+                                        @if ($order->order_status == 'new')
+                                            <span class="badge badge-primary order_status"
+                                                data-order-id="{{ $order->id }}"
+                                                >{{ $order->order_status }}</span>
+                                        @elseif($order->order_status == 'process')
+                                            <span class="badge badge-warning order_status"
+                                                data-order-id="{{ $order->id }}"
+                                                >{{ $order->order_status }}</span>
+                                        @elseif($order->order_status == 'delivered')
+                                            <span class="badge badge-success order_status"
+                                                data-order-id="{{ $order->id }}"
+                                                >{{ $order->order_status }}</span>
+                                        @else
+                                            <span class="badge badge-danger order_status"
+                                                data-order-id="{{ $order->id }}"
+                                                >{{ $order->order_status }}</span>
+                                        @endif
+                                    </a>
+                                </span>
+                            @endif
+                            <a class="btn btn-primary" href="{{route('order.sendToCourier', $order->id)}}">Send to Courier</a>
+                        </div>
 
                     </div>
                     <div class="card-body">
@@ -129,3 +153,98 @@
     </div>
 
 @endsection
+@push('third_party_scripts')
+    <script src="https://www.jqueryscript.net/demo/Dialog-Modal-Dialogify/dist/dialogify.min.js"></script>
+@endpush
+
+@push('page_scripts')
+    <script>
+
+        // Dialogify
+        function orderStatus(order_id, key) {
+            var options = {
+                ajaxPrefix: ''
+            };
+            new Dialogify('{{ url('order-status/ajax') }}', options)
+                .title("Ordere Status")
+                .buttons([{
+                        text: "Cancle",
+                        type: Dialogify.BUTTON_DANGER,
+                        click: function(e) {
+                            this.close();
+                        }
+                    },
+                    {
+                        text: 'Status update',
+                        type: Dialogify.BUTTON_PRIMARY,
+                        click: function(e) {
+                            var name = $('#order_status_name').val();
+
+                            $.ajax({
+                                cache: false,
+                                url: "{{ route('order-status.order-status-assign') }}",
+                                method: "GET",
+                                data: {
+                                    name: name,
+                                    order_id: order_id
+                                },
+                                success: function(data) {
+                                    if (data != 0) {
+                                        alert('Order Status successfully updated')
+                                        // console.log($('#order_status').html());
+                                        $('#order_status' + key).html(data);
+
+                                    } else {
+                                        alert("Order Status can't update")
+
+                                    }
+                                }
+                            });
+
+                        }
+                        // }
+                    }
+                ]).showModal();
+
+        }
+
+        function updateOrderStatuses() {
+            $('.order_status').each(function() {
+                const orderId = $(this).data('order-id');
+                const statusElement = $(this);
+
+                $.ajax({
+                    url: `/api/order/${orderId}/check-status`,
+                    method: 'GET',
+                    success: function(response) {
+                        if (response.newStatus) {
+                            statusElement.removeClass('badge-primary badge-warning badge-success badge-danger');
+
+                            switch(response.newStatus) {
+                                case 'new':
+                                    statusElement.addClass('badge-primary');
+                                    break;
+                                case 'process':
+                                    statusElement.addClass('badge-warning');
+                                    break;
+                                case 'delivered':
+                                    statusElement.addClass('badge-success');
+                                    break;
+                                default:
+                                    statusElement.addClass('badge-danger');
+                            }
+
+                            statusElement.text(response.newStatus);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Update statuses every 5 minutes
+        setInterval(updateOrderStatuses, 300000);
+
+        // Initial update
+        updateOrderStatuses();
+    </script>
+@endpush
