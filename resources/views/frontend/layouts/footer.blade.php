@@ -68,6 +68,7 @@
    <!-- Jquery js -->
     <script src="/assets/frontend/bootstrap.min.js"></script>
     <script src="/assets/frontend/jQuery3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="/assets/frontend/script.js"></script>
 
     {{-- Global js --}}
@@ -95,7 +96,7 @@
     $('.order-now-button-track').on('click',function(){
         fbq('track', 'OrderNow');
     });
-    
+
     $('.search-form').on('submit', function() {
         fbq('track', 'Search', {
             search_string: $('#search-input').val()
