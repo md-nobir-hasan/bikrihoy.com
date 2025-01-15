@@ -32,6 +32,7 @@ use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\WishlishtController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ConfirmedOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -375,6 +376,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit/{review}', [ReviewController::class, 'edit'])->name('edit');
         Route::put('/update/{review}', [ReviewController::class, 'update'])->name('update');
         Route::delete('/destroy/{review}', [ReviewController::class, 'destroy'])->name('destroy');
+    });
+
+    // Confirmed Order Management
+    Route::group(['as' => 'confirmed-order.', 'prefix' => 'confirmed-order'], function () {
+        Route::get('/index', [ConfirmedOrderController::class, 'index'])->name('index');
+        Route::get('/create', [ConfirmedOrderController::class, 'create'])->name('create');
+        Route::post('/store', [ConfirmedOrderController::class, 'store'])->name('store');
+        Route::get('/show/{id}', [ConfirmedOrderController::class, 'show'])->name('show');
+        Route::get('/edit/{id}', [ConfirmedOrderController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [ConfirmedOrderController::class, 'update'])->name('update');
+        Route::delete('/destroy/{id}', [ConfirmedOrderController::class, 'destroy'])->name('destroy');
     });
 
 });
