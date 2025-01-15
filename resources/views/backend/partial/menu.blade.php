@@ -41,6 +41,39 @@
     </li>
 @endif
 
+{{-- Confirm order management --}}
+@if ($n = check('Confirmed Order'))
+    <li class="nav-item {{ Request::is('confirmed-order/*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
+            <i class="fa-solid fa-file-invoice"></i>
+            <p>
+                Confirmed Orders
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            @if ($n->show)
+                <li class="nav-item">
+                    <a href="{{ route('confirmed-order.index') }}"
+                       class="nav-link {{ Request::is('confirmed-order/index') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>Show Orders</p>
+                    </a>
+                </li>
+                @if ($n->add)
+                <li class="nav-item">
+                    <a href="{{ route('confirmed-order.create') }}"
+                       class="nav-link {{ Request::is('confirmed-order/create') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>Add New Order</p>
+                    </a>
+                </li>
+                @endif
+            @endif
+        </ul>
+    </li>
+@endif
+
 {{-- Sub-category Management  --}}
 @if ($n =check('Sub-category'))
     <li class="nav-item {{ Request::is('subcat/*') ? 'menu-open' : '' }}">
@@ -675,34 +708,4 @@
     </li>
 @endif
 
-@if ($n = check('Confirmed Order'))
-    <li class="nav-item {{ Request::is('confirmed-order/*') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link">
-            <i class="fa-solid fa-file-invoice"></i>
-            <p>
-                Confirmed Orders
-                <i class="fas fa-angle-left right"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
-            @if ($n->show)
-                <li class="nav-item">
-                    <a href="{{ route('confirmed-order.index') }}"
-                       class="nav-link {{ Request::is('confirmed-order/index') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-circle"></i>
-                        <p>Show Orders</p>
-                    </a>
-                </li>
-                @if ($n->add)
-                <li class="nav-item">
-                    <a href="{{ route('confirmed-order.create') }}"
-                       class="nav-link {{ Request::is('confirmed-order/create') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-circle"></i>
-                        <p>Add New Order</p>
-                    </a>
-                </li>
-                @endif
-            @endif
-        </ul>
-    </li>
-@endif
+

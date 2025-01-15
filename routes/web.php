@@ -389,6 +389,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/destroy/{id}', [ConfirmedOrderController::class, 'destroy'])->name('destroy');
     });
 
+    Route::delete('confirmed-order/bulk-delete', [ConfirmedOrderController::class, 'bulkDestroy'])
+        ->name('confirmed-order.bulk-delete');
+
+    Route::get('confirmed-order/{id}/item/{index}', [ConfirmedOrderController::class, 'getItem'])
+        ->name('confirmed-order.get-item');
+    Route::post('confirmed-order/{id}/update-item', [ConfirmedOrderController::class, 'updateItem'])
+        ->name('confirmed-order.update-item');
+
 });
 
 //Contact frontend code

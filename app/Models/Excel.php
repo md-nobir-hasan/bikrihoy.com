@@ -13,6 +13,8 @@ class Excel extends Model
 
     public function confirmedOrder()
     {
-        return $this->belongsTo(ConfirmedOrder::class);
+        return $this->belongsTo(ConfirmedOrder::class)->orderBy('id', 'asc');
     }
+
+
 }
