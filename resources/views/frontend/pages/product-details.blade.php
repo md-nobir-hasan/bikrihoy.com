@@ -20,7 +20,7 @@
 @endpush
 
 @push('custom-js')
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    
     <script>
        $(document).ready(function(){
          $('.smallSingle').each(function(){
@@ -32,6 +32,22 @@
             let id = $(this).attr('id');
             $('#color_id').val(id);
         })
+
+        fbq('track', 'ViewContent', {
+            content_name: '{{$data->title}}',
+            content_ids: ['{{$data->id}}'],
+            content_type: 'product',
+            value: {{$data->price - $data->discount}},
+            currency: 'BDT'
+        });
+
+        // Contact event for phone and WhatsApp
+        $('.callBtn').on('click', function() {
+                fbq('track', 'Contact', {
+                    contact_type: $(this).hasClass('whatsappbnt') ? 'WhatsApp' : 'Phone'
+                });
+            });
+
        })
     </script>
 @endpush
@@ -239,22 +255,7 @@
         </div>
     </section>
 
-    <script>
-        fbq('track', 'ViewContent', {
-            content_name: '{{$data->title}}',
-            content_ids: ['{{$data->id}}'],
-            content_type: 'product',
-            value: {{$data->price}},
-            currency: 'BDT'
-        });
 
-      // Contact event for phone and WhatsApp
-      $('.callBtn').on('click', function() {
-            fbq('track', 'Contact', {
-                contact_type: $(this).hasClass('whatsappbnt') ? 'WhatsApp' : 'Phone'
-            });
-        });
-    </script>
 
 @endsection
 

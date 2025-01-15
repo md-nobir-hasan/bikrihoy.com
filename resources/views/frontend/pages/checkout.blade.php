@@ -54,9 +54,9 @@
 });
 
 fbq('track', 'InitiateCheckout', {
-    value: total_amount,
+    value: "{{($product->price - $product->discount)* ($qty ?? 1)}}",
     currency: 'BDT',
-    num_items: item_count
+    num_items: "{{$qty ?? 1}}"
 });
 
 </script>
