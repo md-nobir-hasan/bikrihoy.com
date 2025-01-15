@@ -95,6 +95,12 @@
     $('.order-now-button-track').on('click',function(){
         fbq('track', 'OrderNow');
     });
+    
+    $('.search-form').on('submit', function() {
+        fbq('track', 'Search', {
+            search_string: $('#search-input').val()
+        });
+    });
 </script>
 {{-- in page js  --}}
 @stack('custom-js')

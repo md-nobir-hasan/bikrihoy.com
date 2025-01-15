@@ -53,6 +53,11 @@
     });
 });
 
+fbq('track', 'InitiateCheckout', {
+    value: total_amount,
+    currency: 'BDT',
+    num_items: item_count
+});
 
 </script>
 @endpush

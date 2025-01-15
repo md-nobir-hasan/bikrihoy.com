@@ -53,6 +53,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/frontend/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/frontend/style.css">
+    <style>
+        .bottom-border{
+            border-style: solid;
+    --border-style: solid;
+    border-width: 0 0 3px;
+    --border-top-width: 0px;
+    --border-right-width: 0px;
+    --border-bottom-width: 2px;
+    --border-left-width: 0px;
+    border-color: #1d6ff1;
+    --border-color: #1d6ff1;
+        }
+    </style>
 
     {{-- Tab icon  --}}
     <!-- or for PNG favicon -->
@@ -76,6 +89,7 @@
             }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '{{$pixel_tag->ptag_header}}');
             fbq('track', 'PageView');
+
         </script>
         <noscript>
             <img height="1" width="1" style="display:none"
@@ -84,6 +98,7 @@
             />
         </noscript>
     @endisset
+    
 </head>
 
 <body>
