@@ -1,4 +1,4 @@
-<header class="header bg-dark text-bg-dark">
+<header class="header bg-info text-bg-dark">
     <div class="container">
         <div class="headerMain">
             <a href="{{route('home')}}" class="headerLogo">
