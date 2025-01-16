@@ -44,6 +44,7 @@
                                     <tr>
                                         <th>S.N.</th>
                                         <th>Order No.</th>
+                                        <th>Invoice ID</th>
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Total</th>
@@ -64,6 +65,7 @@
                                         <tr>
                                             <td class="align-middle">{{ $loop->index+1 }}</td>
                                             <td class="align-middle">{{ $order->order_number }}</td>
+                                            <td class="align-middle">{{ $order->invoice_id }}</td>
                                             <td class="align-middle">{{ $order->name }}</td>
                                             <td class="align-middle">
                                                 <a href="tel:{{ $order->phone }}">{{ $order->phone }}</a>

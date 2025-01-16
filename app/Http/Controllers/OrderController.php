@@ -116,7 +116,14 @@ class OrderController extends Controller
         }
         $product = DB::table('products')->where('slug', $request->slug)->first();
         $shipping = Shipping::find($request->shipping_id);
+         // Get the last invoice number
+         $lastInvoice = Order::max('invoice_id');
+
+        $lastInvoice = $lastInvoice >= 1000 ?   $lastInvoice : 999;
+        $newInvoiceId = str_pad((int)$lastInvoice + 1, 4, '0', STR_PAD_LEFT);
+
         $insert = new Order();
+        $insert->invoice_id = $newInvoiceId;
         $insert->order_number = $order_number;
         $insert->user_id = $user_id;
         $insert->shipping_id = $request->shipping_id;

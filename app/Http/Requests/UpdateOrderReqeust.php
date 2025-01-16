@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateOrderReqeust extends FormRequest
 {
@@ -30,6 +31,14 @@ class UpdateOrderReqeust extends FormRequest
             'address' => 'required|string|max:255',
             'total' => 'required|numeric|min:0',
             'note' => 'nullable|string|max:255',
+            'invoice_id' => [
+                'required',
+                'string',
+                'size:4',
+                'min:1000',
+                Rule::unique('orders')->ignore($this->route('id')),
+            ],
+
             'order_status' => 'nullable|in:new,process,shipped,delivered,cancel',
         ];
     }

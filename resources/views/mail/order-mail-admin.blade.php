@@ -17,6 +17,7 @@
         <h2 style="color: #2c3e50; font-size: 18px;">Order Details</h2>
         <p><strong>Order ID:</strong> {{ $order->id }}</p>
         <p><strong>Customer Name:</strong> {{ $order->name }}</p>
+        <p><strong>Invoice ID:</strong> {{ $order->invoice_id }}</p>
         <p><strong>Email:</strong> {{ $order->email }}</p>
         <p><strong>Phone:</strong> {{ $order->phone }}</p>
         <p><strong>Total Amount:</strong> ${{ number_format($order->total, 2) }}</p>
