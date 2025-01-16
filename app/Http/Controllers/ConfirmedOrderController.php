@@ -270,5 +270,19 @@ class ConfirmedOrderController extends Controller
         }
     }
 
+    public function printLabels(Request $request)
+    {
+        $orderIds = explode(',', $request->ids);
+        $orders = ConfirmedOrder::whereIn('id', $orderIds)
+            ->with('excels') // Eager load excel data
+            ->get();
+
+        if ($orders->isEmpty()) {
+            return back()->with('error', 'No orders found to print');
+        }
+
+        return view('backend.pages.confirmed_order.labels', compact('orders'));
+    }
+
     // Add other resource methods as needed...
 }

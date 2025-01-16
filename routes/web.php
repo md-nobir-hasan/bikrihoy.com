@@ -387,6 +387,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit/{id}', [ConfirmedOrderController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [ConfirmedOrderController::class, 'update'])->name('update');
         Route::delete('/destroy/{id}', [ConfirmedOrderController::class, 'destroy'])->name('destroy');
+        Route::get('/print-labels', [ConfirmedOrderController::class, 'printLabels'])->name('print-labels');
     });
 
     Route::delete('confirmed-order/bulk-delete', [ConfirmedOrderController::class, 'bulkDestroy'])

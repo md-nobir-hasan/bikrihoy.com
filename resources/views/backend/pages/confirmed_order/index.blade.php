@@ -20,6 +20,9 @@
                             <button id="bulkDeleteBtn" class="btn btn-danger mr-2" disabled>
                                 <i class="fas fa-trash"></i> Delete Selected
                             </button>
+                            <button id="bulkPrintLabelBtn" class="btn btn-primary mr-2" disabled>
+                                <i class="fas fa-print"></i> Print Labels
+                            </button>
                         @endif
                         @if(check('Confirmed Order')->add)
                             <a href="{{ route('confirmed-order.create') }}" class="btn btn-primary">
@@ -89,6 +92,12 @@
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </button>
                                                     @endif
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-success printSingleLabel"
+                                                            data-order-id="{{ $order->id }}"
+                                                            title="Print Label">
+                                                        <i class="fas fa-print"></i>
+                                                    </button>
                                                     @if(check('Confirmed Order')->delete)
                                                         <a href="#"
                                                            onclick="deleteConfirmedOrder({{ $order->id }})"
@@ -185,18 +194,52 @@
         // Select all checkbox
         $('#selectAll').change(function() {
             $('.order-checkbox').prop('checked', $(this).prop('checked'));
-            updateBulkDeleteButton();
+            updateBulkButtons();
         });
 
         // Individual checkbox change
         $('.order-checkbox').change(function() {
-            updateBulkDeleteButton();
+            updateBulkButtons();
         });
 
-        // Update bulk delete button state
-        function updateBulkDeleteButton() {
+        // Update bulk buttons state
+        function updateBulkButtons() {
             const checkedCount = $('.order-checkbox:checked').length;
-            $('#bulkDeleteBtn').prop('disabled', checkedCount === 0);
+            $('#bulkDeleteBtn, #bulkPrintLabelBtn').prop('disabled', checkedCount === 0);
+        }
+
+        // Bulk print labels button click
+        $('#bulkPrintLabelBtn').click(function() {
+            const selectedIds = $('.order-checkbox:checked').map(function() {
+                return $(this).val();
+            }).get();
+
+            if (selectedIds.length === 0) {
+                alert('Please select at least one order to print');
+                return;
+            }
+
+            printLabels(selectedIds);
+        });
+
+        // Single label print button click
+        $(document).on('click', '.printSingleLabel', function() {
+            const orderId = $(this).data('order-id');
+            printLabels([orderId]);
+        });
+
+        // Function to handle label printing
+        function printLabels(orderIds) {
+            const printWindow = window.open(
+                `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}`,
+                '_blank',
+                'width=800,height=800,menubar=yes,toolbar=yes,location=no,status=no'
+            );
+
+            if (!printWindow) {
+                alert('Please allow popups for this website to print labels');
+                return;
+            }
         }
 
         // Bulk delete button click
