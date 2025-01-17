@@ -1,4 +1,4 @@
-name: 🚀 Deploy to bikrihoy.com on push
+name: 🚀 Deploy to kids.bikrihoy.com on push
 on:
  push:
   branches: kids.bikrihoy.com
