@@ -11,117 +11,74 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
             width: 75mm;
+            height: 50mm;
+            font-family: Arial, sans-serif;
         }
         .label {
-            width: 71mm;
-            height: 46mm;
+            width: 100%;
+            height: 100%;
             padding: 2mm;
-            page-break-after: always;
             box-sizing: border-box;
-            background: #fff;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-        .label:last-child {
-            page-break-after: auto;
-        }
-        .brand-header {
-            display: flex;
-            align-items: center;
-            gap: 2mm;
-            padding-bottom: 2mm;
-            border-bottom: 1.5px solid #e0e0e0;
+            border: 1px solid #000;
         }
         .logo-container {
-            width: 15mm;
-            height: 15mm;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            margin-bottom: 2mm;
+            padding-bottom: 1mm;
+            border-bottom: 1px solid #000;
         }
         .logo {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 20mm;
+            height: auto;
+            max-height: 15mm;
         }
-        .company-info {
-            flex: 1;
-        }
-        .company-name {
-            font-size: 9pt;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 0.5mm;
-        }
-        .company-contact {
-            font-size: 6pt;
-            color: #666;
-            line-height: 1.2;
-        }
-        .main-content {
-            flex: 1;
-            padding: 2mm 0;
+        .shipping-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
             position: relative;
         }
-        .invoice-box {
+        .shipping-details::after {
+            content: '';
             position: absolute;
-            top: 1mm;
-            right: 0;
-            background: #f8f9fa;
-            padding: 1mm 2mm;
-            border-radius: 2mm;
-            border: 1px solid #dee2e6;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 1px;
+            background: #000;
         }
-        .invoice-label {
-            font-size: 6pt;
-            color: #666;
+        .from-section, .to-section {
+            width: 47%;
+            padding: 0 1mm;
         }
-        .invoice-number {
-            font-size: 8pt;
+        .section-title {
             font-weight: bold;
-            color: #333;
-        }
-        .customer-info {
-            margin-top: 6mm;
+            font-size: 8pt;
+            margin-bottom: 1mm;
         }
         .customer-name {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
-            color: #000;
             margin-bottom: 1mm;
+            text-transform: uppercase;
         }
         .customer-phone {
             font-size: 9pt;
-            color: #444;
             margin-bottom: 1mm;
         }
         .customer-address {
             font-size: 8pt;
-            line-height: 1.3;
-            color: #333;
-            padding-left: 2mm;
-            border-left: 2px solid {{ companyInfo()->color ?? '#007bff' }};
-            margin-top: 2mm;
+            line-height: 1.2;
         }
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: auto;
-            padding-top: 2mm;
-            border-top: 1px dashed #e0e0e0;
-        }
-        .qr-code {
-            width: 12mm;
-            height: 12mm;
-        }
-        .date-info {
-            font-size: 6pt;
-            color: #666;
-            text-align: right;
+        .invoice-number {
+            position: absolute;
+            top: 2mm;
+            right: 2mm;
+            font-size: 8pt;
+            font-weight: bold;
+            padding: 0.5mm 1mm;
+            border: 1px solid #000;
         }
     </style>
 </head>
@@ -133,40 +90,33 @@
             $company = companyInfo();
         @endphp
         <div class="label">
-            <div class="brand-header">
-                <div class="logo-container">
-                    <img src="{{ asset($company->logo ?? 'assets/backend/images/logo.png') }}"
-                         alt="{{ $company->title ?? 'Company' }} Logo"
-                         class="logo">
-                </div>
-                <div class="company-info">
-                    <div class="company-name">{{ $company->title ?? 'Company Name' }}</div>
-                    <div class="company-contact">
-                        {{ $company->phone ?? '' }}<br>
-                        {{ $company->email ?? '' }}
-                    </div>
-                </div>
+            <div class="invoice-number">#{{ $invoiceId }}</div>
+
+            <div class="logo-container">
+                <img src="{{ asset($company->logo ?? 'assets/backend/images/logo.png') }}"
+                     alt="Logo"
+                     class="logo">
             </div>
 
-            <div class="main-content">
-                <div class="invoice-box">
-                    <div class="invoice-label">Invoice ID</div>
-                    <div class="invoice-number">#{{ $invoiceId }}</div>
+            <div class="shipping-details">
+                <div class="from-section">
+                    <div class="section-title">From:</div>
+                    {{ $company->title ?? '' }}<br>
+                    {{ $company->address ?? '' }}
                 </div>
-
-                <div class="customer-info">
+                <div class="to-section">
+                    <div class="section-title">To:</div>
                     <div class="customer-name">
-                        {{ $excelData['Name'][0] ?? '' }}
+                        {{ $excelData['Name'][0] ?? '' }},
                     </div>
                     <div class="customer-phone">
-                        {{ $excelData['Phone'][0] ?? '' }}
+                        {{ $excelData['Phone'][0] ?? '' }},
                     </div>
                     <div class="customer-address">
                         {{ $excelData['Address'][0] ?? '' }}
                     </div>
                 </div>
             </div>
-
         </div>
     @endforeach
     <script>
