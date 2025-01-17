@@ -48,7 +48,7 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Total</th>
-                                        <th>Total Product</th>
+                                        <th>Quantity</th>
                                         <th>Address</th>
                                         {{--<th>Shipping</th>
                                         <th>Total Amount</th>--}}
