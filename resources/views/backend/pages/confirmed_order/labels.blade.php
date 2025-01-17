@@ -93,9 +93,7 @@
             <div class="invoice-number">#{{ $invoiceId }}</div>
 
             <div class="logo-container">
-                <img src="{{ asset($company->logo ?? 'assets/backend/images/logo.png') }}"
-                     alt="Logo"
-                     class="logo">
+                {{$company->title}}
             </div>
 
             <div class="shipping-details">
