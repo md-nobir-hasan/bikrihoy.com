@@ -21,13 +21,14 @@
             padding: 2mm;
             box-sizing: border-box;
             border: 1px solid #000;
+            border-bottom: none;
         }
         .logo-container {
             text-align: center;
             margin-bottom: 2mm;
             padding-bottom: 1mm;
             border-bottom: 1px solid #000;
-            font-size: 16pt;
+            font-size: 15pt;
             font-weight: bold;
         }
         .logo {
@@ -56,23 +57,23 @@
         }
         .section-title {
             font-weight: bold;
-            font-size: 8pt;
+            font-size: 9pt;
             margin-bottom: 1mm;
         }
         .customer-name {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             margin-bottom: 1mm;
             text-transform: uppercase;
         }
         .customer-phone {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             margin-bottom: 1mm;
         }
         .customer-address {
-            font-size: 11pt;
-            line-height: 1.2;
+            font-size: 10pt;
+            line-height: 1.1;
             font-weight: bold;
         }
         .invoice-number {
@@ -85,7 +86,7 @@
             border: 1px solid #000;
         }
         .from-address {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             margin-bottom: 1mm;
         }
