@@ -27,6 +27,8 @@
             margin-bottom: 2mm;
             padding-bottom: 1mm;
             border-bottom: 1px solid #000;
+            font-size: 16pt;
+            font-weight: bold;
         }
         .logo {
             width: 20mm;
@@ -58,18 +60,20 @@
             margin-bottom: 1mm;
         }
         .customer-name {
-            font-size: 10pt;
+            font-size: 11pt;
             font-weight: bold;
             margin-bottom: 1mm;
             text-transform: uppercase;
         }
         .customer-phone {
-            font-size: 9pt;
+            font-size: 11pt;
+            font-weight: bold;
             margin-bottom: 1mm;
         }
         .customer-address {
-            font-size: 8pt;
+            font-size: 11pt;
             line-height: 1.2;
+            font-weight: bold;
         }
         .invoice-number {
             position: absolute;
@@ -80,13 +84,19 @@
             padding: 0.5mm 1mm;
             border: 1px solid #000;
         }
+        .from-address {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 1mm;
+        }
     </style>
 </head>
 <body>
     @foreach($orders as $order)
         @php
             $excelData = $order->getFormattedExcelData();
-            $invoiceId = $excelData['Invoice ID'][0] ?? '';
+            $index = request('index', 0);
+            $invoiceId = $excelData['Invoice ID'][$index] ?? '';
             $company = companyInfo();
         @endphp
         <div class="label">
@@ -99,19 +109,21 @@
             <div class="shipping-details">
                 <div class="from-section">
                     <div class="section-title">From:</div>
+                    <div class="from-address">
                     {{ $company->title ?? '' }}<br>
                     {{ $company->address ?? '' }}
+                    </div>
                 </div>
                 <div class="to-section">
                     <div class="section-title">To:</div>
                     <div class="customer-name">
-                        {{ $excelData['Name'][0] ?? '' }},
+                        {{ $excelData['Name'][$index] ?? '' }},
                     </div>
                     <div class="customer-phone">
-                        {{ $excelData['Phone'][0] ?? '' }},
+                        {{ $excelData['Phone'][$index] ?? '' }},
                     </div>
                     <div class="customer-address">
-                        {{ $excelData['Address'][0] ?? '' }}
+                        {{ $excelData['Address'][$index] ?? '' }}
                     </div>
                 </div>
             </div>
