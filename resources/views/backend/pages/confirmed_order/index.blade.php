@@ -95,6 +95,7 @@
                                                     <button type="button"
                                                             class="btn btn-sm btn-success printSingleLabel"
                                                             data-order-id="{{ $order->id }}"
+                                                            data-index="{{ $index }}"
                                                             title="Print Label">
                                                         <i class="fas fa-print"></i>
                                                     </button>
@@ -225,13 +226,14 @@
         // Single label print button click
         $(document).on('click', '.printSingleLabel', function() {
             const orderId = $(this).data('order-id');
-            printLabels([orderId]);
+            const index = $(this).data('index');
+            printLabels([orderId], index);
         });
 
         // Function to handle label printing
-        function printLabels(orderIds) {
+        function printLabels(orderIds, index = 0) {
             const printWindow = window.open(
-                `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}`,
+                `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}&index=${index}`,
                 '_blank',
                 'width=800,height=800,menubar=yes,toolbar=yes,location=no,status=no'
             );
