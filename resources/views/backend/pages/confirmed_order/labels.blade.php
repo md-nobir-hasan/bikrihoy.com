@@ -27,7 +27,7 @@
             margin-bottom: 2mm;
             padding-bottom: 1mm;
             border-bottom: 1px solid #000;
-            font-size: 16pt;
+            font-size: 15pt;
             font-weight: bold;
         }
         .logo {
@@ -60,13 +60,13 @@
             margin-bottom: 1mm;
         }
         .customer-name {
-            font-size: 10pt;
+            font-size: 9pt;
             font-weight: bold;
             margin-bottom: 1mm;
             text-transform: uppercase;
         }
         .customer-phone {
-            font-size: 10pt;
+            font-size: 9pt;
             font-weight: bold;
             margin-bottom: 1mm;
         }
@@ -85,7 +85,7 @@
             border: 1px solid #000;
         }
         .from-address {
-            font-size: 10pt;
+            font-size: 9pt;
             font-weight: bold;
             margin-bottom: 1mm;
         }
