@@ -60,19 +60,19 @@
             margin-bottom: 1mm;
         }
         .customer-name {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             margin-bottom: 1mm;
             text-transform: uppercase;
         }
         .customer-phone {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             margin-bottom: 1mm;
         }
         .customer-address {
-            font-size: 11pt;
-            line-height: 1.2;
+            font-size: 9pt;
+            line-height: 1.1;
             font-weight: bold;
         }
         .invoice-number {
@@ -85,7 +85,7 @@
             border: 1px solid #000;
         }
         .from-address {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             margin-bottom: 1mm;
         }
