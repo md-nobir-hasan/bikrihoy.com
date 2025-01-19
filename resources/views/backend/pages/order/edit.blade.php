@@ -92,8 +92,6 @@
                                         <input id="invoice_id" type="text" name="invoice_id"
                                                placeholder="Enter Invoice ID (4 digits, min 1000)"
                                                value="{{ old('invoice_id',$order->invoice_id) }}"
-                                               pattern="[0-9]{4}"
-                                               title="Must be 4 digits and at least 1000"
                                                class="form-control" required>
                                         @error('invoice_id')
                                             <span class="text-danger">{{ $message }}</span>
