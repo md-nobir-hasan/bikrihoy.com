@@ -102,7 +102,7 @@
         @endphp
         <div class="label">
             <div class="invoice-number">#{{ $invoiceId }}</div>
-
+            
             <div class="logo-container">
                 {{$company->title}}
             </div>
