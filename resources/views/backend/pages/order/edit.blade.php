@@ -91,7 +91,7 @@
                                         <label for="invoice_id" class="col-form-label">Invoice ID <span class="text-danger">*</span></label>
                                         <input id="invoice_id" type="text" name="invoice_id"
                                                placeholder="Enter Invoice ID (4 digits, min 1000)"
-                                               value="{{ $order->invoice_id }}"
+                                               value="{{ old('invoice_id',$order->invoice_id) }}"
                                                pattern="[0-9]{4}"
                                                title="Must be 4 digits and at least 1000"
                                                class="form-control" required>
