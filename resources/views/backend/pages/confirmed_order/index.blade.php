@@ -71,7 +71,16 @@
                                             </td>
                                             <td>{{ $loop->index + 1 }}</td>
                                             <td>{{ $row_data['Invoice ID'] }}</td>
-                                            <td>{{ $row_data['Name'] }}</td>
+                                            <td>
+                                                {{ $row_data['Name'] }}
+                                                <span class="badge badge-success printSingleLabel"
+                                                      style="cursor: pointer"
+                                                      data-order-id="{{ $order->id }}"
+                                                      data-row="{{ $row_number }}"
+                                                      title="Print Label">
+                                                    <i class="fas fa-print"></i>
+                                                </span>
+                                            </td>
                                             <td>{{ $row_data['Phone'] }}</td>
                                             <td>{{ $row_data['Address'] }}</td>
                                             <td>{{ $row_data['Total'] }}</td>
@@ -88,14 +97,7 @@
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </button>
 
-                                                    {{-- Single print button --}}
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-success printSingleLabel"
-                                                            data-order-id="{{ $order->id }}"
-                                                            data-row="{{ $row_number }}"
-                                                            title="Print Label">
-                                                        <i class="fas fa-print"></i>
-                                                    </button>
+
 
                                                     {{-- Single delete button --}}
                                                     @if(check('Confirmed Order')->delete)
