@@ -19,6 +19,7 @@ class CreateExcelsTable extends Migration
             $table->foreignIdFor(ConfirmedOrder::class);
             $table->string('property')->nullable();
             $table->string('value')->nullable();
+            $table->integer('row');
             $table->timestamps();
         });
     }

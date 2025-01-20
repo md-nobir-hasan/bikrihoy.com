@@ -16,10 +16,14 @@
                         <h4>Confirmed Orders</h4>
                     </span>
                     <span class="float-right">
+
                         @if(check('Confirmed Order')->delete)
+                            {{-- bulk delete button --}}
                             <button id="bulkDeleteBtn" class="btn btn-danger mr-2" disabled>
                                 <i class="fas fa-trash"></i> Delete Selected
                             </button>
+
+                            {{-- bulk print label button --}}
                             <button id="bulkPrintLabelBtn" class="btn btn-primary mr-2" disabled>
                                 <i class="fas fa-print"></i> Print Labels
                             </button>
@@ -43,7 +47,7 @@
                                         <input type="checkbox" id="selectAll">
                                     </th>
                                     <td>S.L</td>
-                                    @foreach(App\Models\ConfirmedOrder::getHeaders() as $key => $header)
+                                    @foreach(App\Models\Excel::getHeaders() as $key => $header)
                                         <th style="width: {{ $header['width'] }}">{{ $header['display'] }}</th>
                                     @endforeach
                                     <th style="width: 100px">Actions</th>
@@ -51,61 +55,57 @@
                             </thead>
                             <tbody>
                                 @foreach($orders as $order)
-                                    {{-- <tr class="bg-light">
-                                        <td colspan="{{ count(App\Models\ConfirmedOrder::getHeaders()) + 1 }}"
-                                            class="text-center font-weight-bold text-warning">
-                                            {{ $order->getFormattedDate() }}
-                                        </td>
-                                    </tr> --}}
-
                                     @php
-                                        $excelData = $order->getFormattedExcelData();
+                                        // Group excels by row number
+                                        $excel_rows = $order->excels->groupBy('row');
                                     @endphp
-
-                                    @foreach($excelData->first() ?: [] as $index => $__)
+                                    @foreach($excel_rows as $row_number => $excel_row)
+                                        @php
+                                            $row_data = $excel_row->pluck('value', 'property');
+                                        @endphp
                                         <tr>
                                             <td>
-                                                <input type="checkbox" class="order-checkbox" value="{{ $order->id }}">
+                                                <input type="checkbox" class="order-checkbox"
+                                                       data-order-id="{{ $order->id }}"
+                                                       data-row="{{ $row_number }}">
                                             </td>
                                             <td>{{ $loop->index + 1 }}</td>
-                                            @foreach(App\Models\ConfirmedOrder::getHeaderDisplayNames() as $header)
-                                                <td>{{ $excelData[$header][$index] ?? '' }}</td>
-                                            @endforeach
+                                            <td>{{ $row_data['Invoice ID'] }}</td>
+                                            <td>{{ $row_data['Name'] }}</td>
+                                            <td>{{ $row_data['Phone'] }}</td>
+                                            <td>{{ $row_data['Address'] }}</td>
+                                            <td>{{ $row_data['Total'] }}</td>
+                                            <td>{{ $row_data['Quantity'] }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{ route('confirmed-order.show', $order->id) }}"
-                                                       class="btn btn-sm btn-info"
-                                                       title="View">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    @if(check('Confirmed Order')->edit)
-                                                        <a href="{{ route('confirmed-order.edit', $order->id) }}"
-                                                           class="btn btn-sm btn-primary"
-                                                           title="Bulk Edit">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <button type="button"
-                                                                class="btn btn-sm btn-warning editSingleItem"
-                                                                data-order-id="{{ $order->id }}"
-                                                                data-index="{{ $index }}"
-                                                                title="Edit Item">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </button>
-                                                    @endif
+
+                                                    {{-- Single edit button --}}
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-warning editSingleItem"
+                                                            data-order-id="{{ $order->id }}"
+                                                            data-row="{{ $row_number }}"
+                                                            title="Edit Item">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+
+                                                    {{-- Single print button --}}
                                                     <button type="button"
                                                             class="btn btn-sm btn-success printSingleLabel"
                                                             data-order-id="{{ $order->id }}"
-                                                            data-index="{{ $index }}"
+                                                            data-row="{{ $row_number }}"
                                                             title="Print Label">
                                                         <i class="fas fa-print"></i>
                                                     </button>
+
+                                                    {{-- Single delete button --}}
                                                     @if(check('Confirmed Order')->delete)
-                                                        <a href="#"
-                                                           onclick="deleteConfirmedOrder({{ $order->id }})"
-                                                           class="btn btn-sm btn-danger"
-                                                           title="Delete">
+                                                        <button type="button"
+                                                                class="btn btn-sm btn-danger deleteRow"
+                                                                data-order-id="{{ $order->id }}"
+                                                                data-row="{{ $row_number }}"
+                                                                title="Delete">
                                                             <i class="fas fa-trash"></i>
-                                                        </a>
+                                                        </button>
                                                     @endif
                                                 </div>
                                             </td>
@@ -132,7 +132,7 @@
             </div>
             <form id="editItemForm">
                 <div class="modal-body">
-                    @foreach(App\Models\ConfirmedOrder::getHeaderDisplayNames() as $header)
+                    @foreach(App\Models\Excel::getHeaderDisplayNames() as $header)
                         <div class="form-group">
                             <label>{{ $header }}</label>
                             <input type="text"
@@ -211,29 +211,49 @@
 
         // Bulk print labels button click
         $('#bulkPrintLabelBtn').click(function() {
-            const selectedIds = $('.order-checkbox:checked').map(function() {
-                return $(this).val();
+            const selectedItems = $('.order-checkbox:checked').map(function() {
+                return {
+                    orderId: $(this).data('order-id'),
+                    row: $(this).data('row')
+                };
             }).get();
 
-            if (selectedIds.length === 0) {
-                alert('Please select at least one order to print');
+            if (selectedItems.length === 0) {
+                alert('Please select at least one item to print');
                 return;
             }
 
-            printLabels(selectedIds);
+            const orderIds = selectedItems.map(item => item.orderId);
+            const rows = selectedItems.map(item => item.row);
+
+            printLabels(orderIds, rows);
         });
 
         // Single label print button click
         $(document).on('click', '.printSingleLabel', function() {
             const orderId = $(this).data('order-id');
-            const index = $(this).data('index');
-            printLabels([orderId], index);
+            const row = $(this).data('row');
+
+            // Open print window using properly formatted URL
+            const url = "{{ route('confirmed-order.print-single-label', ['orderId' => ':orderId', 'row' => ':row']) }}"
+                .replace(':orderId', orderId)
+                .replace(':row', row);
+
+            const printWindow = window.open(
+                url,
+                '_blank',
+                'width=800,height=800'
+            );
+
+            if (!printWindow) {
+                alert('Please allow popups for this website to print labels');
+            }
         });
 
         // Function to handle label printing
-        function printLabels(orderIds, index = 0) {
+        function printLabels(orderIds, rows) {
             const printWindow = window.open(
-                `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}&index=${index}`,
+                `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}&rows=${rows.join(',')}`,
                 '_blank',
                 'width=800,height=800,menubar=yes,toolbar=yes,location=no,status=no'
             );
@@ -246,9 +266,12 @@
 
         // Bulk delete button click
         $('#bulkDeleteBtn').click(function() {
-            if (confirm('Are you sure you want to delete all selected orders?')) {
-                const selectedIds = $('.order-checkbox:checked').map(function() {
-                    return $(this).val();
+            if (confirm('Are you sure you want to delete all selected rows?')) {
+                const selectedRows = $('.order-checkbox:checked').map(function() {
+                    return {
+                        orderId: $(this).data('order-id'),
+                        row: $(this).data('row')
+                    };
                 }).get();
 
                 $.ajax({
@@ -256,7 +279,7 @@
                     type: 'DELETE',
                     data: {
                         _token: '{{ csrf_token() }}',
-                        ids: selectedIds
+                        rows: selectedRows
                     },
                     success: function(response) {
                         if (response.success) {
@@ -264,9 +287,6 @@
                         } else {
                             alert(response.message);
                         }
-                    },
-                    error: function(xhr) {
-                        alert('Error deleting orders');
                     }
                 });
             }
@@ -275,10 +295,13 @@
         // Edit single item
         $('.editSingleItem').click(function() {
             const orderId = $(this).data('order-id');
-            const index = $(this).data('index');
+            const row = $(this).data('row');
+
+            // Store row number in modal
+            $('#editItemModal').data('row', row);
 
             // Fetch item data
-            $.get(`/confirmed-order/${orderId}/item/${index}`, function(data) {
+            $.get(`/confirmed-order/${orderId}/item/${row}`, function(data) {
                 // Populate modal form
                 Object.keys(data).forEach(key => {
                     $(`#editItemModal input[name="${key}"]`).val(data[key]);
@@ -292,12 +315,14 @@
         $('#editItemForm').submit(function(e) {
             e.preventDefault();
             const orderId = $('#editExcelId').val();
+            const row = $('#editItemModal').data('row');
 
             $.ajax({
                 url: `/confirmed-order/${orderId}/update-item`,
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
+                    row: row,
                     ...Object.fromEntries(new FormData(this))
                 },
                 success: function(response) {
@@ -313,28 +338,27 @@
                 }
             });
         });
-    });
 
-    function deleteConfirmedOrder(id) {
-        if (confirm('Are you sure you want to delete this order?')) {
-            $.ajax({
-                url: `/confirmed-order/${id}`,
-                type: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if (response.success) {
-                        location.reload();
-                    } else {
-                        alert(response.message);
+        // Single row delete
+        $(document).on('click', '.deleteRow', function() {
+            if (confirm('Are you sure you want to delete this row?')) {
+                const orderId = $(this).data('order-id');
+                const row = $(this).data('row');
+
+                $.ajax({
+                    url: `/confirmed-order/${orderId}/row/${row}`,
+                    type: 'DELETE',
+                    data: { _token: '{{ csrf_token() }}' },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
                     }
-                },
-                error: function(xhr) {
-                    alert('Error deleting order');
-                }
-            });
-        }
-    }
+                });
+            }
+        });
+    });
 </script>
 @endpush

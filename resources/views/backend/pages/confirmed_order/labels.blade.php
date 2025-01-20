@@ -90,14 +90,23 @@
             font-weight: bold;
             margin-bottom: 1mm;
         }
+        .word-wrap {
+            word-wrap: break-word;
+        }
+        .line-height{
+            line-height: 1.4 !important;
+        }
+        .underline{
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+        }
     </style>
 </head>
 <body>
-    @foreach($orders as $order)
+    @foreach($groupedData as $data)
         @php
-            $excelData = $order->getFormattedExcelData();
-            $index = request('index', 0);
-            $invoiceId = $excelData['Invoice ID'][$index] ?? '';
+            $excelData = $data['excelData'];
+            $invoiceId = $excelData['Invoice ID'] ?? '';
             $company = companyInfo();
         @endphp
         <div class="label">
@@ -109,22 +118,22 @@
 
             <div class="shipping-details">
                 <div class="from-section">
-                    <div class="section-title">From:</div>
-                    <div class="from-address">
+                    <div class="section-title underline">From:</div>
+                    <div class="from-address word-wrap line-height">
                     {{ $company->title ?? '' }}<br>
                     {{ $company->address ?? '' }}
                     </div>
                 </div>
                 <div class="to-section">
-                    <div class="section-title">To:</div>
-                    <div class="customer-name">
-                        {{ $excelData['Name'][$index] ?? '' }},
+                    <div class="section-title underline">To:</div>
+                    <div class="customer-name word-wrap line-height">
+                        {{ $excelData['Name'] ?? '' }},
                     </div>
-                    <div class="customer-phone">
-                        {{ $excelData['Phone'][$index] ?? '' }},
+                    <div class="customer-phone word-wrap line-height">
+                        {{ $excelData['Phone'] ?? '' }},
                     </div>
-                    <div class="customer-address">
-                        {{ $excelData['Address'][$index] ?? '' }}
+                    <div class="customer-address word-wrap line-height">
+                        {{ $excelData['Address'] ?? '' }}
                     </div>
                 </div>
             </div>
