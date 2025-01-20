@@ -39,7 +39,7 @@ class ConfirmedOrderController extends Controller
 
         // Get and validate headers
         $headers = array_map('trim', array_shift($rows));
-        $expectedHeaders = ConfirmedOrder::getHeaderDisplayNames()->toArray();
+        $expectedHeaders = Excel::getHeaderDisplayNames()->toArray();
         $missingHeaders = array_diff($expectedHeaders, $headers);
 
         if (!empty($missingHeaders)) {
@@ -83,7 +83,10 @@ class ConfirmedOrderController extends Controller
                 return back()->with('error', 'Error in Excel data: ' . implode(', ', $validator->errors()->all()));
             }
 
-            $validatedData[] = $rowData;
+            $validatedData[] = [
+                'data' => $rowData,
+                'row_number' => $rowIndex + 1  // Store the row number
+            ];
         }
 
         // Check if we have any valid data to process
@@ -100,13 +103,20 @@ class ConfirmedOrderController extends Controller
             ]);
 
             // Insert all validated excel data
-            foreach ($validatedData as $rowData) {
+            foreach ($validatedData as $validatedRow) {
+                $rowData = $validatedRow['data'];
+                $rowNumber = $validatedRow['row_number'];
+
                 foreach ($rowData as $header => $value) {
-                    Excel::create([
-                        'confirmed_order_id' => $confirmedOrder->id,
-                        'property' => $header,
-                        'value' => $value
-                    ]);
+                    // Only insert if header is defined in Excel model
+                    if (Excel::isValidProperty($header)) {
+                        Excel::create([
+                            'confirmed_order_id' => $confirmedOrder->id,
+                            'property' => $header,
+                            'value' => $value,
+                            'row' => $rowNumber  // Add the row number here
+                        ]);
+                    }
                 }
             }
 
@@ -131,16 +141,17 @@ class ConfirmedOrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validationRules = [
             'date' => 'required|date',
             'excel_data' => 'required|array',
-            'excel_data.*.Invoice_ID' => 'required|string',
-            'excel_data.*.Name' => 'required|string',
-            'excel_data.*.Phone' => 'required|string',
-            'excel_data.*.Address' => 'required|string',
-            'excel_data.*.Total' => 'required|numeric',
-            'excel_data.*.Quantity' => 'required|numeric',
-        ]);
+        ];
+
+        // Add validation rules for each valid property
+        foreach (Excel::getValidProperties() as $property) {
+            $validationRules['excel_data.*.' . str_replace(' ', '_', $property)] = Excel::getHeaders()[$property]['validation'];
+        }
+
+        $request->validate($validationRules);
 
         DB::beginTransaction();
         try {
@@ -153,11 +164,14 @@ class ConfirmedOrderController extends Controller
             // Insert new excel data
             foreach ($request->excel_data as $rowData) {
                 foreach ($rowData as $property => $value) {
-                    Excel::create([
-                        'confirmed_order_id' => $id,
-                        'property' => str_replace('_', ' ', $property),
-                        'value' => $value
-                    ]);
+                    $propertyName = str_replace('_', ' ', $property);
+                    if (Excel::isValidProperty($propertyName)) {
+                        Excel::create([
+                            'confirmed_order_id' => $id,
+                            'property' => $propertyName,
+                            'value' => $value
+                        ]);
+                    }
                 }
             }
 
@@ -227,17 +241,18 @@ class ConfirmedOrderController extends Controller
         }
     }
 
-    public function getItem($orderId, $index)
+    public function getItem($orderId, $row)
     {
-        $order = ConfirmedOrder::with('excels')->findOrFail($orderId);
-        $excelData = $order->getFormattedExcelData();
+        $excelData = Excel::where('confirmed_order_id', $orderId)
+                          ->where('row', $row)
+                          ->pluck('value', 'property');
 
-        $itemData = [];
-        foreach(ConfirmedOrder::getHeaderDisplayNames() as $header) {
-            $itemData[str_replace(' ', '_', $header)] = $excelData[$header][$index] ?? '';
+        $formattedData = [];
+        foreach(Excel::getHeaderDisplayNames() as $header) {
+            $formattedData[str_replace(' ', '_', $header)] = $excelData[$header] ?? '';
         }
 
-        return response()->json($itemData);
+        return response()->json($formattedData);
     }
 
     public function updateItem(Request $request, $orderId)
@@ -245,15 +260,23 @@ class ConfirmedOrderController extends Controller
         DB::beginTransaction();
         try {
             $order = ConfirmedOrder::findOrFail($orderId);
+            $row = $request->input('row');
 
-            foreach($request->except(['_token', 'excel_id']) as $property => $value) {
-                Excel::updateOrCreate(
-                    [
-                        'confirmed_order_id' => $orderId,
-                        'property' => str_replace('_', ' ', $property)
-                    ],
-                    ['value' => $value]
-                );
+            foreach($request->except(['_token', 'excel_id', 'row']) as $property => $value) {
+                $propertyName = str_replace('_', ' ', $property);
+                if (Excel::isValidProperty($propertyName)) {
+                    Excel::updateOrCreate(
+                        [
+                            'confirmed_order_id' => $orderId,
+                            'property' => $propertyName,
+                            'row' => $row  // Add row to the condition
+                        ],
+                        [
+                            'value' => $value,
+                            'row' => $row  // Add row to the update values
+                        ]
+                    );
+                }
             }
 
             DB::commit();
@@ -273,15 +296,116 @@ class ConfirmedOrderController extends Controller
     public function printLabels(Request $request)
     {
         $orderIds = explode(',', $request->ids);
+        $rows = explode(',', $request->rows);
+
         $orders = ConfirmedOrder::whereIn('id', $orderIds)
-            ->with('excels') // Eager load excel data
+            ->with(['excels' => function($query) use ($rows) {
+                $query->whereIn('row', $rows);
+            }])
             ->get();
 
         if ($orders->isEmpty()) {
             return back()->with('error', 'No orders found to print');
         }
 
-        return view('backend.pages.confirmed_order.labels', compact('orders'));
+        // Group excel data by order and row
+        $groupedData = [];
+        foreach ($orders as $order) {
+            foreach ($order->excels->groupBy('row') as $row => $excelData) {
+                $groupedData[] = [
+                    'order' => $order,
+                    'excelData' => [
+                        'Invoice ID' => $excelData->where('property', 'Invoice ID')->first()->value ?? '',
+                        'Name' => $excelData->where('property', 'Name')->first()->value ?? '',
+                        'Phone' => $excelData->where('property', 'Phone')->first()->value ?? '',
+                        'Address' => $excelData->where('property', 'Address')->first()->value ?? ''
+                    ]
+                ];
+            }
+        }
+
+        return view('backend.pages.confirmed_order.labels', [
+            'groupedData' => $groupedData
+        ]);
+    }
+
+    public function deleteRow($orderId, $row)
+    {
+        DB::beginTransaction();
+        try {
+            Excel::where('confirmed_order_id', $orderId)
+                 ->where('row', $row)
+                 ->delete();
+
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Row deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete row: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        if (!$request->has('rows') || empty($request->rows)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No rows selected'
+            ]);
+        }
+
+        DB::beginTransaction();
+        try {
+            foreach ($request->rows as $rowData) {
+                Excel::where('confirmed_order_id', $rowData['orderId'])
+                     ->where('row', $rowData['row'])
+                     ->delete();
+            }
+
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Selected rows deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete rows: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function printSingleLabel($orderId, $row)
+    {
+        $order = ConfirmedOrder::with(['excels' => function($query) use ($row) {
+            $query->where('row', $row);
+        }])->findOrFail($orderId);
+
+        if ($order->excels->isEmpty()) {
+            return back()->with('error', 'No data found to print');
+        }
+
+        // Format data to match bulk print structure
+        $groupedData = [[
+            'order' => $order,
+            'excelData' => [
+                'Invoice ID' => $order->excels->where('property', 'Invoice ID')->first()->value ?? '',
+                'Name' => $order->excels->where('property', 'Name')->first()->value ?? '',
+                'Phone' => $order->excels->where('property', 'Phone')->first()->value ?? '',
+                'Address' => $order->excels->where('property', 'Address')->first()->value ?? ''
+            ]
+        ]];
+
+        return view('backend.pages.confirmed_order.labels', [
+            'groupedData' => $groupedData
+        ]);
     }
 
     // Add other resource methods as needed...

@@ -390,13 +390,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/print-labels', [ConfirmedOrderController::class, 'printLabels'])->name('print-labels');
     });
 
-    Route::delete('confirmed-order/bulk-delete', [ConfirmedOrderController::class, 'bulkDestroy'])
-        ->name('confirmed-order.bulk-delete');
+    Route::delete('confirmed-order/bulk-delete', [ConfirmedOrderController::class, 'bulkDelete'])->name('confirmed-order.bulk-delete');
 
     Route::get('confirmed-order/{id}/item/{index}', [ConfirmedOrderController::class, 'getItem'])
         ->name('confirmed-order.get-item');
     Route::post('confirmed-order/{id}/update-item', [ConfirmedOrderController::class, 'updateItem'])
         ->name('confirmed-order.update-item');
+
+    Route::delete('confirmed-order/{orderId}/row/{row}', [ConfirmedOrderController::class, 'deleteRow']);
+    Route::get('confirmed-order/{orderId}/row/{row}', [ConfirmedOrderController::class, 'getItem']);
+
+    Route::get('confirmed-order/print-single-label/{orderId}/{row}', [ConfirmedOrderController::class, 'printSingleLabel'])
+        ->name('confirmed-order.print-single-label');
 
 });
 
