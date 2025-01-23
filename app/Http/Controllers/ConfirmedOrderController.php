@@ -382,7 +382,7 @@ class ConfirmedOrderController extends Controller
         }
     }
 
-    public function printSingleLabel($orderId, $row)
+    public function printSingleLabel($orderId, $row, Request $request)
     {
         $order = ConfirmedOrder::with(['excels' => function($query) use ($row) {
             $query->where('row', $row);
@@ -391,6 +391,9 @@ class ConfirmedOrderController extends Controller
         if ($order->excels->isEmpty()) {
             return back()->with('error', 'No data found to print');
         }
+
+        // Decode the styles from JSON
+        $styles = json_decode($request->input('styles'), true) ?? [];
 
         // Format data to match bulk print structure
         $groupedData = [[
@@ -404,7 +407,8 @@ class ConfirmedOrderController extends Controller
         ]];
 
         return view('backend.pages.confirmed_order.labels', [
-            'groupedData' => $groupedData
+            'groupedData' => $groupedData,
+            'styles' => $styles
         ]);
     }
 

@@ -73,12 +73,23 @@
                                             <td>{{ $row_data['Invoice ID'] }}</td>
                                             <td>
                                                 {{ $row_data['Name'] }}
+
+                                                {{-- Single print label button --}}
                                                 <span class="badge badge-success printSingleLabel"
                                                       style="cursor: pointer"
                                                       data-order-id="{{ $order->id }}"
                                                       data-row="{{ $row_number }}"
                                                       title="Print Label">
                                                     <i class="fas fa-print"></i>
+                                                </span>
+
+                                                {{-- Add this next to the print button --}}
+                                                <span class="badge badge-info styleControl"
+                                                      style="cursor: pointer; margin-left: 3px;"
+                                                      data-order-id="{{ $order->id }}"
+                                                      data-row="{{ $row_number }}"
+                                                      title="Label Style">
+                                                    <i class="fas fa-paint-brush"></i>
                                                 </span>
                                             </td>
                                             <td>{{ $row_data['Phone'] }}</td>
@@ -150,6 +161,50 @@
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+{{-- Add this modal at the bottom of the page --}}
+<div class="modal fade" id="styleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Label Style Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="styleForm">
+                    <div class="form-group">
+                        <label>Font Size (pt)</label>
+                        <input type="number" class="form-control" id="fontSize" value="9" min="6" max="12" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Font Weight</label>
+                        <select class="form-control" id="fontWeight">
+                            <option value="normal">Normal</option>
+                            <option value="bold" selected>Bold</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Line Height</label>
+                        <input type="number" class="form-control" id="lineHeight" value="1.1" min="0.8" max="2" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Text Overflow</label>
+                        <select class="form-control" id="textOverflow">
+                            <option value="visible">Show All</option>
+                            <option value="hidden">Hide Overflow</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="printWithStyle">Print with Style</button>
+            </div>
         </div>
     </div>
 </div>
@@ -360,6 +415,54 @@
                     }
                 });
             }
+        });
+
+        // Add this to your existing JavaScript
+        $(document).on('click', '.styleControl', function() {
+            const orderId = $(this).data('order-id');
+            const row = $(this).data('row');
+
+            // Store the current item details for printing
+            $('#styleModal').data('orderId', orderId);
+            $('#styleModal').data('row', row);
+
+            // Show the modal
+            $('#styleModal').modal('show');
+        });
+
+        // Handle print with style button click
+        $('#printWithStyle').click(function() {
+            const orderId = $('#styleModal').data('orderId');
+            const row = $('#styleModal').data('row');
+
+            // Collect style settings as an object
+            const styles = {
+                fontSize: $('#fontSize').val(),
+                fontWeight: $('#fontWeight').val(),
+                lineHeight: $('#lineHeight').val(),
+                textOverflow: $('#textOverflow').val()
+            };
+
+            // Convert styles object to JSON string
+            const stylesParam = JSON.stringify(styles);
+
+            // Create print URL with encoded style parameters
+            const url = "{{ route('confirmed-order.print-single-label', ['orderId' => ':orderId', 'row' => ':row']) }}"
+                .replace(':orderId', orderId)
+                .replace(':row', row) + `?styles=${encodeURIComponent(stylesParam)}`;
+
+            const printWindow = window.open(
+                url,
+                '_blank',
+                'width=800,height=800'
+            );
+
+            if (!printWindow) {
+                alert('Please allow popups for this website to print labels');
+            }
+
+            // Close the modal
+            $('#styleModal').modal('hide');
         });
     });
 </script>
