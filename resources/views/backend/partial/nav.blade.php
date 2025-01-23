@@ -7,12 +7,30 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
+        {{-- Going frontend home page menu --}}
+        <li class="nav-item">
+            <a href="{{ route('home') }}" class="nav-link" target="_blank">
+                <i class="fas fa-external-link-alt" title="Go to Home Page"></i>
+            </a>
+        </li>
+
+        {{-- Cache Clear --}}
         <li class="nav-item">
             <a href="{{ route('optimize-clear') }}" class="nav-link">
                 <i class="fas fa-cog"></i>
                 Cache Clear
             </a>
         </li>
+
+        {{-- Optimize the app  --}}
+        {{-- <li class="nav-item">
+            <a href="{{ route('optimize') }}" class="nav-link">
+                <i class="fas fa-cog"></i>
+                Optimize the app
+            </a>
+        </li> --}}
+
+        {{-- User profile --}}
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="@if (isset(Auth::user()->image)) {{ asset(Auth::user()->image) }}@else{{ asset('/images/default/human.webp') }} @endif"
