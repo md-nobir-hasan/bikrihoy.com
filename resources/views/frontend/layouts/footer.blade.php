@@ -89,6 +89,14 @@
                 submitButton.text('Processing...');
                 form.data('submitted', true);
             });
+
+            //Shift + N = login page
+            $(document).keydown(function(e){
+                console.log(e,'Shift + N');
+                if(e.shiftKey && e.key === 'N'){
+                    window.open("{{route('login')}}", '_blank');
+                }
+            });
         });
     </script>
 

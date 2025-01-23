@@ -100,6 +100,15 @@
             text-decoration: underline;
             text-decoration-thickness: 2px;
         }
+        .to-section {
+            width: 47%;
+            word-break: break-word;
+            padding: 0 1mm;
+            font-size: {{ $styles['fontSize'] ?? '9' }}pt;
+            font-weight: {{ $styles['fontWeight'] ?? 'bold' }};
+            line-height: {{ $styles['lineHeight'] ?? '1.1' }};
+            overflow: {{ $styles['textOverflow'] ?? 'visible' }};
+        }
     </style>
 </head>
 <body>
@@ -126,13 +135,19 @@
                 </div>
                 <div class="to-section">
                     <div class="section-title underline">To:</div>
-                    <div class="customer-name word-wrap line-height">
+
+                    {{-- class="customer-name word-wrap line-height" --}}
+                    <div>
                         {{ $excelData['Name'] ?? '' }},
                     </div>
-                    <div class="customer-phone word-wrap line-height">
+
+                    {{-- class="customer-phone word-wrap line-height" --}}
+                    <div >
                         {{ $excelData['Phone'] ?? '' }},
                     </div>
-                    <div class="customer-address word-wrap line-height">
+
+                    {{-- class="customer-address word-wrap line-height" --}}
+                    <div>
                         {{ $excelData['Address'] ?? '' }}
                     </div>
                 </div>
