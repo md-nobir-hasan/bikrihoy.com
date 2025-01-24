@@ -298,17 +298,15 @@ class ConfirmedOrderController extends Controller
         $orderIds = explode(',', $request->ids);
         $rows = explode(',', $request->rows);
 
+        // Decode styles from request
+        $styles = json_decode($request->input('styles'), true) ?? [];
+
         $orders = ConfirmedOrder::whereIn('id', $orderIds)
             ->with(['excels' => function($query) use ($rows) {
                 $query->whereIn('row', $rows);
             }])
             ->get();
 
-        if ($orders->isEmpty()) {
-            return back()->with('error', 'No orders found to print');
-        }
-
-        // Group excel data by order and row
         $groupedData = [];
         foreach ($orders as $order) {
             foreach ($order->excels->groupBy('row') as $row => $excelData) {
@@ -325,7 +323,8 @@ class ConfirmedOrderController extends Controller
         }
 
         return view('backend.pages.confirmed_order.labels', [
-            'groupedData' => $groupedData
+            'groupedData' => $groupedData,
+            'styles' => $styles
         ]);
     }
 
