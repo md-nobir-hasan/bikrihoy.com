@@ -27,6 +27,11 @@
                             <button id="bulkPrintLabelBtn" class="btn btn-primary mr-2" disabled>
                                 <i class="fas fa-print"></i> Print Labels
                             </button>
+
+                            {{-- Global style button --}}
+                            <button id="globalStyleBtn" class="btn btn-info mr-2">
+                                <i class="fas fa-paint-brush"></i> Global Style
+                            </button>
                         @endif
                         @if(check('Confirmed Order')->add)
                             <a href="{{ route('confirmed-order.create') }}" class="btn btn-primary">
@@ -83,14 +88,6 @@
                                                     <i class="fas fa-print"></i>
                                                 </span>
 
-                                                {{-- Add this next to the print button --}}
-                                                <span class="badge badge-info styleControl"
-                                                      style="cursor: pointer; margin-left: 3px;"
-                                                      data-order-id="{{ $order->id }}"
-                                                      data-row="{{ $row_number }}"
-                                                      title="Label Style">
-                                                    <i class="fas fa-paint-brush"></i>
-                                                </span>
                                             </td>
                                             <td>{{ $row_data['Phone'] }}</td>
                                             <td>{{ $row_data['Address'] }}</td>
@@ -98,6 +95,14 @@
                                             <td>{{ $row_data['Quantity'] }}</td>
                                             <td>
                                                 <div class="btn-group">
+
+                                                    {{-- Single print style button --}}
+                                                    <button class="btn btn-sm btn-info styleControl"
+                                                            data-order-id="{{ $order->id }}"
+                                                            data-row="{{ $row_number }}"
+                                                            title="Label Style">
+                                                        <i class="fas fa-paint-brush"></i>
+                                                    </button>
 
                                                     {{-- Single edit button --}}
                                                     <button type="button"
@@ -107,8 +112,6 @@
                                                             title="Edit Item">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </button>
-
-
 
                                                     {{-- Single delete button --}}
                                                     @if(check('Confirmed Order')->delete)
@@ -208,6 +211,50 @@
         </div>
     </div>
 </div>
+
+{{-- Add this after the existing style modal --}}
+<div class="modal fade" id="globalStyleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Global Label Style Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="globalStyleForm">
+                    <div class="form-group">
+                        <label>Font Size (pt)</label>
+                        <input type="number" class="form-control" id="globalFontSize" value="9" min="6" max="12" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Font Weight</label>
+                        <select class="form-control" id="globalFontWeight">
+                            <option value="normal">Normal</option>
+                            <option value="bold" selected>Bold</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Line Height</label>
+                        <input type="number" class="form-control" id="globalLineHeight" value="1.1" min="0.8" max="2" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Text Overflow</label>
+                        <select class="form-control" id="globalTextOverflow">
+                            <option value="visible">Show All</option>
+                            <option value="hidden">Hide Overflow</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveGlobalStyle">Save Global Style</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('third_party_scripts')
@@ -283,7 +330,21 @@
             const orderIds = selectedItems.map(item => item.orderId);
             const rows = selectedItems.map(item => item.row);
 
-            printLabels(orderIds, rows);
+            // Get global styles from localStorage
+            const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
+
+            // Create URL with both IDs and styles
+            const url = `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}&rows=${rows.join(',')}&styles=${encodeURIComponent(JSON.stringify(globalStyles))}`;
+
+            const printWindow = window.open(
+                url,
+                '_blank',
+                'width=800,height=800,menubar=yes,toolbar=yes,location=no,status=no'
+            );
+
+            if (!printWindow) {
+                alert('Please allow popups for this website to print labels');
+            }
         });
 
         // Single label print button click
@@ -306,20 +367,6 @@
                 alert('Please allow popups for this website to print labels');
             }
         });
-
-        // Function to handle label printing
-        function printLabels(orderIds, rows) {
-            const printWindow = window.open(
-                `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}&rows=${rows.join(',')}`,
-                '_blank',
-                'width=800,height=800,menubar=yes,toolbar=yes,location=no,status=no'
-            );
-
-            if (!printWindow) {
-                alert('Please allow popups for this website to print labels');
-                return;
-            }
-        }
 
         // Bulk delete button click
         $('#bulkDeleteBtn').click(function() {
@@ -435,34 +482,63 @@
             const orderId = $('#styleModal').data('orderId');
             const row = $('#styleModal').data('row');
 
-            // Collect style settings as an object
-            const styles = {
+            const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
+            const customStyles = {
                 fontSize: $('#fontSize').val(),
                 fontWeight: $('#fontWeight').val(),
                 lineHeight: $('#lineHeight').val(),
                 textOverflow: $('#textOverflow').val()
             };
 
-            // Convert styles object to JSON string
-            const stylesParam = JSON.stringify(styles);
+            // Merge global and custom styles, with custom styles taking precedence
+            const styles = { ...globalStyles, ...customStyles };
 
-            // Create print URL with encoded style parameters
+            const stylesParam = JSON.stringify(styles);
             const url = "{{ route('confirmed-order.print-single-label', ['orderId' => ':orderId', 'row' => ':row']) }}"
                 .replace(':orderId', orderId)
                 .replace(':row', row) + `?styles=${encodeURIComponent(stylesParam)}`;
 
-            const printWindow = window.open(
-                url,
-                '_blank',
-                'width=800,height=800'
-            );
+            const printWindow = window.open(url, '_blank', 'width=800,height=800');
 
             if (!printWindow) {
                 alert('Please allow popups for this website to print labels');
             }
 
-            // Close the modal
             $('#styleModal').modal('hide');
+        });
+
+        // Global style button click
+        $('#globalStyleBtn').click(function() {
+            $('#globalStyleModal').modal('show');
+        });
+
+        // Save global style
+        $('#saveGlobalStyle').click(function() {
+            const globalStyles = {
+                fontSize: $('#globalFontSize').val(),
+                fontWeight: $('#globalFontWeight').val(),
+                lineHeight: $('#globalLineHeight').val(),
+                textOverflow: $('#globalTextOverflow').val()
+            };
+
+            // Store in localStorage
+            localStorage.setItem('labelGlobalStyles', JSON.stringify(globalStyles));
+
+            // Close modal
+            $('#globalStyleModal').modal('hide');
+
+            alert('Global styles saved successfully!');
+        });
+
+        // Load global styles when opening style modal
+        $('.styleControl').click(function() {
+            const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
+            if (globalStyles) {
+                $('#fontSize').val(globalStyles.fontSize || 9);
+                $('#fontWeight').val(globalStyles.fontWeight || 'bold');
+                $('#lineHeight').val(globalStyles.lineHeight || 1.1);
+                $('#textOverflow').val(globalStyles.textOverflow || 'visible');
+            }
         });
     });
 </script>
