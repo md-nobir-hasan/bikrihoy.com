@@ -352,10 +352,13 @@
             const orderId = $(this).data('order-id');
             const row = $(this).data('row');
 
-            // Open print window using properly formatted URL
+            // Get global styles from localStorage
+            const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
+
+            // Create URL with styles parameter
             const url = "{{ route('confirmed-order.print-single-label', ['orderId' => ':orderId', 'row' => ':row']) }}"
                 .replace(':orderId', orderId)
-                .replace(':row', row);
+                .replace(':row', row) + `?styles=${encodeURIComponent(JSON.stringify(globalStyles))}`;
 
             const printWindow = window.open(
                 url,
