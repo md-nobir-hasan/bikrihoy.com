@@ -137,7 +137,7 @@
     @foreach($groupedData as $data)
         @php
             $excelData = $data['excelData'];
-            $invoiceId = $excelData['Invoice ID'] ?? '';
+            $invoiceId = $excelData['Invoice'] ?? ($excelData['Invoice ID'] ?? '');
             $company = $site_info;
             $companyContact = $site_contact_info;
         @endphp

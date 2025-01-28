@@ -75,7 +75,7 @@
                                                        data-row="{{ $row_number }}">
                                             </td>
                                             <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $row_data['Invoice'] }}</td>
+                                            <td>{{ $row_data['Invoice'] ?? ($row_data['Invoice ID'] ?? '') }}</td>
                                             <td>
                                                 {{ $row_data['Name'] }}
 
