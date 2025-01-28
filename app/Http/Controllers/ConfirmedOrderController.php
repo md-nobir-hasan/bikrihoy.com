@@ -312,7 +312,7 @@ class ConfirmedOrderController extends Controller
                 $groupedData[] = [
                     'order' => $order,
                     'excelData' => [
-                        'Invoice ID' => $excelData->where('property', 'Invoice ID')->first()->value ?? '',
+                        'Invoice' => $excelData->where('property', 'Invoice')->first()->value ?? '',
                         'Name' => $excelData->where('property', 'Name')->first()->value ?? '',
                         'Phone' => $excelData->where('property', 'Phone')->first()->value ?? '',
                         'Address' => $excelData->where('property', 'Address')->first()->value ?? ''
@@ -397,7 +397,7 @@ class ConfirmedOrderController extends Controller
         $groupedData = [[
             'order' => $order,
             'excelData' => [
-                'Invoice ID' => $order->excels->where('property', 'Invoice ID')->first()->value ?? '',
+                'Invoice' => $order->excels->where('property', 'Invoice')->first()->value ?? '',
                 'Name' => $order->excels->where('property', 'Name')->first()->value ?? '',
                 'Phone' => $order->excels->where('property', 'Phone')->first()->value ?? '',
                 'Address' => $order->excels->where('property', 'Address')->first()->value ?? ''

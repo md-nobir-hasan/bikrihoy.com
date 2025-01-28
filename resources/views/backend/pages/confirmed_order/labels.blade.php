@@ -16,20 +16,24 @@
             font-family: Arial, sans-serif;
         }
         .label {
+            position: relative;
             width: 100%;
             height: 100%;
-            padding: 2mm;
+            /* padding: 1mm; */
             box-sizing: border-box;
-            border: 1px solid #000;
-            border-bottom: none;
+            /* border: 1px solid #000; */
+            /* border-bottom: none;
+            padding-top: 0px; */
         }
         .logo-container {
             text-align: center;
-            margin-bottom: 2mm;
-            padding-bottom: 1mm;
+            margin-bottom: 1mm;
             border-bottom: 1px solid #000;
             font-size: 15pt;
             font-weight: bold;
+        }
+        .logo-container img{
+            height: 45px;
         }
         .logo {
             width: 20mm;
@@ -51,10 +55,7 @@
             width: 1px;
             background: #000;
         }
-        .from-section, .to-section {
-            width: 47%;
-            padding: 0 1mm;
-        }
+
         .section-title {
             font-weight: bold;
             font-size: 9pt;
@@ -101,13 +102,34 @@
             text-decoration-thickness: 2px;
         }
         .to-section {
-            width: 47%;
             word-break: break-word;
             padding: 0 1mm;
+            border-bottom: 1px solid #000;
+            padding-bottom: 1mm;
+            padding-left: 1mm;
             font-size: {{ $styles['fontSize'] ?? '9' }}pt;
             font-weight: {{ $styles['fontWeight'] ?? 'bold' }};
             line-height: {{ $styles['lineHeight'] ?? '1.1' }};
             overflow: {{ $styles['textOverflow'] ?? 'visible' }};
+        }
+
+        .qr-section{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: space-between;
+            height: 60px;
+            font-size: 10pt;
+            padding-top: 2px;
+            padding-left: 1mm;
+        }
+
+        .company-info{
+            display: flex;
+            flex-direction: column;
+            align-items: space-between;
+            font-weight: bold;
+            font-size: 11pt;
         }
     </style>
 </head>
@@ -116,40 +138,51 @@
         @php
             $excelData = $data['excelData'];
             $invoiceId = $excelData['Invoice ID'] ?? '';
-            $company = companyInfo();
+            $company = $site_info;
+            $companyContact = $site_contact_info;
         @endphp
         <div class="label">
-            <div class="invoice-number">#{{ $invoiceId }}</div>
-            
+            {{-- <div class="invoice-number">#{{ $invoiceId }}</div> --}}
+
             <div class="logo-container">
-                {{$company->title}}
+                <img src="{{ asset('images/default/label-print-logo.jpeg') }}" alt="CASIO" class="logo-img">
             </div>
 
-            <div class="shipping-details">
-                <div class="from-section">
-                    <div class="section-title underline">From:</div>
-                    <div class="from-address word-wrap line-height">
-                    {{ $company->title ?? '' }}<br>
-                    {{ $company->address ?? '' }}
-                    </div>
-                </div>
+            {{-- <div class="shipping-details"> --}}
                 <div class="to-section">
-                    <div class="section-title underline">To:</div>
 
                     {{-- class="customer-name word-wrap line-height" --}}
                     <div>
-                        {{ $excelData['Name'] ?? '' }},
+                       Name : {{ $excelData['Name'] ?? '' }},
                     </div>
 
                     {{-- class="customer-phone word-wrap line-height" --}}
                     <div >
-                        {{ $excelData['Phone'] ?? '' }},
+                        Phone : {{ $excelData['Phone'] ?? '' }},
                     </div>
 
                     {{-- class="customer-address word-wrap line-height" --}}
                     <div>
-                        {{ $excelData['Address'] ?? '' }}
+                        Address : {{ $excelData['Address'] ?? '' }}
                     </div>
+                </div>
+            {{-- </div> --}}
+
+            <div class="qr-section">
+                <img src="{{ asset('images/default/qr.jpeg') }}" class="qr-code">
+                <div class="company-info">
+                    <div class="company-name">Tech-Soi</div>
+                    <div class="company-address">{{$company->title}}</div>
+                    <div class="company-phone">{{$companyContact->phone}}</div>
+                </div>
+                <div class="sub-text msg">
+                    Allah Always
+                    <br>
+                    Be With Us
+                    <br>
+                    Be Positive
+                    <br>
+                    Never Give Up
                 </div>
             </div>
         </div>
