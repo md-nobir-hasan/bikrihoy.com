@@ -62,22 +62,21 @@ class ConfirmedOrderController extends Controller
             }
 
             $validator = Validator::make($rowData, [
-                'Invoice ID' => 'required|string',
+                'Invoice' => 'required|string',
                 'Name' => 'required|string',
-                'Phone' => 'required|string',
                 'Address' => 'required|string',
-                'Total' => 'required|numeric',
-                'Quantity' => 'required|numeric'
+                'Phone' => 'required|string',
+                'Amount' => 'required|numeric',
+                'Note' => 'nullable|string'
             ], [
-                'Invoice ID.required' => 'Row ' . ($rowIndex + 1) . ': Invoice ID is required',
+                'Invoice.required' => 'Row ' . ($rowIndex + 1) . ': Invoice is required',
                 'Name.required' => 'Row ' . ($rowIndex + 1) . ': Customer name is required',
                 'Phone.required' => 'Row ' . ($rowIndex + 1) . ': Phone number is required',
                 'Address.required' => 'Row ' . ($rowIndex + 1) . ': Address is required',
-                'Total.required' => 'Row ' . ($rowIndex + 1) . ': Total amount is required',
-                'Total.numeric' => 'Row ' . ($rowIndex + 1) . ': Total amount must be a number',
-                'Quantity.required' => 'Row ' . ($rowIndex + 1) . ': Quantity is required',
-                'Quantity.numeric' => 'Row ' . ($rowIndex + 1) . ': Quantity must be a number'
+                'Amount.required' => 'Row ' . ($rowIndex + 1) . ': Amount is required',
+                'Amount.numeric' => 'Row ' . ($rowIndex + 1) . ': Amount must be a number',
             ]);
+
 
             if ($validator->fails()) {
                 return back()->with('error', 'Error in Excel data: ' . implode(', ', $validator->errors()->all()));

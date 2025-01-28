@@ -75,7 +75,7 @@
                                                        data-row="{{ $row_number }}">
                                             </td>
                                             <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $row_data['Invoice ID'] }}</td>
+                                            <td>{{ $row_data['Invoice'] }}</td>
                                             <td>
                                                 {{ $row_data['Name'] }}
 
@@ -89,10 +89,10 @@
                                                 </span>
 
                                             </td>
-                                            <td>{{ $row_data['Phone'] }}</td>
                                             <td>{{ $row_data['Address'] }}</td>
-                                            <td>{{ $row_data['Total'] }}</td>
-                                            <td>{{ $row_data['Quantity'] }}</td>
+                                            <td>{{ $row_data['Phone'] }}</td>
+                                            <td>{{ $row_data['Amount'] }}</td>
+                                            <td>{{ $row_data['Note'] }}</td>
                                             <td>
                                                 <div class="btn-group">
 
