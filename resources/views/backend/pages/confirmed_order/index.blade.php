@@ -92,7 +92,7 @@
                                             <td>{{ $row_data['Address'] }}</td>
                                             <td>{{ $row_data['Phone'] }}</td>
                                             <td>{{ $row_data['Amount'] ?? ($row_data['Total'] ?? '') }}</td>
-                                            <td>{{ $row_data['Note'] }}</td>
+                                            <td>{{ $row_data['Note'] ?? '' }}</td>
                                             <td>
                                                 <div class="btn-group">
 
