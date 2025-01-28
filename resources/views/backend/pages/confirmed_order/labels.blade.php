@@ -5,14 +5,14 @@
     <title>Shipping Label</title>
     <style>
         @page {
-            size: 75mm 50mm;
+            size: 50mm 70mm;
             margin: 0;
         }
         body {
             margin: 0;
             padding: 0;
-            width: 75mm;
-            height: 50mm;
+            width: 50mm;
+            height: 70mm;
             font-family: Arial, sans-serif;
         }
         .label {
@@ -107,21 +107,27 @@
             border-bottom: 1px solid #000;
             padding-bottom: 1mm;
             padding-left: 1mm;
+            min-height: 33mm;
+            margin-top: 2mm;
             font-size: {{ $styles['fontSize'] ?? '9' }}pt;
             font-weight: {{ $styles['fontWeight'] ?? 'bold' }};
-            line-height: {{ $styles['lineHeight'] ?? '1.1' }};
+            line-height: {{ $styles['lineHeight'] ?? '1.4' }};
             overflow: {{ $styles['textOverflow'] ?? 'visible' }};
         }
 
         .qr-section{
             display: flex;
             flex-direction: row;
-            gap: 10px;
+            /* gap: 10px; */
             align-items: space-between;
-            height: 60px;
             font-size: 10pt;
             padding-top: 2px;
             padding-left: 1mm;
+            margin-top: 2mm;
+        }
+
+        .qr-section img{
+            height: 55px;
         }
 
         .company-info{
@@ -129,7 +135,23 @@
             flex-direction: column;
             align-items: space-between;
             font-weight: bold;
-            font-size: 11pt;
+            font-size: 8pt;
+            margin-left: 1mm;
+            line-height: 1.4;
+        }
+        .sub-text{
+            font-size: 6pt;
+            font-weight: normal;
+            line-height: 1.5;
+            margin-left: 2px;
+            padding-left: 3px;
+            border-left: 1px solid #000;
+        }
+        .font-weight-bold{
+            font-weight: bold;
+        }
+        .mt-1mm{
+            margin-top: 1mm;
         }
     </style>
 </head>
@@ -153,17 +175,17 @@
 
                     {{-- class="customer-name word-wrap line-height" --}}
                     <div>
-                       Name : {{ $excelData['Name'] ?? '' }},
+                       <span class="font-weight-bold">Name</span> : {{ $excelData['Name'] ?? '' }},
                     </div>
 
                     {{-- class="customer-phone word-wrap line-height" --}}
-                    <div >
-                        Phone : {{ $excelData['Phone'] ?? '' }},
+                    <div class="">
+                        <span class="font-weight-bold">Phone</span> : {{ $excelData['Phone'] ?? '' }},
                     </div>
 
                     {{-- class="customer-address word-wrap line-height" --}}
-                    <div>
-                        Address : {{ $excelData['Address'] ?? '' }}
+                    <div class="">
+                        <span class="font-weight-bold">Address</span> : {{ $excelData['Address'] ?? '' }}
                     </div>
                 </div>
             {{-- </div> --}}
