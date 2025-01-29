@@ -209,4 +209,11 @@ class SettingController extends Controller
         Artisan::call('optimize:clear');
         return redirect()->back()->with('success', 'Cache clear successfully!');
     }
+
+    public function optimize()
+    {
+        // dd('optimize');
+        Artisan::call('optimize');
+        return redirect()->back()->with('success', 'The app has been optimized!');
+    }
 }

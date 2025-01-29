@@ -9,3 +9,5 @@ Homestead.yaml
 /node_modules
 /public/storage
 /storage/app/
+/.rnd
+

@@ -296,6 +296,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //optimize clear
     Route::get('/optimize-clear', [SettingController::class, 'optimizeClear'])->name('optimize-clear');
+    Route::get('/optimize', [SettingController::class, 'optimize'])->name('optimize');
     //Setting
     Route::group(['as' => 'setting.', 'prefix' => 'setting'], function () {
 
