@@ -7,6 +7,14 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
+
+        {{-- Cache Clear --}}
+        <li class="nav-item">
+            <a href="{{ route('optimize') }}" class="nav-link" title='Optimize the app'>
+                <i class="fas fa-sync"></i>
+            </a>
+        </li>
+
         {{-- Going frontend home page menu --}}
         <li class="nav-item">
             <a href="{{ route('home') }}" class="nav-link" target="_blank">
