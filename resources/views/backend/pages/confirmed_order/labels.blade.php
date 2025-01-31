@@ -194,7 +194,7 @@
                 <img src="{{ asset('images/default/qr.jpeg') }}" class="qr-code">
                 <div class="company-info">
                     <div class="company-name">Tech-Soi</div>
-                    <div class="company-address">{{$company->title}}</div>
+                    <div class="company-address">Bikrihoy.Com</div>
                     <div class="company-phone">{{$companyContact->phone}}</div>
                 </div>
                 <div class="sub-text msg">
