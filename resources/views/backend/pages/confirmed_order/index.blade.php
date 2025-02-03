@@ -4,6 +4,11 @@
 
 @push('third_party_stylesheets')
     <link href="{{ asset('assets/backend/js/DataTable/datatables.min.css') }}" rel="stylesheet">
+    <style>
+        .bg-17a2b85c{
+            background-color: #17a2b85c !important;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -66,17 +71,17 @@
                                         $excel_rows = $order->excels->groupBy('row');
                                     @endphp
 
-                                    <tr>
+                                    <tr class="bg-17a2b85c">
                                         <td>
                                             <input type="checkbox" class="order-checkbox"
                                                 data-order-id="{{ $order->id }}"
                                                 data-row="4534{{ $order->id }}">
                                         </td>
-                                        <td colspan="2" class="text-danger"> {{$order->date->format('d-m-Y')}}</td>
-                                        <td class="text-info"> count ({{count($excel_rows)}})</td>
                                         <td> </td>
                                         <td> </td>
                                         <td></td>
+                                        <td class="text-danger"> {{$order->date->format('d-m-Y')}}</td>
+                                        <td class="text-danger"> count ({{count($excel_rows)}})</td>
                                         <td> </td>
                                         <td> </td>
                                         <td></td>
