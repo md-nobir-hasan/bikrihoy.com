@@ -65,92 +65,94 @@
                             </thead>
                             <tbody>
                                 @foreach($orders as $order)
-
-                                    @php
-                                        // Group excels by row number
-                                        $excel_rows = $order->excels->groupBy('row');
-                                    @endphp
-
-                                    <tr class="bg-17a2b85c">
-                                        <td>
-                                            <input type="checkbox" class="order-checkbox"
-                                                data-order-id="{{ $order->id }}"
-                                                data-row="4534{{ $order->id }}">
-                                        </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td></td>
-                                        <td class="text-danger"> {{$order->date->format('d-m-Y')}}</td>
-                                        <td class="text-danger"> count ({{count($excel_rows)}})</td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td></td>
-                                    </tr>
-
-                                    @foreach($excel_rows as $row_number => $excel_row)
+                                    @if(count($order->excels ?: []))
                                         @php
-                                            $row_data = $excel_row->pluck('value', 'property');
+                                            // Group excels by row number
+                                            $excel_rows = $order->excels->groupBy('row');
                                         @endphp
-                                        <tr>
+
+                                        <tr class="bg-17a2b85c">
                                             <td>
                                                 <input type="checkbox" class="order-checkbox"
-                                                       data-order-id="{{ $order->id }}"
-                                                       data-row="{{ $row_number }}">
+                                                    data-order-id="{{ $order->id }}"
+                                                    data-row="4534{{ $order->id }}">
                                             </td>
-                                            <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $row_data['Invoice'] ?? ($row_data['Invoice ID'] ?? '') }}</td>
-                                            <td>
-                                                {{ $row_data['Name'] }}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td></td>
+                                            <td class="text-danger"> {{$order->date->format('d-m-Y')}}</td>
+                                            <td class="text-danger"> count ({{count($excel_rows)}})</td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td></td>
+                                        </tr>
 
-                                                {{-- Single print label button --}}
-                                                <span class="badge badge-success printSingleLabel"
-                                                      style="cursor: pointer"
-                                                      data-order-id="{{ $order->id }}"
-                                                      data-row="{{ $row_number }}"
-                                                      title="Print Label">
-                                                    <i class="fas fa-print"></i>
-                                                </span>
+                                        @foreach($excel_rows as $row_number => $excel_row)
+                                            @php
+                                                $row_data = $excel_row->pluck('value', 'property');
+                                            @endphp
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" class="order-checkbox"
+                                                        data-order-id="{{ $order->id }}"
+                                                        data-row="{{ $row_number }}">
+                                                </td>
+                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td>{{ $row_data['Invoice'] ?? ($row_data['Invoice ID'] ?? '') }}</td>
+                                                <td>
+                                                    {{ $row_data['Name'] }}
 
-                                            </td>
-                                            <td>{{ $row_data['Address'] }}</td>
-                                            <td>{{ $row_data['Phone'] }}</td>
-                                            <td>{{ $row_data['Amount'] ?? ($row_data['Total'] ?? '') }}</td>
-                                            <td>{{ $row_data['Note'] ?? '' }}</td>
-                                            <td>
-                                                <div class="btn-group">
+                                                    {{-- Single print label button --}}
+                                                    <span class="badge badge-success printSingleLabel"
+                                                        style="cursor: pointer"
+                                                        data-order-id="{{ $order->id }}"
+                                                        data-row="{{ $row_number }}"
+                                                        title="Print Label">
+                                                        <i class="fas fa-print"></i>
+                                                    </span>
 
-                                                    {{-- Single print style button --}}
-                                                    <button class="btn btn-sm btn-info styleControl"
-                                                            data-order-id="{{ $order->id }}"
-                                                            data-row="{{ $row_number }}"
-                                                            title="Label Style">
-                                                        <i class="fas fa-paint-brush"></i>
-                                                    </button>
+                                                </td>
+                                                <td>{{ $row_data['Address'] }}</td>
+                                                <td>{{ $row_data['Phone'] }}</td>
+                                                <td>{{ $row_data['Amount'] ?? ($row_data['Total'] ?? '') }}</td>
+                                                <td>{{ $row_data['Note'] ?? '' }}</td>
+                                                <td>
+                                                    <div class="btn-group">
 
-                                                    {{-- Single edit button --}}
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-warning editSingleItem"
-                                                            data-order-id="{{ $order->id }}"
-                                                            data-row="{{ $row_number }}"
-                                                            title="Edit Item">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </button>
-
-                                                    {{-- Single delete button --}}
-                                                    @if(check('Confirmed Order')->delete)
-                                                        <button type="button"
-                                                                class="btn btn-sm btn-danger deleteRow"
+                                                        {{-- Single print style button --}}
+                                                        <button class="btn btn-sm btn-info styleControl"
                                                                 data-order-id="{{ $order->id }}"
                                                                 data-row="{{ $row_number }}"
-                                                                title="Delete">
-                                                            <i class="fas fa-trash"></i>
+                                                                title="Label Style">
+                                                            <i class="fas fa-paint-brush"></i>
                                                         </button>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+
+                                                        {{-- Single edit button --}}
+                                                        <button type="button"
+                                                                class="btn btn-sm btn-warning editSingleItem"
+                                                                data-order-id="{{ $order->id }}"
+                                                                data-row="{{ $row_number }}"
+                                                                title="Edit Item">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+
+                                                        {{-- Single delete button --}}
+                                                        @if(check('Confirmed Order')->delete)
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-danger deleteRow"
+                                                                    data-order-id="{{ $order->id }}"
+                                                                    data-row="{{ $row_number }}"
+                                                                    title="Delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 @endforeach
+
                             </tbody>
                         </table>
                     </div>
