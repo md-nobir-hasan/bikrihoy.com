@@ -60,10 +60,28 @@
                             </thead>
                             <tbody>
                                 @foreach($orders as $order)
+
                                     @php
                                         // Group excels by row number
                                         $excel_rows = $order->excels->groupBy('row');
                                     @endphp
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="order-checkbox"
+                                                data-order-id="{{ $order->id }}"
+                                                data-row="4534{{ $order->id }}">
+                                        </td>
+                                        <td colspan="2" class="text-danger"> {{$order->date->format('d-m-Y')}}</td>
+                                        <td class="text-info"> count ({{count($excel_rows)}})</td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td></td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td></td>
+                                    </tr>
+
                                     @foreach($excel_rows as $row_number => $excel_row)
                                         @php
                                             $row_data = $excel_row->pluck('value', 'property');

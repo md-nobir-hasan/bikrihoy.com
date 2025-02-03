@@ -97,7 +97,7 @@ class ConfirmedOrderController extends Controller
         DB::beginTransaction();
         try {
             // Create confirmed order
-            $confirmedOrder = ConfirmedOrder::create([
+            $confirmedOrder = ConfirmedOrder::firstOrCreate([
                 'date' => $request->date
             ]);
 
