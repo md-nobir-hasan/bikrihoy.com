@@ -12,6 +12,7 @@
 @endpush
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -48,14 +49,22 @@
 
                 <div class="card-body">
                     @include('backend.partial.flush-message')
-
+                    <div style="float: right;">
+                            <label for="dateFilter">Filter by Date:</label>
+                            <select id="dateFilter">
+                                <option value="all">All Dates</option>
+                            </select>
+                        </div>
                     <div class="table-responsive">
+                        
                         <table id="confirmedOrderTable" class="table table-striped">
                             <thead>
                                 <tr>
+                                     <td>Date</td>
                                     <th>
                                         <input type="checkbox" id="selectAll">
                                     </th>
+                                   
                                     <td>S.L</td>
                                     @foreach(App\Models\Excel::getHeaders() as $key => $header)
                                         <th style="width: {{ $header['width'] }}">{{ $header['display'] }}</th>
@@ -71,27 +80,12 @@
                                             $excel_rows = $order->excels->groupBy('row');
                                         @endphp
 
-                                        <tr class="bg-17a2b85c">
-                                            <td>
-                                                <input type="checkbox" class="order-checkbox"
-                                                    data-order-id="{{ $order->id }}"
-                                                    data-row="4534{{ $order->id }}">
-                                            </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td></td>
-                                            <td class="text-danger"> {{$order->date->format('d-m-Y')}}</td>
-                                            <td class="text-danger"> count ({{count($excel_rows)}})</td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td></td>
-                                        </tr>
-
                                         @foreach($excel_rows as $row_number => $excel_row)
                                             @php
                                                 $row_data = $excel_row->pluck('value', 'property');
                                             @endphp
                                             <tr>
+                                               <td>{{$order->date->format('d-m-Y')}}</td>
                                                 <td>
                                                     <input type="checkbox" class="order-checkbox"
                                                         data-order-id="{{ $order->id }}"
@@ -155,6 +149,13 @@
 
                             </tbody>
                         </table>
+                        <div class="dataTables_paginate paging_simple_numbers">
+                            <ul class="pagination" style="justify-content: flex-end;">
+                                <li class="paginate_button page-item previous" id="prevPage"><a href="#" aria-controls="table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                <li class="paginate_button page-item active page-link" id="pageNumber" style="background-color: #007bff;color:black;"></li>
+                                <li class="paginate_button page-item next" id="nextPage"><a href="#" aria-controls="table" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -289,37 +290,114 @@
 @push('page_scripts')
 <script>
     $(document).ready(function() {
-        $('#confirmedOrderTable').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'excel',
-                    text: '<i class="fas fa-file-excel"></i> Export Excel',
-                    className: 'btn btn-success btn-sm',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    text: '<i class="fas fa-file-pdf"></i> Export PDF',
-                    className: 'btn btn-danger btn-sm',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fas fa-print"></i> Print',
-                    className: 'btn btn-info btn-sm',
-                    exportOptions: {
-                        columns: ':not(:last-child)'
-                    }
+        var table = $('#confirmedOrderTable');
+            var tableData = [];
+            table.find('tbody tr').each(function () {
+                var row = $(this);
+                var date = row.find('td:eq(0)').text().trim();
+                tableData.push({ date: date, rowHTML: row.prop('outerHTML') });
+            });
+
+            tableData.sort((a, b) => b.date.localeCompare(a.date));
+
+            var groupedData = {};
+            tableData.forEach(entry => {
+                if (!groupedData[entry.date]) {
+                    groupedData[entry.date] = [];
                 }
-            ],
-            pageLength: 25,
-            order: [[0, 'desc']]
-        });
+                groupedData[entry.date].push(entry.rowHTML);
+            });
+
+            var dateKeys = Object.keys(groupedData);
+            var currentPageIndex = 0;
+            var totalPages = dateKeys.length;
+
+            var dateFilter = $("#dateFilter");
+            dateKeys.forEach(date => {
+                dateFilter.append(`<option value="${date}">${date}</option>`);
+            });
+
+            function updatePageControls() {
+                $("#pageNumber").text(`Page ${currentPageIndex + 1} of ${totalPages}`);
+
+                $("#prevPage").prop("disabled", currentPageIndex === 0);
+                $("#nextPage").prop("disabled", currentPageIndex === totalPages - 1);
+            }
+
+            function loadPage(pageIndex) {
+                if (pageIndex < 0 || pageIndex >= totalPages) return;
+
+                currentPageIndex = pageIndex;
+                var tbody = table.find('tbody');
+                tbody.empty();
+
+                var date = dateKeys[currentPageIndex];
+                groupedData[date].forEach(rowHTML => tbody.append(rowHTML));
+
+                updatePageControls();
+            }
+
+            $("#prevPage").click(() => {
+                if (currentPageIndex > 0) {
+                    loadPage(currentPageIndex - 1);
+                }
+            });
+
+            $("#nextPage").click(() => {
+                if (currentPageIndex < totalPages - 1) {
+                    loadPage(currentPageIndex + 1);
+                }
+            });
+
+            $("#dateFilter").change(function () {
+                var selectedDate = $(this).val();
+                var tbody = table.find('tbody');
+                tbody.empty();
+
+                if (selectedDate === "all") {
+                    dateKeys.forEach(date => {
+                        groupedData[date].forEach(rowHTML => tbody.append(rowHTML));
+                    });
+                    $(".dataTables_paginate").show();
+                } else {
+                    groupedData[selectedDate]?.forEach(rowHTML => tbody.append(rowHTML));
+                    $(".dataTables_paginate").hide();
+                }
+            });
+
+            loadPage(0);
+            table.DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Export Excel',
+                        className: 'btn btn-success btn-sm',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> Export PDF',
+                        className: 'btn btn-danger btn-sm',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i> Print',
+                        className: 'btn btn-info btn-sm',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    }
+                ],
+                ordering: true,
+                searching: true,
+                paging: false
+            });
 
         // Select all checkbox
         $('#selectAll').change(function() {
