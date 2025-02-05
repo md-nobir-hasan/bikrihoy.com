@@ -3,8 +3,6 @@
 @push('custom-js')
 <script>
     $(document).ready(function () {
-
-
     function calculateTotal() {
         // Get values
         let price = parseFloat($('.price').text());

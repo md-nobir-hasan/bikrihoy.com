@@ -66,6 +66,7 @@
                             <tbody>
                                 @foreach($orders as $order)
                                     @if(count($order->excels ?: []))
+
                                         @php
                                             // Group excels by row number
                                             $excel_rows = $order->excels->groupBy('row');
@@ -376,14 +377,15 @@
         $(document).on('click', '.printSingleLabel', function() {
             const orderId = $(this).data('order-id');
             const row = $(this).data('row');
+            const serialNumber = $(this).closest('tr').find('td:eq(1)').text(); // Get the S.L number
 
             // Get global styles from localStorage
             const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
 
-            // Create URL with styles parameter
+            // Create URL with styles parameter and serial number
             const url = "{{ route('confirmed-order.print-single-label', ['orderId' => ':orderId', 'row' => ':row']) }}"
                 .replace(':orderId', orderId)
-                .replace(':row', row) + `?styles=${encodeURIComponent(JSON.stringify(globalStyles))}`;
+                .replace(':row', row) + `?styles=${encodeURIComponent(JSON.stringify(globalStyles))}&serial=${serialNumber}`;
 
             const printWindow = window.open(
                 url,
