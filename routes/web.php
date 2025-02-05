@@ -186,6 +186,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('view/{order_number}', [OrderController::class, 'view'])->name('view');
         //send to courier
         Route::get('/sendToCourier/{id}', [OrderController::class, 'sendToCourier'])->name('sendToCourier');
+        Route::get('/sendToPathao/{id}', [OrderController::class, 'sendToPathao'])->name('sendToPathao');
 
 
     });

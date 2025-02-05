@@ -119,7 +119,9 @@
                                     </div>
                                 </div>
                                 {{-- Send to curier button  --}}
-                                <a class="btn btn-primary" href="{{route('order.sendToCourier', $order->id)}}">Send to Courier</a>
+                                <a class="btn btn-primary" href="{{route('order.sendToCourier', $order->id)}}">Send to Courier</a>&nbsp;
+                                
+                                <a class="btn btn-success" href="{{route('order.sendToPathao', $order->id)}}">Send to Pathao</a>
 
                             </div>
                         </div>

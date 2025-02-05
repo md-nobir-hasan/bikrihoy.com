@@ -210,6 +210,17 @@ class OrderController extends Controller
             return back()->with('error', $sent['error']);
         }
     }
+    
+     public function sendToPathao($id)
+    {
+        $order = Order::find($id);
+       // call pathao api 
+
+        return redirect()->route('order.index')->with('success', 'Order sent to Pathao successfully');
+
+//            return back()->with('error', $sent['error']);
+
+    }
 
 
     /**
