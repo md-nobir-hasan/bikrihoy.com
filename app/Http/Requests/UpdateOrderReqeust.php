@@ -34,8 +34,6 @@ class UpdateOrderReqeust extends FormRequest
             'invoice_id' => [
                 'required',
                 'string',
-                'size:4',
-                'min:1000',
                 Rule::unique('orders')->ignore($this->route('id')),
             ],
 

@@ -12,10 +12,17 @@ class Excel extends Model
 
     protected $fillable = ['confirmed_order_id', 'property', 'value','row'];
 
-    // Move headers definition here
+    /*
+        * Invoice
+        * Name
+        * Address
+        * Phone
+        * Amount
+        * Note
+    */
     protected static $headers = [
-        'Invoice ID' => [
-            'display' => 'Invoice ID',
+        'Invoice' => [
+            'display' => 'Invoice',
             'validation' => 'required|string',
             'width' => '100px'
         ],
@@ -24,26 +31,36 @@ class Excel extends Model
             'validation' => 'required|string',
             'width' => '150px'
         ],
-        'Phone' => [
-            'display' => 'Phone',
-            'validation' => 'required|string',
-            'width' => '120px'
-        ],
         'Address' => [
             'display' => 'Address',
             'validation' => 'required|string',
             'width' => '200px'
         ],
-        'Total' => [
-            'display' => 'Total',
+        'Phone' => [
+            'display' => 'Phone',
+            'validation' => 'required|string',
+            'width' => '120px'
+        ],
+        'Amount' => [
+            'display' => 'Amount',
             'validation' => 'required|numeric',
             'width' => '100px'
         ],
-        'Quantity' => [
-            'display' => 'Quantity',
-            'validation' => 'required|numeric',
-            'width' => '80px'
-        ]
+        'Note' => [
+            'display' => 'Note',
+            'validation' => 'nullable|string',
+            'width' => '200px'
+        ],
+        // 'Total' => [
+        //     'display' => 'Total',
+        //     'validation' => 'required|numeric',
+        //     'width' => '100px'
+        // ],
+        // 'Quantity' => [
+        //     'display' => 'Quantity',
+        //     'validation' => 'required|numeric',
+        //     'width' => '80px'
+        // ]
     ];
 
     public function confirmedOrder()

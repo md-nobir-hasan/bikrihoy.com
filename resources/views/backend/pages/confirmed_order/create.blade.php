@@ -44,6 +44,12 @@
                             <label for="excel_file">Excel File</label>
                             <input type="file" name="excel_file" id="excel_file"
                                    class="form-control @error('excel_file') is-invalid @enderror" required>
+                            <p class='text-muted'>
+                                <small>
+                                    <i class="fas fa-info-circle"></i>
+                                    Excel file should have the following headers: {{ implode(', ', \App\Models\Excel::getHeaderDisplayNames()->toArray()) }}
+                                </small>
+                            </p>
                             @error('excel_file')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

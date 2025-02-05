@@ -62,22 +62,21 @@ class ConfirmedOrderController extends Controller
             }
 
             $validator = Validator::make($rowData, [
-                'Invoice ID' => 'required|string',
+                'Invoice' => 'required|string',
                 'Name' => 'required|string',
-                'Phone' => 'required|string',
                 'Address' => 'required|string',
-                'Total' => 'required|numeric',
-                'Quantity' => 'required|numeric'
+                'Phone' => 'required|string',
+                'Amount' => 'required|numeric',
+                'Note' => 'nullable|string'
             ], [
-                'Invoice ID.required' => 'Row ' . ($rowIndex + 1) . ': Invoice ID is required',
+                'Invoice.required' => 'Row ' . ($rowIndex + 1) . ': Invoice is required',
                 'Name.required' => 'Row ' . ($rowIndex + 1) . ': Customer name is required',
                 'Phone.required' => 'Row ' . ($rowIndex + 1) . ': Phone number is required',
                 'Address.required' => 'Row ' . ($rowIndex + 1) . ': Address is required',
-                'Total.required' => 'Row ' . ($rowIndex + 1) . ': Total amount is required',
-                'Total.numeric' => 'Row ' . ($rowIndex + 1) . ': Total amount must be a number',
-                'Quantity.required' => 'Row ' . ($rowIndex + 1) . ': Quantity is required',
-                'Quantity.numeric' => 'Row ' . ($rowIndex + 1) . ': Quantity must be a number'
+                'Amount.required' => 'Row ' . ($rowIndex + 1) . ': Amount is required',
+                'Amount.numeric' => 'Row ' . ($rowIndex + 1) . ': Amount must be a number',
             ]);
+
 
             if ($validator->fails()) {
                 return back()->with('error', 'Error in Excel data: ' . implode(', ', $validator->errors()->all()));
@@ -98,7 +97,7 @@ class ConfirmedOrderController extends Controller
         DB::beginTransaction();
         try {
             // Create confirmed order
-            $confirmedOrder = ConfirmedOrder::create([
+            $confirmedOrder = ConfirmedOrder::firstOrCreate([
                 'date' => $request->date
             ]);
 
@@ -297,8 +296,7 @@ class ConfirmedOrderController extends Controller
     {
         $orderIds = explode(',', $request->ids);
         $rows = explode(',', $request->rows);
-
-        // Decode styles from request
+        $serials = explode(',', $request->serials);
         $styles = json_decode($request->input('styles'), true) ?? [];
 
         $orders = ConfirmedOrder::whereIn('id', $orderIds)
@@ -308,17 +306,23 @@ class ConfirmedOrderController extends Controller
             ->get();
 
         $groupedData = [];
+        $serialIndex = 0;
+
         foreach ($orders as $order) {
             foreach ($order->excels->groupBy('row') as $row => $excelData) {
                 $groupedData[] = [
                     'order' => $order,
                     'excelData' => [
-                        'Invoice ID' => $excelData->where('property', 'Invoice ID')->first()->value ?? '',
+                        'Invoice' => $excelData->where('property', 'Invoice')->first()->value ?? '',
                         'Name' => $excelData->where('property', 'Name')->first()->value ?? '',
                         'Phone' => $excelData->where('property', 'Phone')->first()->value ?? '',
-                        'Address' => $excelData->where('property', 'Address')->first()->value ?? ''
+                        'Address' => $excelData->where('property', 'Address')->first()->value ?? '',
+                        'Amount' => $excelData->where('property', 'Amount')->first()->value ??
+                            ($excelData->where('property', 'Total')->first()->value ?? ''),
+                        'SerialNumber' => $serials[$serialIndex] ?? ($serialIndex + 1)
                     ]
                 ];
+                $serialIndex++;
             }
         }
 
@@ -398,10 +402,12 @@ class ConfirmedOrderController extends Controller
         $groupedData = [[
             'order' => $order,
             'excelData' => [
-                'Invoice ID' => $order->excels->where('property', 'Invoice ID')->first()->value ?? '',
-                'Name' => $order->excels->where('property', 'Name')->first()->value ?? '',
-                'Phone' => $order->excels->where('property', 'Phone')->first()->value ?? '',
-                'Address' => $order->excels->where('property', 'Address')->first()->value ?? ''
+                'Invoice' => $order->excels->where('property', 'Invoice')->first() ? $order->excels->where('property', 'Invoice')->first()->value : '',
+                'Name' => $order->excels->where('property', 'Name')->first() ? $order->excels->where('property', 'Name')->first()->value : '',
+                'Phone' => $order->excels->where('property', 'Phone')->first() ? $order->excels->where('property', 'Phone')->first()->value : '',
+                'Address' => $order->excels->where('property', 'Address')->first() ? $order->excels->where('property', 'Address')->first()->value : '',
+                'Amount' => $order->excels->where('property', 'Amount')->first() ? $order->excels->where('property', 'Amount')->first()->value : '',
+                'SerialNumber' => $request->input('serial', '1') // Add serial number from request
             ]
         ]];
 
