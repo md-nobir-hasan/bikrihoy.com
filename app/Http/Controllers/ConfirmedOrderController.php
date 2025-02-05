@@ -296,8 +296,7 @@ class ConfirmedOrderController extends Controller
     {
         $orderIds = explode(',', $request->ids);
         $rows = explode(',', $request->rows);
-
-        // Decode styles from request
+        $serials = explode(',', $request->serials);
         $styles = json_decode($request->input('styles'), true) ?? [];
 
         $orders = ConfirmedOrder::whereIn('id', $orderIds)
@@ -307,6 +306,8 @@ class ConfirmedOrderController extends Controller
             ->get();
 
         $groupedData = [];
+        $serialIndex = 0;
+
         foreach ($orders as $order) {
             foreach ($order->excels->groupBy('row') as $row => $excelData) {
                 $groupedData[] = [
@@ -317,9 +318,11 @@ class ConfirmedOrderController extends Controller
                         'Phone' => $excelData->where('property', 'Phone')->first()->value ?? '',
                         'Address' => $excelData->where('property', 'Address')->first()->value ?? '',
                         'Amount' => $excelData->where('property', 'Amount')->first()->value ??
-                            ($excelData->where('property', 'Total')->first()->value ?? '')
+                            ($excelData->where('property', 'Total')->first()->value ?? ''),
+                        'SerialNumber' => $serials[$serialIndex] ?? ($serialIndex + 1)
                     ]
                 ];
+                $serialIndex++;
             }
         }
 
