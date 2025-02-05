@@ -56,7 +56,7 @@
                             </select>
                         </div>
                     <div class="table-responsive">
-                        
+
                         <table id="confirmedOrderTable" class="table table-striped">
                             <thead>
                                 <tr>
@@ -64,7 +64,7 @@
                                     <th>
                                         <input type="checkbox" id="selectAll">
                                     </th>
-                                   
+
                                     <td>S.L</td>
                                     @foreach(App\Models\Excel::getHeaders() as $key => $header)
                                         <th style="width: {{ $header['width'] }}">{{ $header['display'] }}</th>
@@ -428,7 +428,7 @@
                 const $row = $(this).closest('tr');
                 orderIds.push($(this).data('order-id'));
                 rows.push($(this).data('row'));
-                serials.push($row.find('td:eq(1)').text()); // Get serial number from second column
+                serials.push($row.find('td:eq(2)').text()); // Get serial number from second column
             });
 
             const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
@@ -444,7 +444,7 @@
         $(document).on('click', '.printSingleLabel', function() {
             const orderId = $(this).data('order-id');
             const row = $(this).data('row');
-            const serialNumber = $(this).closest('tr').find('td:eq(1)').text(); // Get the S.L number
+            const serialNumber = $(this).closest('tr').find('td:eq(2)').text(); // Get the S.L number
 
             // Get global styles from localStorage
             const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
