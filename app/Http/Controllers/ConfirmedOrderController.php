@@ -296,8 +296,7 @@ class ConfirmedOrderController extends Controller
     {
         $orderIds = explode(',', $request->ids);
         $rows = explode(',', $request->rows);
-
-        // Decode styles from request
+        $serials = explode(',', $request->serials);
         $styles = json_decode($request->input('styles'), true) ?? [];
 
         $orders = ConfirmedOrder::whereIn('id', $orderIds)
@@ -307,6 +306,8 @@ class ConfirmedOrderController extends Controller
             ->get();
 
         $groupedData = [];
+        $serialIndex = 0;
+
         foreach ($orders as $order) {
             foreach ($order->excels->groupBy('row') as $row => $excelData) {
                 $groupedData[] = [
@@ -315,9 +316,13 @@ class ConfirmedOrderController extends Controller
                         'Invoice' => $excelData->where('property', 'Invoice')->first()->value ?? '',
                         'Name' => $excelData->where('property', 'Name')->first()->value ?? '',
                         'Phone' => $excelData->where('property', 'Phone')->first()->value ?? '',
-                        'Address' => $excelData->where('property', 'Address')->first()->value ?? ''
+                        'Address' => $excelData->where('property', 'Address')->first()->value ?? '',
+                        'Amount' => $excelData->where('property', 'Amount')->first()->value ??
+                            ($excelData->where('property', 'Total')->first()->value ?? ''),
+                        'SerialNumber' => $serials[$serialIndex] ?? ($serialIndex + 1)
                     ]
                 ];
+                $serialIndex++;
             }
         }
 
@@ -398,10 +403,11 @@ class ConfirmedOrderController extends Controller
             'order' => $order,
             'excelData' => [
                 'Invoice' => $order->excels->where('property', 'Invoice')->first() ? $order->excels->where('property', 'Invoice')->first()->value : '',
-                'Invoice ID' => $order->excels->where('property', 'Invoice ID')->first() ? $order->excels->where('property', 'Invoice ID')->first()->value : '',
                 'Name' => $order->excels->where('property', 'Name')->first() ? $order->excels->where('property', 'Name')->first()->value : '',
                 'Phone' => $order->excels->where('property', 'Phone')->first() ? $order->excels->where('property', 'Phone')->first()->value : '',
-                'Address' => $order->excels->where('property', 'Address')->first() ? $order->excels->where('property', 'Address')->first()->value : ''
+                'Address' => $order->excels->where('property', 'Address')->first() ? $order->excels->where('property', 'Address')->first()->value : '',
+                'Amount' => $order->excels->where('property', 'Amount')->first() ? $order->excels->where('property', 'Amount')->first()->value : '',
+                'SerialNumber' => $request->input('serial', '1') // Add serial number from request
             ]
         ]];
 

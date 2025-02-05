@@ -153,6 +153,17 @@
         .mt-1mm{
             margin-top: 1mm;
         }
+        .page-number{
+            border: 1px solid;
+            border-radius: 100%;
+            padding: 1px;
+        }
+        .m-auto{
+            margin: auto;
+        }
+        .mb-2mm{
+            margin-bottom: 2mm;
+        }
     </style>
 </head>
 <body>
@@ -172,20 +183,17 @@
 
             {{-- <div class="shipping-details"> --}}
                 <div class="to-section">
-
-                    {{-- class="customer-name word-wrap line-height" --}}
-                    <div>
-                       <span class="font-weight-bold">Name</span> : {{ $excelData['Name'] ?? '' }},
+                    <div style="margin-bottom: 2mm;">
+                        <span class="font-weight-bold">Name</span> : {{ $excelData['Name'] ?? '' }}
                     </div>
-
-                    {{-- class="customer-phone word-wrap line-height" --}}
-                    <div class="">
-                        <span class="font-weight-bold">Phone</span> : {{ $excelData['Phone'] ?? '' }},
+                    <div style="margin-bottom: 2mm;">
+                        <span class="font-weight-bold">Phone</span> : {{ $excelData['Phone'] ?? '' }}
                     </div>
-
-                    {{-- class="customer-address word-wrap line-height" --}}
-                    <div class="">
+                    <div style="margin-bottom: 2mm;">
                         <span class="font-weight-bold">Address</span> : {{ $excelData['Address'] ?? '' }}
+                    </div>
+                    <div class="mb-2mm">
+                        <span class="font-weight-bold">Amount</span> : {{ $excelData['Amount'] ?? '' }} Tk
                     </div>
                 </div>
             {{-- </div> --}}
@@ -196,6 +204,9 @@
                     <div class="company-name">Tech-Soi</div>
                     <div class="company-address">Bikrihoy.Com</div>
                     <div class="company-phone">{{$companyContact->phone}}</div>
+                    <div class="m-auto">
+                       <span class="page-number">{{ $excelData['SerialNumber'] ?? $loop->iteration }}</span>
+                    </div>
                 </div>
                 <div class="sub-text msg">
                     Allah Always

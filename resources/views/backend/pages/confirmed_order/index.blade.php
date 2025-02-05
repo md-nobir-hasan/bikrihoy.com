@@ -75,6 +75,7 @@
                             <tbody>
                                 @foreach($orders as $order)
                                     @if(count($order->excels ?: []))
+
                                         @php
                                             // Group excels by row number
                                             $excel_rows = $order->excels->groupBy('row');
@@ -418,33 +419,22 @@
 
         // Bulk print labels button click
         $('#bulkPrintLabelBtn').click(function() {
-            const selectedItems = $('.order-checkbox:checked').map(function() {
-                return {
-                    orderId: $(this).data('order-id'),
-                    row: $(this).data('row')
-                };
-            }).get();
+            const selectedRows = $('.order-checkbox:checked');
+            const orderIds = [];
+            const rows = [];
+            const serials = [];
 
-            if (selectedItems.length === 0) {
-                alert('Please select at least one item to print');
-                return;
-            }
+            selectedRows.each(function() {
+                const $row = $(this).closest('tr');
+                orderIds.push($(this).data('order-id'));
+                rows.push($(this).data('row'));
+                serials.push($row.find('td:eq(1)').text()); // Get serial number from second column
+            });
 
-            const orderIds = selectedItems.map(item => item.orderId);
-            const rows = selectedItems.map(item => item.row);
-
-            // Get global styles from localStorage
             const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
+            const url = `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}&rows=${rows.join(',')}&serials=${serials.join(',')}&styles=${encodeURIComponent(JSON.stringify(globalStyles))}`;
 
-            // Create URL with both IDs and styles
-            const url = `{{ route('confirmed-order.print-labels') }}?ids=${orderIds.join(',')}&rows=${rows.join(',')}&styles=${encodeURIComponent(JSON.stringify(globalStyles))}`;
-
-            const printWindow = window.open(
-                url,
-                '_blank',
-                'width=800,height=800,menubar=yes,toolbar=yes,location=no,status=no'
-            );
-
+            const printWindow = window.open(url, '_blank', 'width=800,height=800');
             if (!printWindow) {
                 alert('Please allow popups for this website to print labels');
             }
@@ -454,14 +444,15 @@
         $(document).on('click', '.printSingleLabel', function() {
             const orderId = $(this).data('order-id');
             const row = $(this).data('row');
+            const serialNumber = $(this).closest('tr').find('td:eq(1)').text(); // Get the S.L number
 
             // Get global styles from localStorage
             const globalStyles = JSON.parse(localStorage.getItem('labelGlobalStyles') || '{}');
 
-            // Create URL with styles parameter
+            // Create URL with styles parameter and serial number
             const url = "{{ route('confirmed-order.print-single-label', ['orderId' => ':orderId', 'row' => ':row']) }}"
                 .replace(':orderId', orderId)
-                .replace(':row', row) + `?styles=${encodeURIComponent(JSON.stringify(globalStyles))}`;
+                .replace(':row', row) + `?styles=${encodeURIComponent(JSON.stringify(globalStyles))}&serial=${serialNumber}`;
 
             const printWindow = window.open(
                 url,
