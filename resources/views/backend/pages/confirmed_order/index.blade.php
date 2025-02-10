@@ -395,7 +395,7 @@
                         }
                     }
                 ],
-                ordering: true,
+                ordering: false,
                 searching: true,
                 paging: false
             });
