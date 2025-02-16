@@ -45,10 +45,18 @@ class ConfirmedOrderController extends Controller
         if (!empty($missingHeaders)) {
             return back()->with('error', 'Your Excel file is missing these required columns: ' . implode(', ', $missingHeaders));
         }
+        $confirmedOrder = ConfirmedOrder::where('date', $request->date)->first();
 
         // Prepare and validate all row data first
         $validatedData = [];
         foreach ($rows as $rowIndex => $row) {
+            //row number identification
+            if($confirmedOrder){
+                $rowNumber = $confirmedOrder->excels->max('row') + 1 + $rowIndex;
+            }else{
+                $rowNumber = $rowIndex + 1;
+            }
+
             // Check if row is empty (all values are null or empty string)
             if (empty(array_filter($row, function($value) {
                 return $value !== null && $value !== '';
@@ -84,7 +92,7 @@ class ConfirmedOrderController extends Controller
 
             $validatedData[] = [
                 'data' => $rowData,
-                'row_number' => $rowIndex + 1  // Store the row number
+                'row_number' => $rowNumber  // Store the row number
             ];
         }
 
@@ -97,10 +105,12 @@ class ConfirmedOrderController extends Controller
         DB::beginTransaction();
         try {
             // Create confirmed order
-            $confirmedOrder = ConfirmedOrder::firstOrCreate([
-                'date' => $request->date
-            ]);
-
+            if(!$confirmedOrder){
+                $confirmedOrder = ConfirmedOrder::firstOrCreate([
+                    'date' => $request->date
+                ]);
+            }
+            // dd($validatedData,$confirmedOrder);
             // Insert all validated excel data
             foreach ($validatedData as $validatedRow) {
                 $rowData = $validatedRow['data'];
