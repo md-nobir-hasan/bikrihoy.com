@@ -115,9 +115,7 @@
             color: #fff;
         }
 
-        .transaction-input {
-            margin-top: 20px;
-        }
+
 
         .transaction-input label {
             display: block;
@@ -174,7 +172,7 @@
         }
 
         .payment-section {
-            margin: 30px 0;
+            margin-top: 8px;
         }
 
         .payment-header {
@@ -245,7 +243,7 @@
         .send-money-title {
             color: #0d6efd;
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
         }
 
         .payment-info-row {
@@ -253,7 +251,7 @@
             border: 1px solid #e0e0e0;
             border-radius: 6px;
             padding: 12px 15px;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -289,9 +287,7 @@
             color: white;
         }
 
-        .transaction-input {
-            margin-top: 25px;
-        }
+
 
         .transaction-input label {
             display: block;
@@ -767,7 +763,7 @@
                         @enderror
 
 
-                        <div class="pamentInfoMain mt-5">
+                        <div class="pamentInfoMain">
                             <div class="address">
                                 <span class="numberCountBill">2.</span>
                                 <h3 class="addressTitle">Payment Information</h3>

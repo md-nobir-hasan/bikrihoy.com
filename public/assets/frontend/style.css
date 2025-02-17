@@ -473,7 +473,7 @@ input[type="number"] {
     justify-content: flex-start;
     align-items: center;
     column-gap: 1rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 .numberCountBill {
     width: 2rem;
@@ -1233,7 +1233,7 @@ h5.subtitle{
     }
     .ckeckoutForm {
         flex-direction: column;
-        row-gap: 3rem;
+        /* row-gap: 3rem; */
     }
     .checkoutFormRight {
         width: 100%;
