@@ -528,7 +528,7 @@ input[type="number"] {
     display: block;
 }
 .pamentInfoMain {
-    padding: 1.5rem;
+    padding: 4px;
     background: rgba(0, 0, 0, 0.05);
 }
 .orderprocess {

@@ -171,9 +171,7 @@
             margin-left: 4px;
         }
 
-        .payment-section {
-            margin-top: 8px;
-        }
+
 
         .payment-header {
             display: flex;
@@ -752,13 +750,12 @@
                             <span class="text-danger">{{$message}}</span>
                         @enderror
 
+                        <div class="address mt-4">
+                            <span class="numberCountBill">2.</span>
+                            <h3 class="addressTitle">Payment Information</h3>
+                        </div>
 
                         <div class="pamentInfoMain">
-                            <div class="address">
-                                <span class="numberCountBill">2.</span>
-                                <h3 class="addressTitle">Payment Information</h3>
-                            </div>
-
                             <!-- Make Payment -->
                             @if($is_paid_shipping)
                                 <div class="payment-section">
