@@ -1,3 +1,6 @@
+@php
+    $is_paid_shipping = $product->isPaidShipping();
+@endphp
 @extends('frontend.layouts.app')
 
 @push('css')
@@ -612,6 +615,19 @@
         // Initial state setup
         $('#payment_screenshot').prop('required', false);
         $('#bKash_nagad_number').prop('required', true);
+
+        function updateShippingCost() {
+            let shipping = parseFloat($('input[name="shipping_id"]:checked').attr('id')) || 0;
+            $('.shipping-cost').text(shipping.toFixed(2));
+        }
+
+        // Call on page load
+        updateShippingCost();
+
+        // Update when shipping option changes
+        $('.shipping-option').on('change', function() {
+            updateShippingCost();
+        });
     });
 
 
@@ -758,95 +774,97 @@
                             </div>
 
                             <!-- Make Payment -->
-                            <div class="payment-section">
-                                <!-- Payment Method Card -->
-                                <div class="payment-card">
-                                    <!-- Payment Method Selection -->
-                                    <div class="method-selection">
-                                        <div class="radio-wrapper">
-                                            <input type="radio" checked name="payment_method" id="mobile_banking" value="mobile_banking">
-                                            <span class="radio-circle"></span>
-                                        </div>
-                                        <div class="method-logo">
-                                            <img src="{{ asset('images/default/bkash-nagad.jpg') }}" alt="bKash Nagad">
-                                            <span class="method-name">Mobile Banking</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Payment Details -->
-                                    <div class="payment-details" id="mobile_banking-details">
-                                        <h4 class="send-money-title">Pay via Send Money</h4>
-
-                                        <!-- Payment Number -->
-                                        <div class="payment-info-row">
-                                            <label>Payment Number:</label>
-                                            <div class="info-content">
-                                                <span>01781666859</span>
-                                                <button class="copy-btn" onclick="copyToClipboard('01781666859')">
-                                                    <i class="fas fa-copy"></i>
-                                                </button>
+                            @if($is_paid_shipping)
+                                <div class="payment-section">
+                                    <!-- Payment Method Card -->
+                                    <div class="payment-card">
+                                        <!-- Payment Method Selection -->
+                                        <div class="method-selection">
+                                            <div class="radio-wrapper">
+                                                <input type="radio" checked name="payment_method" id="mobile_banking" value="mobile_banking">
+                                                <span class="radio-circle"></span>
+                                            </div>
+                                            <div class="method-logo">
+                                                <img src="{{ asset('images/default/bkash-nagad.jpg') }}" alt="bKash Nagad">
+                                                <span class="method-name">Mobile Banking</span>
                                             </div>
                                         </div>
 
-                                        <!-- Amount -->
-                                        <div class="payment-info-row">
-                                            <label>Amount to Pay:</label>
-                                            <div class="info-content">
-                                                <span>৳ <span class="total"></span></span>
-                                                <button class="copy-btn" onclick="copyToClipboard(document.querySelector('.total').textContent)">
-                                                    <i class="fas fa-copy"></i>
-                                                </button>
+                                        <!-- Payment Details -->
+                                        <div class="payment-details" id="mobile_banking-details">
+                                            <h4 class="send-money-title">Pay Shipping Cost via Send Money</h4>
+
+                                            <!-- Payment Number -->
+                                            <div class="payment-info-row">
+                                                <label>Payment Number:</label>
+                                                <div class="info-content">
+                                                    <span>01781666859</span>
+                                                    <button class="copy-btn" onclick="copyToClipboard('01781666859')">
+                                                        <i class="fas fa-copy"></i>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                         <!-- Payment Verification -->
-                                         <div class="transaction-input">
-                                            <div class="verification-options">
-                                                <h5>Payment Verification (Choose one option)</h5>
+                                            <!-- Amount -->
+                                            <div class="payment-info-row">
+                                                <label>Shipping Cost to Pay:</label>
+                                                <div class="info-content">
+                                                    <span>৳ <span class="shipping-cost"></span></span>
+                                                    <button class="copy-btn" onclick="copyToClipboard(document.querySelector('.shipping-cost').textContent)">
+                                                        <i class="fas fa-copy"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
 
-                                                <!-- Option 1: Upload Screenshot -->
-                                                <div class="verification-option">
-                                                    <input type="radio" name="verification_method" id="upload_screenshot" value="screenshot">
-                                                    <label for="upload_screenshot" class="option-label">
-                                                        <span class="option-title">Upload Payment Screenshot</span>
-                                                        <div class="file-upload-wrapper">
-                                                            <input type="file"
-                                                                   name="payment_screenshot"
-                                                                   id="payment_screenshot"
-                                                                   class="form-control"
-                                                                   accept="image/*">
-                                                            <div id="image-preview" class="mt-2 d-none">
-                                                                <img src="" alt="Preview" style="max-width: 200px; max-height: 200px;">
-                                                                <button type="button" class="btn btn-sm btn-danger remove-preview">
-                                                                    <i class="fas fa-times"></i>
-                                                                </button>
+                                            <!-- Payment Verification -->
+                                            <div class="transaction-input">
+                                                <div class="verification-options">
+                                                    <h5>Payment Verification (Choose one option)</h5>
+
+                                                    <!-- Option 1: Upload Screenshot -->
+                                                    <div class="verification-option">
+                                                        <input type="radio" name="verification_method" id="upload_screenshot" value="screenshot">
+                                                        <label for="upload_screenshot" class="option-label">
+                                                            <span class="option-title">Upload Payment Screenshot</span>
+                                                            <div class="file-upload-wrapper">
+                                                                <input type="file"
+                                                                    name="payment_screenshot"
+                                                                    id="payment_screenshot"
+                                                                    class="form-control"
+                                                                    accept="image/*">
+                                                                <div id="image-preview" class="mt-2 d-none">
+                                                                    <img src="" alt="Preview" style="max-width: 200px; max-height: 200px;">
+                                                                    <button type="button" class="btn btn-sm btn-danger remove-preview">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <small class="hint">Upload your bKash/Nagad payment screenshot (Recommended)</small>
                                                             </div>
-                                                            <small class="hint">Upload your bKash/Nagad payment screenshot (Recommended)</small>
-                                                        </div>
-                                                    </label>
-                                                </div>
+                                                        </label>
+                                                    </div>
 
-                                                <!-- Option 2: Enter Number -->
-                                                <div class="verification-option">
-                                                    <input type="radio" name="verification_method" id="enter_number" value="number" checked>
-                                                    <label for="enter_number" class="option-label">
-                                                        <span class="option-title">Enter Payment Number</span>
-                                                        <div class="number-input-wrapper">
-                                                            <input type="text"
-                                                                   name="payment_number"
-                                                                   id="bKash_nagad_number"
-                                                                   class="form-control"
-                                                                   placeholder="Example: 01518460933">
-                                                            <small class="hint">Enter your bKash/Nagad number from which payment has been done</small>
-                                                        </div>
-                                                    </label>
+                                                    <!-- Option 2: Enter Number -->
+                                                    <div class="verification-option">
+                                                        <input type="radio" name="verification_method" id="enter_number" value="number" checked>
+                                                        <label for="enter_number" class="option-label">
+                                                            <span class="option-title">Enter Payment Number</span>
+                                                            <div class="number-input-wrapper">
+                                                                <input type="text"
+                                                                    name="payment_number"
+                                                                    id="bKash_nagad_number"
+                                                                    class="form-control"
+                                                                    placeholder="Example: 01518460933">
+                                                                <small class="hint">Enter your bKash/Nagad number from which payment has been done</small>
+                                                            </div>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
 
                             <p class="paragraph">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy.</a></p>

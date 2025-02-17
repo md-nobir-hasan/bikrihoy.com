@@ -137,4 +137,19 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function isPaidShipping()
+    {
+        if($this->productShipping->count() > 0){
+            $shipping_price = 0;
+            foreach($this->productShipping as $shipping){
+                $shipping_price += $shipping->shipping->price;
+            }
+            if($shipping_price > 0){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
 }
