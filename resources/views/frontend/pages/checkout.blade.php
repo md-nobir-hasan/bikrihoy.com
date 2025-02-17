@@ -1,63 +1,398 @@
 @extends('frontend.layouts.app')
 
+@push('css')
+    <style>
+        .payment-methods {
+            margin: 25px 0;
+        }
+
+        .payment-method {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .payment-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .payment-logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .payment-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .payment-details {
+            padding: 20px;
+        }
+
+        .payment-info-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-header i {
+            color: #2196F3;
+        }
+
+        .send-money-text {
+            font-size: 18px;
+            color: #2196F3;
+            margin: 0;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .info-label {
+            color: #666;
+            min-width: 120px;
+        }
+
+        .info-value {
+            font-weight: 500;
+            color: #333;
+            flex: 1;
+        }
+
+        .info-value.amount {
+            color: #2196F3;
+            font-size: 18px;
+        }
+
+        .copy-btn {
+            padding: 5px 10px;
+            border: none;
+            background: #e3f2fd;
+            color: #2196F3;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #2196F3;
+            color: #fff;
+        }
+
+        .transaction-input {
+            margin-top: 20px;
+        }
+
+        .transaction-input label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .hint {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #2196F3;
+            outline: none;
+        }
+
+        .payment-steps {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .payment-steps h5 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .payment-steps ol {
+            padding-left: 20px;
+        }
+
+        .payment-steps li {
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .required {
+            color: #f44336;
+            margin-left: 4px;
+        }
+
+        .payment-section {
+            margin: 30px 0;
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header-number {
+            width: 30px;
+            height: 30px;
+            background: #0d6efd;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .payment-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .method-selection {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            gap: 15px;
+        }
+
+        .radio-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-wrapper input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .method-logo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+        }
+
+        .method-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .method-name {
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .send-money-title {
+            color: #0d6efd;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .payment-info-row {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-info-row label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-content span {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .copy-btn {
+            background: #e3f2fd;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #0d6efd;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .transaction-input {
+            margin-top: 25px;
+        }
+
+        .transaction-input label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .required {
+            color: red;
+        }
+
+        .hint {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: #999;
+        }
+    </style>
+@endpush
+
 @push('custom-js')
-<script>
-    $(document).ready(function () {
-    function calculateTotal() {
-        // Get values
-        let price = parseFloat($('.price').text());
-        let discount = parseFloat($('.discount').text());
-        let quantity = parseInt($('.countShow').val());
-        let shipping = parseFloat($('input[name="shipping_id"]:checked').attr('id'));
-         shipping = shipping ? shipping : 0;
-        // Calculate subtotal and total
-        let subtotal = (price - discount) * quantity;
-        let total = subtotal + shipping;
+    <script>
+        $(document).ready(function () {
 
-        // Update HTML
-        $('.subtotal').text(subtotal.toFixed(2));
-        $('.total').text(total.toFixed(2));
-    }
+            // $('.payment-details').hide();
 
-    // Initial calculation on page load
-    calculateTotal();
+            // $('input[name="payment_method"]').on('change', function() {
+            //     $('.payment-details').hide();
+            //     $('#' + $(this).val() + '-details').show();
+            // });
 
-    // Update quantity when plus or minus buttons are clicked
-    $('.plusBtn').on('click', function () {
-        let count = parseInt($('.countShow').val());
-        $('.countShow').val(count + 1);
+        function calculateTotal() {
+            // Get values
+            let price = parseFloat($('.price').text());
+            let discount = parseFloat($('.discount').text());
+            let quantity = parseInt($('.countShow').val());
+            let shipping = parseFloat($('input[name="shipping_id"]:checked').attr('id'));
+            shipping = shipping ? shipping : 0;
+            // Calculate subtotal and total
+            let subtotal = (price - discount) * quantity;
+            let total = subtotal + shipping;
+
+            // Update HTML
+            $('.subtotal').text(subtotal.toFixed(2));
+            $('.total').text(total.toFixed(2));
+        }
+
+        // Initial calculation on page load
         calculateTotal();
-    });
 
-    $('.minusBtn').on('click', function () {
-        let count = parseInt($('.countShow').val());
-        if (count > 1) {
-            $('.countShow').val(count - 1);
+        // Update quantity when plus or minus buttons are clicked
+        $('.plusBtn').on('click', function () {
+            let count = parseInt($('.countShow').val());
+            $('.countShow').val(count + 1);
             calculateTotal();
-        }
+        });
+
+        $('.minusBtn').on('click', function () {
+            let count = parseInt($('.countShow').val());
+            if (count > 1) {
+                $('.countShow').val(count - 1);
+                calculateTotal();
+            }
+        });
+
+        // Update shipping when a different option is selected
+        $('.shipping-option').on('change', function () {
+            calculateTotal();
+        });
+
+        // Update subtotal and total when quantity input field is changed manually
+        $('.countShow').on('input', function () {
+            if ($(this).val() < 1) {
+                $(this).val(1); // Ensure quantity is at least 1
+            }
+            calculateTotal();
+        });
     });
 
-    // Update shipping when a different option is selected
-    $('.shipping-option').on('change', function () {
-        calculateTotal();
+
+    fbq('track', 'InitiateCheckout', {
+        value: "{{($product->price - $product->discount)* ($qty ?? 1)}}",
+        currency: 'BDT',
+        num_items: "{{$qty ?? 1}}"
     });
 
-    // Update subtotal and total when quantity input field is changed manually
-    $('.countShow').on('input', function () {
-        if ($(this).val() < 1) {
-            $(this).val(1); // Ensure quantity is at least 1
-        }
-        calculateTotal();
-    });
-});
-
-fbq('track', 'InitiateCheckout', {
-    value: "{{($product->price - $product->discount)* ($qty ?? 1)}}",
-    currency: 'BDT',
-    num_items: "{{$qty ?? 1}}"
-});
-
-</script>
+    </script>
 @endpush
 
 @section('page_conent')
@@ -166,14 +501,71 @@ fbq('track', 'InitiateCheckout', {
                         @enderror
 
 
-                        <div class="pamentInfoMain">
+                        <div class="pamentInfoMain mt-5">
                             <div class="address">
                                 <span class="numberCountBill">2.</span>
                                 <h3 class="addressTitle">Payment Information</h3>
                             </div>
 
-                            <label for="cashDelidery">Cash on delivery</label>
-                            <input class="disabledr" type="text" value="Pay with cash upon delivery." name="#" id="cashDelidery" disabled>
+                            <!-- Make Payment -->
+                            <div class="payment-section">
+                                <!-- Payment Method Card -->
+                                <div class="payment-card">
+                                    <!-- Payment Method Selection -->
+                                    <div class="method-selection">
+                                        <div class="radio-wrapper">
+                                            <input type="radio" checked name="payment_method" id="mobile_banking" value="mobile_banking">
+                                            <span class="radio-circle"></span>
+                                        </div>
+                                        <div class="method-logo">
+                                            <img src="{{ asset('images/default/bkash-nagad.jpg') }}" alt="bKash Nagad">
+                                            <span class="method-name">Mobile Banking</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Payment Details -->
+                                    <div class="payment-details" id="mobile_banking-details">
+                                        <h4 class="send-money-title">Pay via Send Money</h4>
+
+                                        <!-- Payment Number -->
+                                        <div class="payment-info-row">
+                                            <label>Payment Number:</label>
+                                            <div class="info-content">
+                                                <span>01705644008</span>
+                                                <button class="copy-btn" onclick="copyToClipboard('01705644008')">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Amount -->
+                                        <div class="payment-info-row">
+                                            <label>Amount to Pay:</label>
+                                            <div class="info-content">
+                                                <span>৳ <span class="total"></span></span>
+                                                <button class="copy-btn" onclick="copyToClipboard(document.querySelector('.total').textContent)">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Transaction ID Input -->
+                                        <div class="transaction-input">
+                                            <label for="transaction_id">
+                                                Transaction ID <span class="required">*</span>
+                                            </label>
+                                            <small class="hint">Please enter your transaction ID after sending money</small>
+                                            <input type="text"
+                                                   name="transaction_id"
+                                                   id="transaction_id"
+                                                   class="form-control"
+                                                   placeholder="Example: TrxID7XV4K8">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <p class="paragraph">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy.</a></p>
                             <button class="btn_primary w-100">Place Order</button>
                         </div>
