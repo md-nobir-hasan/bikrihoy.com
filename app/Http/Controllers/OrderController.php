@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\UpdateOrderReqeust;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
@@ -121,6 +122,17 @@ class OrderController extends Controller
 
         $lastInvoice = $lastInvoice >= 1000 ?   $lastInvoice : 999;
         $newInvoiceId = str_pad((int)$lastInvoice + 1, 4, '0', STR_PAD_LEFT);
+        $screenshot_path = null;
+        if($request->hasFile('payment_screenshot')){
+            $image = $request->file('payment_screenshot');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $path = Storage::disk('public')->put('uploads/orders', $image);
+            $screenshot_path = $path;
+        }else{
+            if(!$request->payment_number){
+                return redirect()->back()->with('error', 'অনুগ্রহ করে পেমেন্ট স্ক্রিনশট আপলোড করুন অথবা পেমেন্ট নাম্বার দিন');
+            }
+        }
 
         $insert = new Order();
         $insert->invoice_id = $newInvoiceId;
@@ -131,17 +143,20 @@ class OrderController extends Controller
         $insert->ip_address = $request->ip();
         $insert->name = $request->name;
         $insert->phone = $request->phone;
+        $insert->payment_screenshot = $screenshot_path;
+        $insert->payment_number = $request->payment_number;
         // $insert->email = $request->email;
         $insert->address = $request->address;
         $insert->note = $request->note;
         $insert->subtotal = $product->price - $product->discount;
         $insert->total = ($insert->subtotal * $request->qty) + ($shipping ? $shipping->price : 0);
+        $insert->payment_method = $request->payment_method;
         $insert->payment_number = $request->payment_number;
         $insert->transection = $request->transection;
         $insert->country = $request->country;
         $insert->district = $request->district;
         $insert->thana = $request->thana;
-
+// dd($insert);
         // Status Status
 
         $order_statuses = OrderStatus::first();
@@ -210,11 +225,11 @@ class OrderController extends Controller
             return back()->with('error', $sent['error']);
         }
     }
-    
+
      public function sendToPathao($id)
     {
         $order = Order::find($id);
-       // call pathao api 
+       // call pathao api
 
         return redirect()->route('order.index')->with('success', 'Order sent to Pathao successfully');
 

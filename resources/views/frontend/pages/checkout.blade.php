@@ -323,6 +323,206 @@
         .form-control::placeholder {
             color: #999;
         }
+
+        .shipping-options-container {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .shipping-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .shipping-header i {
+            color: #0d6efd;
+            font-size: 20px;
+        }
+
+        .shipping-header h4 {
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .shipping-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .shipping-method-card {
+            position: relative;
+        }
+
+        .shipping-method-card input[type="radio"] {
+            display: none;
+        }
+
+        .shipping-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .shipping-method-card input[type="radio"]:checked + .shipping-label {
+            border-color: #0d6efd;
+            background: #f8f9ff;
+        }
+
+        .shipping-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .shipping-type {
+            font-weight: 500;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .shipping-price {
+            color: #0d6efd;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .shipping-radio-mark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .shipping-method-card input[type="radio"]:checked + .shipping-label .shipping-radio-mark {
+            border-color: #0d6efd;
+        }
+
+        .shipping-method-card input[type="radio"]:checked + .shipping-label .shipping-radio-mark::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #0d6efd;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .verification-options {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .verification-options h5 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .verification-option {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .verification-option:hover {
+            border-color: #0d6efd;
+            background: #f8f9ff;
+        }
+
+        .verification-option input[type="radio"] {
+            display: none;
+        }
+
+        .option-label {
+            display: block;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .option-title {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .file-upload-wrapper,
+        .number-input-wrapper {
+            margin-top: 10px;
+        }
+
+        .verification-option input[type="radio"]:checked + .option-label {
+            color: #0d6efd;
+        }
+
+        .verification-option input[type="radio"]:checked + .option-label .form-control {
+            border-color: #0d6efd;
+        }
+
+        .verification-option input[type="file"] {
+            padding: 8px;
+            border: 2px dashed #e0e0e0;
+            background: #f8f9fa;
+        }
+
+        .verification-option input[type="file"]:hover {
+            border-color: #0d6efd;
+        }
+
+        .hint {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        #image-preview {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        #image-preview img {
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .remove-preview {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .d-none {
+            display: none !important;
+        }
     </style>
 @endpush
 
@@ -383,6 +583,35 @@
             }
             calculateTotal();
         });
+
+        // Handle verification method change
+
+
+
+        // Handle file input change and image preview
+        $('#payment_screenshot').on('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#image-preview').removeClass('d-none');
+                    $('#image-preview img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+                $('#bKash_nagad_number').prop('required', false);
+            }
+        });
+
+        // Handle remove preview button
+        $('.remove-preview').on('click', function() {
+            $('#payment_screenshot').val('');
+            $('#image-preview').addClass('d-none');
+            $('#image-preview img').attr('src', '');
+        });
+
+        // Initial state setup
+        $('#payment_screenshot').prop('required', false);
+        $('#bKash_nagad_number').prop('required', true);
     });
 
 
@@ -406,9 +635,14 @@
                     Whatsapp: <a href="https://wa.me/{{$site_contact_info->whatsapp}}"> {{$site_contact_info->whatsapp}}</a>
                 </div>
             @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="checkoutMain">
                 <!-- main form -->
-                 <form action="{{route('order.store')}}" method="POST" class="multiple-submit-prevent ckeckoutForm">
+                 <form action="{{route('order.store')}}" method="POST" class="multiple-submit-prevent ckeckoutForm" enctype="multipart/form-data">
                     @csrf
 
                     <input type="hidden" name="color_id" value="{{$color->id ?? null}}">
@@ -444,19 +678,7 @@
                                         <td><b>Subtotal</b></td>
                                         <td><b>৳ <span class="subtotal"></span></b></td>
                                     </tr>
-                                    @if($product->productShipping->count() > 0)
-                                        <tr>
-                                            <td><b>Shipping</b></td>
-                                            <td class="checkradio">
-                                                @foreach ($product->productShipping as $shipping)
-                                                    <div>
-                                                        <label for="{{$shipping->price}}">{{$shipping->type}}: <span>৳ <span class="shipping-price">{{$shipping->price}}</span></span></label>
-                                                        <input type="radio" name="shipping_id" id="{{$shipping->price}}" class="shipping-option" value="{{$shipping->id}}"  checked>
-                                                    </div>
-                                                @endforeach
-                                            </td>
-                                        </tr>
-                                    @endif
+
                                     <tr>
                                         <td><b>Total</b></td>
                                         <td><strong>৳ <span class="total"></span></strong></td>
@@ -465,6 +687,34 @@
                             </table>
 
                         </div>
+
+                        @if($product->productShipping->count() > 0)
+                            <div class="shipping-options-container">
+                                <div class="shipping-header">
+                                    <i class="fas fa-truck"></i>
+                                    <h4>Shipping Method</h4>
+                                </div>
+                                <div class="shipping-methods">
+                                    @foreach ($product->productShipping as $shipping)
+                                        <div class="shipping-method-card">
+                                            <input type="radio"
+                                                   name="shipping_id"
+                                                   id="{{$shipping->shipping->price}}"
+                                                   class="shipping-option"
+                                                   value="{{$shipping->shipping_id}}"
+                                                   checked>
+                                            <label for="{{$shipping->shipping->price}}" class="shipping-label">
+                                                <div class="shipping-info">
+                                                    <span class="shipping-type">{{$shipping->shipping->type}}</span>
+                                                    <span class="shipping-price">৳ {{$shipping->shipping->price}}</span>
+                                                </div>
+                                                <div class="shipping-radio-mark"></div>
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                     </div>
 
                     <!-- Billing info -->
@@ -531,8 +781,8 @@
                                         <div class="payment-info-row">
                                             <label>Payment Number:</label>
                                             <div class="info-content">
-                                                <span>01705644008</span>
-                                                <button class="copy-btn" onclick="copyToClipboard('01705644008')">
+                                                <span>01781666859</span>
+                                                <button class="copy-btn" onclick="copyToClipboard('01781666859')">
                                                     <i class="fas fa-copy"></i>
                                                 </button>
                                             </div>
@@ -549,18 +799,51 @@
                                             </div>
                                         </div>
 
-                                        <!-- Transaction ID Input -->
-                                        <div class="transaction-input">
-                                            <label for="transaction_id">
-                                                Transaction ID <span class="required">*</span>
-                                            </label>
-                                            <small class="hint">Please enter your transaction ID after sending money</small>
-                                            <input type="text"
-                                                   name="transaction_id"
-                                                   id="transaction_id"
-                                                   class="form-control"
-                                                   placeholder="Example: TrxID7XV4K8">
+                                         <!-- Payment Verification -->
+                                         <div class="transaction-input">
+                                            <div class="verification-options">
+                                                <h5>Payment Verification (Choose one option)</h5>
+
+                                                <!-- Option 1: Upload Screenshot -->
+                                                <div class="verification-option">
+                                                    <input type="radio" name="verification_method" id="upload_screenshot" value="screenshot">
+                                                    <label for="upload_screenshot" class="option-label">
+                                                        <span class="option-title">Upload Payment Screenshot</span>
+                                                        <div class="file-upload-wrapper">
+                                                            <input type="file"
+                                                                   name="payment_screenshot"
+                                                                   id="payment_screenshot"
+                                                                   class="form-control"
+                                                                   accept="image/*">
+                                                            <div id="image-preview" class="mt-2 d-none">
+                                                                <img src="" alt="Preview" style="max-width: 200px; max-height: 200px;">
+                                                                <button type="button" class="btn btn-sm btn-danger remove-preview">
+                                                                    <i class="fas fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                            <small class="hint">Upload your bKash/Nagad payment screenshot (Recommended)</small>
+                                                        </div>
+                                                    </label>
+                                                </div>
+
+                                                <!-- Option 2: Enter Number -->
+                                                <div class="verification-option">
+                                                    <input type="radio" name="verification_method" id="enter_number" value="number" checked>
+                                                    <label for="enter_number" class="option-label">
+                                                        <span class="option-title">Enter Payment Number</span>
+                                                        <div class="number-input-wrapper">
+                                                            <input type="text"
+                                                                   name="payment_number"
+                                                                   id="bKash_nagad_number"
+                                                                   class="form-control"
+                                                                   placeholder="Example: 01518460933">
+                                                            <small class="hint">Enter your bKash/Nagad number from which payment has been done</small>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

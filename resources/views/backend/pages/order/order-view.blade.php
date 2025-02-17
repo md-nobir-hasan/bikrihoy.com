@@ -54,7 +54,11 @@
                                     </tr>
                                     <tr>
                                         <td>Payment Method:</td>
-                                        <td>{{ $order->payment->payment }}</td>
+                                        <td>{{ $order->payment_method }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment Number:</td>
+                                        <td>{{ $order->payment_number }}</td>
                                     </tr>
                                     <tr>
                                         <td>Order Note:</td>
@@ -120,7 +124,7 @@
                                 </div>
                                 {{-- Send to curier button  --}}
                                 <a class="btn btn-primary" href="{{route('order.sendToCourier', $order->id)}}">Send to Courier</a>&nbsp;
-                                
+
                                 <a class="btn btn-success" href="{{route('order.sendToPathao', $order->id)}}">Send to Pathao</a>
 
                             </div>
@@ -128,7 +132,7 @@
 
                     </div>
                     <div class="card-body">
-                        @include('backend.partial.flush-message')
+
                         <div class="table-responsive">
                             <table id="table" class="table table-striped">
                                 <thead>
@@ -179,6 +183,16 @@
                         </div>
 
                     </div>
+
+
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        @if ($order->payment_screenshot)
+                             <img src="{{ asset('storage/'.$order->payment_screenshot) }}" alt="Payment Screenshot" class="img-fluid">
+                        @endif
+                     </div>
                 </div>
             </div>
         </div>
