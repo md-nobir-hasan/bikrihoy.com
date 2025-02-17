@@ -792,11 +792,11 @@
 
                                         <!-- Payment Details -->
                                         <div class="payment-details" id="mobile_banking-details">
-                                            <h4 class="send-money-title">Pay Shipping Cost via Send Money</h4>
+                                            <h4 class="send-money-title">সেন্ড মানি করে ডেলিভারী চার্জ পরিশোধ করুন</h4>
 
                                             <!-- Payment Number -->
                                             <div class="payment-info-row">
-                                                <label>Payment Number:</label>
+                                                <label>পেমেন্ট নাম্বার:</label>
                                                 <div class="info-content">
                                                     <span>01781666859</span>
                                                     <button class="copy-btn" onclick="copyToClipboard('01781666859')">
@@ -807,7 +807,7 @@
 
                                             <!-- Amount -->
                                             <div class="payment-info-row">
-                                                <label>Shipping Cost to Pay:</label>
+                                                <label>শিপিং চার্জ:</label>
                                                 <div class="info-content">
                                                     <span>৳ <span class="shipping-cost"></span></span>
                                                     <button class="copy-btn" onclick="copyToClipboard(document.querySelector('.shipping-cost').textContent)">
@@ -819,13 +819,13 @@
                                             <!-- Payment Verification -->
                                             <div class="transaction-input">
                                                 <div class="verification-options">
-                                                    <h5>Payment Verification (Choose one option)</h5>
+                                                    {{-- <h5>পেমেন্ট ভেরিফিকেশন (যেকোন একটি অপশন বেছে নিন)</h5> --}}
 
                                                     <!-- Option 1: Upload Screenshot -->
                                                     <div class="verification-option">
                                                         <input type="radio" name="verification_method" id="upload_screenshot" value="screenshot">
                                                         <label for="upload_screenshot" class="option-label">
-                                                            <span class="option-title">Upload Payment Screenshot</span>
+                                                            <span class="option-title">পেমেন্ট স্ক্রিনশট আপলোড করুন</span>
                                                             <div class="file-upload-wrapper">
                                                                 <input type="file"
                                                                     name="payment_screenshot"
@@ -838,7 +838,7 @@
                                                                         <i class="fas fa-times"></i>
                                                                     </button>
                                                                 </div>
-                                                                <small class="hint">Upload your bKash/Nagad payment screenshot (Recommended)</small>
+                                                                <small class="hint">বিকাশ/নগদ পেমেন্টের স্ক্রিনশট আপলোড করুন (রেকমেন্ডেড)</small>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -847,14 +847,14 @@
                                                     <div class="verification-option">
                                                         <input type="radio" name="verification_method" id="enter_number" value="number" checked>
                                                         <label for="enter_number" class="option-label">
-                                                            <span class="option-title">Enter Payment Number</span>
+                                                            <span class="option-title">পেমেন্ট নাম্বার লিখুন</span>
                                                             <div class="number-input-wrapper">
                                                                 <input type="text"
                                                                     name="payment_number"
                                                                     id="bKash_nagad_number"
                                                                     class="form-control"
-                                                                    placeholder="Example: 01518460933">
-                                                                <small class="hint">Enter your bKash/Nagad number from which payment has been done</small>
+                                                                    placeholder="উদাহরণ: 01518460933">
+                                                                <small class="hint">যে নাম্বার থেকে পেমেন্ট করেছেন সেই বিকাশ/নগদ নাম্বারটি লিখুন</small>
                                                             </div>
                                                         </label>
                                                     </div>
