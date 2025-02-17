@@ -46,7 +46,7 @@
         }
 
         .payment-details {
-            padding: 20px;
+            padding: 10px 10px 0px 10px;
         }
 
         .payment-info-box {
@@ -127,7 +127,7 @@
             display: block;
             color: #666;
             font-size: 12px;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .form-control {
@@ -299,12 +299,7 @@
             color: red;
         }
 
-        .hint {
-            display: block;
-            color: #666;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
+
 
         .form-control {
             width: 100%;
@@ -426,7 +421,7 @@
         .verification-options {
             background: #fff;
             border-radius: 8px;
-            padding: 20px;
+            /* padding: 20px; */
         }
 
         .verification-options h5 {
@@ -437,7 +432,7 @@
 
         .verification-option {
             margin-bottom: 15px;
-            padding: 15px;
+            padding: 0px 8px;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -488,12 +483,7 @@
             border-color: #0d6efd;
         }
 
-        .hint {
-            display: block;
-            color: #666;
-            font-size: 12px;
-            margin-top: 5px;
-        }
+
 
         #image-preview {
             position: relative;
@@ -862,9 +852,7 @@
                                 </div>
                             @endif
 
-
-                            <p class="paragraph">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy.</a></p>
-                            <button class="btn_primary w-100">Place Order</button>
+                            <button class="btn_primary w-100 mt-2">Place Order</button>
                         </div>
                     </div>
 

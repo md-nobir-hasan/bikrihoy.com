@@ -496,7 +496,7 @@ input[type="number"] {
     display: block;
     font-size: 1rem;
     font-weight: 500;
-    margin-top: 1rem;
+    margin-top: 5px;
 }
 .checkoutFormLeft input {
     width: 100%;
