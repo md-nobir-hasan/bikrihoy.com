@@ -70,7 +70,7 @@ class OrderController extends Controller
             // 'note' => 'nullable|string',
             // 'payment_method' => 'required|in:mobile_banking',
             // 'verification_method' => 'required|in:screenshot,number',
-            'payment_number' => 'required_if:verification_method,number|regex:/^01\d{9}$/',
+            'payment_number' => 'nullable|regex:/^01\d{9}$/',
             // 'payment_screenshot' => 'required_if:verification_method,screenshot|image|mimes:jpeg,png,jpg|max:2048'
         ], [
             // 'name.required' => 'পুরো নাম দিতে হবে',
