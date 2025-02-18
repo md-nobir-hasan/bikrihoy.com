@@ -832,12 +832,17 @@
                                                         <label for="enter_number" class="option-label">
                                                             <span class="option-title">পেমেন্ট নাম্বার লিখুন</span>
                                                             <div class="number-input-wrapper">
-                                                                <input type="text"
+                                                                <input type="number"
                                                                     name="payment_number"
                                                                     id="bKash_nagad_number"
                                                                     class="form-control"
                                                                     placeholder="উদাহরণ: 01518460933">
-                                                                <small class="hint">যে নাম্বার থেকে পেমেন্ট করেছেন সেই বিকাশ/নগদ নাম্বারটি লিখুন</small>
+                                                                @error('payment_number')
+                                                                    <small class="text-danger">{{$message}}</small>
+                                                                @else
+                                                                    <small class="hint">যে নাম্বার থেকে পেমেন্ট করেছেন সেই বিকাশ/নগদ নাম্বারটি লিখুন</small>
+                                                                @enderror
+
                                                             </div>
                                                         </label>
                                                     </div>

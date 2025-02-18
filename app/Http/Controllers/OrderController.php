@@ -63,22 +63,31 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        // $rule = [
-        //     'name'=>'string|required',
-        //     'shipping_id'=>'required',
-        //     'quantity'=>'required',
-        //     'address'=>'string|required',
-        //     'phone'=>'numeric|required',
-        // ];
-        // $msg = [];
-        // $attributes = [
-        //     'name'=>'First Name',
-        //     'address'=>'Address',
-        //     'phone'=>'Phone Number',
-        //     'post_code'=>'string|nullable',
-        //     'shipping_id'=>'Shipping Method'
-        // ];
+        $request->validate([
+            // 'name' => 'required|string|max:255',
+            // 'phone' => 'required|regex:/^01\d{9}$/',
+            // 'address' => 'required|string',
+            // 'note' => 'nullable|string',
+            // 'payment_method' => 'required|in:mobile_banking',
+            // 'verification_method' => 'required|in:screenshot,number',
+            'payment_number' => 'required_if:verification_method,number|regex:/^01\d{9}$/',
+            // 'payment_screenshot' => 'required_if:verification_method,screenshot|image|mimes:jpeg,png,jpg|max:2048'
+        ], [
+            // 'name.required' => 'পুরো নাম দিতে হবে',
+            // 'phone.required' => 'মোবাইল নাম্বার দিতে হবে',
+            // 'phone.regex' => 'সঠিক মোবাইল নাম্বার দিন',
+            // 'address.required' => 'পুর্ণ ঠিকানা দিতে হবে',
+            // 'payment_method.required' => 'পেমেন্ট মেথড নির্বাচন করুন',
+            // 'verification_method.required' => 'ভেরিফিকেশন মেথড নির্বাচন করুন',
+            'payment_number.required_if' => 'যে নাম্বার থেকে পেমেন্ট করেছেন ঐ নাম্বারটি দিন',
+            'payment_number.regex' => 'নাম্বারটি 01 থেকে শুরু হতে হবে এবং টোটাল 11 টি সংখ্যা থাকতে হবে',
+            // 'payment_screenshot.required_if' => 'পেমেন্ট স্ক্রিনশট আপলোড করুন',
+            // 'payment_screenshot.image' => 'স্ক্রিনশট ইমেজ ফরম্যাটে হতে হবে',
+            // 'payment_screenshot.mimes' => 'শুধুমাত্র jpeg, png, jpg ফরম্যাট গ্রহণযোগ্য',
+            // 'payment_screenshot.max' => 'ফাইল সাইজ ২ MB এর বেশি হতে পারবে না'
+        ]);
         // Validator::make($request->all(),$rule,$msg,$attributes);
+
         $comany_contact = companyContact();
         $order = Order::where('phone',$request->phone)->first();
         if($order){
