@@ -226,7 +226,11 @@ class ProductController extends Controller
         $update->status = $request->status;
         $update->is_landing = $request->is_landing ? 1 : 0;
         $update->is_show_in_website = $request->is_show_in_website ? 1 : 0;
-        $update->photo = ProductGallery::orderBy('id', 'desc')->first()->imageGallery->img;
+
+        if($request->photo){
+            $update->photo = ProductGallery::orderBy('id', 'desc')->first()->imageGallery->img;
+        }
+
         $update->slug = Str::slug($request->title);
         $update->is_featured = $request->input('is_featured', 0);
         $update->save();
