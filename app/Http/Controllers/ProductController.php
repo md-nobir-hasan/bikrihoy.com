@@ -106,7 +106,7 @@ class ProductController extends Controller
             foreach($request->shipping_id as $shipping){
                 if($shipping){
                     ProductShipping::create([
-                        'product_id'=>$update->id,
+                        'product_id'=>$insert->id,
                         'shipping_id'=>$shipping
                     ]);
                 }
