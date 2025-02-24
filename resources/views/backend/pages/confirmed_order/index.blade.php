@@ -314,8 +314,30 @@
             var totalPages = dateKeys.length;
 
             var dateFilter = $("#dateFilter");
+
+            // Group dates by year and month
+            const dateGroups = {};
             dateKeys.forEach(date => {
-                dateFilter.append(`<option value="${date}">${date}</option>`);
+                const [day, month, year] = date.split('-');
+                if (!dateGroups[year]) {
+                    dateGroups[year] = {};
+                }
+                if (!dateGroups[year][month]) {
+                    dateGroups[year][month] = [];
+                }
+                dateGroups[year][month].push(date);
+            });
+
+            // Create hierarchical options
+            Object.keys(dateGroups).sort().reverse().forEach(year => {
+                dateFilter.append(`<optgroup label="${year}">`);
+                Object.keys(dateGroups[year]).sort().reverse().forEach(month => {
+                    const monthName = new Date(0, month - 1).toLocaleString('default', { month: 'long' });
+                    dateFilter.append(`<optgroup label="&nbsp;&nbsp;${monthName}">`);
+                    dateGroups[year][month].forEach(date => {
+                        dateFilter.append(`<option value="${date}">&nbsp;&nbsp;&nbsp;&nbsp;${date}</option>`);
+                    });
+                });
             });
 
             function updatePageControls() {
